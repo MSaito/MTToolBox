@@ -125,6 +125,7 @@ namespace MTToolBox {
         }
         return true;
     }
+
     /**
      * 原始性判定
      * poly が原始多項式であるか判定する。この関数は、原始性を正しく
@@ -212,7 +213,7 @@ namespace MTToolBox {
         if (deg(poly) != degree) {
             return 0;
         }
-        return IterIrredTest(poly);
+        return static_cast<bool>(IterIrredTest(poly));
     }
 
 }

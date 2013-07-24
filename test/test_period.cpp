@@ -68,3 +68,16 @@ TEST(ISPRIME2)
     minpoly(poly, rt);
     CHECK(!isPrime(poly, 128, table));
 }
+
+TEST(HASFACTOR)
+{
+    RLittle32 little(0x80903834, 7, 1, 31, 26, 26, 1234);
+    GF2X poly;
+    minpoly(poly, little);
+    CHECK(hasFactorOfDegree(poly, 521));
+
+    // does not have
+    RLittle32 little2(0xed6fdaa7, 7, 5, 27, 9, 12, 1234);
+    minpoly(poly, little2);
+    CHECK(!hasFactorOfDegree(poly, 521));
+}

@@ -24,6 +24,9 @@ main: main.cpp test_period.o tinymt32.o tinymt64.o
 test_rtiny: test_rtiny.cpp test_generator.hpp
 	${CPP} -o $@ $< ${LINKOPT}
 
+test_rlittle: test_rlittle.cpp test_generator.hpp
+	${CPP} -o $@ $< ${LINKOPT}
+
 doc:
 	doxygen doxygen.cfg
 

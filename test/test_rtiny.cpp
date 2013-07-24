@@ -11,6 +11,7 @@ int main()
     bool reducible = false;
     bool irreducible = false;
     bool prime = false;
+    bool factor = true;
     RTiny32 r(1234);
     GF2X poly;
     const char * table[] = {"3", "5", "17", "257", "641", "65537",
@@ -32,7 +33,7 @@ int main()
         zz_table[i] = w;
     }
 #endif
-    for (int i = 0; i < 100000; i++) {
+    for (int i = 0; i < 10000000; i++) {
         minpoly(poly, r);
         if (deg(poly) != 128) {
             r.setUp();
@@ -51,8 +52,13 @@ int main()
             cout << "reducible" << endl;
             r.printParam();
             reducible = true;
+            if (hasFactorOfDegree(poly, 127)) {
+                cout << "has a factor of degree 127" << endl;
+                r.printParam();
+                factor = true;
+            }
         }
-        if (reducible && irreducible && prime) {
+        if (reducible && irreducible && prime && factor) {
             break;
         }
         r.setUp();
