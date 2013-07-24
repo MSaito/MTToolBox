@@ -14,18 +14,11 @@ CPPOPT = -Wall -Wextra -O3 $(M64) $(INC) \
 	$(DDEBUG) -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS
 CPP = g++ $(CPPOPT)
 #CPP = icc $(CPPOPT)
-OPTLIB = -lgf2x
 
-LINKOPT += -L../lib -lMTToolBox -lUnitTest++ -lntl $(OPTLIB)
+OBJS = period.o MersenneTwister.o
 
-main: main.cpp test_period.o tinymt32.o tinymt64.o
-	${CPP} -o $@ main.cpp test_period.o tinymt32.o tinymt64.o ${LINKOPT}
-
-test_rtiny: test_rtiny.cpp test_generator.hpp
-	${CPP} -o $@ $< ${LINKOPT}
-
-doc:
-	doxygen doxygen.cfg
+lib: ${OBJS}
+	ar -rs libMTToolBox.a ${OBJS}
 
 .cpp.o:
 	${CPP} -c $<
