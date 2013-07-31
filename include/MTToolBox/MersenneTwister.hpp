@@ -1,23 +1,16 @@
-#ifndef MT19937_HPP
-#define MT19937_HPP
-
-/* This macro should be defined compiler option or .c .cpp file */
-#ifndef __STDC_CONSTANT_MACROS
-#define __STDC_CONSTANT_MACROS 1
-#endif
+#ifndef MTTOOLBOX_MERSENNETWISTER_HPP
+#define MTTOOLBOX_MERSENNETWISTER_HPP
 
 /**
- * @file all_in_one.hpp
+ * @file MersenneTwister.hpp
  *
  * @brief MersenneTwister generator for generating random parameters.
  *
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (c) 2010 Mutsuo Saito, Makoto Matsumoto and Hiroshima
+ * Copyright (c) 2013 Mutsuo Saito, Makoto Matsumoto and Hiroshima
  * University. All rights reserved.
- * Copyright (c) 2011 Mutsuo Saito, Makoto Matsumoto, Hiroshima
- * University and University of Tokyo. All rights reserved.
  *
  * The new BSD License is applied to this software, see LICENSE.txt
  */
@@ -128,4 +121,4 @@ namespace MTToolBox {
     };
     extern MersenneTwister MT;
 }
-#endif
+#endif // MTTOOLBOX_MERSENNETWISTER_HPP

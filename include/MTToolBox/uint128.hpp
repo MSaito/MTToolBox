@@ -7,8 +7,12 @@ namespace MTToolBox {
         uint32_t u32[4];
         uint64_t u64[2];
 
-        uint128_t(const uint128_t& that)
-            {
+        uint128_t() {
+            u64[0] = 0;
+            u64[1] = 1;
+        }
+
+        uint128_t(const uint128_t& that) {
             u64[0] = that.u64[0];
             u64[1] = that.u64[1];
         }

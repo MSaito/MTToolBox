@@ -1,6 +1,6 @@
 /* -*- coding:utf-8 -*- */
-#ifndef PERIOD_HPP
-#define PERIOD_HPP
+#ifndef MTTOOLBOX_PERIOD_HPP
+#define MTTOOLBOX_PERIOD_HPP
 
 #include <stdint.h>
 #include <NTL/GF2X.h>
@@ -28,9 +28,6 @@ namespace MTToolBox {
         MinPolySeq(poly, v, size);
     }
 
-    void
-    minpoly(NTL::GF2X& poly, U128Generator& generator, int pos = 0);
-
     bool isIrreducible(const NTL::GF2X& poly);
 
     bool isPrime(const NTL::GF2X& poly);
@@ -42,4 +39,4 @@ namespace MTToolBox {
     bool hasFactorOfDegree(NTL::GF2X& poly, long degree);
 
 }
-#endif // PERIOD_HPP
+#endif // MTTOOLBOX_PERIOD_HPP

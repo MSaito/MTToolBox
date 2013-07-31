@@ -1,15 +1,19 @@
+#define LINEARITY_CHECK // for calc_equidist
 #include <tinymt32.h>
 #include <tinymt64.h>
+#undef  LINEARITY_CHECK // for calc_equidist
 #include <iostream>
 #include <iomanip>
+#include <stdexcept>
 #include <MTToolBox/MersenneTwister.hpp>
 #include <MTToolBox/abstract_generator.hpp>
+#include <MTToolBox/abstract_searcher.hpp>
 #include <MTToolBox/uint128.hpp>
 
 namespace MTToolBox {
     using namespace std;
 
-    class Tiny32 : public U32Generator {
+    class Tiny32 : public Searcher<uint32_t> {
     public:
         Tiny32(uint32_t seed) {
             tiny.mat1 = 0x8f7011ee;
@@ -20,17 +24,72 @@ namespace MTToolBox {
         uint32_t generate() {
             return tinymt32_generate_uint32(&tiny);
         }
+        uint32_t generate(int outBitLen) {
+            uint32_t mask = 0;
+            mask = (~mask) << (32 - outBitLen);
+            return tinymt32_generate_uint32(&tiny) & mask;
+        }
         void seed(uint32_t value) {
             tinymt32_init(&tiny, value);
         }
-        int bitSize() {
+        int bitSize() const {
             return tinymt32_get_mexp(&tiny);
         }
+
+        void add(Searcher<uint32_t>& other) {
+            Tiny32* that = dynamic_cast<Tiny32 *>(&other);
+            if(that == 0) {
+                throw std::invalid_argument(
+                    "the adder should have the same type as the addee.");
+            }
+            if (tiny.mat1 != that->tiny.mat1 ||
+                tiny.mat2 != that->tiny.mat2 ||
+                tiny.tmat != that->tiny.tmat) {
+                throw std::invalid_argument(
+                    "the adder should have the same parameter as the addee.");
+            }
+            for (int i = 0; i < 4; i++) {
+                tiny.status[i] ^= that->tiny.status[i];
+            }
+        }
+
+        void next() {
+            tinymt32_next_state(&tiny);
+        }
+
+        void setZero() {
+            for (int i = 0; i < 4; i++) {
+                tiny.status[i] = 0;
+            }
+        }
+
+        bool isZero() {
+            if ((tiny.status[0] & TINYMT32_MASK) == 0 &&
+                tiny.status[1] == 0 &&
+                tiny.status[2] == 0 &&
+                tiny.status[3] == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        void setUpParam() {
+            tiny.mat1 = MT.next();
+            tiny.mat2 = MT.next();
+        }
+
+        void printParam(std::ostream& out) {
+            out << "mat1:" << hex << tiny.mat1 << endl;
+            out << "mat2:" << hex << tiny.mat2 << endl;
+            out << "tmat:" << hex << tiny.tmat << endl;
+        }
+
     private:
         tinymt32_t tiny;
     };
 
-    class Tiny64 : public U64Generator {
+    class Tiny64 : public Generator<uint64_t> {
     public:
         Tiny64(uint64_t seed) {
             tiny.mat1 = 0xfa051f40;
@@ -44,14 +103,14 @@ namespace MTToolBox {
         void seed(uint64_t value) {
             tinymt64_init(&tiny, value);
         }
-        int bitSize() {
+        int bitSize() const {
             return tinymt64_get_mexp(&tiny);
         }
     private:
         tinymt64_t tiny;
     };
 
-    class Tiny128 : public U128Generator {
+    class Tiny128 : public Generator<uint128_t> {
     public:
         Tiny128(uint128_t seed) {
             tiny.mat1 = 0xfa051f40;
@@ -63,17 +122,17 @@ namespace MTToolBox {
             tinymt64_generate_uint64(&tiny);
             return uint128_t(tiny.status[0], tiny.status[1]);
         }
-        void seed(uint128_t& value) {
+        void seed(uint128_t value) {
             tinymt64_init(&tiny, value.u64[0]);
         }
-        int bitSize() {
+        int bitSize() const {
             return tinymt64_get_mexp(&tiny);
         }
     private:
         tinymt64_t tiny;
     };
 
-    class RTiny32 : public U32Generator {
+    class RTiny32 : public Generator<uint32_t> {
     public:
         RTiny32(uint32_t mat1, uint32_t mat2, int sh1,
                 int sh2, int sh3, int sh4, uint32_t value) {
@@ -101,15 +160,14 @@ namespace MTToolBox {
             sh4 = MT.next() % 32;
         }
 
-        void printParam() {
-            cout << "mat1:" << hex << mat1 << endl;
-            cout << "mat2:" << hex << mat2 << endl;
-            cout << "sh1:" << dec << sh1 << endl;
-            cout << "sh2:" << dec << sh2 << endl;
-            cout << "sh3:" << dec << sh3 << endl;
-            cout << "sh4:" << dec << sh4 << endl;
+        void printParam(std::ostream& out) {
+            out << "mat1:" << hex << mat1 << endl;
+            out << "mat2:" << hex << mat2 << endl;
+            out << "sh1:" << dec << sh1 << endl;
+            out << "sh2:" << dec << sh2 << endl;
+            out << "sh3:" << dec << sh3 << endl;
+            out << "sh4:" << dec << sh4 << endl;
        }
-
         uint32_t generate() {
             uint32_t x;
             uint32_t y;
@@ -144,7 +202,7 @@ namespace MTToolBox {
             }
         }
 
-        int bitSize() {
+        int bitSize() const {
             return 128;
         }
     private:
@@ -168,7 +226,7 @@ namespace MTToolBox {
 
     };
 
-    class RLittle32 : public U32Generator {
+    class RLittle32 : public Generator<uint32_t> {
     public:
         RLittle32(uint32_t mat1, int pos,
                   int sh1, int sh2, int sh3, int sh4,
@@ -241,7 +299,7 @@ namespace MTToolBox {
             index = length - 1;
         }
 
-        int bitSize() {
+        int bitSize() const {
             return size;
         }
     private:
