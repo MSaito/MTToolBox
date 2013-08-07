@@ -6,7 +6,7 @@
 #OPTLIB = -lgf2x
 #OPTLIB = -lgmp
 
-INC = -I../include
+INC = -I../../include
 
 CC = gcc -Wall -O3 -std=c99 -Wmissing-prototypes -Wextra $(DDEBUG)
 

@@ -13,19 +13,15 @@
 namespace MTToolBox {
     using namespace std;
 
-    class Tiny32 : public Searcher<uint32_t> {
+    class Tiny32 : public TemperingSearcher<uint32_t> {
     public:
         Tiny32(uint32_t seed) {
             tiny.mat1 = 0x8f7011ee;
             tiny.mat2 = 0xfc78ff1f;
             tiny.tmat = 0x3793fdff;
             tinymt32_init(&tiny, seed);
+            reverse = false;
         }
-
-        Tiny32(const Tiny32& that) : Searcher<uint32_t>() {
-            tiny = that.tiny;
-        }
-
         uint32_t generate() {
             return tinymt32_generate_uint32(&tiny);
         }
@@ -90,8 +86,23 @@ namespace MTToolBox {
             out << "tmat:" << hex << tiny.tmat << endl;
         }
 
+        void setTemperingPattern(uint32_t mask, uint32_t pattern, int index) {
+        }
+
+        void setReverseOutput() {
+            reverse = true;
+        }
+
+        void resetReverseOutput() {
+            reverse = false;
+        }
+
+        bool isReverseOutput() const {
+            return reverse;
+        }
     private:
         tinymt32_t tiny;
+        bool reverse;
     };
 
     class Tiny64 : public Generator<uint64_t> {

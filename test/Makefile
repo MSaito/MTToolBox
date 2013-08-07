@@ -17,7 +17,9 @@ CPP = g++ $(CPPOPT)
 OPTLIB = -lgf2x
 
 LINKOPT += -L../lib -lMTToolBox -lUnitTest++ -lntl $(OPTLIB)
-OBJS = test_period.o tinymt32.o tinymt64.o test_search.o test_equidist.o
+OBJS = test_period.o tinymt32.o tinymt64.o test_search.o test_equidist.o \
+test_temper.o
+
 DEPENDS = test_generator.hpp tinymt32.h tinymt64.h
 
 main: main.cpp ${OBJS} ${DEPENDS}

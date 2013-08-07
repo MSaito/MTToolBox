@@ -16,9 +16,9 @@ SUITE(CALC_EQUIDISTRIBUTION) {
         calc_equidist<Tiny32, uint32_t> eq(tiny, 32);
         int veq[32];
         int delta = eq.get_all_equidist(veq);
-        int bitSize = tiny.bitSize();
 #if 0
         cout << "delta:" << delta << endl;
+        int bitSize = tiny.bitSize();
         for (int i = 0; i < 32; i++) {
             cout << dec << (i + 1) << ":"
                  << veq[i] << ":"
