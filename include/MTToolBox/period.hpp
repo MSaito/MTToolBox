@@ -5,16 +5,15 @@
 #include <stdint.h>
 #include <NTL/GF2X.h>
 #include <NTL/vector.h>
-#include <MTToolBox/abstract_generator.hpp>
+#include <MTToolBox/AbstractGenerator.hpp>
 
 namespace MTToolBox {
     /**
-     * T は U32Generator, I32Generator, U64Generator, I64Generator,
-     * または U128Generator のどれか
+     * U は 疑似乱数生成器の出力の型
      *
      */
-    template<class T> void
-    minpoly(NTL::GF2X& poly, T& generator, int pos = 0)
+    template<typename U> void
+    minpoly(NTL::GF2X& poly, AbstractGenerator<U>& generator, int pos = 0)
     {
         using namespace std;
         using namespace NTL;

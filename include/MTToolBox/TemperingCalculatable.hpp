@@ -1,24 +1,24 @@
+#ifndef MTTOOLBOX_TEMPERING_CALCULATABLE_HPP
+#define MTTOOLBOX_TEMPERING_CALCULATABLE_HPP
 /* -*- coding:utf-8 -*- */
 /**
- * @file abstract_temper_searcher.hpp
+ * @file TemperingCalculatable.hpp
  * @brief テンパリングパラメータ探索用の抽象クラス
  *
  * テンパリングパラメータを探索するアルゴリズム TemperingAlgorithm
  * を利用してテンパリングパラメータを探索する時に使用するクラス
  */
-#ifndef MTTOOLBOX_ABSTRACT_TEMPER_SEARCHER_HPP
-#define MTTOOLBOX_ABSTRACT_TEMPER_SEARCHER_HPP
 #include <stdint.h>
 #include <inttypes.h>
-#include <MTToolBox/abstract_searcher.hpp>
+#include <MTToolBox/EquidistributionCalculatable.hpp>
 
 namespace MTToolBox {
     /**
-     * @class TemperingSearcher
+     * @class TemperingCalculatable
      *
      */
     template<class U>
-    class TemperingSearcher : public Searcher<U> {
+    class TemperingCalculatable : public EquidistributionCalculatable<U> {
     public:
         /**
          * テンパリングパラメータの数を返す。
@@ -66,4 +66,4 @@ namespace MTToolBox {
     };
 }
 
-#endif // MTTOOLBOX_ABSTRACT_TEMPER_SEARCHER_HPP
+#endif // MTTOOLBOX_TEMPERING_CALCULATABLE_HPP

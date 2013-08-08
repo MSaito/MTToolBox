@@ -1,5 +1,5 @@
 #include <MTToolBox/period.hpp>
-#include <MTToolBox/abstract_generator.hpp>
+#include <MTToolBox/AbstractGenerator.hpp>
 #include <UnitTest++/UnitTest++.h>
 #include <NTL/GF2X.h>
 #include "test_generator.hpp"

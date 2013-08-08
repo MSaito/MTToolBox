@@ -41,20 +41,20 @@ int main()
         }
         if (isIrreducible(poly)) {
             cout << "irreducible" << endl;
-            r.printParam();
+            r.printParam(cout);
             irreducible = true;
             //if (isPrime(poly, 128, zz_table)) {
             if (isPrime(poly, 128, table)) {
                 cout << "prime" << endl;
-                r.printParam();
+                r.printParam(cout);
             }
         } else {
             cout << "reducible" << endl;
-            r.printParam();
+            r.printParam(cout);
             reducible = true;
             if (hasFactorOfDegree(poly, 127)) {
                 cout << "has a factor of degree 127" << endl;
-                r.printParam();
+                r.printParam(cout);
                 factor = true;
             }
         }

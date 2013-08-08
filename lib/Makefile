@@ -16,6 +16,8 @@ CPP = g++ $(CPPOPT)
 #CPP = icc $(CPPOPT)
 
 OBJS = period.o MersenneTwister.o
+DEPS = ../include/MTToolBox/period.hpp \
+       ../include/MTToolBox/MersenneTwister.hpp
 
 lib: ${OBJS}
 	ar -rs libMTToolBox.a ${OBJS}
@@ -25,6 +27,10 @@ lib: ${OBJS}
 
 .c.o:
 	${CC} -c $<
+
+period.o:${DEPS}
+
+MersenneTwister.o:${DEPS}
 
 clean:
 	rm -rf *.o *~ *.dSYM

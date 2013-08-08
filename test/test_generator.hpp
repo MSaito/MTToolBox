@@ -6,14 +6,14 @@
 #include <iomanip>
 #include <stdexcept>
 #include <MTToolBox/MersenneTwister.hpp>
-#include <MTToolBox/abstract_generator.hpp>
-#include <MTToolBox/abstract_searcher.hpp>
+#include <MTToolBox/AbstractGenerator.hpp>
+#include <MTToolBox/EquidistributionCalculatable.hpp>
 #include <MTToolBox/uint128.hpp>
 
 namespace MTToolBox {
     using namespace std;
 
-    class Tiny32 : public Searcher<uint32_t> {
+    class Tiny32 : public EquidistributionCalculatable<uint32_t> {
     public:
         Tiny32(uint32_t seed) {
             tiny.mat1 = 0x8f7011ee;
@@ -22,26 +22,29 @@ namespace MTToolBox {
             tinymt32_init(&tiny, seed);
         }
 
-        Tiny32(const Tiny32& that) : Searcher<uint32_t>() {
+        Tiny32(const Tiny32& that) : EquidistributionCalculatable<uint32_t>() {
             tiny = that.tiny;
         }
 
         uint32_t generate() {
             return tinymt32_generate_uint32(&tiny);
         }
+
         uint32_t generate(int outBitLen) {
             uint32_t mask = 0;
             mask = (~mask) << (32 - outBitLen);
             return tinymt32_generate_uint32(&tiny) & mask;
         }
+
         void seed(uint32_t value) {
             tinymt32_init(&tiny, value);
         }
+
         int bitSize() const {
             return tinymt32_get_mexp(&tiny);
         }
 
-        void add(Searcher<uint32_t>& other) {
+        void add(EquidistributionCalculatable<uint32_t>& other) {
             Tiny32* that = dynamic_cast<Tiny32 *>(&other);
             if(that == 0) {
                 throw std::invalid_argument(
@@ -57,11 +60,11 @@ namespace MTToolBox {
                 tiny.status[i] ^= that->tiny.status[i];
             }
         }
-
+#if 0
         void next() {
             tinymt32_next_state(&tiny);
         }
-
+#endif
         void setZero() {
             for (int i = 0; i < 4; i++) {
                 tiny.status[i] = 0;
@@ -94,7 +97,7 @@ namespace MTToolBox {
         tinymt32_t tiny;
     };
 
-    class Tiny64 : public Generator<uint64_t> {
+    class Tiny64 : public AbstractGenerator<uint64_t> {
     public:
         Tiny64(uint64_t seed) {
             tiny.mat1 = 0xfa051f40;
@@ -115,7 +118,7 @@ namespace MTToolBox {
         tinymt64_t tiny;
     };
 
-    class Tiny128 : public Generator<uint128_t> {
+    class Tiny128 : public AbstractGenerator<uint128_t> {
     public:
         Tiny128(uint128_t seed) {
             tiny.mat1 = 0xfa051f40;
@@ -137,7 +140,7 @@ namespace MTToolBox {
         tinymt64_t tiny;
     };
 
-    class RTiny32 : public Generator<uint32_t> {
+    class RTiny32 : public AbstractGenerator<uint32_t> {
     public:
         RTiny32(uint32_t mat1, uint32_t mat2, int sh1,
                 int sh2, int sh3, int sh4, uint32_t value) {
@@ -231,7 +234,7 @@ namespace MTToolBox {
 
     };
 
-    class RLittle32 : public Generator<uint32_t> {
+    class RLittle32 : public AbstractGenerator<uint32_t> {
     public:
         RLittle32(uint32_t mat1, int pos,
                   int sh1, int sh2, int sh3, int sh4,
