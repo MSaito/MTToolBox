@@ -6,14 +6,15 @@
 #include <iomanip>
 #include <stdexcept>
 #include <MTToolBox/MersenneTwister.hpp>
-#include <MTToolBox/abstract_generator.hpp>
-#include <MTToolBox/abstract_searcher.hpp>
+#include <MTToolBox/AbstractGenerator.hpp>
+#include <MTToolBox/TemperingCalculatable.hpp>
+#include <MTToolBox/util.hpp>
 #include <MTToolBox/uint128.hpp>
 
 namespace MTToolBox {
     using namespace std;
 
-    class Tiny32 : public TemperingSearcher<uint32_t> {
+    class Tiny32 : public TemperingCalculatable<uint32_t> {
     public:
         Tiny32(uint32_t seed) {
             tiny.mat1 = 0x8f7011ee;
@@ -22,22 +23,47 @@ namespace MTToolBox {
             tinymt32_init(&tiny, seed);
             reverse = false;
         }
+
+        Tiny32(uint32_t m1, uint32_t m2, uint32_t t, uint32_t seed) {
+            tiny.mat1 = m1;
+            tiny.mat2 = m2;
+            tiny.tmat = t;
+            tinymt32_init(&tiny, seed);
+            reverse = false;
+        }
+
+        Tiny32(const Tiny32& that) :
+            TemperingCalculatable<uint32_t>() {
+            tiny = that.tiny;
+        }
+
+        ~Tiny32() {
+        }
+
+        Tiny32 * clone() const {
+            return new Tiny32(*this);
+        }
+
         uint32_t generate() {
             return tinymt32_generate_uint32(&tiny);
         }
+
         uint32_t generate(int outBitLen) {
             uint32_t mask = 0;
             mask = (~mask) << (32 - outBitLen);
             return tinymt32_generate_uint32(&tiny) & mask;
         }
+
         void seed(uint32_t value) {
             tinymt32_init(&tiny, value);
         }
+
         int bitSize() const {
             return tinymt32_get_mexp(&tiny);
         }
 
-        void add(Searcher<uint32_t>& other) {
+//        void add(const TemperingCalculatable<uint32_t>& other) {
+        void add(EquidistributionCalculatable<uint32_t>& other) {
             Tiny32* that = dynamic_cast<Tiny32 *>(&other);
             if(that == 0) {
                 throw std::invalid_argument(
@@ -53,11 +79,11 @@ namespace MTToolBox {
                 tiny.status[i] ^= that->tiny.status[i];
             }
         }
-
+#if 0
         void next() {
             tinymt32_next_state(&tiny);
         }
-
+#endif
         void setZero() {
             for (int i = 0; i < 4; i++) {
                 tiny.status[i] = 0;
@@ -80,6 +106,10 @@ namespace MTToolBox {
             tiny.mat2 = MT.next();
         }
 
+        void printHeader(std::ostream& out) {
+            UNUSED_VARIABLE(&out);
+        }
+
         void printParam(std::ostream& out) {
             out << "mat1:" << hex << tiny.mat1 << endl;
             out << "mat2:" << hex << tiny.mat2 << endl;
@@ -87,6 +117,9 @@ namespace MTToolBox {
         }
 
         void setTemperingPattern(uint32_t mask, uint32_t pattern, int index) {
+            UNUSED_VARIABLE(&index);
+            tiny.tmat &= ~mask;
+            tiny.tmat |= pattern & mask;
         }
 
         void setReverseOutput() {
@@ -97,7 +130,7 @@ namespace MTToolBox {
             reverse = false;
         }
 
-        bool isReverseOutput() const {
+        bool isReverseOutput() {
             return reverse;
         }
     private:
@@ -105,6 +138,7 @@ namespace MTToolBox {
         bool reverse;
     };
 
+#if 0
     class Tiny64 : public Generator<uint64_t> {
     public:
         Tiny64(uint64_t seed) {
@@ -338,4 +372,5 @@ namespace MTToolBox {
             sh4 = p_sh4;
         }
     };
+#endif
 }

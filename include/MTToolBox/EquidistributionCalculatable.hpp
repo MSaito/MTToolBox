@@ -8,7 +8,7 @@
  */
 #include <stdint.h>
 #include <inttypes.h>
-#include <MTToolBox/AbstractGenerator.hpp>
+#include <MTToolBox/RecursionSearchable.hpp>
 
 namespace MTToolBox {
     /**
@@ -28,11 +28,25 @@ namespace MTToolBox {
      * @tparam U 疑似乱数生成器の出力のタイプ
      */
     template<class U>
-    class EquidistributionCalculatable : public AbstractGenerator<U> {
+    class EquidistributionCalculatable : public RecursionSearchable<U> {
     public:
+#if 0
+        /**
+         * 仮想デストラクタ
+         */
+        virtual ~EquidistributionCalculatable<U>() = 0;
+#endif
+        /*
+         * 自分のコピーを返す。
+         *
+         * @note clone には問題があるが、テンプレートよりよいと判断する。
+         * @return 自分自身のコピー
+         */
+        virtual EquidistributionCalculatable<U> * clone() const = 0;
 
         /*
          * 上位(MSBから) @code outBitLen だけ出力する。
+         *
          * それ以外のビットは0でなければならない。
          * 均等分布次元の計算にとって重要なメソッドである。
          * このメソッドを実行すると、状態空間の遷移も行われる。
@@ -78,8 +92,10 @@ namespace MTToolBox {
          * @return true なら状態空間がすべてゼロ
          */
         virtual bool isZero() = 0;
+#if 0
         virtual void setUpParam() = 0;
         virtual void printParam(std::ostream& out) = 0;
+#endif
     };
 }
 

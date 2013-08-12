@@ -20,6 +20,7 @@ namespace MTToolBox {
     template<class U>
     class TemperingCalculatable : public EquidistributionCalculatable<U> {
     public:
+#if 0
         /**
          * テンパリングパラメータの数を返す。
          * 通常は1を返すようにすればよい。
@@ -28,7 +29,7 @@ namespace MTToolBox {
          * @return テンパリングパラメータの数
          */
         virtual int numberOfTemperingParam() {return 1;}
-
+#endif
         /**
          * テンパリングパラメータをセットする。
          * @param[in] mask pattern のうち実際にテンパリングパラメータに

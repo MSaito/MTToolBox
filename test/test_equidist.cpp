@@ -1,19 +1,19 @@
 #include <sstream>
-#include <MTToolBox/calc_equidist.hpp>
-#include <MTToolBox/abstract_generator.hpp>
+#include <stdint.h>
+#include <inttypes.h>
+#include <MTToolBox/AlgorithmEquidistribution.hpp>
+#include <MTToolBox/AbstractGenerator.hpp>
 #include <UnitTest++/UnitTest++.h>
-#include <NTL/GF2X.h>
 #include "test_generator.hpp"
 
 using namespace MTToolBox;
-using namespace NTL;
 using namespace std;
 
 SUITE(CALC_EQUIDISTRIBUTION) {
     TEST(EQUI_U32)
     {
         Tiny32 tiny(1234);
-        calc_equidist<Tiny32, uint32_t> eq(tiny, 32);
+        AlgorithmEquidsitribution<uint32_t> eq(tiny, 32);
         int veq[32];
         int delta = eq.get_all_equidist(veq);
 #if 0

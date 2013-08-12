@@ -3,19 +3,13 @@
 /**
  * @file tinymt32search.hpp
  *
- * @brief Tiny Mersenne Twister only 127 bit internal state,
- * this class is used by tinymt32dc.
- *
- * This file is important. Users should not change this file,
- * except they are experts in random number generation.
- * This file is used for parameter searching.
- * For random number generation, use tinymt32c.c and tinymt32c.h.
+ * @brief TinyMT のDynamic Generator の重要部分
  *
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (The University of Tokyo)
  *
- * Copyright (C) 2011 Mutsuo Saito, Makoto Matsumoto,
- * Hiroshima University and The University of Tokyo.
+ * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
+ * and Hiroshima University.
  * All rights reserved.
  *
  * The 3-clause BSD License is applied to this software, see
@@ -28,7 +22,9 @@
 #include <cerrno>
 #include <sstream>
 #include <unistd.h>
-#include <MTToolBox/abstract_searcher.hpp>
+#include <MTToolBox/EquidistributionCalculatable.hpp>
+#include <MTToolBox/AlgorithmPartialBitPattern.hpp>
+#include "sequential.hpp"
 
 /**
  * @namespace tinymt
@@ -39,16 +35,15 @@ namespace tinymt {
     using namespace NTL;
     using namespace std;
 
-    class tinymt32;
     /**
-     * Tempering parameter searching algorithm.
-     * - Tempering for tinymt32.
-     * - The output of pseudo random number generator is 32 bits.
-     * - Tempering parameter is one unsigned 32-bit integer.
-     * - Tempering 23 bits from MSB.
+     * テンパリングパラメータ探索方法
+     * - 疑似乱数生成器の出力の型は uint32_t
+     * - テンパリングパラメータのビット長は32ビット
+     * - テンパリングパラメータは１個
+     * - MSB から23ビットテンパリングする　（stlsb32 と合わせて32ビットテンパリング）
      * - Searching parameters by 6 bits at once.
      */
-    typedef search_temper<tinymt32, uint32_t, 32, 1, 23, 6> st32;
+    typedef AlgorithmPartialBitPattern<uint32_t, 32, 1, 23, 6> st32;
 
     /**
      * - Tempering parameter searching algorithm.
@@ -58,7 +53,7 @@ namespace tinymt {
      * - Tempering 9 bits from LSB.
      * - Searching parameters by 5 bits at once.
      */
-    typedef search_temper<tinymt32, uint32_t, 32, 1, 9, 5, true> stlsb32;
+    typedef AlgorithmPartialBitPattern<uint32_t, 32, 1, 9, 5, true> stlsb32;
 
     /**
      * @class tinymt32_param
@@ -79,7 +74,7 @@ namespace tinymt {
          */
         string get_header() {
             return "id, mat1, mat2, tmat";
-        };
+        }
 
         /**
          * This method is used in output.hpp.
@@ -94,7 +89,7 @@ namespace tinymt {
             string s;
             ss >> s;
             return s;
-        };
+        }
 
         /**
          * This method is used for DEBUG.
@@ -109,7 +104,8 @@ namespace tinymt {
             string s;
             ss >> s;
             return s;
-        };
+        }
+
         /**
          * This method writes parameters to output stream.
          * @param out The output stream to which parameters are written.
@@ -118,7 +114,7 @@ namespace tinymt {
             out.write((char *)&mat1, sizeof(uint32_t));
             out.write((char *)&mat2, sizeof(uint32_t));
             out.write((char *)&tmat[0], sizeof(uint32_t));
-        };
+        }
     };
 
     /**
@@ -130,7 +126,7 @@ namespace tinymt {
      * but is not a subclass of some abstract class.
      * Instead, this class is passed to them as template parameters.
      */
-    class tinymt32 : public TemperingSearcher<uint32_t> {
+    class tinymt32 : public TemperingCalculatable<uint32_t> {
     public:
         /**
          * Constructor by id.
@@ -142,7 +138,7 @@ namespace tinymt {
             param.mat2 = 0;
             param.tmat[0] = 0;
             reverse_bit_flag = false;
-        };
+        }
 
         /**
          * The copy constructor.
@@ -150,7 +146,7 @@ namespace tinymt {
          */
         tinymt32(const tinymt32& src) : param(src.param) {
             reverse_bit_flag = false;
-        };
+        }
 
         /**
          * Constructor by parameter.
@@ -158,7 +154,11 @@ namespace tinymt {
          */
         tinymt32(const tinymt32_param& src_param) : param(src_param) {
             reverse_bit_flag = false;
-        };
+        }
+
+        tinymt32 * clone() const {
+            return new tinymt32(*this);
+        }
 
         /**
          * This method is called by the functions in simple_shortest_basis.hpp
@@ -168,7 +168,7 @@ namespace tinymt {
             status[1] = 0;
             status[2] = 0;
             status[3] = 0;
-        };
+        }
 
         /**
          * This method always returns 127
@@ -176,7 +176,7 @@ namespace tinymt {
          */
         int get_mexp() const {
             return mexp;
-        };
+        }
 
         /**
          * This method always returns 4
@@ -184,7 +184,7 @@ namespace tinymt {
          */
         int get_status_size() const {
             return status_size;
-        };
+        }
 
         /**
          * This method initialize internal state.
@@ -196,7 +196,7 @@ namespace tinymt {
             status[1] = 0;
             status[2] = 0;
             status[3] = seed;
-        };
+        }
 
         /**
          * Important state transition function.
@@ -216,7 +216,7 @@ namespace tinymt {
                 status[1] ^= param.mat1;
                 status[2] ^= param.mat2;
             }
-        };
+        }
 
         /**
          * get a part of internal state without tempering
@@ -224,7 +224,7 @@ namespace tinymt {
          */
         uint32_t get_uint() {
             return status[0];
-        };
+        }
 
         /**
          * getter of status
@@ -233,7 +233,7 @@ namespace tinymt {
          */
         uint32_t get_status(int index) {
             return status[index];
-        };
+        }
 
         /**
          * setter of status
@@ -243,7 +243,7 @@ namespace tinymt {
             for (int i = 0; i < 4; i++) {
                 status[i] = value[i];
             }
-        };
+        }
 
         /**
          * Important method, generate new random number
@@ -252,7 +252,7 @@ namespace tinymt {
         uint32_t generate() {
             next_state();
             return temper();
-        };
+        }
 
         /**
          * This method is called by the functions in simple_shortest_basis.hpp
@@ -271,14 +271,15 @@ namespace tinymt {
             uint32_t mask = 0;
             mask = (~mask) << (32 - bit_len);
             return u & mask;
-        };
+        }
 
         /**
          * make parameters from given sequential number and
          * internal id
          * @param num sequential number
          */
-        void setup_param(uint32_t num) {
+        void setUpParam() {
+            uint32_t num = SQ.next();
             uint32_t work = num ^ (num << 15) ^ (num << 23);
             work <<= 1;
             param.mat1 = (work & 0xffff0000) | (param.id & 0xffff);
@@ -287,7 +288,7 @@ namespace tinymt {
             param.mat2 ^= param.mat2 << 18;
             param.mat2 ^= 1;
             param.tmat[0] = 0;
-        };
+        }
 
         /**
          * getter of parameter
@@ -295,7 +296,7 @@ namespace tinymt {
          */
         const tinymt32_param& get_param() const {
             return param;
-        };
+        }
 
         /**
          * getter of recursion parameter
@@ -305,7 +306,7 @@ namespace tinymt {
         void get_mat(uint32_t *mat1, uint32_t *mat2) const {
             *mat1 = param.mat1;
             *mat2 = param.mat2;
-        };
+        }
 
         /**
          * This method gives information to the functions in the file
@@ -314,19 +315,19 @@ namespace tinymt {
          */
         int get_temper_param_num() const {
             return 1;
-        };
+        }
 
         /**
          * This method is called by the functions in the file
          * simple_shortest_basis.hpp
          * @return true if all elements of status is zero
          */
-        bool is_zero() {
+        bool isZero() const {
             return (status[0] == 0) &&
                 (status[1] == 0) &&
                 (status[2] == 0) &&
                 (status[3] == 0);
-        };
+        }
 
         /**
          * This is important,
@@ -354,7 +355,7 @@ namespace tinymt {
             }
             return t0;
 #endif
-        };
+        }
 
         /**
          * This method is called by functions in the file search_temper.hpp
@@ -362,10 +363,10 @@ namespace tinymt {
          * @param pattern bit pattern
          * @param src_bit only 0 is allowed
          */
-        void set_temper_pattern(uint32_t mask, uint32_t pattern, int src_bit) {
+        void setTemperingPattern(uint32_t mask, uint32_t pattern, int src_bit) {
             param.tmat[src_bit] &= ~mask;
             param.tmat[src_bit] |= pattern & mask;
-        };
+        }
 
         /**
          * This method is called by functions in the file
@@ -379,14 +380,14 @@ namespace tinymt {
             status[1] ^= that.status[1];
             status[2] ^= that.status[2];
             status[3] ^= that.status[3];
-        };
+        }
 
         /**
          * This method is called by functions in the file search_temper.hpp
          * Do not remove this.
          */
-        void setup_temper() {
-        };
+        void setUpTempering() {
+        }
 
         /**
          * setter of parameter
@@ -394,7 +395,7 @@ namespace tinymt {
          */
         void set_param(tinymt32_param src) {
             param = src;
-        };
+        }
 
         /**
          * output parameters
@@ -403,23 +404,27 @@ namespace tinymt {
         void out_param(ostream& out) {
             string s = param.get_debug_string();
             out << s << endl;
-        };
+        }
 
         /**
          * This method is called by the functions in search_temper.hpp
          * to calculate the equidistribution properties from LSB
          */
-        void set_reverse_bit() {
+        void setReverseOutput() {
             reverse_bit_flag = true;
-        };
+        }
 
         /**
          * This method is called by the functions in search_temper.hpp
          * to reset the reverse_bit_flag
          */
-        void reset_reverse_bit() {
+        void resetReverseOutput() {
             reverse_bit_flag = false;
-        };
+        }
+
+        bool isReverseOutput() const {
+            return reverse_bit_flag;
+        }
     private:
         enum {sh0 = 1, sh1 = 10, sh8=8, status_size = 4, mexp = 127};
         uint32_t status[4];
@@ -428,4 +433,4 @@ namespace tinymt {
     };
 }
 
-#endif
+#endif //TINYMT32SEARCH_HPP

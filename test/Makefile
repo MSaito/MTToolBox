@@ -22,6 +22,10 @@ test_temper.o
 
 DEPENDS = test_generator.hpp tinymt32.h tinymt64.h
 
+debug: main.cpp test_temper.cpp tinymt32.o
+	${CPP} -o $@ main.cpp test_temper.cpp \
+	tinymt32.o ${LINKOPT}
+
 main: main.cpp ${OBJS} ${DEPENDS}
 	${CPP} -o $@ main.cpp ${OBJS} ${LINKOPT}
 

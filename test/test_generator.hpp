@@ -22,8 +22,13 @@ namespace MTToolBox {
             tinymt32_init(&tiny, seed);
         }
 
-        Tiny32(const Tiny32& that) : EquidistributionCalculatable<uint32_t>() {
+        Tiny32(const Tiny32& that) :
+            EquidistributionCalculatable<uint32_t>() {
             tiny = that.tiny;
+        }
+
+        Tiny32 * clone() const {
+            return new Tiny32(*this);
         }
 
         uint32_t generate() {
@@ -85,6 +90,10 @@ namespace MTToolBox {
         void setUpParam() {
             tiny.mat1 = MT.next();
             tiny.mat2 = MT.next();
+        }
+
+        void printHeader(std::ostream& out) {
+            (void)out;
         }
 
         void printParam(std::ostream& out) {

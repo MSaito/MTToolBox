@@ -40,6 +40,9 @@ namespace MTToolBox {
     inline static uint32_t reverse_bit(uint32_t x);
     inline static uint64_t reverse_bit(uint64_t x);
 
+    inline static void UNUSED_VARIABLE(void * x) {
+        (void)x;
+    }
     /**
      * calculate the largest number which is 2^m and does not exceed n.
      * @tparam T type of integer
@@ -177,7 +180,7 @@ namespace MTToolBox {
      * @param x input
      * @return the position of most right 1.
      */
-    int calc_1pos(uint16_t x)
+    static inline int calc_1pos(uint16_t x)
     {
         if (x == 0) {
             return -1;
@@ -196,7 +199,7 @@ namespace MTToolBox {
      * @param x input
      * @return the position of most right 1.
      */
-    int calc_1pos(uint32_t x)
+    static inline int calc_1pos(uint32_t x)
     {
         if (x == 0) {
             return -1;
@@ -215,7 +218,7 @@ namespace MTToolBox {
      * @param x input
      * @return the position of most right 1.
      */
-    int calc_1pos(uint64_t x)
+    static inline int calc_1pos(uint64_t x)
     {
         if (x == 0) {
             return -1;
@@ -356,21 +359,21 @@ namespace MTToolBox {
         }
     }
 
-    uint128_t make_msb_mask(int n) {
+    static inline uint128_t make_msb_mask(int n) {
         uint128_t w;
         if (n < 64) {
-            w.u64[0] = ~((~0) >> n);
+            w.u64[0] = ~((~UINT64_C(0)) >> n);
             w.u64[1] = 0;
             return w;
         } else {
             n = n - 64;
             w.u64[0] = UINT64_C(0xffffffffffffffff);
-            w.u64[1] = ~((~0) >> n);
+            w.u64[1] = ~((~UINT64_C(0)) >> n);
             return w;
         }
     }
 
-    uint128_t and_mask(uint128_t a, uint128_t b) {
+    static inline uint128_t and_mask(uint128_t a, uint128_t b) {
         uint128_t w;
         w.u64[0] = a.u64[0] & b.u64[0];
         w.u64[1] = a.u64[1] & b.u64[1];

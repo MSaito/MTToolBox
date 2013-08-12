@@ -1,5 +1,5 @@
-#ifndef MTTOOLBOX_ALGORITHMPARTIALBITPATTERN_HPP
-#define MTTOOLBOX_ALGORITHMPARTIALBITPATTERN_HPP
+#ifndef MTTOOLBOX_ALGORITHM_PARTIAL_BITPATTERN_HPP
+#define MTTOOLBOX_ALGORITHM_PARTIAL_BITPATTERN_HPP
 /**
  * @file AlgorithmPartialBitPattern.hpp
  *
@@ -21,35 +21,43 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <tr1/memory>
-#include <MTToolBox/abstract_temper_searcher.hpp>
-#include <MTToolBox/calc_equidist.hpp>
+#include <MTToolBox/TemperingCalculatable.hpp>
+#include <MTToolBox/AlgorithmEquidistribution.hpp>
 
 namespace MTToolBox {
     /**
      * @class AlgorithmPartialBitPattern
      *
-     * @brief 疑似乱数生成器の高次元均等分布性を改善するために、テンパリングパラメータを
-     * 探索するアルゴリズム
+     * @brief 疑似乱数生成器の高次元均等分布性を改善するために、テンパ
+     * リングパラメータを探索するアルゴリズム
      *
-     * このアルゴリズムはMTGPのテンパリングパラメータを探索するために開発され、TinyMTの
-     * テンパリングパラメータ探索にも使われている。
+     * このアルゴリズムはMTGPのテンパリングパラメータを探索するために開
+     * 発され、TinyMTのテンパリングパラメータ探索にも使われている。
      *
-     * @caution テンパリングパラメータの探索をしても十分良い高次元均等分布が得られない
-     * 場合は、状態遷移関数の変更を考慮した方がよい。状態遷移関数で十分ビットミックスされて
-     * いない場合、単純なテンパリングで均等分布次元を最大化することはできないだろう。
+     * @caution テンパリングパラメータの探索をしても十分良い高次元均等
+     * 分布が得られない場合は、状態遷移関数の変更を考慮した方がよい。状
+     * 態遷移関数で十分ビットミックスされていない場合、単純なテンパリン
+     * グで均等分布次元を最大化することはできないだろう。
      *
      * @tparam T 疑似乱数生成器の出力の型, 例えば uint32_t など。
-     * @tparam bit_len テンパリングパラメータのビット長, 通常は出力のビット長と等しい
-     * と思われる。
-     * @tparam param_num テンパリングパラメータの数, MTGPでは4, TinyMT では 1
-     * @tparam try_bit_len 出力のうちテンパリングされる部分の長さ。上位からこのビット数
-     * だけがテンパリングされる。
-     * @tparam step 一度に何ビットずつビットパターンを生成するか。この数を大きくすると
-     * 実行時間が延びるであろう。MTGP では 5 ビットずつ生成している。
-     * @tparam lsb このフラグが指定されると、上位ビットと下位ビットが反転されて均等分布
-     * 次元が計算される。つまり下位ビットの均等分布次元をあげたい時に指定する。
-     * TestU01のBigCrushには下位ビットの均等分布次元を改善することに
-     * よってパス可能性が高まるテストがある。
+     *
+     * @tparam bit_len テンパリングパラメータのビット長, 通常は出力のビッ
+     * ト長と等しいと思われる。
+     *
+     * @tparam param_num テンパリングパラメータの数, MTGPでは4, TinyMT
+     * では 1
+     *
+     * @tparam try_bit_len 出力のうちテンパリングされる部分の長さ。上位
+     * からこのビット数だけがテンパリングされる。
+     *
+     * @tparam step 一度に何ビットずつビットパターンを生成するか。この
+     * 数を大きくすると実行時間が延びるであろう。MTGP では 5 ビットずつ
+     * 生成している。
+     *
+     * @tparam lsb このフラグが指定されると、上位ビットと下位ビットが反
+     * 転されて均等分布次元が計算される。つまり下位ビットの均等分布次元
+     * をあげたい時に指定する。TestU01のBigCrushには下位ビットの均等分
+     * 布次元を改善することによってパス可能性が高まるテストがある。
      */
     template<typename T,
              int bit_len, int param_num, int try_bit_len, int step = 5,
@@ -60,19 +68,19 @@ namespace MTToolBox {
          * search tempering parameters.
          * @returns 0
          */
-        int operator()(TemperingSearcher<T>& rand,
+        int operator()(TemperingCalculatable<T>& rand,
                        bool verbose = false) {
             using namespace std;
             if (verbose) {
                 cout << "searching..." << endl;
             }
             if (lsb) {
-                rand.setReverseBit();
+                rand.setReverseOutput();
                 if (verbose) {
                     cout << "searching from LSB" << endl;
                 }
             } else {
-                rand.resetReverseBit();
+                rand.resetReverseOutput();
                 if (verbose) {
                     cout << "searching from MSB" << endl;
                 }
@@ -90,11 +98,12 @@ namespace MTToolBox {
             if (verbose) {
                 cout << "delta = " << dec << delta << endl;
             }
-            rand.resetReverseBit();
+            rand.resetReverseOutput();
             return 0;
         };
     private:
-        void make_temper_bit(TemperingSearcher<T>& rand, int start, int size,
+        void make_temper_bit(TemperingCalculatable<T>& rand,
+                             int start, int size,
                              int param_pos, T pattern) {
             T mask = make_mask(start, size);
             rand.setTemperingPattern(mask, pattern, param_pos);
@@ -114,7 +123,7 @@ namespace MTToolBox {
          * @param verbose if true output searching process
          * @return delta an integer which shows equidistribution property.
          */
-        int search_best_temper(TemperingSearcher<T>& rand, int v_bit,
+        int search_best_temper(TemperingCalculatable<T>& rand, int v_bit,
                                int param_pos, int max_v_bit, bool verbose) {
             using namespace std;
             int bitSize = rand.bitSize();
@@ -131,7 +140,7 @@ namespace MTToolBox {
                 } else {
                     pattern = static_cast<T>(i) << (bit_len - v_bit - size);
                 }
-                rand.set_temper_pattern(mask, pattern, param_pos);
+                rand.setTemperingPattern(mask, pattern, param_pos);
                 delta = get_equidist(rand, bit_len, bitSize);
                 if (delta < min_delta) {
                     min_delta = delta;
@@ -163,11 +172,11 @@ namespace MTToolBox {
          * @returns summation of equidistribution property
          * from 0 to \b bit_len_ -1 MSBs.
          */
-        int get_equidist(TemperingSearcher<T>& rand,
+        int get_equidist(TemperingCalculatable<T>& rand,
                          int bit_len_,
                          int bitSize) {
-            TemperingSearcher<T> r(rand);
-            calc_equidist<TemperingSearcher<T>, T> sb(r, bit_len_);
+            //TemperingCalculatable<T> r(rand);
+            AlgorithmEquidsitribution<T> sb(rand, bit_len_);
             int veq[bit_len_];
             sb.get_all_equidist(veq);
             int sum = 0;
@@ -176,12 +185,12 @@ namespace MTToolBox {
             }
             return sum;
         }
-        T get_equidist_pattern(TemperingSearcher<T>& rand,
+        T get_equidist_pattern(TemperingCalculatable<T>& rand,
                                int bit_len_,
                                int bitSize) {
-            G r(rand);
+            //G r(rand);
             T pattern = 0;
-            shortest_basis<G, T> sb(r, bit_len_);
+            AlgorithmEquidsitribution<T> sb(rand, bit_len_);
             int veq[bit_len_];
             sb.get_all_equidist(veq);
             for (int i = 0; i < bit_len_; i++) {
@@ -223,4 +232,4 @@ namespace MTToolBox {
     };
 }
 
-#endif // MTTOOLBOX_ALGORITHMPARTIALBITPATTERN_HPP
+#endif // MTTOOLBOX_ALGORITHM_PARTIAL_BITPATTERN_HPP

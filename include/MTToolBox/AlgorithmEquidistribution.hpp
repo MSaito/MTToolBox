@@ -1,5 +1,5 @@
-#ifndef MTTOOLBOX_CALC_EQUIDIST_HPP
-#define MTTOOLBOX_CALC_EQUIDIST_HPP
+#ifndef MTTOOLBOX_ALGORITHM_EQUIDISTRIBUTION_HPP
+#define MTTOOLBOX_ALGORITHM_EQUIDISTRIBUTION_HPP
 /**
  * @file calc_equidist.hpp
  *
@@ -20,7 +20,7 @@
  */
 #include <tr1/memory>
 #include <stdexcept>
-#include <NTL/GF2.h>
+#include <MTToolBox/EquidistributionCalculatable.hpp>
 #include <MTToolBox/util.hpp>
 
 namespace MTToolBox {
@@ -35,41 +35,47 @@ namespace MTToolBox {
      * @tparam G F2-linear generator
      * @tparam T the output type of \b G.
      */
-    template<typename G, typename T> class linear_generator_vector {
+    template<typename T>
+    class linear_generator_vector {
     public:
+        typedef EquidistributionCalculatable<T> ECGenerator;
         /**
          * constructor
          *
          * @param rand_ random number generator whose state transition
          * function is F<sub>2</sub>-linear.
          */
-        linear_generator_vector<G, T>(const G& rand_) {
+        linear_generator_vector<T>(const ECGenerator& generator) {
             using namespace std::tr1;
-            shared_ptr<G> r(new G(rand_));
+            shared_ptr<ECGenerator>
+                r(reinterpret_cast<ECGenerator *>(generator.clone()));
             rand = r;
             rand->seed(1);
             count = 0;
             zero = false;
             next = 0;
-        };
+        }
 
         /**
          * constructor of a vector in standard basis
          *
-         * @param rand_ random number generator used as a template
+         * @param generator random number generator used as a template
          * @param bit_pos position of 1 for standard basis.
          */
-        linear_generator_vector<G, T>(const G& rand_, int bit_pos) {
+        linear_generator_vector<T>(const ECGenerator& generator,
+                                   int bit_pos) {
             using namespace std::tr1;
-            shared_ptr<G> r(new G(rand_));
+            shared_ptr<ECGenerator>
+                r(reinterpret_cast<ECGenerator *>(generator.clone()));
+//            shared_ptr<ECGenerator> r(generator.clone());
             rand = r;
             rand->setZero();
             count = 0;
             zero = false;
             next = static_cast<T>(1) << (sizeof(T) * 8 - bit_pos - 1);
-        };
+        }
 
-        void add(const linear_generator_vector<G, T>& src);
+        void add(const linear_generator_vector<T>& src);
         void next_state(int bit_len);
         void debug_print();
 
@@ -77,7 +83,7 @@ namespace MTToolBox {
          * a pseudo random number generator whose state transition
          * function is F<sub>2</sub>-linear.
          */
-        std::tr1::shared_ptr<G> rand;
+        std::tr1::shared_ptr<ECGenerator> rand;
 
         /**
          * The counter which shows how many times next_state() is called.
@@ -109,9 +115,10 @@ namespace MTToolBox {
      * @tparam G a linear generator vector
      * @tparam T output type of the generator
      */
-    template<typename G, typename T> class calc_equidist {
-        typedef linear_generator_vector<G, T> linear_vec;
+    template<typename T> class AlgorithmEquidsitribution {
+        typedef linear_generator_vector<T> linear_vec;
     public:
+        typedef EquidistributionCalculatable<T> ECGenerator;
         /**
          * constructor
          *
@@ -120,7 +127,7 @@ namespace MTToolBox {
          * @param bit_len_ from \b bit_len to 1 of dimensions of
          * equidistribution with v-bit accuracy are calculated.
          */
-        calc_equidist(const G& rand, int bit_len_) {
+        AlgorithmEquidsitribution(const ECGenerator& rand, int bit_len_) {
             bit_len = bit_len_;
             size = bit_len + 1;
             basis = new linear_vec * [size];
@@ -130,16 +137,16 @@ namespace MTToolBox {
             }
             basis[bit_len] = new linear_vec(rand);
             basis[bit_len]->next_state(bit_len);
-        };
+        }
         /**
          * The destructor.
          */
-        ~calc_equidist() {
+        ~AlgorithmEquidsitribution() {
             for (int i = 0; i < size; i++) {
                 delete basis[i];
             }
             delete[] basis;
-        };
+        }
 
         int get_all_equidist(int veq[]);
         int get_equidist(int *sum_equidist);
@@ -163,8 +170,8 @@ namespace MTToolBox {
      *
      * @param new_len a bit length to be changed to.
      */
-    template<typename G, typename T>
-    void calc_equidist<G, T>::adjust(int new_len) {
+    template<typename T>
+    void AlgorithmEquidsitribution<T>::adjust(int new_len) {
         using namespace std;
 
         T mask = (~static_cast<T>(0)) << (sizeof(T) * 8 - new_len);
@@ -187,8 +194,8 @@ namespace MTToolBox {
     /**
      * print some information for debug.
      */
-    template<typename G, typename T>
-    void linear_generator_vector<G, T>::debug_print() {
+    template<typename T>
+    void linear_generator_vector<T>::debug_print() {
         using namespace std;
 
         cout << "debug ====" << endl;
@@ -207,8 +214,8 @@ namespace MTToolBox {
      * @return sum of the differences between the theoretical
      * upper bounds and the dimensions.
      */
-    template<typename G, typename T>
-    int calc_equidist<G, T>::get_all_equidist(int veq[]) {
+    template<typename T>
+    int AlgorithmEquidsitribution<T>::get_all_equidist(int veq[]) {
         using namespace std;
 
         int sum = 0;
@@ -237,8 +244,8 @@ namespace MTToolBox {
      * @param sum_equidist sum of the differences
      * @return the dimension of equidistribution at \b bit_len
      */
-    template<typename G, typename T>
-    int calc_equidist<G, T>::get_equidist(int *sum_equidist) {
+    template<typename T>
+    int AlgorithmEquidsitribution<T>::get_equidist(int *sum_equidist) {
         using namespace std;
 
         int veq = get_equidist_main(bit_len);
@@ -256,9 +263,9 @@ namespace MTToolBox {
      * addition of vectors
      * @param src a vector which is added to this.
      */
-    template<typename G, typename T>
-    void linear_generator_vector<G, T>::add(
-        const linear_generator_vector<G, T>& src) {
+    template<typename T>
+    void linear_generator_vector<T>::add(
+        const linear_generator_vector<T>& src) {
         using namespace std;
 
         rand->add(*src.rand);
@@ -272,8 +279,8 @@ namespace MTToolBox {
      *
      * @param bit_len bit length from MSB
      */
-    template<typename G, typename T>
-    void linear_generator_vector<G, T>::next_state(int bit_len) {
+    template<typename T>
+    void linear_generator_vector<T>::next_state(int bit_len) {
         using namespace std;
 
         if (zero) {
@@ -308,8 +315,8 @@ namespace MTToolBox {
      *
      * @param bit_len bit length from MSB, so bit_Len is v.
      */
-    template<typename G, typename T>
-    int calc_equidist<G, T>::get_equidist_main(int bit_len) {
+    template<typename T>
+    int AlgorithmEquidsitribution<T>::get_equidist_main(int bit_len) {
         using namespace std;
         using namespace NTL;
 
@@ -360,5 +367,5 @@ namespace MTToolBox {
         return min_count;
     }
 }
-#endif // MTTOOLBOX_CALC_EQUIDIST_HPP
+#endif // MTTOOLBOX_ALGORITHM_EQUIDISTRIBUTION_HPP
 

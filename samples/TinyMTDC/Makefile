@@ -3,7 +3,7 @@
 #DDEBUG = -O0 -g -ggdb -DDEBUG=1
 
 # uncomment next line if you installed NTL with gf2x or gmp
-#OPTLIB = -lgf2x
+OPTLIB = -lgf2x
 #OPTLIB = -lgmp
 
 INC = -I../../include
@@ -17,19 +17,8 @@ CPP = g++ $(CPPOPT)
 
 LINKOPT += -lntl $(OPTLIB)
 
-all: tinymt32dc tinymt64dc getid
-
-tinymt32dc:  tinymt32dc.cpp tinymt32search.hpp output.hpp parse_opt.o
-	${CPP} -o $@ tinymt32dc.cpp parse_opt.o ${LINKOPT}
-
-tinymt64dc:  tinymt64dc.cpp tinymt64search.hpp output.hpp parse_opt.o
-	${CPP} -o $@ tinymt64dc.cpp parse_opt.o ${LINKOPT}
-
-getid: getid.cpp
-	${CPP} -o $@ getid.cpp ${LINKOPT}
-
-doc:
-	doxygen doxygen.cfg
+tinymt32dc:  tinymt32dc.cpp tinymt32search.hpp output.hpp sequential.o parse_opt.o
+	${CPP} -o $@ tinymt32dc.cpp parse_opt.o sequentil.o ${LINKOPT}
 
 .cpp.o:
 	${CPP} -c $<

@@ -1,5 +1,5 @@
-#ifndef MTTOOLBOX_RECURSION_SEARCH_HPP
-#define MTTOOLBOX_RECURSION_SEARCH_HPP
+#ifndef MTTOOLBOX_ALGORITHM_RECURSION_SEARCH_HPP
+#define MTTOOLBOX_ALGORITHM_RECURSION_SEARCH_HPP
 /**
  * @file recursion_search.hpp
  *
@@ -20,6 +20,7 @@
 #include <ostream>
 #include <NTL/GF2X.h>
 #include <NTL/GF2XFactoring.h>
+#include <MTToolBox/RecursionSearchable.hpp>
 #include <MTToolBox/period.hpp>
 
 namespace MTToolBox {
@@ -33,17 +34,19 @@ namespace MTToolBox {
      *
      * @tparam T generators class
      */
-    template<class T>
-    class Search {
+    template<typename U>
+    class AlgorithmRecursionSearch {
     public:
         /**
+         * rand は破壊される。
          * @param rand_ random number generator whose parameters are
          * searched.
          * @param seq_generator a sequential number generator which
          * gives sequential number for searching parameters.
          *
          */
-        Search(const T& rand_) : rand(rand_) {
+        AlgorithmRecursionSearch(RecursionSearchable<U>& rand_) {
+            rand = &rand_;
             count = 0;
         }
 
@@ -56,12 +59,12 @@ namespace MTToolBox {
          * @param try_count
          */
         bool start(int try_count) {
-            long size = rand.bitSize();
+            long size = rand->bitSize();
             long degree;
             for (int i = 0; i < try_count; i++) {
-                rand.setUpParam();
-                rand.seed(1);
-                minpoly(poly, rand);
+                rand->setUpParam();
+                rand->seed(1);
+                minpoly(poly, *rand);
                 count++;
                 degree = deg(poly);
                 if (degree != size) {
@@ -79,7 +82,7 @@ namespace MTToolBox {
          * @return random number generator class with parameters.
          */
         void printParam(std::ostream& out) {
-            rand.printParam(out);
+            rand->printParam(out);
         }
 
         /**
@@ -102,9 +105,9 @@ namespace MTToolBox {
         }
 
     private:
-        T rand;
+        RecursionSearchable<U> *rand;
         NTL::GF2X poly;
         long count;
     };
 }
-#endif // MTTOOLBOX_RECURSION_SEARCH_HPP
+#endif // MTTOOLBOX_ALGORITHM_RECURSION_SEARCH_HPP

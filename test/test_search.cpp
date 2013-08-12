@@ -1,6 +1,6 @@
 #include <sstream>
-#include <MTToolBox/recursion_search.hpp>
-#include <MTToolBox/abstract_generator.hpp>
+#include <MTToolBox/AlgorithmRecursionSearch.hpp>
+#include <MTToolBox/AbstractGenerator.hpp>
 #include <UnitTest++/UnitTest++.h>
 #include <NTL/GF2X.h>
 #include "test_generator.hpp"
@@ -13,15 +13,15 @@ SUITE(RECURSION_SEARCH) {
     TEST(SEARCH_U32)
     {
         Tiny32 tiny(1234);
-        Search<Tiny32> s(tiny);
+        AlgorithmRecursionSearch<uint32_t> search(tiny);
         stringstream ss;
-        if (s.start(10000)) {
-            s.printParam(ss);
+        if (search.start(10000)) {
+            search.printParam(ss);
             string str = ss.str();
             CHECK(str.find("mat1") != string::npos);
-            GF2X poly = s.getMinPoly();
+            GF2X poly = search.getMinPoly();
             CHECK(deg(poly) == tiny.bitSize());
-            CHECK(s.getCount() > 0);
+            CHECK(search.getCount() > 0);
         }
     }
 }
