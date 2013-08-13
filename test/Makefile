@@ -17,17 +17,17 @@ CPP = g++ $(CPPOPT)
 OPTLIB = -lgf2x
 
 LINKOPT += -L../lib -lMTToolBox -lUnitTest++ -lntl $(OPTLIB)
-OBJS = test_period.o tinymt32.o tinymt64.o test_search.o test_equidist.o \
-test_temper.o
+COMMON_OBJS = tinymt32.o tinymt64.o
+OBJS1 = ${COMMON_OBJS} test_period.o test_search.o test_equidist.o
+OBJS2 = ${COMMON_OBJS} test_temper.o test_search_temper.o
 
 DEPENDS = test_generator.hpp tinymt32.h tinymt64.h
 
-debug: main.cpp test_temper.cpp tinymt32.o
-	${CPP} -o $@ main.cpp test_temper.cpp \
-	tinymt32.o ${LINKOPT}
+main2: main.cpp ${OBJS2} ${DEPENDS}
+	${CPP} -o $@ main.cpp ${OBJS2} ${LINKOPT}
 
-main: main.cpp ${OBJS} ${DEPENDS}
-	${CPP} -o $@ main.cpp ${OBJS} ${LINKOPT}
+main1: main.cpp ${OBJS1} ${DEPENDS}
+	${CPP} -o $@ main.cpp ${OBJS1} ${LINKOPT}
 
 test_rtiny: test_rtiny.cpp test_generator.hpp
 	${CPP} -o $@ $< ${LINKOPT}

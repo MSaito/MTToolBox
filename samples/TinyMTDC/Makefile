@@ -17,7 +17,8 @@ CPP = g++ $(CPPOPT)
 
 LINKOPT += -lntl $(OPTLIB)
 
-tinymt32dc:  tinymt32dc.cpp tinymt32search.hpp output.hpp sequential.o parse_opt.o
+tinymt32dc:  tinymt32dc.cpp tinymt32search.hpp sequential.hpp \
+	parse_opt.hpp output.hpp sequential.o parse_opt.o
 	${CPP} -o $@ tinymt32dc.cpp parse_opt.o sequentil.o ${LINKOPT}
 
 .cpp.o:

@@ -21,8 +21,7 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <tr1/memory>
-#include <MTToolBox/abstract_temper_searcher.hpp>
-#include <MTToolBox/calc_equidist.hpp>
+#include <MTToolBox/TemperingCalculatable.hpp>
 
 namespace MTToolBox {
     /**
@@ -46,8 +45,11 @@ namespace MTToolBox {
          * search tempering parameters.
          * @returns 0
          */
-        int operator()(TemperingSearchable<U>& rand,
-                       bool verbose = false);
+        virtual int operator()(TemperingCalculatable<U>& rand, bool verbose = 0)
+        = 0;
+        virtual bool isLSBTempering() {
+            return false;
+        }
     };
 }
 

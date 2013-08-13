@@ -17,7 +17,7 @@
  */
 
 #include <ostream>
-#include <MTToolBox/TemperingSearchable.hpp>
+#include <MTToolBox/TemperingCalculatable.hpp>
 #include <MTToolBox/AlgothmTempering.hpp>
 
 

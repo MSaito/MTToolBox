@@ -1,5 +1,5 @@
-#ifndef MTTOOLBOX_ALGORITHMBESTBITS_HPP
-#define MTTOOLBOX_ALGORITHMBESTBITS_HPP
+#ifndef MTTOOLBOX_ALGORITHM_BEST_BITS_HPP
+#define MTTOOLBOX_ALGORITHM_BEST_BITS_HPP
 /**
  * @file AlgorithmBestBits.hpp
  *
@@ -20,8 +20,9 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <tr1/memory>
-#include <MTToolBox/abstract_temper_searcher.hpp>
-#include <MTToolBox/calc_equidist.hpp>
+#include <MTToolBox/AlgorithmTempering.hpp>
+#include <MTToolBox/TemperingCalculatable.hpp>
+#include <MTToolBox/AlgorithmEquidistribution.hpp>
 
 namespace MTToolBox {
     /**
@@ -69,7 +70,7 @@ namespace MTToolBox {
              int param_num,
              const int shifts[],
              bool lsb = false>
-    class AlgorithmBestBits {
+    class AlgorithmBestBits : public AlgorithmTempering<T> {
     public:
         typedef temper_params<T, param_num> tempp;
 
@@ -149,7 +150,10 @@ namespace MTToolBox {
             }
             rand.resetReverseBit();
             return 0;
-        };
+        }
+        bool isLSBTempering() {
+            return lsb;
+        }
     private:
         /**
          * search for one tempering parameter. generate all bit pattern
@@ -271,4 +275,4 @@ namespace MTToolBox {
     };
 }
 
-#endif // MTTOOLBOX_ALGORITHMBESTBITS_HPP
+#endif // MTTOOLBOX_ALGORITHM_BEST_BITS_HPP

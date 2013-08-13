@@ -21,6 +21,7 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <tr1/memory>
+#include <MTToolBox/AlgorithmTempering.hpp>
 #include <MTToolBox/TemperingCalculatable.hpp>
 #include <MTToolBox/AlgorithmEquidistribution.hpp>
 
@@ -62,7 +63,7 @@ namespace MTToolBox {
     template<typename T,
              int bit_len, int param_num, int try_bit_len, int step = 5,
              bool lsb = false>
-    class AlgorithmPartialBitPattern {
+    class AlgorithmPartialBitPattern : public AlgorithmTempering<T> {
     public:
         /**
          * search tempering parameters.
@@ -100,7 +101,11 @@ namespace MTToolBox {
             }
             rand.resetReverseOutput();
             return 0;
-        };
+        }
+
+        bool isLSBTempering() {
+            return lsb;
+        }
     private:
         void make_temper_bit(TemperingCalculatable<T>& rand,
                              int start, int size,
@@ -108,7 +113,7 @@ namespace MTToolBox {
             T mask = make_mask(start, size);
             rand.setTemperingPattern(mask, pattern, param_pos);
             rand.setUpTempering();
-        };
+        }
 
         /**
          * search for one tempering parameter. generate all bit pattern
