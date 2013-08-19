@@ -17,6 +17,8 @@
  */
 
 #include <stdexcept>
+#include <stdint.h>
+#include <inttypes.h>
 
 namespace tinymt {
     /**
@@ -31,25 +33,27 @@ namespace tinymt {
     template<typename T>
     class Sequential {
     public:
+        Sequential() {
+        }
         Sequential(T p_mask) {
             status = reinterpret_cast<T>(-1);
             mask = p_mask;
             error = false;
-        };
+        }
         Sequential(T p_mask, T seed) {
             status = seed;
             mask = p_mask;
             error = false;
-        };
+        }
         Sequential(Sequential<T>& src) {
             status = src.status;
             mask = src.mask;
             error = src.error;
-        };
+        }
         void reseed(T seed) {
             status = seed;
             error = false;
-        };
+        }
         T next() {
             if (error) {
                 throw std::underflow_error("count over zero exception");
@@ -60,14 +64,14 @@ namespace tinymt {
             T work = status;
             status -= 1;
             return work ^ mask;
-        };
+        }
     private:
         T status;
         T mask;
         bool error;
     };
 
-    extern Sequential SQ;
+    extern Sequential<uint32_t> SQ32;
 }
 //  LocalWords:  namespace
 

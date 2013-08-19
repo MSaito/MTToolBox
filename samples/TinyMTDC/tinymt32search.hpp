@@ -24,6 +24,7 @@
 #include <unistd.h>
 #include <MTToolBox/EquidistributionCalculatable.hpp>
 #include <MTToolBox/AlgorithmPartialBitPattern.hpp>
+#include <MTToolBox/util.hpp>
 #include "sequential.hpp"
 
 /**
@@ -67,7 +68,7 @@ namespace tinymt {
         uint32_t id;
         uint32_t mat1;
         uint32_t mat2;
-        uint32_t tmat[1];
+        uint32_t tmat;
         /**
          * This method is used in output.hpp.
          * @return header line of output.
@@ -85,7 +86,7 @@ namespace tinymt {
             ss << dec << id << ",";
             ss << hex << setw(8) << setfill('0') << mat1 << ",";
             ss << hex << setw(8) << setfill('0') << mat2 << ",";
-            ss << hex << setw(8) << setfill('0') << tmat[0] << ",";
+            ss << hex << setw(8) << setfill('0') << tmat << ",";
             string s;
             ss >> s;
             return s;
@@ -100,7 +101,7 @@ namespace tinymt {
             ss << "id:" << dec << id << endl;
             ss << "mat1:" << hex << setw(8) << setfill('0') << mat1 << endl;
             ss << "mat2:" << hex << setw(8) << setfill('0') << mat2 << endl;
-            ss << "tmat:" << hex << setw(8) << setfill('0') << tmat[0] << endl;
+            ss << "tmat:" << hex << setw(8) << setfill('0') << tmat << endl;
             string s;
             ss >> s;
             return s;
@@ -113,7 +114,7 @@ namespace tinymt {
         void binary_write(ostream& out) {
             out.write((char *)&mat1, sizeof(uint32_t));
             out.write((char *)&mat2, sizeof(uint32_t));
-            out.write((char *)&tmat[0], sizeof(uint32_t));
+            out.write((char *)&tmat, sizeof(uint32_t));
         }
     };
 
@@ -136,7 +137,7 @@ namespace tinymt {
             param.id = id;
             param.mat1 = 0;
             param.mat2 = 0;
-            param.tmat[0] = 0;
+            param.tmat = 0;
             reverse_bit_flag = false;
         }
 
@@ -144,7 +145,8 @@ namespace tinymt {
          * The copy constructor.
          * @param src The origin of copy.
          */
-        tinymt32(const tinymt32& src) : param(src.param) {
+        tinymt32(const tinymt32& src) : TemperingCalculatable<uint32_t>(),
+                                        param(src.param) {
             reverse_bit_flag = false;
         }
 
@@ -163,7 +165,7 @@ namespace tinymt {
         /**
          * This method is called by the functions in simple_shortest_basis.hpp
          */
-        void make_zero_status() {
+        void setZero() {
             status[0] = 0;
             status[1] = 0;
             status[2] = 0;
@@ -174,7 +176,7 @@ namespace tinymt {
          * This method always returns 127
          * @return always 127
          */
-        int get_mexp() const {
+        int bitSize() const {
             return mexp;
         }
 
@@ -191,32 +193,13 @@ namespace tinymt {
          * This initialization is simple.
          * @param seed seed for initialization
          */
-        void seeding(uint32_t seed) {
+        void seed(uint32_t seed) {
             status[0] = 0;
             status[1] = 0;
             status[2] = 0;
             status[3] = seed;
         }
 
-        /**
-         * Important state transition function.
-         */
-        void next_state() {
-            uint32_t x;
-            uint32_t y;
-            y = status[3];
-            x = (status[0] & 0x7fffffff) ^ status[1] ^ status[2];
-            x ^= (x << sh0);
-            y ^= (y >> sh0) ^ x;
-            status[0] = status[1];
-            status[1] = status[2];
-            status[2] = x ^ (y << sh1);
-            status[3] = y;
-            if (y & 1) {
-                status[1] ^= param.mat1;
-                status[2] ^= param.mat2;
-            }
-        }
 
         /**
          * get a part of internal state without tempering
@@ -279,7 +262,7 @@ namespace tinymt {
          * @param num sequential number
          */
         void setUpParam() {
-            uint32_t num = SQ.next();
+            uint32_t num = SQ32.next();
             uint32_t work = num ^ (num << 15) ^ (num << 23);
             work <<= 1;
             param.mat1 = (work & 0xffff0000) | (param.id & 0xffff);
@@ -287,7 +270,7 @@ namespace tinymt {
             param.mat1 ^= param.mat1 >> 19;
             param.mat2 ^= param.mat2 << 18;
             param.mat2 ^= 1;
-            param.tmat[0] = 0;
+            param.tmat = 0;
         }
 
         /**
@@ -322,8 +305,8 @@ namespace tinymt {
          * simple_shortest_basis.hpp
          * @return true if all elements of status is zero
          */
-        bool isZero() const {
-            return (status[0] == 0) &&
+        bool isZero() {
+            return ((status[0] & 0x7fffffff) == 0) &&
                 (status[1] == 0) &&
                 (status[2] == 0) &&
                 (status[3] == 0);
@@ -351,7 +334,7 @@ namespace tinymt {
 #endif
             t0 ^= t1;
             if (t1 & 1) {
-                t0 ^= param.tmat[0];
+                t0 ^= param.tmat;
             }
             return t0;
 #endif
@@ -364,8 +347,9 @@ namespace tinymt {
          * @param src_bit only 0 is allowed
          */
         void setTemperingPattern(uint32_t mask, uint32_t pattern, int src_bit) {
-            param.tmat[src_bit] &= ~mask;
-            param.tmat[src_bit] |= pattern & mask;
+            UNUSED_VARIABLE(&src_bit);
+            param.tmat &= ~mask;
+            param.tmat |= pattern & mask;
         }
 
         /**
@@ -375,11 +359,31 @@ namespace tinymt {
          * output function is GF(2)-linear.
          * @param that tinymt generator added to this generator
          */
-        void add(tinymt32& that) {
-            status[0] ^= that.status[0];
-            status[1] ^= that.status[1];
-            status[2] ^= that.status[2];
-            status[3] ^= that.status[3];
+        void add(EquidistributionCalculatable<uint32_t>& other) {
+            tinymt32* that = dynamic_cast<tinymt32 *>(&other);
+            if (that == 0) {
+                throw std::invalid_argument(
+                    "the adder should have the same type as the addee.");
+            }
+            if (param.mat1 != that->param.mat1 ||
+                param.mat2 != that->param.mat2 ||
+                param.tmat != that->param.tmat) {
+                cerr << "in add: the adder should have the same parameter"
+                     << " as the addee." << endl;
+
+                cerr << "mat1:" << hex << param.mat1 << endl;
+                cerr << "mat2:" << hex << param.mat2 << endl;
+                cerr << "tmat:" << hex << param.tmat << endl;
+                cerr << "that->mat1:" << hex << that->param.mat1 << endl;
+                cerr << "that->mat2:" << hex << that->param.mat2 << endl;
+                cerr << "that->tmat:" << hex << that->param.tmat << endl;
+                throw std::invalid_argument(
+                    "the adder should have the same parameter as the addee.");
+            }
+            status[0] ^= that->status[0];
+            status[1] ^= that->status[1];
+            status[2] ^= that->status[2];
+            status[3] ^= that->status[3];
         }
 
         /**
@@ -397,12 +401,17 @@ namespace tinymt {
             param = src;
         }
 
+        void printHeader(ostream& out) {
+            string s = param.get_header();
+            out << s << endl;
+        }
+
         /**
          * output parameters
          * @param out output stream
          */
-        void out_param(ostream& out) {
-            string s = param.get_debug_string();
+        void printParam(ostream& out) {
+            string s = param.get_string();
             out << s << endl;
         }
 
@@ -422,7 +431,7 @@ namespace tinymt {
             reverse_bit_flag = false;
         }
 
-        bool isReverseOutput() const {
+        bool isReverseOutput() {
             return reverse_bit_flag;
         }
     private:
@@ -430,6 +439,26 @@ namespace tinymt {
         uint32_t status[4];
         tinymt32_param param;
         bool reverse_bit_flag;
+        /**
+         * Important state transition function.
+         */
+        void next_state() {
+            uint32_t x;
+            uint32_t y;
+            y = status[3];
+            x = (status[0] & 0x7fffffff) ^ status[1] ^ status[2];
+            x ^= (x << sh0);
+            y ^= (y >> sh0) ^ x;
+            status[0] = status[1];
+            status[1] = status[2];
+            status[2] = x ^ (y << sh1);
+            status[3] = y;
+            if (y & 1) {
+                status[1] ^= param.mat1;
+                status[2] ^= param.mat2;
+            }
+        }
+
     };
 }
 

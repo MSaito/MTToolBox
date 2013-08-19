@@ -15,11 +15,11 @@ CPPOPT = -Wall -Wextra -O3 $(M64) $(INC) \
 CPP = g++ $(CPPOPT)
 #CPP = icc $(CPPOPT)
 
-LINKOPT += -lntl $(OPTLIB)
+LINKOPT += -L../../lib -lntl -lMTToolBox $(OPTLIB)
 
 tinymt32dc:  tinymt32dc.cpp tinymt32search.hpp sequential.hpp \
 	parse_opt.hpp output.hpp sequential.o parse_opt.o
-	${CPP} -o $@ tinymt32dc.cpp parse_opt.o sequentil.o ${LINKOPT}
+	${CPP} -o $@ tinymt32dc.cpp parse_opt.o sequential.o ${LINKOPT}
 
 .cpp.o:
 	${CPP} -c $<

@@ -1,5 +1,5 @@
 #include "sequential.hpp"
 
 namespace tinymt {
-    Sequential SQ;
+    Sequential<uint32_t> SQ32;
 }
