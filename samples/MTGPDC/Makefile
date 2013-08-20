@@ -3,10 +3,10 @@
 #DDEBUG = -O0 -g -ggdb -DDEBUG=1
 
 # uncomment next line if you installed NTL with gf2x or gmp
-#OPTLIB = -lgf2x
+OPTLIB = -lgf2x
 #OPTLIB = -lgmp
 
-INC = -I../include
+INC = -I../../include
 
 CC = gcc -Wall -O3 -std=c99 -Wmissing-prototypes -Wextra $(DDEBUG)
 
@@ -15,24 +15,17 @@ CPPOPT = -Wall -Wextra -O3 $(M64) $(INC) \
 CPP = g++ $(CPPOPT)
 #CPP = icc $(CPPOPT)
 
-#OBJS = period.o MersenneTwister.o
-#DEPS = ../include/MTToolBox/period.hpp \
-#       ../include/MTToolBox/MersenneTwister.hpp
-OBJS = period.o
-DEPS = ../include/MTToolBox/period.hpp
+LINKOPT += -L../../lib -lntl -lMTToolBox $(OPTLIB)
 
-lib: ${OBJS}
-	ar -rs libMTToolBox.a ${OBJS}
+tinymt32dc:  tinymt32dc.cpp tinymt32search.hpp sequential.hpp \
+	parse_opt.hpp output.hpp sequential.o parse_opt.o
+	${CPP} -o $@ tinymt32dc.cpp parse_opt.o sequential.o ${LINKOPT}
 
 .cpp.o:
 	${CPP} -c $<
 
 .c.o:
 	${CC} -c $<
-
-period.o:${DEPS}
-
-MersenneTwister.o:${DEPS}
 
 clean:
 	rm -rf *.o *~ *.dSYM

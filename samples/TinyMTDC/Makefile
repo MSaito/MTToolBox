@@ -18,8 +18,8 @@ CPP = g++ $(CPPOPT)
 LINKOPT += -L../../lib -lntl -lMTToolBox $(OPTLIB)
 
 tinymt32dc:  tinymt32dc.cpp tinymt32search.hpp sequential.hpp \
-	parse_opt.hpp output.hpp sequential.o parse_opt.o
-	${CPP} -o $@ tinymt32dc.cpp parse_opt.o sequential.o ${LINKOPT}
+	parse_opt.hpp output.hpp parse_opt.o
+	${CPP} -o $@ tinymt32dc.cpp parse_opt.o ${LINKOPT}
 
 .cpp.o:
 	${CPP} -c $<

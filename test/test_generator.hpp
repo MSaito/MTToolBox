@@ -87,9 +87,9 @@ namespace MTToolBox {
             }
         }
 
-        void setUpParam() {
-            tiny.mat1 = MT.next();
-            tiny.mat2 = MT.next();
+        void setUpParam(AbstractGenerator<uint32_t>& mt) {
+            tiny.mat1 = mt.generate();
+            tiny.mat2 = mt.generate();
         }
 
         void printHeader(std::ostream& out) {
@@ -168,13 +168,13 @@ namespace MTToolBox {
             delete[] state;
         }
 
-        void setUp() {
-            mat1 = MT.next();
-            mat2 = MT.next();
-            sh1 = MT.next() % 32;
-            sh2 = MT.next() % 32;
-            sh3 = MT.next() % 32;
-            sh4 = MT.next() % 32;
+        void setUpParam(AbstractGenerator<uint32_t>& mt) {
+            mat1 = mt.generate();
+            mat2 = mt.generate();
+            sh1 = mt.generate() % 32;
+            sh2 = mt.generate() % 32;
+            sh3 = mt.generate() % 32;
+            sh4 = mt.generate() % 32;
         }
 
         void printParam(std::ostream& out) {
@@ -263,13 +263,13 @@ namespace MTToolBox {
             delete[] state;
         }
 
-        void setUp() {
-            mat1 = MT.next();
-            pos = MT.next() % length;
-            sh1 = MT.next() % 32;
-            sh2 = MT.next() % 32;
-            sh3 = MT.next() % 32;
-            sh4 = MT.next() % 32;
+        void setUpParam(AbstractGenerator<uint32_t>& mt) {
+            mat1 = mt.generate();
+            pos = mt.generate() % length;
+            sh1 = mt.generate() % 32;
+            sh2 = mt.generate() % 32;
+            sh3 = mt.generate() % 32;
+            sh4 = mt.generate() % 32;
             seed(1234);
         }
 

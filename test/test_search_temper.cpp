@@ -16,7 +16,8 @@ SUITE(RECURSION_SEARCH_AND_TEMPER) {
         AlgorithmPartialBitPattern<uint32_t, 32, 1, 23, 6, false> st32;
         AlgorithmPartialBitPattern<uint32_t, 32, 1, 9, 5, true> stlsb32;
         stringstream ss;
-        AlgorithmRecursionAndTempering<uint32_t> searcher;
+        MersenneTwister mt;
+        AlgorithmRecursionAndTempering<uint32_t> searcher(mt);
         searcher.search(tiny, st32, stlsb32, true);
         tiny.printParam(cout);
         tiny.printParam(ss);

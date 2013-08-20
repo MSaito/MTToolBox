@@ -45,8 +45,10 @@ namespace MTToolBox {
          * gives sequential number for searching parameters.
          *
          */
-        AlgorithmRecursionSearch(RecursionSearchable<U>& rand_) {
+        AlgorithmRecursionSearch(RecursionSearchable<U>& rand_,
+                                 AbstractGenerator<U>& bg) {
             rand = &rand_;
+            baseGenerator = &bg;
             count = 0;
         }
 
@@ -62,7 +64,7 @@ namespace MTToolBox {
             long size = rand->bitSize();
             long degree;
             for (int i = 0; i < try_count; i++) {
-                rand->setUpParam();
+                rand->setUpParam(*baseGenerator);
                 rand->seed(1);
                 minpoly(poly, *rand);
                 count++;
@@ -106,6 +108,7 @@ namespace MTToolBox {
 
     private:
         RecursionSearchable<U> *rand;
+        AbstractGenerator<U> *baseGenerator;
         NTL::GF2X poly;
         long count;
     };

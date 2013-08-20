@@ -66,7 +66,6 @@ int main(int argc, char** argv) {
  */
 int search(tinymt_options& opt, int count) {
     Sequential<uint32_t> sq(0, opt.start);
-    SQ32 = sq;
     tinymt32 g(opt.uid);
 
     if (opt.verbose) {
@@ -74,7 +73,7 @@ int search(tinymt_options& opt, int count) {
         cout << "search start at " << ctime(&t);
         cout << "id:" << dec << opt.uid << endl;
     }
-    AlgorithmRecursionAndTempering<uint32_t> all;
+    AlgorithmRecursionAndTempering<uint32_t> all(sq);
     st32 st;
     stlsb32 stlsb;
     int i = 0;

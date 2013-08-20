@@ -18,9 +18,10 @@
 #include <stdint.h>
 #include <inttypes.h>
 #include <string>
+#include <MTToolBox/AbstractGenerator.hpp>
 
 namespace MTToolBox {
-    class MersenneTwister {
+    class MersenneTwister : public AbstractGenerator<uint32_t> {
     public:
         MersenneTwister() {
             mt = new uint32_t[LARGE_N];
@@ -40,6 +41,9 @@ namespace MTToolBox {
         }
         ~MersenneTwister() {
             delete[] mt;
+        }
+        void seed(uint32_t value) {
+            reseed(value);
         }
         void reseed(uint32_t seed) {
             mt[0] = seed;
@@ -90,6 +94,9 @@ namespace MTToolBox {
             mt[0] = 0x80000000UL;
             mti = N;
         }
+        uint32_t generate() {
+            return next();
+        }
         uint32_t next() {
             using namespace std;
 
@@ -107,6 +114,9 @@ namespace MTToolBox {
             mti = (mti + 1) & LARGE_MASK;
             return y;
         }
+        int bitSize() const {
+            return 19937;
+        }
     private:
         enum {LARGE_N = 1024, N = 624, M = 397};
         uint32_t *mt;    /* the array for the state vector  */
@@ -119,6 +129,5 @@ namespace MTToolBox {
             return y;
         }
     };
-    extern MersenneTwister MT;
 }
 #endif // MTTOOLBOX_MERSENNETWISTER_HPP

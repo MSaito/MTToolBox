@@ -101,9 +101,9 @@ namespace MTToolBox {
             }
         }
 
-        void setUpParam() {
-            tiny.mat1 = MT.next();
-            tiny.mat2 = MT.next();
+        void setUpParam(AbstractGenerator<uint32_t>& mt) {
+            tiny.mat1 = mt.generate();
+            tiny.mat2 = mt.generate();
         }
 
         void printHeader(std::ostream& out) {

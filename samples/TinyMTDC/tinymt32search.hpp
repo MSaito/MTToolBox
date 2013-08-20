@@ -261,8 +261,8 @@ namespace tinymt {
          * internal id
          * @param num sequential number
          */
-        void setUpParam() {
-            uint32_t num = SQ32.next();
+        void setUpParam(AbstractGenerator<uint32_t>& sq32) {
+            uint32_t num = sq32.generate();
             uint32_t work = num ^ (num << 15) ^ (num << 23);
             work <<= 1;
             param.mat1 = (work & 0xffff0000) | (param.id & 0xffff);

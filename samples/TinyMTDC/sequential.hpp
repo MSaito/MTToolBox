@@ -19,8 +19,11 @@
 #include <stdexcept>
 #include <stdint.h>
 #include <inttypes.h>
+#include <MTToolBox/AbstractGenerator.hpp>
+#include <MTToolBox/util.hpp>
 
 namespace tinymt {
+    using namespace MTToolBox;
     /**
      * @class Sequential
      * @brief sequential count down generator
@@ -31,7 +34,7 @@ namespace tinymt {
      * @tparam T output data type, and internal counter type
      */
     template<typename T>
-    class Sequential {
+    class Sequential : public AbstractGenerator<T> {
     public:
         Sequential() {
         }
@@ -50,9 +53,15 @@ namespace tinymt {
             mask = src.mask;
             error = src.error;
         }
+        void seed(T value) {
+            reseed(value);
+        }
         void reseed(T seed) {
             status = seed;
             error = false;
+        }
+        T generate() {
+            return next();
         }
         T next() {
             if (error) {
@@ -65,13 +74,14 @@ namespace tinymt {
             status -= 1;
             return work ^ mask;
         }
+        int bitSize() const {
+            return bit_size(T);
+        }
     private:
         T status;
         T mask;
         bool error;
     };
-
-    extern Sequential<uint32_t> SQ32;
 }
 //  LocalWords:  namespace
 

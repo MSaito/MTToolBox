@@ -30,7 +30,7 @@ namespace MTToolBox {
          * 設定すること。TinyMT では疑似乱数ではなくカウントダウンする
          * 数値を元にパラメータを設定しているが、そうしてもよい。
          */
-        virtual void setUpParam() = 0;
+        virtual void setUpParam(AbstractGenerator<U>& generator) = 0;
 
         /**
          * パラメータのヘッダを出力する。

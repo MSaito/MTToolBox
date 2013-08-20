@@ -52,10 +52,9 @@ namespace MTToolBox {
     template<typename T>
     class AlgorithmRecursionAndTempering {
     public:
-//        AlgorithmRecursionAndTempering() {
-//            const TemperingCalculatable<T>& rand) {
-//            generator = rand.copy();
-//        }
+        AlgorithmRecursionAndTempering(AbstractGenerator<T>& bg) {
+            baseGenerator = &bg;
+        }
         /**
          * search
          *
@@ -76,7 +75,7 @@ namespace MTToolBox {
 
             out = &os;
             int veq[bit_size(T)];
-            AlgorithmRecursionSearch<T> search(lg);
+            AlgorithmRecursionSearch<T> search(lg, *baseGenerator);
             int mexp = lg.bitSize();
             bool found = false;
             for (int i = 0;; i++) {
@@ -198,7 +197,8 @@ namespace MTToolBox {
          * internal state.
          */
         NTL::GF2X poly;
-        std::ostream *out;
+        std::ostream * out;
+        AbstractGenerator<T> * baseGenerator;
     };
 
 }

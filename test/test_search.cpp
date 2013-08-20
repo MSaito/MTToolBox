@@ -13,7 +13,8 @@ SUITE(RECURSION_SEARCH) {
     TEST(SEARCH_U32)
     {
         Tiny32 tiny(1234);
-        AlgorithmRecursionSearch<uint32_t> search(tiny);
+        MersenneTwister mt;
+        AlgorithmRecursionSearch<uint32_t> search(tiny, mt);
         stringstream ss;
         if (search.start(10000)) {
             search.printParam(ss);
