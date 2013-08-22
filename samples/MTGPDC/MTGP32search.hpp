@@ -95,15 +95,6 @@ namespace mtgp {
         int bitSize() const {
             return param.mexp;
         }
-#if 0
-        /**
-         * accessor to state_size
-         * @returns size of internal state.
-         */
-        int get_state_size() {
-            return state_size;
-        }
-#endif
 
         uint32_t generate() {
             next_state();
@@ -201,15 +192,6 @@ namespace mtgp {
         mtgp_param<uint32_t> get_param() {
             return param;
         }
-#if 0
-        /**
-         * returns number of tempering parameter vectors
-         * @return number of tempering parameter vectors
-         */
-        int get_temper_param_num() {
-            return 4;
-        }
-#endif
         void printHeader(std::ostream& out) {
             param.printHeader(out);
         }
@@ -259,26 +241,7 @@ namespace mtgp {
         void set_param(mtgp_param<uint32_t> src) {
             param = src;
         }
-#if 0
-        void out_param(ostream& out) {
-            out << "pos:" << param.pos << endl;
-            out << "sh1:" << param.sh1 << endl;
-            out << "sh2:" << param.sh2 << endl;
-            for (int i = 0; i < 4; i++) {
-                out << "tbl[" << dec << i << "]:0x" << hex
-                    << setw(sizeof(uint32_t) * 2) << setfill('0')
-                    << param.tbl[i]
-                    << endl;
-            }
-            for (int i = 0; i < 4; i++) {
-                out << "tmp_tbl[" << dec << i << "]:0x"
-                    << hex << setw(sizeof(uint32_t) * 2) << setfill('0')
-                    << param.tmp_tbl[i] << endl;
-            }
-            out << "id:" << "0x" << hex << setw(sizeof(uint32_t) * 2)
-                << setfill('0') << param.id << dec << endl;
-        }
-#endif
+
         /**
          * initialize the internal state array
          * @param seed seed of initialization
@@ -307,7 +270,7 @@ namespace mtgp {
          * simple_shortest_basis.hpp
          * @return true if all elements of status is zero
          */
-        bool isZero() {
+        bool isZero() const {
             if (state[idx] & mask != 0) {
                 return false;
             }

@@ -305,7 +305,7 @@ namespace tinymt {
          * simple_shortest_basis.hpp
          * @return true if all elements of status is zero
          */
-        bool isZero() {
+        bool isZero() const {
             return ((status[0] & 0x7fffffff) == 0) &&
                 (status[1] == 0) &&
                 (status[2] == 0) &&

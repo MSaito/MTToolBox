@@ -38,7 +38,7 @@ namespace mtgp {
                 tp[i] = 0;
             }
         }
-        mtgp_param(const mtgp_param& that) {
+        mtgp_param(const mtgp_param<T>& that) {
             mexp = that.mexp;
             pos = that.pos;
             sh1 = that.sh1;

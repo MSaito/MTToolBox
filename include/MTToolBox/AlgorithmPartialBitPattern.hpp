@@ -3,14 +3,14 @@
 /**
  * @file AlgorithmPartialBitPattern.hpp
  *
- * @brief search tempering parameters so that the random number
- * generator has a good equidistribution property.
+ * @brief 疑似乱数生成器の高次元均等分布性を改善するために、テンパ
+ * リングパラメータを探索するアルゴリズム
  *
  * @author Mutsuo Saito (Hiroshima University)
- * @author Makoto Matsumoto (The University of Tokyo)
+ * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2011 Mutsuo Saito, Makoto Matsumoto,
- * Hiroshima University and The University of Tokyo.
+ * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
+ * and Hiroshima University.
  * All rights reserved.
  *
  * The 3-clause BSD License is applied to this software, see
@@ -66,7 +66,9 @@ namespace MTToolBox {
     class AlgorithmPartialBitPattern : public AlgorithmTempering<T> {
     public:
         /**
-         * search tempering parameters.
+         * テンパリングパラメータを探索する。
+         *
+         * この処理の呼び出しは長時間かかる可能性がある。
          * @returns 0
          */
         int operator()(TemperingCalculatable<T>& rand,
@@ -103,10 +105,18 @@ namespace MTToolBox {
             return 0;
         }
 
+        /**
+         * このテンパリングパラメータ探索がLSBからの探索であるかどうか
+         *@return true LSBからのテンパリングパラメータ探索
+         */
         bool isLSBTempering() {
             return lsb;
         }
     private:
+        /**
+         *
+         *
+         */
         void make_temper_bit(TemperingCalculatable<T>& rand,
                              int start, int size,
                              int param_pos, T pattern) {
@@ -138,6 +148,7 @@ namespace MTToolBox {
             int size = max_v_bit - v_bit;
             T pattern;
             T mask = make_mask(v_bit, size);
+            int length = bit_size(T) / 4;
             //for (int i = 0; i < (1 << size); i++) {
             for (int i = (1 << size) -1; i >= 0; i--) {
                 if (lsb) {
@@ -146,8 +157,13 @@ namespace MTToolBox {
                     pattern = static_cast<T>(i) << (bit_len - v_bit - size);
                 }
                 rand.setTemperingPattern(mask, pattern, param_pos);
+                rand.setUpTempering();
                 delta = get_equidist(rand, bit_len, bitSize);
                 if (delta < min_delta) {
+                    if (verbose) {
+                        cout << "pattern chagne" << hex << min_pattern
+                             << ":" << pattern << endl;
+                    }
                     min_delta = delta;
                     min_pattern = pattern;
                 } else if (delta == min_delta) {
@@ -162,7 +178,9 @@ namespace MTToolBox {
             }
             make_temper_bit(rand, v_bit, size, param_pos, min_pattern);
             if (verbose) {
-                cout << min_delta << ":" << hex << min_pattern << endl;
+                cout << dec << min_delta << ":"
+                     << hex << setw(length) << min_pattern << ":"
+                     << hex << setw(length) << mask << endl;
             }
             return min_delta;
         }
@@ -183,13 +201,16 @@ namespace MTToolBox {
             //TemperingCalculatable<T> r(rand);
             AlgorithmEquidsitribution<T> sb(rand, bit_len_);
             int veq[bit_len_];
-            sb.get_all_equidist(veq);
+            int sum = sb.get_all_equidist(veq);
+#if 0
             int sum = 0;
             for (int i = 0; i < bit_len_; i++) {
                 sum += (bitSize / (i + 1) - veq[i]) * (bit_len_ - i);
             }
+#endif
             return sum;
         }
+#if 0
         T get_equidist_pattern(TemperingCalculatable<T>& rand,
                                int bit_len_,
                                int bitSize) {
@@ -205,6 +226,7 @@ namespace MTToolBox {
             }
             return pattern;
         }
+#endif
         /**
          * make mask which has \b size bits 1s form start.<br/>
          * ex.<br/>
