@@ -15,11 +15,11 @@ CPPOPT = -Wall -Wextra -O3 $(M64) $(INC) \
 CPP = g++ $(CPPOPT)
 #CPP = icc $(CPPOPT)
 
-LINKOPT += -L../../lib -lntl -lMTToolBox $(OPTLIB)
+LINKOPT += -L../../lib -lntl -lMTToolBox -lcrypto $(OPTLIB)
 
-tinymt32dc:  tinymt32dc.cpp tinymt32search.hpp sequential.hpp \
-	parse_opt.hpp output.hpp sequential.o parse_opt.o
-	${CPP} -o $@ tinymt32dc.cpp parse_opt.o sequential.o ${LINKOPT}
+MTGP32dc:  MTGP32dc.cpp MTGP32search.hpp mtgp_param.h \
+	parse_opt.hpp output.hpp parse_opt.o
+	${CPP} -DUSE_SHA -o $@ MTGP32dc.cpp parse_opt.o ${LINKOPT}
 
 .cpp.o:
 	${CPP} -c $<

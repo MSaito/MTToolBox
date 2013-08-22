@@ -5,8 +5,9 @@
  * @file TemperingCalculatable.hpp
  * @brief テンパリングパラメータ探索用の抽象クラス
  *
- * テンパリングパラメータを探索するアルゴリズム TemperingAlgorithm
- * を利用してテンパリングパラメータを探索する時に使用するクラス
+ * テンパリングを行うGF(2)線形疑似乱数生成器は、このクラスを継承する
+ * ことによって、TemperingAlgorithmを使用したテンパリングパラメータ
+ * 探索が可能になる。
  */
 #include <stdint.h>
 #include <inttypes.h>
@@ -20,16 +21,6 @@ namespace MTToolBox {
     template<class U>
     class TemperingCalculatable : public EquidistributionCalculatable<U> {
     public:
-#if 0
-        /**
-         * テンパリングパラメータの数を返す。
-         * 通常は1を返すようにすればよい。
-         * MTGP のようにテーブルを参照してテンパリングする場合は
-         * 1より大きな数を返すようにoverrideする。
-         * @return テンパリングパラメータの数
-         */
-        virtual int numberOfTemperingParam() {return 1;}
-#endif
         /**
          * テンパリングパラメータをセットする。
          * @param[in] mask pattern のうち実際にテンパリングパラメータに
@@ -45,7 +36,7 @@ namespace MTToolBox {
          * MTGP の場合はルックアップテーブルの準備をしている。
          * テンパリングパラメータの数が1の場合はおそらく準備をする必要はない。
          */
-        virtual void setUpTempering() {};
+        virtual void setUpTempering() = 0;
 
         /**
          * 出力の上位ビットと下位ビットを反転する。

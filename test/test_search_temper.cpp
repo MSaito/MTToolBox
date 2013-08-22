@@ -18,7 +18,7 @@ SUITE(RECURSION_SEARCH_AND_TEMPER) {
         stringstream ss;
         MersenneTwister mt;
         AlgorithmRecursionAndTempering<uint32_t> searcher(mt);
-        searcher.search(tiny, st32, stlsb32, true);
+        searcher.search(tiny, st32, stlsb32, false);
         tiny.printParam(cout);
         tiny.printParam(ss);
         string str = ss.str();

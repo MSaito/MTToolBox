@@ -19,14 +19,14 @@ OPTLIB = -lgf2x
 LINKOPT += -L../lib -lMTToolBox -lUnitTest++ -lntl $(OPTLIB)
 COMMON_OBJS = tinymt32.o tinymt64.o
 OBJS1 = ${COMMON_OBJS} test_period.o test_search.o test_equidist.o
-OBJS2 = ${COMMON_OBJS} test_temper.o test_search_temper.o
+OBJS2 = ${COMMON_OBJS} test_temper.o test_search_temper.o test_linearity.o
 
-DEPENDS = test_generator.hpp tinymt32.h tinymt64.h
+DEPENDS = test_generator.hpp tinymt32.h tinymt64.h test_linearity.cpp
 
-main2: main.cpp ${OBJS2} ${DEPENDS}
+test2: main.cpp ${OBJS2} ${DEPENDS}
 	${CPP} -o $@ main.cpp ${OBJS2} ${LINKOPT}
 
-main1: main.cpp ${OBJS1} ${DEPENDS}
+test1: main.cpp ${OBJS1} ${DEPENDS}
 	${CPP} -o $@ main.cpp ${OBJS1} ${LINKOPT}
 
 test_rtiny: test_rtiny.cpp test_generator.hpp

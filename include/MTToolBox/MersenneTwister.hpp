@@ -25,42 +25,40 @@ namespace MTToolBox {
     public:
         MersenneTwister() {
             mt = new uint32_t[LARGE_N];
-            reseed(5489);
+            seed(5489);
         }
-        MersenneTwister(uint32_t seed) {
+        MersenneTwister(uint32_t value) {
             mt = new uint32_t[LARGE_N];
-            reseed(seed);
+            seed(value);
         }
-        MersenneTwister(const std::string& seed) {
+        MersenneTwister(const std::string& value) {
             mt = new uint32_t[LARGE_N];
-            reseed(seed);
+            seed(value);
         }
-        MersenneTwister(const uint32_t *seed, int size) {
+        MersenneTwister(const uint32_t *value, int size) {
             mt = new uint32_t[LARGE_N];
-            reseed(seed, size);
+            seed(value, size);
         }
         ~MersenneTwister() {
             delete[] mt;
         }
         void seed(uint32_t value) {
-            reseed(value);
-        }
-        void reseed(uint32_t seed) {
-            mt[0] = seed;
+            mt[0] = value;
             for (mti = 1; mti < N; mti++) {
                 mt[mti] =
-                    (1812433253UL * (mt[mti - 1] ^ (mt[mti - 1] >> 30)) + mti);
+                    (UINT32_C(1812433253)
+                     * (mt[mti - 1] ^ (mt[mti - 1] >> 30)) + mti);
             }
         }
-        void reseed(const std::string& seed) {
-            reseed<char>(seed.c_str(), static_cast<int>(seed.size()));
+        void seed(const std::string& seed) {
+            seed_array<char>(seed.c_str(), static_cast<int>(seed.size()));
         }
-        void reseed(const uint32_t *seed, int key_length) {
-            reseed<uint32_t>(seed, key_length);
+        void seed(const uint32_t *value, int key_length) {
+            seed_array<uint32_t>(value, key_length);
         }
-        template<class T> void reseed(const T *seed, int key_length) {
+        template<class T> void seed_array(const T *value, int key_length) {
             int i, j, k;
-            reseed(19650218UL);
+            seed(UINT32_C(19650218));
             i = 1;
             j = 0;
             if (N > key_length) {
@@ -69,8 +67,9 @@ namespace MTToolBox {
                 k = key_length;
             }
             for (; k > 0; k--) {
-                mt[i] = (mt[i] ^ ((mt[i-1] ^ (mt[i-1] >> 30)) * 1664525UL))
-                    + static_cast<uint32_t>(seed[j]) + j; /* non linear */
+                mt[i] = (mt[i] ^ ((mt[i-1] ^ (mt[i-1] >> 30))
+                                  * UINT32_C(1664525)))
+                    + static_cast<uint32_t>(value[j]) + j; /* non linear */
                 i++;
                 j++;
                 if (i>=N) {
@@ -82,7 +81,8 @@ namespace MTToolBox {
                 }
             }
             for (k=N-1; k; k--) {
-                mt[i] = (mt[i] ^ ((mt[i-1] ^ (mt[i-1] >> 30)) * 1566083941UL))
+                mt[i] = (mt[i] ^ ((mt[i-1] ^ (mt[i-1] >> 30))
+                                  * UINT32_C(1566083941)))
                     - i; /* non linear */
                 i++;
                 if (i>=N) {
@@ -91,7 +91,7 @@ namespace MTToolBox {
                 }
             }
             /* MSB is 1; assuring non-zero initial array */
-            mt[0] = 0x80000000UL;
+            mt[0] = UINT32_C(0x80000000);
             mti = N;
         }
         uint32_t generate() {
@@ -123,8 +123,8 @@ namespace MTToolBox {
         int mti;
         uint32_t temper(uint32_t y) {
             y ^= (y >> 11);
-            y ^= (y << 7) & 0x9d2c5680UL;
-            y ^= (y << 15) & 0xefc60000UL;
+            y ^= (y << 7) & UINT32_C(0x9d2c5680);
+            y ^= (y << 15) & UINT32_C(0xefc60000);
             y ^= (y >> 18);
             return y;
         }

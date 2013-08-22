@@ -30,12 +30,7 @@ namespace MTToolBox {
     template<class U>
     class EquidistributionCalculatable : public RecursionSearchable<U> {
     public:
-#if 0
-        /**
-         * 仮想デストラクタ
-         */
-        virtual ~EquidistributionCalculatable<U>() = 0;
-#endif
+        using AbstractGenerator<U>::generate;
         /*
          * 自分のコピーを返す。
          *
@@ -70,13 +65,7 @@ namespace MTToolBox {
          * これはもう少し効率的に書くことが出来る。（サンプルを参照）
          */
         virtual void add(EquidistributionCalculatable& that) = 0;
-#if 0
-        /**
-         * 状態空間を次状態に遷移する
-         *
-         */
-        virtual void next() = 0;
-#endif
+
         /**
          * 状態空間をすべてゼロにセットする。
          */
@@ -91,11 +80,7 @@ namespace MTToolBox {
          *
          * @return true なら状態空間がすべてゼロ
          */
-        virtual bool isZero() = 0;
-#if 0
-        virtual void setUpParam() = 0;
-        virtual void printParam(std::ostream& out) = 0;
-#endif
+        virtual bool isZero() const = 0;
     };
 }
 

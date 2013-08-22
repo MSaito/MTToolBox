@@ -90,7 +90,7 @@ namespace MTToolBox {
             }
         }
 
-        bool isZero() {
+        bool isZero() const {
             if ((tiny.status[0] & TINYMT32_MASK) == 0 &&
                 tiny.status[1] == 0 &&
                 tiny.status[2] == 0 &&
@@ -122,6 +122,8 @@ namespace MTToolBox {
             tiny.tmat |= pattern & mask;
         }
 
+        void setUpTempering() {
+        }
         void setReverseOutput() {
             reverse = true;
         }
