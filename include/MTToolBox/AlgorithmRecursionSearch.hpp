@@ -3,14 +3,13 @@
 /**
  * @file recursion_search.hpp
  *
- * @brief search parameters so that the random number generator's state
- * transition function has an irreducible characteristic polynomial.
+ * @brief 状態遷移関数のパラメータを探索する。
  *
  * @author Mutsuo Saito (Hiroshima University)
- * @author Makoto Matsumoto (The University of Tokyo)
+ * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2011 Mutsuo Saito, Makoto Matsumoto,
- * Hiroshima University and The University of Tokyo.
+ * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto,
+ * and Hiroshima University.
  * All rights reserved.
  *
  * The 3-clause BSD License is applied to this software, see
@@ -25,34 +24,47 @@
 
 namespace MTToolBox {
     /**
-     * @class Search
-     * search parameters so that the generator's state transition function
-     * has an irreducible characteristic polynomial.
-     * 1) call start() function.
-     * 2) if start() returns true, then call get_random(), get_minpoly(),
-     * or get_count().
+     * @class AlgorithmRecursionSearch
+     * @brief 状態遷移関数のパラメータを探索する。
      *
-     * @tparam T generators class
+     * GF(2)線形疑似乱数生成器の状態遷移関数が既約な特性多項式をもつよ
+     * うなパラメータを探索する。
+     *
+     * コンストラクタに与えるgenerator はこのクラスのstart()メソッドを
+     * 呼び出すと変更される。そしてstart()がtrueを返したなら、変更後の
+     * generatorはその状態遷移関数が既約な特性多項式を持つように変更さ
+     * れているはずである。従って変更後のgeneratorからパラメータを取得
+     * することによって状態遷移関数が既約となるパラメータを取得できる。
+     *
+     * <ol><li>start()メソッドを呼ぶ。</li> <li>start()メソッドがtrueを
+     * 返したら、getMinpoly(), getCount()などのメソッドを呼んで情報を取
+     * 得する。またgeneratorのgetParamString() からも情報を取得できる。
+     * </li></ol>
+     *
+     * @tparam U 疑似乱数生成器の出力する値の型
      */
     template<typename U>
     class AlgorithmRecursionSearch {
     public:
         /**
-         * rand は破壊される。
-         * @param rand_ random number generator whose parameters are
-         * searched.
-         * @param seq_generator a sequential number generator which
-         * gives sequential number for searching parameters.
+         * コンストラクタ
          *
+         * bg はgenerator とは異なるインスタンスである必要がある。
+         * 通常の場合、bg にはMersenneTwisterのインスタンスを与えるとよい。
+         * TinyMT では、
+         *
+         * @param generator generator はこのクラスのメソッドによって変更される。
+         * @param bg パラメータ探索に使用する疑似乱数生成器
          */
-        AlgorithmRecursionSearch(RecursionSearchable<U>& rand_,
+        AlgorithmRecursionSearch(RecursionSearchable<U>& generator,
                                  AbstractGenerator<U>& bg) {
-            rand = &rand_;
+            rand = &generator;
             baseGenerator = &bg;
             count = 0;
         }
 
         /**
+         *
          * generate random parameters and check if the generator's
          * state transition function has an irreducible characteristic
          * polynomial. If found in \b try_count times, return true, else
@@ -83,8 +95,8 @@ namespace MTToolBox {
          * call this function after \b start() has returned true.
          * @return random number generator class with parameters.
          */
-        void printParam(std::ostream& out) {
-            rand->printParam(out);
+        const std::string getParamString() {
+            return rand->getParamString();
         }
 
         /**

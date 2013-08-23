@@ -73,7 +73,7 @@ namespace tinymt {
          * This method is used in output.hpp.
          * @return header line of output.
          */
-        string get_header() {
+        const std::string getHeaderString() {
             return "id, mat1, mat2, tmat";
         }
 
@@ -81,30 +81,26 @@ namespace tinymt {
          * This method is used in output.hpp.
          * @return string of parameters
          */
-        string get_string() {
+        const std::string getParamString() {
             stringstream ss;
             ss << dec << id << ",";
             ss << hex << setw(8) << setfill('0') << mat1 << ",";
             ss << hex << setw(8) << setfill('0') << mat2 << ",";
             ss << hex << setw(8) << setfill('0') << tmat << ",";
-            string s;
-            ss >> s;
-            return s;
+            return ss.str();
         }
 
         /**
          * This method is used for DEBUG.
          * @return string of parameters.
          */
-        string get_debug_string() {
+        const std::string getDebugString() {
             stringstream ss;
             ss << "id:" << dec << id << endl;
             ss << "mat1:" << hex << setw(8) << setfill('0') << mat1 << endl;
             ss << "mat2:" << hex << setw(8) << setfill('0') << mat2 << endl;
             ss << "tmat:" << hex << setw(8) << setfill('0') << tmat << endl;
-            string s;
-            ss >> s;
-            return s;
+            return ss.str();
         }
 
         /**
@@ -179,7 +175,7 @@ namespace tinymt {
         int bitSize() const {
             return mexp;
         }
-
+#if 0
         /**
          * This method always returns 4
          * @return always 4
@@ -187,7 +183,7 @@ namespace tinymt {
         int get_status_size() const {
             return status_size;
         }
-
+#endif
         /**
          * This method initialize internal state.
          * This initialization is simple.
@@ -290,7 +286,7 @@ namespace tinymt {
             *mat1 = param.mat1;
             *mat2 = param.mat2;
         }
-
+#if 0
         /**
          * This method gives information to the functions in the file
          * search_temper.hpp
@@ -299,7 +295,7 @@ namespace tinymt {
         int get_temper_param_num() const {
             return 1;
         }
-
+#endif
         /**
          * This method is called by the functions in the file
          * simple_shortest_basis.hpp
@@ -401,18 +397,16 @@ namespace tinymt {
             param = src;
         }
 
-        void printHeader(ostream& out) {
-            string s = param.get_header();
-            out << s << endl;
+        const std::string getHeaderString() {
+            return param.getHeaderString();
         }
 
         /**
          * output parameters
          * @param out output stream
          */
-        void printParam(ostream& out) {
-            string s = param.get_string();
-            out << s << endl;
+        const std::string getParamString() {
+            return param.getParamString();
         }
 
         /**

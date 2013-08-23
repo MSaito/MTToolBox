@@ -118,9 +118,9 @@ namespace MTToolBox {
          *
          */
         void make_temper_bit(TemperingCalculatable<T>& rand,
-                             int start, int size,
+                             T mask,
                              int param_pos, T pattern) {
-            T mask = make_mask(start, size);
+            //T mask = make_mask(start, size);
             rand.setTemperingPattern(mask, pattern, param_pos);
             rand.setUpTempering();
         }
@@ -156,12 +156,14 @@ namespace MTToolBox {
                 } else {
                     pattern = static_cast<T>(i) << (bit_len - v_bit - size);
                 }
-                rand.setTemperingPattern(mask, pattern, param_pos);
-                rand.setUpTempering();
-                delta = get_equidist(rand, bit_len, bitSize);
+                make_temper_bit(rand, mask, param_pos, pattern);
+                //rand.setTemperingPattern(mask, pattern, param_pos);
+                //rand.setUpTempering();
+                //delta = get_equidist(rand, bit_len, bitSize);
+                delta = get_equidist(rand, bit_len);
                 if (delta < min_delta) {
                     if (verbose) {
-                        cout << "pattern chagne" << hex << min_pattern
+                        cout << "pattern chagne " << hex << min_pattern
                              << ":" << pattern << endl;
                     }
                     min_delta = delta;
@@ -169,14 +171,14 @@ namespace MTToolBox {
                 } else if (delta == min_delta) {
                     if (count_bit(min_pattern) < count_bit(pattern)) {
                         if (verbose) {
-                            cout << "pattern chagne" << hex << min_pattern
+                            cout << "pattern chagne " << hex << min_pattern
                                  << ":" << pattern << endl;
                         }
                         min_pattern = pattern;
                     }
                 }
             }
-            make_temper_bit(rand, v_bit, size, param_pos, min_pattern);
+            make_temper_bit(rand, mask, param_pos, min_pattern);
             if (verbose) {
                 cout << dec << min_delta << ":"
                      << hex << setw(length) << min_pattern << ":"
@@ -196,8 +198,7 @@ namespace MTToolBox {
          * from 0 to \b bit_len_ -1 MSBs.
          */
         int get_equidist(TemperingCalculatable<T>& rand,
-                         int bit_len_,
-                         int bitSize) {
+                         int bit_len_) {
             //TemperingCalculatable<T> r(rand);
             AlgorithmEquidsitribution<T> sb(rand, bit_len_);
             int veq[bit_len_];

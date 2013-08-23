@@ -30,7 +30,6 @@
 #include "sequential.hpp"
 #include "tinymt32search.hpp"
 #include "parse_opt.hpp"
-#include "output.hpp"
 
 using namespace std;
 using namespace MTToolBox;
@@ -38,6 +37,7 @@ using namespace tinymt;
 static const uint32_t sequence_max = 0x7fffffff;
 
 int search(tinymt_options& opt, int count);
+const std::string toString(GF2X& poly);
 
 /**
  * parse command line option, and search parameters
@@ -87,9 +87,21 @@ int search(tinymt_options& opt, int count) {
             tinymt32_param param = g.get_param();
             int weight = all.getWeight();
             GF2X poly = all.getCharacteristicPolynomial();
+            if (i == 0) {
+                cout << "# characteristic, "
+                     << g.getHeaderString()
+                     << ", weight, delta"
+                     << endl;
+            }
+            cout << toString(poly) << ","
+                 << g.getParamString()
+                 << dec << weight << "," << delta
+                 << endl;
+#if 0
             output_params<uint32_t, tinymt32_param>(poly, weight,
                                                     delta, param,
                                                     opt, i == 0);
+#endif
             i++;
         } else {
             cout << "search failed" << endl;
@@ -101,4 +113,31 @@ int search(tinymt_options& opt, int count) {
         cout << "search end at " << ctime(&t) << endl;
     }
     return 0;
+}
+
+const std::string toString(GF2X& poly) {
+    uint64_t p1;
+    uint64_t p2;
+    uint64_t p = 0;
+    uint64_t mask = 1;
+    for(int i = 0; i < 64; i++) {
+        if (IsOne(coeff(poly, i))) {
+            p |= mask;
+        }
+        mask <<= 1;
+    }
+    p2 = p;
+    mask = 1;
+    p = 0;
+    for(int i = 0; i < 64; i++) {
+        if (IsOne(coeff(poly, i + 64))) {
+            p |= mask;
+        }
+        mask <<= 1;
+    }
+    p1 = p;
+    stringstream ss;
+    ss << hex << setfill('0') << setw(16) << p1
+       << hex << setfill('0') << setw(16) << p2;
+    return ss.str();
 }

@@ -192,11 +192,12 @@ namespace mtgp {
         mtgp_param<uint32_t> get_param() {
             return param;
         }
-        void printHeader(std::ostream& out) {
-            param.printHeader(out);
+        const std::string getHeaderString() {
+            return param.getHeaderString();
         }
-        void printParam(std::ostream& out) {
-            param.printParam(out);
+
+        const std::string getParamString() {
+            return param.getParamString();
         }
         void setTemperingPattern(uint32_t mask, uint32_t pattern, int src_bit) {
             param.tmp_tbl[src_bit] &= ~mask;

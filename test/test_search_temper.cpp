@@ -19,9 +19,8 @@ SUITE(RECURSION_SEARCH_AND_TEMPER) {
         MersenneTwister mt;
         AlgorithmRecursionAndTempering<uint32_t> searcher(mt);
         searcher.search(tiny, st32, stlsb32, false);
-        tiny.printParam(cout);
-        tiny.printParam(ss);
-        string str = ss.str();
+        const string str = tiny.getParamString();
+        cout << str << endl;
         CHECK(str.find("tmat") != string::npos);
         CHECK(searcher.getWeight() < 128);
         CHECK(searcher.getDelta() <= 10);

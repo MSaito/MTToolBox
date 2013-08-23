@@ -4,6 +4,8 @@
 #undef  LINEARITY_CHECK // for calc_equidist
 #include <iostream>
 #include <iomanip>
+#include <sstream>
+#include <string>
 #include <stdexcept>
 #include <MTToolBox/MersenneTwister.hpp>
 #include <MTToolBox/AbstractGenerator.hpp>
@@ -106,14 +108,16 @@ namespace MTToolBox {
             tiny.mat2 = mt.generate();
         }
 
-        void printHeader(std::ostream& out) {
-            UNUSED_VARIABLE(&out);
+        const std::string getHeaderString() {
+            return "";
         }
 
-        void printParam(std::ostream& out) {
-            out << "mat1:" << hex << tiny.mat1 << endl;
-            out << "mat2:" << hex << tiny.mat2 << endl;
-            out << "tmat:" << hex << tiny.tmat << endl;
+        const std::string getParamString() {
+            stringstream ss;
+            ss << "mat1:" << hex << tiny.mat1 << endl;
+            ss << "mat2:" << hex << tiny.mat2 << endl;
+            ss << "tmat:" << hex << tiny.tmat << endl;
+            return ss.str();
         }
 
         void setTemperingPattern(uint32_t mask, uint32_t pattern, int index) {
@@ -212,13 +216,15 @@ namespace MTToolBox {
             sh4 = MT.next() % 32;
         }
 
-        void printParam(std::ostream& out) {
-            out << "mat1:" << hex << mat1 << endl;
-            out << "mat2:" << hex << mat2 << endl;
-            out << "sh1:" << dec << sh1 << endl;
-            out << "sh2:" << dec << sh2 << endl;
-            out << "sh3:" << dec << sh3 << endl;
-            out << "sh4:" << dec << sh4 << endl;
+        const std::string getParamString() {
+            stringstream ss;
+            ss << "mat1:" << hex << mat1 << endl;
+            ss << "mat2:" << hex << mat2 << endl;
+            ss << "sh1:" << dec << sh1 << endl;
+            ss << "sh2:" << dec << sh2 << endl;
+            ss << "sh3:" << dec << sh3 << endl;
+            ss << "sh4:" << dec << sh4 << endl;
+            return ss.str();
        }
         uint32_t generate() {
             uint32_t x;

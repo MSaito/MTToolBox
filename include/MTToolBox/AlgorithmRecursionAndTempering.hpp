@@ -31,10 +31,6 @@
 #include <MTToolBox/AlgorithmTempering.hpp>
 #include <MTToolBox/util.hpp>
 
-/**
- * @namespace MTToolBox
- * name space for random number generator development
- */
 namespace MTToolBox {
     /**
      * @class AlgorithmRecursionAndTempering
@@ -96,7 +92,7 @@ namespace MTToolBox {
             }
             if (verbose) {
                 *out << "count = " << search.getCount() << endl;
-                lg.printParam(*out);
+                *out << lg.getParamString() << endl;
             }
             poly = search.getMinPoly();
             weight = NTL::weight(poly);
@@ -130,7 +126,7 @@ namespace MTToolBox {
                 time_t t = time(NULL);
                 *out << "tempering parameters are found at " << ctime(&t)
                      << endl;
-                lg.printParam(*out);
+                *out << lg.getParamString() << endl;
                 print_kv(veq, mexp, bit_size(T));
                 *out << "delta = " << dec << delta << endl;
             }

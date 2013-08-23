@@ -9,6 +9,7 @@
  */
 #include <stdint.h>
 #include <inttypes.h>
+#include <string>
 #include <MTToolBox/AbstractGenerator.hpp>
 
 namespace MTToolBox {
@@ -33,25 +34,25 @@ namespace MTToolBox {
         virtual void setUpParam(AbstractGenerator<U>& generator) = 0;
 
         /**
-         * パラメータのヘッダを出力する。
+         * パラメータのヘッダ文字列を返す。
          *
          * パラメータを出力する際に、わかりやすいようにヘッダを表示する。
          * このメソッドは、Dynamic Creator のように大量のパラメータを探
-         * 索する際に使用する。ここで出力するパラメータは状態遷移関数の
-         * パラメータだけでなく、テンパリングパラメータも出力してよい。
+         * 索する際に使用する。ここで返却する文字列パラメータは状態遷移関数の
+         * パラメータだけでなく、テンパリングパラメータも含めてよい。
          */
-        virtual void printHeader(std::ostream& out) = 0;
+        virtual const std::string getHeaderString() = 0;
 
         /**
-         * パラメータを出力する。
+         * パラメータの文字列表現を返す。
          *
          * Dynamic Creator のように大量のパラメータを探索する場合は、
-         * printHeader() と組み合わせて出力するとよい。そうでない場合は、
-         * printHeader() は何もしないようにしてもよい。ここで出力するパ
+         * getHeaderString() と組み合わせて出力するとよい。そうでない場合は、
+         * getHeaderString() は何もしないようにしてもよい。ここで出力するパ
          * ラメータは状態遷移関数のパラメータだけでなく、テンパリングパ
          * ラメータも出力してよい。
          */
-        virtual void printParam(std::ostream& out) = 0;
+        virtual const std::string getParamString() = 0;
     };
 }
 

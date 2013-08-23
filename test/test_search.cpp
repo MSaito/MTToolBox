@@ -15,10 +15,8 @@ SUITE(RECURSION_SEARCH) {
         Tiny32 tiny(1234);
         MersenneTwister mt;
         AlgorithmRecursionSearch<uint32_t> search(tiny, mt);
-        stringstream ss;
         if (search.start(10000)) {
-            search.printParam(ss);
-            string str = ss.str();
+            string str = search.getParamString();
             CHECK(str.find("mat1") != string::npos);
             GF2X poly = search.getMinPoly();
             CHECK(deg(poly) == tiny.bitSize());

@@ -70,40 +70,45 @@ namespace mtgp {
             sha1[sha1_length - 1] = 0;
         }
 
-        void printHeader(std::ostream& out) {
-            out << "# sha1, mexp, type, id, pos, sh1, sh2, tbl_0,"
-                << " tbl_1, tbl_2, tbl_3,tmp_0, tmp_1, tmp_2, tmp_3,"
-                << " mask," << std::endl;
+        const std::string getHeaderString() {
+            return "sha1, mexp, type, id, pos, sh1, sh2, tbl_0,"
+                " tbl_1, tbl_2, tbl_3,tmp_0, tmp_1, tmp_2, tmp_3,"
+                " mask";
         }
 
-        void printParam(std::ostream& out) {
+        const std::string getParamString() {
             using namespace std;
-            out << '"' << sha1 << '"' << ",";
-            out << dec << mexp << ",";
+            stringstream ss;
+            ss << '"' << sha1 << '"' << ",";
+            ss << dec << mexp << ",";
+            int length = 8;
             if (bit_size(T) == 32) {
-                out << "uint32_t,";
+                ss << "uint32_t,";
+                length = 8;
             } else {
-                out << "uint64_t,";
+                ss << "uint64_t,";
+                length = 16;
             }
-            out << dec << id << ",";
-            out << dec << pos << ",";
-            out << dec << sh1 << ",";
-            out << dec << sh2 << ",";
+            ss << dec << id << ",";
+            ss << dec << pos << ",";
+            ss << dec << sh1 << ",";
+            ss << dec << sh2 << ",";
             for (int i = 0; i < 4; i++) {
-                out << hex << tbl[i] << ",";
+                ss << hex << setfill('0') << setw(8) << tbl[i] << ",";
             }
             for (int i = 0; i < 4; i++) {
-                out << hex << tmp_tbl[i] << ",";
+                ss << hex << setfill('0') << setw(length) << tmp_tbl[i] << ",";
             }
-            out << hex << mask << ",";
+            ss << hex << setfill('0') << setw(length) << mask << ",";
 #if defined(DEBUG)
             for (int i = 0; i < 16; i++) {
-                out << hex << p[i] << ",";
+                ss << hex << p[i] << ",";
             }
             for (int i = 0; i < 16; i++) {
-                out << hex << tp[i] << ",";
+                ss << hex << tp[i] << ",";
             }
 #endif
+            return ss.str();
         }
 
         bool equals(mtgp_param<T>& other) {

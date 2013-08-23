@@ -17,9 +17,8 @@ SUITE(TEMPER_SEARCH) {
         stringstream ss;
         stlsb32(tiny, true);
         st32(tiny, true);
-        tiny.printParam(cout);
-        tiny.printParam(ss);
-        string str = ss.str();
+        string str = tiny.getParamString();
+        cout << str << endl;
         CHECK(str.find("tmat") != string::npos);
     }
 }

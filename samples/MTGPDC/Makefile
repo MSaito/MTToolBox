@@ -18,7 +18,7 @@ CPP = g++ $(CPPOPT)
 LINKOPT += -L../../lib -lntl -lMTToolBox -lcrypto $(OPTLIB)
 
 MTGP32dc:  MTGP32dc.cpp MTGP32search.hpp mtgp_param.h \
-	parse_opt.hpp output.hpp parse_opt.o
+	parse_opt.hpp parse_opt.o
 	${CPP} -DUSE_SHA -o $@ MTGP32dc.cpp parse_opt.o ${LINKOPT}
 
 test: test.cpp test_linearity.cpp
