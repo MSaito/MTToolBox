@@ -1,0 +1,86 @@
+# scons construct file
+# see http://www.scons.org/
+#
+
+#
+# define check for libUnitTest++.a
+#
+def libcheck(basename, path):
+    name = basename + '.lib'
+    if os.name == 'posix' or os.name == 'mac':
+        name = 'lib' + basename + '.a'
+    for a in path:
+        if os.path.exists(a + '/' + name):
+            return True
+    return False
+
+#
+# set LINUX environment variables
+#
+import os
+include_path = []
+os_library_path = []
+os_include_path = os.environ.get('CPLUS_INCLUDE_PATH').split(':')
+if os_include_path :
+    while '' in os_include_path: os_include_path.remove('')
+    for a in os_include_path:
+        include_path.append('-I' + a)
+os_library_path = os_library_path + os.environ.get('LIBRARY_PATH').split(':')
+if os_library_path :
+    while '' in os_library_path: os_library_path.remove('')
+    library_path = os_library_path
+
+#
+# setting for this project
+#
+include_path.append('-I../../include')
+include_path.append('-I.')
+library_path.append('../../lib')
+optlib = ['MTToolBox', 'ntl']
+env = Environment(CFLAGS=['-Wall', '-O3', '-std=c99',
+                          '-Wmissing-prototypes', '-Wextra'],
+                  CXXFLAGS=['-Wall', '-g', '-O3', '-Wextra',
+                            include_path,
+ 			    '-D__STDC_CONSTANT_MACROS',
+			    '-D__STDC_FORMAT_MACROS'])
+env.Append(LIBPATH=library_path)
+
+files = ['MTGP32dc.cpp',
+         'parse_opt.cpp']
+test_files = ['test.cpp', 'test_linearity.cpp']
+
+#
+# Library check
+#
+sha_lib = ''
+unit_test = False
+conf = Configure(env)
+if not conf.CheckLib('ntl'):
+    print 'Did not find libntl.a or ntl.lib, exiting!'
+    Exit(1)
+if conf.CheckLib('crypto'):
+    optlib.append('crypto')
+    sha_lib = '-DUSE_SHA'
+if conf.CheckLib('gf2x'):
+    optlib.append('gf2x')
+if conf.CheckLib('gmp'):
+    optlib.append('gmp')
+if conf.CheckLib('UnitTest++') or libcheck('UnitTest++', library_path) :
+    unit_test = True
+else:
+    print "don't exexcute unit test."
+env = conf.Finish()
+if sha_lib:
+    env.Append(CXXFLAGS = [sha_lib])
+#
+# target build
+#
+env.Program('MTGP32dc', files, LIBS=optlib)
+
+#
+# test if UnitTest++ is installed.
+#
+if unit_test:
+    optlib.append('UnitTest++')
+    env.Program('test', test_files, LIBS=optlib)
+
