@@ -1,8 +1,10 @@
 # scons construct file
 # see http://www.scons.org/
 #
+# This file is called by top level SConstruct file.
+
 target = 'MTToolBox'
-inc = '-I../include'
+inc = '-Iinclude'
 env = Environment(CPPFLAGS=['-Wall', '-g', '-O3', '-Wextra', inc,
  			    '-D__STDC_CONSTANT_MACROS',
 			    '-D__STDC_FORMAT_MACROS'])

@@ -26,13 +26,28 @@ MTToolBox はGF(2)線形疑似乱数生成器を作成するためのライブ�
 2. 必要ライブラリ
 
 NTL
-GF(2)係数多項式の計算に使用。
+http://www.shoup.net/ntl/
+GF(2)係数多項式の計算に使用。このプロジェクトがC++で書かれている最大の
+理由はNTLを使うためである。
 
 tr1/shared_ptr C++/tr1, C++11
 shared_ptr にしなくても動作すると思うが、不安なので一部で使用。
 
+UnitTest++
+http://unittest-cpp.sourceforge.net/
+ぱっと見たところ一番簡単に使えるUnit Testライブラリだったので。このライ
+ブラリがインストールされていなくても、動作する。
+
+openssl
+http://www.openssl.org/
+MTGP32dcのサンプルの出力を公開済みのMTGPの出力と同様にするため。
+インストールされていなくても、他のサンプルのコンパイルには影響しない。
+
 scons
-酢昆布に語呂が似ていたから...ではなくて、autotools を使いこなせないので
+http://www.scons.org/
+酢昆布に語呂が似ていたから...ではなくて、autotools を使いこなせないので。
+そして長年使ってきたはずのshell script を書くよりも、これまで使ったこと
+がなかったpython scriptを書く方がずっと楽だから。
 
 3. 実行速度について
 
