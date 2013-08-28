@@ -14,6 +14,7 @@ int main()
     bool factor = true;
     RTiny32 r(1234);
     GF2X poly;
+    MersenneTwister mt;
     const char * table[] = {"3", "5", "17", "257", "641", "65537",
                             "274177", "6700417", "672804213107211", NULL};
 #if 0
@@ -36,32 +37,32 @@ int main()
     for (int i = 0; i < 10000000; i++) {
         minpoly(poly, r);
         if (deg(poly) != 128) {
-            r.setUp();
+            r.setUpParam(mt);
             continue;
         }
         if (isIrreducible(poly)) {
             cout << "irreducible" << endl;
-            r.printParam(cout);
+            cout << r.getParamString() << endl;
             irreducible = true;
             //if (isPrime(poly, 128, zz_table)) {
             if (isPrime(poly, 128, table)) {
                 cout << "prime" << endl;
-                r.printParam(cout);
+                cout << r.getParamString() << endl;
             }
         } else {
             cout << "reducible" << endl;
-            r.printParam(cout);
+            cout << r.getParamString() << endl;
             reducible = true;
             if (hasFactorOfDegree(poly, 127)) {
                 cout << "has a factor of degree 127" << endl;
-                r.printParam(cout);
+                cout << r.getParamString() << endl;
                 factor = true;
             }
         }
         if (reducible && irreducible && prime && factor) {
             break;
         }
-        r.setUp();
+        r.setUpParam(mt);
     }
     return 0;
 }

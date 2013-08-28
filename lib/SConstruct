@@ -1,0 +1,9 @@
+# scons construct file
+# see http://www.scons.org/
+#
+target = 'MTToolBox'
+inc = '-I../include'
+env = Environment(CPPFLAGS=['-Wall', '-g', '-O3', '-Wextra', inc,
+ 			    '-D__STDC_CONSTANT_MACROS',
+			    '-D__STDC_FORMAT_MACROS'])
+env.StaticLibrary(target, ['period.cpp'])

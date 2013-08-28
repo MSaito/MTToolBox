@@ -13,6 +13,7 @@ int main()
     bool factor = false;
     RLittle32 r(1234);
     GF2X poly;
+    MersenneTwister mt;
 
     for (int i = 0; i < 10; i++) {
         cout << hex << r.generate() << endl;
@@ -24,7 +25,7 @@ int main()
             cout << "deg:" << dec << deg(poly) << endl;
         }
         if (deg(poly) < 521) {
-            r.setUp();
+            r.setUpParam(mt);
             continue;
         }
         if (isIrreducible(poly)) {
@@ -44,7 +45,7 @@ int main()
         if (reducible && irreducible && factor) {
             break;
         }
-        r.setUp();
+        r.setUpParam(mt);
     }
     return 0;
 }
