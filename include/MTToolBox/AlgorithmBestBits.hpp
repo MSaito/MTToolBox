@@ -3,7 +3,8 @@
 /**
  * @file AlgorithmBestBits.hpp
  *
- * @brief テンパリングパラメータを探索するアルゴリズムであり、MTDCで使用されているものである。
+ * @brief テンパリングパラメータを探索するアルゴリズムであり、MTDCで使
+ * 用されているものである。
  *
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (The University of Tokyo)
@@ -29,13 +30,22 @@ namespace MTToolBox {
      * @class temper_params
      * @brief テンパリングパラメータのクラス
      *
+     * @tparam T 個々のテンパリングパラメータの型
+     * @tparam size テンパリングパラメータの個数
      */
     template<typename T, int size>
     class temper_params {
     public:
+        /** テンパリングパラメータ */
         T param[size];
+        /** 均等分布次元の理論値との差の総和 */
         int delta;
-        temper_params(T& p, int d) {
+        /**
+         * 単純なコンストラクタ
+         * @param[in] p テンパリングパラメータ
+         * @param[in] d 均等分布次元の理論値との差の総和
+         */
+        temper_params(const T p[], int d) {
             for (int i = 0; i < size; i++) {
                 param[i] = p[i];
             }
@@ -44,26 +54,25 @@ namespace MTToolBox {
     };
 
     /**
-     * @class AlgorithmPartialBitPattern
+     * @class AlgorithmBestBits
      *
-     * @brief 疑似乱数生成器の高次元均等分布性を改善するために、テンパリングパラメータを
-     * 探索するアルゴリズム
+     * @brief テンパリングパラメータを探索するアルゴリズム(MT用)
      *
-     * このアルゴリズムはMTDCのテンパリングパラメータ探索をシミュレートする。
+     * 疑似乱数生成器の高次元均等分布性を改善するために、テンパリングパ
+     * ラメータを探索するアルゴリズムこのアルゴリズムはMTDCのテンパリン
+     * グパラメータ探索をシミュレートする。
      *
-     * @caution テンパリングパラメータの探索をしても十分良い高次元均等分布が得られない
-     * 場合は、状態遷移関数の変更を考慮した方がよい。状態遷移関数で十分ビットミックスされて
-     * いない場合、単純なテンパリングで均等分布次元を最大化することはできないだろう。
+     * \b 注意： テンパリングパラメータの探索をしても十分良い高次元均等
+     * 分布が得られない場合は、状態遷移関数の変更を考慮した方がよい。状
+     * 態遷移関数で十分ビットミックスされていない場合、単純なテンパリン
+     * グで均等分布次元を最大化することはできないだろう。
      *
      * @tparam T 疑似乱数生成器の出力の型, 例えば uint32_t など。
      * @tparam bit_len テンパリングパラメータのビット長, 通常は出力のビット長と等しい
      * と思われる。
      * @tparam param_num テンパリングパラメータの数, MTDCでは2。
      * @tparam shifts テンパリングパラメータと対になるシフト数。正は左シフト。
-     * @tparam lsb このフラグが指定されると、上位ビットと下位ビットが反転されて均等分布
-     * 次元が計算される。つまり下位ビットの均等分布次元をあげたい時に指定する。
-     * TestU01のBigCrushには下位ビットの均等分布次元を改善することに
-     * よってパスする可能性が高まるテストがある。
+     * @tparam lsb このアルゴリズムでは使わない
      */
     template<typename T,
              int bit_len,
@@ -72,10 +81,21 @@ namespace MTToolBox {
              bool lsb = false>
     class AlgorithmBestBits : public AlgorithmTempering<T> {
     public:
+        /**
+         * テンパリングパラメータのクラス
+         */
         typedef temper_params<T, param_num> tempp;
 
         /**
-         * search tempering parameters.
+         * テンパリングパラメータを探索する
+         *
+         * テンパリングパラメータを生成し、均等分布次元を計算してよいテ
+         * ンパリングパラメータを決定する。求められたよいテンパリングパ
+         * ラメータは疑似乱数生成器にセットされる。
+         *
+         * @tparam T 疑似乱数生成器の出力の型
+         * @param[in,out] rand 疑似乱数生成器
+         * @param[in] verbose 余分な情報を出力するフラグ
          * @returns 0
          */
         int operator()(TemperingSearcher<T>& rand,
@@ -161,15 +181,16 @@ namespace MTToolBox {
          * equidistribution property, then select the best bit pattern.
          * This function calls itself recursively.
          *
-         * @param rand GF(2)線形疑似乱数生成器、TemperingSearcherのサブクラス
-         * @param v_bit 今からテンパリングしようとするビット(上から数えた)
-         * @param tempp v_bit -1 ビット目までのテンパリングパラメータ
-         * @param current v ビット目のテンパリングパラメータとデルタのvector
-         * @param verbose true なら余計な情報を標準出力に表示する。
+         * @param[in,out] rand GF(2)線形疑似乱数生成器、TemperingSearcherのサブクラス
+         * @param[in] v_bit 今からテンパリングしようとするビット(上から数えた)
+         * @param[in] para v_bit -1 ビット目までのテンパリングパラメータ
+         * @param[out] current v ビット目のテンパリングパラメータとデルタのvector
+         * @param[in] shifts シフト量の配列
+         * @param[in] verbose true なら余計な情報を標準出力に表示する。
          */
         void search_best_temper(TemperingSearcher<T>& rand,
                                 int v_bit,
-                                tempp& para,
+                                const tempp& para,
                                 vector<shared_ptr<tempp> >& current,
                                 const int shifts[],
                                 bool verbose) {
@@ -201,7 +222,7 @@ namespace MTToolBox {
         }
 #endif
         /**
-         * wrapper of shortest_basis#get_equidist()
+         * AlgorithmEquidistribution#get_equidist()のラッパー
          *
          * @param rand linear generator
          * @param bit_len_ \b bit_len_ MSBs of equidistribution
@@ -241,14 +262,18 @@ namespace MTToolBox {
         }
 #endif
         /**
+         * v ビット目のテンパリングパラメータを作成する。
+         *
          * 既に計算済みの MSBから v - 1 ビットのテンパリングパラメータである
-         * \code para に1ビット分足して MSB から v ビットのテンパリングパラメータを
+         * \b para \b に1ビット分足して MSB から v ビットのテンパリングパラメータを
          * 作成する。
          * @param[out] result 作成されるテンパリングパラメータ
-         * @param size size of 1s
-         * @return bit mask
+         * @param[in] pat 不明
+         * @param[in] v 今回作成するビット
+         * @param[in] para これまでに作成したテンパリングパラメータ
          */
-        void make_pattern(tempp& result, int pat, int v, tempp& para) const {
+        void make_pattern(tempp& result,
+                          int pat, int v, const tempp& para) const {
             int obSize = bit_size(T);
             for (int i = 0; i < size; i++) {
                 T mask = 1 & (pat >> i);
@@ -258,10 +283,15 @@ namespace MTToolBox {
         }
 
         /**
-         * シフトによって0になる部分のビットパターンは作らないので、
-         * 該当するかどうかチェックする。
+         * マスク作成の該当部分かチェックする。
          *
-         * \example
+         * シフトによって0になる部分のビットパターンは作らないので、該
+         * 当するかどうかチェックする。
+         *
+         * @param[in] pat ビットパターン
+         * @param[in] v ビット位置
+         * @param[in] shifts シフト量
+         * @return true 該当する場合
          */
         bool inRange(int pat, int v, const int shifts[]) const {
             int obSize = bit_size(T);

@@ -34,16 +34,10 @@
 namespace MTToolBox {
     /**
      * @class AlgorithmRecursionAndTempering
-     * - search parameters of random number generator whose state transition
-     * function has an irreducible characteristic polynomial.
-     * - search tempering parameters for the generator.
+     * - 状態遷移関数の特性多項式が原始多項式となるような疑似乱数生成器のパラメータを探索する。
+     * - 均等分布次元がよくなるようなテンパリングパラメータを探索する。
      *
-     * @tparam T type of generator's output, uint32_t or uint64_t.
-     * @tparam G class of generator, always linear_generator with template.
-     * @tparam ST tempering parameter searching strategy class.
-     * @tparam STLSB tempering paramete searching strategy class for
-     * tempering from LSB.
-     * @tparam SG the sequential generator class
+     * @tparam T 疑似乱数生成器の出力の型
      */
     template<typename T>
     class AlgorithmRecursionAndTempering {
@@ -52,12 +46,15 @@ namespace MTToolBox {
             baseGenerator = &bg;
         }
         /**
-         * search
+         * 状態遷移パラメータとテンパリングパラメータを探索する。
          *
-         * @param lg linear generator class
-         * @param st tempering parameter searching strategy
-         * @param stlsb tempering parameter searching strategy for LSB.
-         * @param verbose verbose mode, output information about search process.
+         * @param lg テンパリングパラメータ計算可能な疑似乱数生成器
+         * @param st1 テンパリングパラメータ探索アルゴリズム
+         * @param st2 テンパリングパラメータ探索アルゴリズム（LSB）
+         * @param verbose 余分な情報を出力するフラグ
+         * @param os 出力ストリーム
+         * @param no_lsb LSBからのテンパリングをしない
+         * @return 原始多項式を発見した
          */
         bool search(TemperingCalculatable<T>& lg,
                     AlgorithmTempering<T>& st1,
@@ -134,8 +131,13 @@ namespace MTToolBox {
         }
 
         /**
-         * MSBからの均等分布次元のみを向上させたい場合の
+         * MSBからの均等分布次元のみを向上させたい場合の探索を行う。
          *
+         * @param lg テンパリングパラメータ計算可能な疑似乱数生成器
+         * @param st テンパリングパラメータ探索アルゴリズム
+         * @param verbose 余分な情報を出力するフラグ
+         * @param os 出力ストリーム
+         * @return 特性多項式が原始多項式となるような状態遷移パラメータを発見した
          */
         bool search(TemperingCalculatable<T>& lg,
                     AlgorithmTempering<T>& st,
@@ -150,29 +152,19 @@ namespace MTToolBox {
             return generator.copy();
         }
 #endif
-        /** getter of weight */
+        /** 特性多項式のハミングウェイトを返す */
         int getWeight() {
             return weight;
         }
 
-        /** getter of delta */
+        /** 均等分布次元の理論値との差の総和を返す。*/
         int getDelta() {
             return delta;
         }
 
-        /** getter of the characteristic polynomial */
+        /** 状態遷移関数の特性多項式を返す。*/
         const NTL::GF2X& getCharacteristicPolynomial() {
             return poly;
-        }
-
-        /** print the detail of v-bit accuracy equidistribution */
-        void print_kv(int veq[], int mexp, int size) {
-            using namespace std;
-            for (int i = 0; i < size; i++) {
-                *out << dec << i + 1 << ":" << veq[i]
-                     << "(" << mexp / (i + 1) - veq[i] << ")"
-                     << endl;
-            }
         }
     private:
         /**
@@ -195,6 +187,16 @@ namespace MTToolBox {
         NTL::GF2X poly;
         std::ostream * out;
         AbstractGenerator<T> * baseGenerator;
+
+        /** print the detail of v-bit accuracy equidistribution */
+        void print_kv(int veq[], int mexp, int size) {
+            using namespace std;
+            for (int i = 0; i < size; i++) {
+                *out << dec << i + 1 << ":" << veq[i]
+                     << "(" << mexp / (i + 1) - veq[i] << ")"
+                     << endl;
+            }
+        }
     };
 
 }

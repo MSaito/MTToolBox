@@ -35,7 +35,7 @@ namespace MTToolBox {
      * このアルゴリズムはMTGPのテンパリングパラメータを探索するために開
      * 発され、TinyMTのテンパリングパラメータ探索にも使われている。
      *
-     * @caution テンパリングパラメータの探索をしても十分良い高次元均等
+     * \b 注意: テンパリングパラメータの探索をしても十分良い高次元均等
      * 分布が得られない場合は、状態遷移関数の変更を考慮した方がよい。状
      * 態遷移関数で十分ビットミックスされていない場合、単純なテンパリン
      * グで均等分布次元を最大化することはできないだろう。
@@ -193,7 +193,6 @@ namespace MTToolBox {
          * @param rand linear generator
          * @param bit_len_ \b bit_len_ MSBs of equidistribution
          * property of the generator is calculated.
-         * @param bitSize Mersenne Exponent of the period of rand.
          * @returns summation of equidistribution property
          * from 0 to \b bit_len_ -1 MSBs.
          */

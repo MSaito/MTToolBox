@@ -10,7 +10,7 @@
 #include <MTToolBox/MersenneTwister.hpp>
 #include <MTToolBox/AbstractGenerator.hpp>
 #include <MTToolBox/EquidistributionCalculatable.hpp>
-#include <MTToolBox/uint128.hpp>
+//#include <MTToolBox/uint128.hpp>
 
 namespace MTToolBox {
     using namespace std;
@@ -130,7 +130,7 @@ namespace MTToolBox {
     private:
         tinymt64_t tiny;
     };
-
+#if 0
     class Tiny128 : public AbstractGenerator<uint128_t> {
     public:
         Tiny128(uint128_t seed) {
@@ -152,7 +152,7 @@ namespace MTToolBox {
     private:
         tinymt64_t tiny;
     };
-
+#endif
     class RTiny32 : public AbstractGenerator<uint32_t> {
     public:
         RTiny32(uint32_t mat1, uint32_t mat2, int sh1,

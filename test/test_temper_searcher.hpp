@@ -11,7 +11,7 @@
 #include <MTToolBox/AbstractGenerator.hpp>
 #include <MTToolBox/TemperingCalculatable.hpp>
 #include <MTToolBox/util.hpp>
-#include <MTToolBox/uint128.hpp>
+//#include <MTToolBox/uint128.hpp>
 
 namespace MTToolBox {
     using namespace std;
@@ -166,6 +166,7 @@ namespace MTToolBox {
         tinymt64_t tiny;
     };
 
+#if 0
     class Tiny128 : public Generator<uint128_t> {
     public:
         Tiny128(uint128_t seed) {
@@ -187,7 +188,7 @@ namespace MTToolBox {
     private:
         tinymt64_t tiny;
     };
-
+#endif
     class RTiny32 : public Generator<uint32_t> {
     public:
         RTiny32(uint32_t mat1, uint32_t mat2, int sh1,

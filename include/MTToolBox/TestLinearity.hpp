@@ -32,12 +32,12 @@ namespace MTToolBox {
      *
      * @brief 疑似乱数生成器がGF(2)線形であるかどうかテストする
      *
-     * 疑似乱数生成器がGF(2)線形であるかどうかテストする。テストされる
-     * 疑似乱数生成器はEquidistributionCalculatableのサブクラスである必
-     * 要がある。また、テストされる疑似乱数生成器は状態遷移関数だけでな
-     * く、出力関数もGF(2)線形であることが必要です。なお、このテストに
-     * 落ちればGF(2)線形ではないが、このテストをパスしたからといって
-     * GF(2)線形であるという保証はない。
+     * テストされる疑似乱数生成器はEquidistributionCalculatableのサブク
+     * ラスである必要がある。また、テストされる疑似乱数生成器は状態遷移
+     * 関数だけでなく、出力関数もGF(2)線形であることが必要です。
+     *
+     * なお、このテストに落ちればGF(2)線形ではないが、このテストをパス
+     * したからといってGF(2)線形であるという保証はない。
      *
      * GF(2)線形に作ったつもりなのに、このテストをパスしなかった場合は、
      * EquidistributionCalculatable#add() の実装に問題があるかもしれな
@@ -52,9 +52,7 @@ namespace MTToolBox {
          * generator がGF(2)線形であるかどうかテストする。
          *
          * @param generator テストされる疑似乱数生成器
-         * @return
-         * gives sequential number for searching parameters.
-         *
+         * @return true GF(2)線形の場合
          */
         bool operator()(const EquidistributionCalculatable<U>& generator) {
             EquidistributionCalculatable<U> *g1 = generator.clone();

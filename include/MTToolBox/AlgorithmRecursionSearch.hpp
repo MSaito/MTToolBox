@@ -1,7 +1,7 @@
 #ifndef MTTOOLBOX_ALGORITHM_RECURSION_SEARCH_HPP
 #define MTTOOLBOX_ALGORITHM_RECURSION_SEARCH_HPP
 /**
- * @file recursion_search.hpp
+ * @file AlgorithmRecursionSearch.hpp
  *
  * @brief 状態遷移関数のパラメータを探索する。
  *

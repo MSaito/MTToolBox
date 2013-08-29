@@ -1,15 +1,15 @@
 #ifndef MTTOOLBOX_UTIL_HPP
 #define MTTOOLBOX_UTIL_HPP
 /**
- * @file random_util.hpp
+ * @file util.hpp
  *
- * @brief some functions commonly used in MTToolBox.
+ * @brief ユーティリティ関数群
  *
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (The University of Tokyo)
  *
- * Copyright (C) 2011, 2013 Mutsuo Saito, Makoto Matsumoto,
- * Hiroshima University and The University of Tokyo.
+ * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
+ * and Hiroshima University.
  * All rights reserved.
  *
  * The 3-clause BSD License is applied to this software, see
@@ -23,8 +23,6 @@
 #include <stdint.h>
 #include <stdexcept>
 #include <tr1/memory>
-#include <MTToolBox/uint128.hpp>
-
 #include <NTL/GF2X.h>
 
 #if defined(USE_SHA)
@@ -40,14 +38,19 @@ namespace MTToolBox {
     inline static uint32_t reverse_bit(uint32_t x);
     inline static uint64_t reverse_bit(uint64_t x);
 
+    /**
+     * 使用しない変数のワーニングを止める
+     * @param[in] x 使用しない変数へのポインタ
+     */
     inline static void UNUSED_VARIABLE(void * x) {
         (void)x;
     }
+
     /**
-     * calculate the largest number which is 2^m and does not exceed n.
-     * @tparam T type of integer
-     * @param n number
-     * @returns the largest number which is 2^m and does not exceed n.
+     * n を越えない最大の2のべき乗を返す。
+     * @tparam T n の整数型
+     * @param[in] n 整数
+     * @returns n を越えない最大の2のべき乗
      */
     template<typename T>
     T floor2p(T n) {
@@ -59,11 +62,12 @@ namespace MTToolBox {
     }
 
     /**
-     * print polynomial in binary form. The coefficient of the smallest degree
-     * is printed first.
-     * @param os output-stream
-     * @param poly polynomial to be printed
-     * @param breakline if true, break line every 32 outputs.
+     * 出力ストリーム os に多項式 poly を01の文字列で出力する。
+     * 次数の低い項の係数が先に出力される。（昇巾順）
+     *
+     * @param[in,out] os 出力ストリーム
+     * @param[in] poly 出力される多項式
+     * @param[in] breakline 真なら32文字出力ごとに改行される。
      */
     inline static void print_binary(std::ostream& os,
                                     NTL::GF2X& poly,
@@ -87,20 +91,22 @@ namespace MTToolBox {
     }
 
     /**
-     * change \b input to the number between \b start and \b end
-     * @param input input number
-     * @param start start of the range
-     * @param end end of the range
-     * @return the number r such that \b start <= \b r <= \b end.
+     * input を start と end の間の数に変換する。
+     * 偏りは気にしない。
+     * @param input 入力
+     * @param start 範囲の開始
+     * @param end 範囲の終了
+     * @return \b start <= \b r <= \b end となるような r
      */
-    inline static uint32_t get_range(uint32_t input, int start, int end) {
+    template<typename T>
+    int get_range(T input, int start, int end) {
         if (end < start) {
             printf("get_range:%d, %d\n", start, end);
             exit(0);
         }
         return input % (end - start + 1) + start;
     }
-
+#if 0
     /**
      * change \b input to the number between \b start and \b end
      * @param input input number
@@ -115,13 +121,14 @@ namespace MTToolBox {
         }
         return input % (end - start + 1) + start;
     }
+#endif
 
     /**
-     * change the small F2 table to the fast and redundant table.
-     * @tparam T type of table member.
-     * @param dist_tbl new redundant table
-     * @param src_tbl source table
-     * @param size size of \b dist_table
+     * GF(2)ベクトルのパラメータテーブルからより高速で冗長なルックアップテーブルを作成する。
+     * @tparam T テーブル内の符号なし整数の型
+     * @param dist_tbl 作成されるルックアップテーブル
+     * @param src_tbl 元になるGF(2)ベクトルのテーブル
+     * @param size \b dist_table　のサイズ
      */
     template<typename T>
     void fill_table(T dist_tbl[], T src_tbl[], int size) {
@@ -136,14 +143,14 @@ namespace MTToolBox {
 
 #if defined(USE_SHA)
     /**
-     * calculate the SHA1 digest of F2 polynomial. The coefficients of
-     * the polynomial are changed to the string of "0" and "1", which
-     * starts with the coefficient of the lowest degree, and the SHA1
-     * hash of the string is calculated. The result hash is returned
-     * by hexadecimal string.
+     * GF(2)係数多項式のSHA1ダイジェストを計算する。
      *
-     * @param str output string
-     * @param poly F2 polynomial
+     * 多項式の係数を昇巾の順で01からなる文字列に変換し、その後その文字
+     * 列のSHA1ダイジェストを計算する。計算されたSHA1ダイジェストは十六進文字列
+     * として返される
+     *
+     * @param[out] str 出力文字列
+     * @param[in] poly GF(2)係数多項式
      */
     inline static void poly_sha1(std::string& str, const NTL::GF2X& poly) {
         using namespace NTL;
@@ -172,13 +179,18 @@ namespace MTToolBox {
 #endif
 
     /**
-     * calculate the position of most right 1, or
-     * least significant 1. The position of the MSB is
-     * 0. returns -1 when \b v is zero.
-     * citing from a website http://aggregate.org/MAGIC/#Trailing Zero Count
+     * 入力をビット列とみなして最上位の1の位置を0とした最も右側の（下位の）1の位置を返す。
      *
-     * @param x input
-     * @return the position of most right 1.
+     * 例<ul>
+     * <li>calc_1pos(0x8000U) は 0を返す。
+     * <li>calc_1pos(0x8002U) は14を返す。
+     * <li>calc_1pos(0) は -1 を返す。
+     * </ul>
+     *
+     * このアルゴリズムは以下を参照した
+     * @see http://aggregate.org/MAGIC/#Trailing Zero Count
+     * @param[in] x 入力
+     * @return 最下位の1のあるビットの上位から数えた位置を返す。
      */
     static inline int calc_1pos(uint16_t x)
     {
@@ -191,13 +203,18 @@ namespace MTToolBox {
     }
 
     /**
-     * calculate the position of most right 1, or
-     * least significant 1. The position of the MSB is
-     * 0. returns -1 when \b v is zero.
-     * citing from a website http://aggregate.org/MAGIC/#Trailing Zero Count
+     * 入力をビット列とみなして最上位の1の位置を0とした最も右側の（下位の）1の位置を返す。
      *
-     * @param x input
-     * @return the position of most right 1.
+     * 例<ul>
+     * <li>calc_1pos(0x80000000U) は 0を返す。
+     * <li>calc_1pos(0x80000002U) は30を返す。
+     * <li>calc_1pos(0) は -1 を返す。
+     * </ul>
+     *
+     * このアルゴリズムは以下を参照した
+     * @see http://aggregate.org/MAGIC/#Trailing Zero Count
+     * @param[in] x 入力
+     * @return 最下位の1のあるビットの上位から数えた位置を返す。
      */
     static inline int calc_1pos(uint32_t x)
     {
@@ -210,13 +227,18 @@ namespace MTToolBox {
     }
 
     /**
-     * calculate the position of most right 1, or
-     * least significant 1. The position of the MSB is
-     * 0. returns -1 when \b v is zero.
-     * citing from a website http://aggregate.org/MAGIC/#Trailing Zero Count
+     * 入力をビット列とみなして最上位の1の位置を0とした最も右側の（下位の）1の位置を返す。
      *
-     * @param x input
-     * @return the position of most right 1.
+     * 例<ul>
+     * <li>calc_1pos(UINT64_C(0x8000000000000000)) は 0を返す。
+     * <li>calc_1pos(UINT64_C(0x8000000000000002)) は62を返す。
+     * <li>calc_1pos(0) は -1 を返す。
+     * </ul>
+     *
+     * このアルゴリズムは以下を参照にした
+     * @see http://aggregate.org/MAGIC/#Trailing Zero Count
+     * @param[in] x 入力
+     * @return 最下位の1のあるビットの上位から数えた位置を返す。
      */
     static inline int calc_1pos(uint64_t x)
     {
@@ -228,6 +250,7 @@ namespace MTToolBox {
         return 63 - y;
     }
 
+#if 0
     /**
      * check if \b array is all zero or not.
      * @tparam type of members of \b array
@@ -243,7 +266,8 @@ namespace MTToolBox {
             return (memcmp(array, array + 1, sizeof(T) * (size - 1)) == 0);
         }
     }
-
+#endif
+#if 0
     /**
      * calculate the minimal polynomial of the generated sequence.
      * @returns the minimal polynomial
@@ -263,7 +287,7 @@ namespace MTToolBox {
         MinPolySeq(*minpoly, vec, length);
         return minpoly;
     }
-
+#endif
     /**
      * count the number of 1
      * SIMD within a Register algorithm
@@ -324,7 +348,7 @@ namespace MTToolBox {
         x = (((x >> 16) & y) | ((x & y) << 16));
         return((x >> 32) | (x << 32));
     }
-
+#if 0
     /**
      * divide and ceil
      */
@@ -335,7 +359,8 @@ namespace MTToolBox {
             return x / y + 1;
         }
     }
-
+#endif
+#if 0
     /**
      * polynomial to string
      */
@@ -358,27 +383,7 @@ namespace MTToolBox {
             }
         }
     }
-
-    static inline uint128_t make_msb_mask(int n) {
-        uint128_t w;
-        if (n < 64) {
-            w.u64[0] = ~((~UINT64_C(0)) >> n);
-            w.u64[1] = 0;
-            return w;
-        } else {
-            n = n - 64;
-            w.u64[0] = UINT64_C(0xffffffffffffffff);
-            w.u64[1] = ~((~UINT64_C(0)) >> n);
-            return w;
-        }
-    }
-
-    static inline uint128_t and_mask(uint128_t a, uint128_t b) {
-        uint128_t w;
-        w.u64[0] = a.u64[0] & b.u64[0];
-        w.u64[1] = a.u64[1] & b.u64[1];
-        return w;
-    }
+#endif
 
 }
 #endif //MTTOOLBOX_UTIL_HPP

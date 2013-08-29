@@ -15,8 +15,7 @@
 namespace MTToolBox {
     /**
      * @class ResursionSearchable
-     * @brief このクラスは状態遷移パラメータ探索を行える
-     * GF(2)線形疑似乱数生成器のクラスである。
+     * @brief このクラスは状態遷移パラメータ探索を行えるGF(2)線形疑似乱数生成器のクラスである。
      *
      * @tparam U 疑似乱数生成器の出力のタイプ
      */

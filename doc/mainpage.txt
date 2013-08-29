@@ -1,0 +1,35 @@
+/**
+ * \mainpage
+ *
+ * MTToolBox はGF(2)線形疑似乱数生成器を開発するためのライブラリである。
+ *
+ * This Project provides pseudorandom number generators of the
+ * Mersenne Prime Period 2<sup>127</sup>-1, and parameter generator
+ * which generates parameters for the generators.
+ *
+ * The following C files are intended to work with C programs written
+ * by users.
+ * - tinymt32.c 32-bit pseudo random number generator's initialization
+ *   program.
+ * - tinymt32.h a header file of 32-bit pseudo random number generators.
+ * - tinymt64.c 64-bit pseudo random number generator's initialization
+ *   program.
+ * - tinymt64.h a header file of 64-bit pseudo random number generators.
+ *
+ * Two executable files and documents are made by typing \b make \b all.
+ * - check32 a simple check program for tinymt32
+ * - check64 a simple check program for tinymt64
+ * - The document html files you are looking at.
+ *
+ * @author Mutsuo Saito, (saito@math.sci.hiroshima-u.ac.jp) Hiroshima University
+ * @author Makoto Matsumoto, Hiroshima University
+ *
+ * @date 2013-8-29
+ *
+ * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
+ * and Hiroshima University.
+ * All rights reserved.
+ *
+ * The 3-clause BSD License is applied to this software.
+ * \verbinclude ./LICENSE.txt
+ */

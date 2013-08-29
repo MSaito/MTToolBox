@@ -23,7 +23,7 @@ TEST(PERIOD_U64)
     minpoly(poly, tiny);
     CHECK(deg(poly) == tiny.bitSize());
 }
-
+#if 0
 TEST(PERIOD_U128)
 {
     uint128_t seed(1234, 0);
@@ -32,7 +32,7 @@ TEST(PERIOD_U128)
     minpoly(poly, tiny);
     CHECK(deg(poly) == tiny.bitSize());
 }
-
+#endif
 TEST(ISIRRECUDIBLE)
 {
     Tiny64 tiny(1234);
