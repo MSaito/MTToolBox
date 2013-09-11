@@ -58,3 +58,4 @@ env = conf.Finish()
 #
 env.Program('tinymt32dc', files, LIBS=optlib)
 
+Clean('all', Glob('*.o'))

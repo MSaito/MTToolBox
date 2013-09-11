@@ -61,6 +61,22 @@ namespace MTToolBox {
     }
 
     /**
+     * メルセンヌ指数判定
+     * degree がメルセンヌ指数であるか判定する。
+     * @param[in] degree
+     * @returns true degree がメルセンヌ指数の場合
+     */
+    bool
+    isMexp(uint32_t degree) {
+        for (int i = 0; mersenne_exponent[i] > 0; i++) {
+            if (degree == mersenne_exponent[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * 原始性判定
      * poly が原始多項式であるか判定する。
      * この関数では、多項式が既約でかつその次数がメルセンヌ指数
@@ -77,11 +93,9 @@ namespace MTToolBox {
         if (!isIrreducible(poly)) {
             return false;
         }
-        long degree = deg(poly);
-        for (int i = 0; mersenne_exponent[i] > 0; i++) {
-            if (degree == mersenne_exponent[i]) {
-                return true;
-            }
+        uint32_t degree = static_cast<uint32_t>(deg(poly));
+        if (isMexp(degree)) {
+            return true;
         }
         return false;
     }

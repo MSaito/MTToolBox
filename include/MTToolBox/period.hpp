@@ -27,6 +27,7 @@ namespace MTToolBox {
         MinPolySeq(poly, v, size);
     }
 
+    bool isMexp(uint32_t degree);
     bool isIrreducible(const NTL::GF2X& poly);
 
     bool isPrime(const NTL::GF2X& poly);

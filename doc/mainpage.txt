@@ -3,28 +3,25 @@
  *
  * MTToolBox はGF(2)線形疑似乱数生成器を開発するためのライブラリである。
  *
- * This Project provides pseudorandom number generators of the
- * Mersenne Prime Period 2<sup>127</sup>-1, and parameter generator
- * which generates parameters for the generators.
+ * MTToolBox はGF(2)線形疑似乱数生成器を開発する上で以下の点をサポートする。
+ * - GF(2)線形性のチェック
+ * - 出力列の最小多項式の計算
+ *   - 出力列の最小多項式の原始性の判定
+ * - 均等分布次元の計算
+ * - 均等分布次元を向上させるテンパリングパラメータの計算
  *
- * The following C files are intended to work with C programs written
- * by users.
- * - tinymt32.c 32-bit pseudo random number generator's initialization
- *   program.
- * - tinymt32.h a header file of 32-bit pseudo random number generators.
- * - tinymt64.c 64-bit pseudo random number generator's initialization
- *   program.
- * - tinymt64.h a header file of 64-bit pseudo random number generators.
+ * MTToolBox は以下のような人に役に立つ
+ * - CPU アーキテクチャに詳しく、高速な疑似乱数生成器を作りたい人
+ * - 特殊なハードウェアに適した疑似乱数生成器を作りたい人
  *
- * Two executable files and documents are made by typing \b make \b all.
- * - check32 a simple check program for tinymt32
- * - check64 a simple check program for tinymt64
- * - The document html files you are looking at.
+ * MTToolBox には実践的なサンプルがある。
+ * - TinyMT のパラメータを検索するTinyMTDCのサンプル
+ * - MTGP のパラメータを検索するMTGPDCのサンプル
  *
  * @author Mutsuo Saito, (saito@math.sci.hiroshima-u.ac.jp) Hiroshima University
  * @author Makoto Matsumoto, Hiroshima University
  *
- * @date 2013-8-29
+ * @date 2013-8-30
  *
  * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
  * and Hiroshima University.

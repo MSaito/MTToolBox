@@ -20,6 +20,7 @@
 #include <NTL/GF2X.h>
 #include <NTL/GF2XFactoring.h>
 #include <MTToolBox/RecursionSearchable.hpp>
+#include <MTToolBox/AlgorithmPrimitivity.hpp>
 #include <MTToolBox/period.hpp>
 
 namespace MTToolBox {
@@ -49,9 +50,12 @@ namespace MTToolBox {
         /**
          * コンストラクタ
          *
+         * このコンストラクタでは、状態空間の大きさがメルセンヌ指数の場合を
+         * 想定している。
+         *
          * bg はgenerator とは異なるインスタンスである必要がある。
          * 通常の場合、bg にはMersenneTwisterのインスタンスを与えるとよい。
-         * TinyMT では、
+         * TinyMT では、規則的に減少する数列を使用している。
          *
          * @param generator generator はこのクラスのメソッドによって変更される。
          * @param bg パラメータ探索に使用する疑似乱数生成器
@@ -61,16 +65,40 @@ namespace MTToolBox {
             rand = &generator;
             baseGenerator = &bg;
             count = 0;
+            isPrime = &MersennePrimitivity;
         }
 
         /**
+         * コンストラクタ
          *
-         * generate random parameters and check if the generator's
-         * state transition function has an irreducible characteristic
-         * polynomial. If found in \b try_count times, return true, else
-         * return false.
+         * このコンストラクタでは、原始多項式判定アルゴリズムを指定できる。
          *
-         * @param try_count
+         * bg はgenerator とは異なるインスタンスである必要がある。
+         * 通常の場合、bg にはMersenneTwisterのインスタンスを与えるとよい。
+         * TinyMT では、規則的に減少する数列を使用している。
+         *
+         * @param generator generator はこのクラスのメソッドによって変更される。
+         * @param bg パラメータ探索に使用する疑似乱数生成器
+         * @param primitivity 原始多項式判定アルゴリズム
+         */
+        AlgorithmRecursionSearch(RecursionSearchable<U>& generator,
+                                 AbstractGenerator<U>& bg,
+                                 const AlgorithmPrimitivity& primitivity) {
+            rand = &generator;
+            baseGenerator = &bg;
+            count = 0;
+            isPrime = &primitivity;
+        }
+
+        /**
+         * 疑似乱数生成器に状態遷移パラメータをランダムに生成させ、
+         * その状態遷移パラメータのもとで出力列の最小多項式を求める。
+         * 最小多項式が求める次数の原始多項式か判定し、原始多項式なら成功して終了。
+         * そうでなければ、状態遷移パラメータのランダム生成から繰り返す。
+         * 繰り返しの回数が try_count を越えると失敗して終了する。
+         *
+         * @param try_count 試行回数の上限
+         * @return true 求める次数の原始多項式となる最小多項式が得られた場合
          */
         bool start(int try_count) {
             long size = rand->bitSize();
@@ -84,7 +112,7 @@ namespace MTToolBox {
                 if (degree != size) {
                     continue;
                 }
-                if (isIrreducible(poly)) {
+                if ((*isPrime)(size, poly)) {
                     return true;
                 }
             }
@@ -92,26 +120,28 @@ namespace MTToolBox {
         }
 
         /**
-         * call this function after \b start() has returned true.
-         * @return random number generator class with parameters.
+         * このメソッドは start() が true を返した場合にのみ呼び出すべきである。
+         * @return 疑似乱数生成器のパラメータを表す文字列
          */
         const std::string getParamString() {
             return rand->getParamString();
         }
 
         /**
-         * call this function after \b start() has returned true.
-         * In this program, if minimal polynomial is irreducible,
-         * then the polynomial is characteristic polynomial of
-         * generator's state transition function.
+         * このメソッドは start() が true を返した場合にのみ呼び出すべきである。
          *
-         * @return minimal polynomial of generated sequence.
+         * 一般には最小多項式は初期状態と出力関数に依存するが、GF(2)線
+         * 形疑似乱数生成器の最大周期を与えるような最小多項式は一つであ
+         * る。
+         *
+         * @return 最小多項式
          */
         const NTL::GF2X& getMinPoly() const {
             return poly;
         }
 
         /**
+         * このインスタンスが作られてからstart() が終了するまでに試行した回数を返す。
          * @return tried count after this class has created.
          */
         long getCount() const {
@@ -121,6 +151,7 @@ namespace MTToolBox {
     private:
         RecursionSearchable<U> *rand;
         AbstractGenerator<U> *baseGenerator;
+        const AlgorithmPrimitivity *isPrime;
         NTL::GF2X poly;
         long count;
     };

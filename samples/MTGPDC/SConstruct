@@ -84,3 +84,4 @@ if unit_test:
     optlib.append('UnitTest++')
     env.Program('test', test_files, LIBS=optlib)
 
+Clean('all', Glob('*.o'))

@@ -8,4 +8,4 @@ inc = '-Iinclude'
 env = Environment(CPPFLAGS=['-Wall', '-g', '-O3', '-Wextra', inc,
  			    '-D__STDC_CONSTANT_MACROS',
 			    '-D__STDC_FORMAT_MACROS'])
-env.StaticLibrary(target, ['period.cpp'])
+env.StaticLibrary(target, ['period.cpp','AlgorithmPrimitivity.cpp'])
