@@ -1,7 +1,7 @@
 .SUFFIXES: .tex .dvi .pdf .ps
 
 .tex.dvi:
-	platex-euc $<
+	platex-utf8 $<
 
 .dvi.ps:
 	dvips $<
