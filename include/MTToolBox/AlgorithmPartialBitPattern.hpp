@@ -148,7 +148,7 @@ namespace MTToolBox {
             int size = max_v_bit - v_bit;
             T pattern;
             T mask = make_mask(v_bit, size);
-            int length = bit_size(T) / 4;
+            int length = bit_size<T>() / 4;
             //for (int i = 0; i < (1 << size); i++) {
             for (int i = (1 << size) -1; i >= 0; i--) {
                 if (lsb) {

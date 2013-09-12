@@ -274,7 +274,7 @@ namespace MTToolBox {
          */
         void make_pattern(tempp& result,
                           int pat, int v, const tempp& para) const {
-            int obSize = bit_size(T);
+            int obSize = bit_size<T>();
             for (int i = 0; i < size; i++) {
                 T mask = 1 & (pat >> i);
                 mask = mask << (obSize - 1 - v);
@@ -294,7 +294,7 @@ namespace MTToolBox {
          * @return true 該当する場合
          */
         bool inRange(int pat, int v, const int shifts[]) const {
-            int obSize = bit_size(T);
+            int obSize = bit_size<T>();
             for (int i = 0; i < size; i++) {
                 if ((obSize < v + shifts[i]) && ((pat >> i) != 0)) {
                     return false;

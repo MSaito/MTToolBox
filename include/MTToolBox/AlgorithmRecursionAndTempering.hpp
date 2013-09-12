@@ -67,7 +67,7 @@ namespace MTToolBox {
             using namespace std::tr1;
 
             out = &os;
-            int veq[bit_size(T)];
+            int veq[bit_size<T>()];
             AlgorithmRecursionSearch<T> search(lg, *baseGenerator);
             int mexp = lg.bitSize();
             bool found = false;
@@ -94,10 +94,10 @@ namespace MTToolBox {
             poly = search.getMinPoly();
             weight = NTL::weight(poly);
             if (verbose) {
-                AlgorithmEquidsitribution<T> sb(lg, bit_size(T));
+                AlgorithmEquidsitribution<T> sb(lg, bit_size<T>());
                 //print_binary(*out, poly);
                 int delta = sb.get_all_equidist(veq);
-                print_kv(veq, mexp, bit_size(T));
+                print_kv(veq, mexp, bit_size<T>());
                 *out << "delta = " << dec << delta << endl;
             }
             if (! no_lsb) {
@@ -106,25 +106,25 @@ namespace MTToolBox {
                     if (st2.isLSBTempering()) {
                         lg.setReverseOutput();
                     }
-                    AlgorithmEquidsitribution<T> sc(lg, bit_size(T));
+                    AlgorithmEquidsitribution<T> sc(lg, bit_size<T>());
                     delta = sc.get_all_equidist(veq);
                     lg.resetReverseOutput();
                     time_t t = time(NULL);
                     *out << "lsb tempering parameters are found at "
                          << ctime(&t) << endl;
-                    print_kv(veq, mexp, bit_size(T));
+                    print_kv(veq, mexp, bit_size<T>());
                     *out << "lsb delta = " << dec << delta << endl;
                 }
             }
             st1(lg, verbose);
-            AlgorithmEquidsitribution<T> sc(lg, bit_size(T));
+            AlgorithmEquidsitribution<T> sc(lg, bit_size<T>());
             delta = sc.get_all_equidist(veq);
             if (verbose) {
                 time_t t = time(NULL);
                 *out << "tempering parameters are found at " << ctime(&t)
                      << endl;
                 *out << lg.getParamString() << endl;
-                print_kv(veq, mexp, bit_size(T));
+                print_kv(veq, mexp, bit_size<T>());
                 *out << "delta = " << dec << delta << endl;
             }
             return true;

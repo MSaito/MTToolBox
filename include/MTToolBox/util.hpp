@@ -29,7 +29,7 @@
 #include <openssl/sha.h>
 #endif
 
-#define bit_size(tp) (static_cast<int>(sizeof(tp) * 8))
+//#define bit_size(tp) (static_cast<int>(sizeof(tp) * 8))
 
 namespace MTToolBox {
     inline static int count_bit(uint16_t x);
@@ -38,6 +38,10 @@ namespace MTToolBox {
     inline static uint32_t reverse_bit(uint32_t x);
     inline static uint64_t reverse_bit(uint64_t x);
 
+    template<typename T>
+    int bit_size() {
+        return static_cast<int>(sizeof(T) * 8);
+    }
     /**
      * 使用しない変数のワーニングを止める
      * @param[in] x 使用しない変数へのポインタ
@@ -106,22 +110,6 @@ namespace MTToolBox {
         }
         return input % (end - start + 1) + start;
     }
-#if 0
-    /**
-     * change \b input to the number between \b start and \b end
-     * @param input input number
-     * @param start start of the range
-     * @param end end of the range
-     * @return the number r such that \b start <= \b r <= \b end.
-     */
-    inline static uint64_t get_range(uint64_t input, int start, int end) {
-        if (end < start) {
-            printf("get_range:%u, %u\n", start, end);
-            exit(0);
-        }
-        return input % (end - start + 1) + start;
-    }
-#endif
 
     /**
      * GF(2)ベクトルのパラメータテーブルからより高速で冗長なルックアップテーブルを作成する。
@@ -250,44 +238,6 @@ namespace MTToolBox {
         return 63 - y;
     }
 
-#if 0
-    /**
-     * check if \b array is all zero or not.
-     * @tparam type of members of \b array
-     * @param array checked array
-     * @param size size of \b array
-     * @return true if all elements of \b array are zero.
-     */
-    template<typename T>
-    bool is_zero_array(T *array, int size) {
-        if (array[0] != 0) {
-            return false;
-        } else {
-            return (memcmp(array, array + 1, sizeof(T) * (size - 1)) == 0);
-        }
-    }
-#endif
-#if 0
-    /**
-     * calculate the minimal polynomial of the generated sequence.
-     * @returns the minimal polynomial
-     */
-    template<typename G>
-    std::tr1::shared_ptr<NTL::GF2X> get_minpoly(G& generator, int length) {
-        using namespace std;
-        using namespace NTL;
-        using namespace std::tr1;
-
-        vec_GF2 vec;
-        vec.SetLength(length * 2);
-        for (int i = 0; i < length * 2; i++) {
-            vec[i] = generator() & 1;
-        }
-        shared_ptr<GF2X> minpoly(new GF2X());
-        MinPolySeq(*minpoly, vec, length);
-        return minpoly;
-    }
-#endif
     /**
      * count the number of 1
      * SIMD within a Register algorithm
