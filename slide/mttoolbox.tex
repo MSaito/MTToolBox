@@ -76,6 +76,8 @@
 \begin{document}
 \newcommand{\FLPRNG}{$\F2$線形疑似乱数生成器}
 \newcommand{\strong}[1]{\textbf{\textcolor{PineGreen}{#1}}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
 \begin{frame}
   \titlepage
   \begin{center}
@@ -90,9 +92,34 @@
   \parbox{2cm}{\vskip .2cm \includegraphics[width=2cm,height=2cm]{logo.eps}}
 \end{frame}
 
-\section*{Outline}
+
 \begin{frame}[t]
+  \frametitle{目次}
   \tableofcontents
+\end{frame}
+
+\section{はじめに}
+\begin{frame}[t]
+  \frametitle{はじめに}
+  Mersenne Twister(MT)~\cite{MT}(1998 松本,西村) は広く使われている疑似乱数生成器
+  である。
+
+  \vspace{\baselineskip}
+  MTToolBox~\cite{MTTOOLBOX}
+  はMTなどの疑似乱数生成器の開発に使われた技術をツール化したものである。
+
+  MTToolBox のユーザーは、要望する
+  \begin{itemize}
+    \item メモリサイズ
+    \item 品質
+    \item 速度
+    \item 並列性
+  \end{itemize}
+  に合った疑似乱数生成器を設計することができる。
+
+  \pause
+  \vspace{\baselineskip}
+  以下では、疑似乱数生成器の開発上で使われる概念と技術を説明する。
 \end{frame}
 
 \section{疑似乱数生成器}
@@ -100,13 +127,13 @@
 \begin{frame}[t]
   \frametitle{\insertsubsection}
   \begin{description}
-  \item[真の乱数列] 定義はあるが、難しい。
-    \begin{itemize}
-      \item 圧縮できない。（数列自体よりも短い記述方法がない）
-      \item どんな有限の数列も部分列として含む。
-    \end{itemize}
+  \item[真の乱数列] 定義はあるが、そのまま応用するのは難しい。
+%    \begin{itemize}
+%      \item 圧縮できない。（数列自体よりも短い記述方法がない）
+%      \item どんな有限の数列も部分列として含む。
+%    \end{itemize}
   \item[物理乱数] 物理現象を元にして作られた乱数列。
-  \item[\strong{疑似乱数}] 確定的なアルゴリズムと有限のメモリから作られた乱数列。
+  \item[\strong{疑似乱数}] 確定的なアルゴリズムから作られた数列を乱数列とみなしたもの。
     \begin{itemize}
     \item 真の乱数ではない。
     \item 再現性がある。
@@ -127,15 +154,22 @@
   \begin{block}{定義}
     無入力有限オートマトンは、
     \begin{itemize}
-    \item 有限集合 $S$,$O$
+    \item 有限集合 $S$:状態空間, $O$:出力の集合
     \item 初期状態 $s_0 \in S$
     \item 状態遷移関数 $f: S \longrightarrow S$
     \item 出力関数 $o: S \longrightarrow O$
     \end{itemize}
     の組である。
   \end{block}
-  疑似乱数生成器の状態遷移は、$s_0, s_1 = f(s_0), s_2 = f(s_1), ...$となり、
-  出力列は、$o(s_1), o(s_2), ...$となる。
+  疑似乱数生成器の状態遷移は、
+  \[
+  s_0, s_1 = f(s_0), s_2 = f(s_1), ...
+  \]
+  となり、出力列は、
+  \[
+  o(s_1), o(s_2), ...
+  \]
+  となる。
 \end{frame}
 
 \begin{frame}[t]
@@ -143,9 +177,10 @@
   \begin{block}{定義}
     \begin{itemize}
     \item ビット $\{0,1\}$ を2元体$\F2$と同一視する。
-    \item $b$-ビット整数を $\F2^{b}$ 上の横ベクトルと同一視する。 \\
+    \item $b$-ビット整数を $\F2^{b}$ 上の横ベクトルと同一視する。（出力集合$O$）\\
       $b$ は 32, 64 または 128など．
-    \item 計算機のメモリ中の$N$ 要素$b$-ビット配列を線形空間 $(\F2^{b})^N$とみなす。
+    \item 計算機のメモリ中の$b$-ビットの要素$N$個から成る配列を線形空間
+      $(\F2^{b})^N$とみなす。（状態空間$S$）
     \end{itemize}
   \end{block}
 
@@ -161,21 +196,22 @@
   \begin{itemize}
   \item 長い周期であっても周期の計算が（比較的）簡単にできる。
   \item 均等分布次元（後述）の計算が可能。
-  \item 高速に計算が可能。
-  \item \strong{暗号用疑似乱数生成器としては、容易に暗号解析される。}
+  \item 高速に乱数生成が可能。
+  \item \strong{暗号用疑似乱数生成器としては、容易に解読される。}
   \end{itemize}
 
   \pause
-  シミュレーション用疑似乱数生成器として、\FLPRNG は望ましい性質を満たしている。
+  これらの性質は、シミュレーション用疑似乱数生成器としては、望ましい。
 
-  以下では、主に\FLPRNG について説明する。
+  以下では、\FLPRNG について説明する。
 \end{frame}
 
+\begin{comment}
 \subsection{LFSR}
 \begin{frame}[t]
   \frametitle{\insertsubsection}
 
-  %\pause
+  線形フィードバックシフトレジスタは、典型的な線形疑似乱数生成器である。
   \begin{block}{定義}
     線形フィードバックシフトレジスタ(LFSR) は次の階数$N$の漸化式で定義される。
     \[
@@ -193,46 +229,35 @@
   LFSR は、配列とインデックス変数を使うことによって、効率的にプログラム出来る。
 
 \end{frame}
-
-\begin{comment}
-\begin{frame}[t]
-  \frametitle{\insertsubsection}
-
-Mersenne Twister(MT) は LFSRの一種で、 周期$2^p-1$のMTの漸化式は
-$N = \lceil p / 32 \rceil$, $r = 32N - p$として、
-\begin{eqnarray*}
-\bw_i &=& g(\bw_{i-N},\ldots,\bw_{i-1}) \\
-&=& g(\bw_{i-N}, \bw_{i-N+1}, \bw_{i-N+M})\\
-&=& (\bw_{i-N}|\bw_{i-N+1})A + \bw_{i-N+M},
-\end{eqnarray*}
-ここで $(\bw_{i-N}|\bw_{i-N+1})$ は
-$\bw_{i-N}$ の$32-r$ ビットMSBと$\bw_{i-N+1}$の$r$ ビットのLSBの結合を示し、
-$A$ は $(32\times 32)$行列で、
-$\bw A$ が数回のビット演算で計算可能なものである。
-
-\pause
-その周期は $2^{32N-r}-1$ のメルセンヌ素数になる。
-メルセンヌ素数$2^p-1$の2の指数部分($p$)を\structure{メルセンヌ指数}という。
-(以後MEXPで表す)
-
-\pause
-上位ビットの分布を改善するために、
-$32\times 32$ 行列 $T$を選んで、
-\[
-\bw_iT, \;\bw_{i+1}T, \;\bw_{i+2}T, \;\ldots
-\]
-を出力する。（テンパリングという）
-\end{frame}
 \end{comment}
+
+\begin{frame}[t]
+  \frametitle{Mersenne Twister}
+
+  \FLPRNG の例としてMersenne Twister を挙げる。
+
+  MT19937の漸化式は$N = 624$, $r = 31$として、
+  \begin{eqnarray*}
+    \bw_i &=& g(\bw_{i-N},\ldots,\bw_{i-1}) \\
+    &=& g(\bw_{i-N}, \bw_{i-N+1}, \bw_{i-N+M})\\
+    &=& (\bw_{i-N}|\bw_{i-N+1})A + \bw_{i-N+M},
+  \end{eqnarray*}
+  ここで $(\bw_{i-N}|\bw_{i-N+1})$ は
+  $\bw_{i-N}$ の$1$ ビットMSBと$\bw_{i-N+1}$の$31$ ビットのLSBの結合を示し、
+  $A$ は $(32\times 32)$行列で、
+  $\bw A$ が数回のビット演算で計算可能なものである。
+
+  状態空間は($\bw_{i-N},\ldots,\bw_{i-1}$)\footnote{$\bw_{i-N}$はMSBの1ビットのみ},
+  初期状態は($\bw_{0},\ldots,\bw_{N-1}$)\footnote{$\bw_{0}$はMSBの1ビットのみ}。
+\end{frame}
 
 \section{周期}
 \subsection{出力列の周期}
 \begin{frame}[t]
   \frametitle{\insertsubsection}
-  $s_0$を固定した疑似乱数生成器の出力列を$\bx_i$で表すと、
+  初期状態$s_0$を固定した疑似乱数生成器の出力列を$\bx_i$で表すと、
   状態空間が有限であることから、
-  以下のように出力列はかならず繰り返し部分を持つ、
-  これを\strong{周期的}という。
+  出力列は必ず繰り返し部分を持つ、このことを出力列は\strong{周期的}であるという。
   \[
   \bx_1, \bx_2, ..., \bx_{n_0}, \bx_{n_0 + 1}, ..., \bx_{n_0 + p} = \bx_{n_0},
   \bx_{n_0+1}, ...
@@ -246,18 +271,21 @@ $32\times 32$ 行列 $T$を選んで、
   $n_0 = 1$の時は、すべての$m$について、$\bx_{m + p} = \bx_m$ が成
   り立つ。
 
-  このとき出力列は\strong{純周期的(purely periodic)}という。周期的だが
-  純周期的でないことを強調するとき、\strong{準周期的(semi periodic)}と
-  いう。
+  このとき出力列は\strong{純周期的}という。
+%  周期的だが
+%  純周期的でないことを強調するとき、\strong{準周期的(semi periodic)}と
+%  いう。
 
   %疑似乱数生成器の内部状態空間$S$のサイズが$n$ビットならば、出力列の周
   %期は$2^n$を越えない。線形疑似乱数生成器の場合、$f(\mathbf(0)) = 0,
   %o(\mathbf{0}) = 0$より、出力列の周期は$2^n-1$を越えない。
   \begin{itemize}
-    \item 疑似乱数生成器の出力列の周期は、状態空間の要素数を越えない。\\
-      （状態空間がnビットなら、$2^n$を越えない）
+%    \item 疑似乱数生成器の出力列の周期は、状態空間の要素数を越えない。\\
+%      （状態空間がnビットなら、$2^n$を越えない）
     \item \FLPRNG の周期は、状態空間の要素数-1を越えない。\\
       （状態空間がnビットなら、$2^n-1$を越えない）
+    \item \FLPRNG の周期が状態空間の要素数-1のとき、最大周期という。
+    \item 最大周期なら、純周期的である。
   \end{itemize}
 \end{frame}
 
@@ -265,15 +293,15 @@ $32\times 32$ 行列 $T$を選んで、
 \begin{frame}[t]
   \frametitle{\insertsubsection}
   \FLPRNG の出力関数として、1ビット出力関数を選んだとする。
-  そして出力列を$x_0, x_1, x_2, ..., (x_i \in \F2)$とすると周期性により
+  そして出力列を$x_0, x_1, x_2, ..., (x_i \in \F2)$とすると%周期性により
   \[
-  c_0x_a = c_1x_{a-1} + c_{2}x_{a-2} + \cdots + c_{k}x_{a-k}
+  x_a = c_1x_{a-1} + c_{2}x_{a-2} + \cdots + c_{k}x_{a-k}
   \]
-  がすべての$a$について成り立つような$c_0,c_1,...,c_k \in \F2$の
+  がすべての$a$について成り立つような$c_1,...,c_k \in \F2$の
   最小の列が存在する。
   このとき、
   \[
-  P(t) = c_0t^k + c_1t^{k-1} + \cdots + c_{k-1}t + c_{k}
+  P(t) = t^k + c_1t^{k-1} + \cdots + c_{k-1}t + c_{k}
   \]
   を出力列$x_i$の\strong{最小多項式}という。
 
@@ -282,7 +310,7 @@ $32\times 32$ 行列 $T$を選んで、
     \begin{itemize}
 %    \item $\F2$線形疑似乱数生成器の1ビット出力列の最小多項式$P(t)$は、初期状態$s_0$および
 %      1ビット出力関数の選び方によって変わる。
-    \item 最小多項式$P(t)$は、初期状態$s_0$および出力関数によって決まる。
+    \item 最小多項式$P(t)$は、初期状態$s_0$および出力関数に依存する。
 %    \item $\F2$線形疑似乱数生成器の1ビット出力列の最小多項式$P(t)$の次数は、
 %      状態空間の次元を越えない。
     \item 最小多項式$P(t)$の次数は、状態空間の次元を越えない。
@@ -295,14 +323,16 @@ $32\times 32$ 行列 $T$を選んで、
 \begin{frame}[t]
   \frametitle{原始多項式}
 
-  \begin{itemize}
-  \item $\F2$係数多項式$Q(t)$が既約なら、$\F2[t]/Q(t)$が体になる。
-  \item 体の乗法群$(\F2[t]/Q(t))^{\times}$を考える。
-  \item この乗法群の大きさは$2^{\mathrm{deg}(Q(t))}-1$となる。乗法群の
-    要素$a$について、$a^n = 1$となる最小の$n>0$を$a$の位数という。
-  \item 乗法群$(\F2[t]/Q(t))^{\times}$の要素のひとつに$t$があるが、$t$の位
-    数が乗法群の大きさと等しいとき、$Q(t)$を\strong{原始多項式}という。
-  \end{itemize}
+  $Q(t) \in \F2[t]$が原始的とは、$t \in \F2[t]/Q(t)$が、乗法群
+  $(\F2[t]/Q(t))^{\times}$を生成することである。原始的ならば既約である。
+%   \begin{itemize}
+%   \item $\F2$係数多項式$Q(t)$が既約なら、$\F2[t]/Q(t)$が体になる。
+%   \item 体の乗法群$(\F2[t]/Q(t))^{\times}$を考える。
+%   \item この乗法群の大きさは$2^{\mathrm{deg}(Q(t))}-1$となる。乗法群の
+%     要素$a$について、$a^n = 1$となる最小の$n>0$を$a$の位数という。
+%   \item 乗法群$(\F2[t]/Q(t))^{\times}$の要素のひとつに$t$があるが、$t$の位
+%     数が乗法群の大きさと等しいとき、$Q(t)$を\strong{原始多項式}という。
+%  \end{itemize}
 
   \begin{block}{最小多項式と原始多項式の関係}
     %\begin{itemize}
@@ -312,6 +342,9 @@ $32\times 32$ 行列 $T$を選んで、
     p_o = 2^{\mathrm{deg}(P(t))}-1
     \]
     となる。
+
+    さらに、$\mathrm{deg}(P(t)) = \mathrm{dim}_{\F2}S$なら、
+    周期は$s_0 (\neq \mathbf{0})$の選び方によらない。
 %    \item 状態遷移についても周期を考えることが出来、状態遷移の周期$p_s$は、$p_o$の
 %      倍数になる。
 %    \item 出力列の周期が最大なら、状態遷移の周期も最大になる。
@@ -326,10 +359,11 @@ $32\times 32$ 行列 $T$を選んで、
 %\subsection{Berlekamp-Massey法}
 \begin{frame}[t]
   \frametitle{最小多項式の求め方と原始性の判定法}
-  最小多項式を求めるアルゴリズムにBerlekamp-Massey法がある。
+  最小多項式を求めるアルゴリズムにBerlekamp-Massey法(1967 Berlekamp,
+  1969 Massey)がある。
   \begin{description}
-  \item[入力] 予想される最小多項式の次数の二倍の長さの数列。
-  \item[アルゴリズム] 多項式版拡張ユークリッドの互除法。
+  \item[入力] 最小多項式の次数の二倍以上の長さの数列。
+  \item[アルゴリズム] 多項式版ユークリッドの互除法。
   \item[効率] 効率よく計算可能。
   \end{description}
 
@@ -337,11 +371,14 @@ $32\times 32$ 行列 $T$を選んで、
   \vspace{\baselineskip}
   $Q(t)$が原始多項式であることの判定法
   \begin{description}
-  \item[既約判定] 素数判定より簡単（効率的に求められる）。
+  \item[既約判定] 整数における素数判定と比べて効率的に計算が可能。
   \item[$t$の位数の判定] $2^{deg(Q(t)}-1$の
     \alt<3>{\strong{素因数分解}}{素因数分解}が必要。\\
-    素因数分解が出来ていれば、それ以外は簡単（効率的に求められる）。
+    素因数分解が出来ていれば、効率的に計算が可能。
   \end{description}
+
+%  \pause
+%  \FLPRNG の出力列の周期を求める上で、問題となるのは素因数分解。
 
   % \FLPRNG の出力列から最小多項式を求めるには、Berlekamp-Massey法という
 %  アルゴリズムが知られている。そのアルゴリズムの大部分は多項式版の拡張
@@ -357,22 +394,35 @@ $32\times 32$ 行列 $T$を選んで、
   \begin{itemize}
   \item $2^m-1$で表される数をメルセンヌ数という。
   \item メルセンヌ数が素数の時、\strong{メルセンヌ素数}という。
-  \item メルセンヌ数の指数部$m$を\strong{メルセンヌ指数}ということにする。
+  \item メルセンヌ素数の指数部$m$を\strong{メルセンヌ指数}ということにする。
   \item メルセンヌ素数はGIMPSプロジェクトにより大きなものが求められている。
   \end{itemize}
 
   \pause
   \begin{block}{メルセンヌ素数の利用}
     \begin{itemize}
-    \item[] 状態空間の大きさをメルセンヌ指数$M$にすると、
-    \item 最小多項式の次数は最大で$M$になる
-    \item 最小多項式の次数が$M$で既約なら、周期は$2^M-1$になる。
-    \item ある周期が$2^M-1$なら、
+    \item[] 状態空間の大きさをメルセンヌ指数$m$にすると、
+    \item 最小多項式の次数は最大で$m$になる
+    \item \alt<3->{\strong{最小多項式の次数が$m$で既約なら、周期は$2^m-1$になる。
+        }}{最小多項式の次数が$m$で既約なら、周期は$2^m-1$になる。}
+    \item ある周期が$2^m-1$なら、
       周期は（$\mathbf{0}$以外の）初期状態に依存しない。
     \end{itemize}
-    状態空間の大きさをメルセンヌ指数$M$にし、最小多項式が既約で次数が$M$となるような
-    \FLPRNG を作ればよい。
+    状態空間の大きさをメルセンヌ指数$m$にし、最小多項式が既約で次数が$m$となるような
+    \FLPRNG を作れば、周期が最大で初期値によらない。
   \end{block}
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{MTToolBoxによるサポート}
+  MTToolBoxは、利用者の設計した\FLPRNG に対して、
+  \begin{itemize}
+  \item 最小多項式の計算
+  \item 最小多項式の既約性判定
+  \item 原始性の判定
+  \item 最大周期となるような状態遷移関数の探索
+  \end{itemize}
+  をサポートする。
 \end{frame}
 
 \begin{comment}
@@ -460,7 +510,7 @@ $32\times 32$ 行列 $T$を選んで、
 
   疑似乱数生成器の出力が最大周期になっている場合、$w$ビットの出力
   列$\bx_1, \bx_2, \bx_3, ...$について、周期$p$の1周期分について、連続
-  する$k$個を1組にした列と$w$ビットの$\mathbf{0}$からなる和集合を考え
+  する$k$個を1組にした列と$k$個の$w$ビットの$\mathbf{0}$からなる和集合を考え
   る。
   \[
   (\bx_1, \bx_2, ..., \bx_k), (\bx_2, \bx_3, ..., \bx_{k+1}), ...,
@@ -468,7 +518,7 @@ $32\times 32$ 行列 $T$を選んで、
     \mathbf{0}, ..., \mathbf{0}}_{k\text{個}})
   \]
   \pause
-  この$w$ビットの$k$個からなる$wk$ビットがすべてのビットパターンを尽く
+  こうして得られる$p+1$個の$wk$ビットがすべての$wk$ビットパターンを尽く
   すような\strong{最大の$k$を$w$ビット均等分布次元}といい、このとき疑似
   乱数生成器の出力は、\strong{$k$次元$w$ビット均等分布する}という。
 
@@ -477,30 +527,33 @@ $32\times 32$ 行列 $T$を選んで、
 
   \pause
   \vspace{\baselineskip}
-  線形写像（群）の性質より、$wk$ビットのビットパターンはどれも同じ回数だけ出現する。
-  出力列についていえば、全部$0$というビットパターンは1回少なく出現する。
+  この性質が成り立つとき、線形写像の性質より、$wk$ビットパターンはどれ
+  も$(p+1)$個の中で同じ回数ずつ出現する。
+
+  出力列については、全部$0$というビットパターンは1回少なく出現する。
 \end{frame}
 
 \subsection{$v$ビット精度均等分布次元}
 \begin{frame}[t]
   \frametitle{\insertsubsection}
 
-  $k$次元$w$ビット均等分布する疑似乱数生成器の出力の均等性をもう少し細かく
-  みたい場合がある。
+  疑似乱数生成器の出力の均等性を上位ビットについてみ見ることが実用上重要である。
+
 %  特に出力列を$[0, 1)$区間の浮動小数点数に変換して使用する場合は、
 %  上位ビットの均等性が重要なので、上位ビットを重視して均等性を細かく見たい。
 
   \pause
   \vspace{\baselineskip}
   $w$ビットの出力列の上位$v$ビットだけを切り出した出力列につい
-  て、$vk$ビットのビットパターンを尽くすような\strong{最大の$k$を$v$ビッ
-    ト精度均等分布次元}といい、$k(v)$で表す。このとき疑似乱数生成器の出力
-  は、\strong{$v$ビット精度で$k$次元均等分布する}という。
+  ての均等分布の次元$k$を\strong{$v$ビット精度均等分布次元}といい、
+  $k(v)$で表す。このとき疑似乱数生成器の出力は、
+  \strong{$v$ビット精度で$k(v)$次元均等分布する}という。
 
   \pause
   \vspace{\baselineskip}
   \FLPRNG の周期を$2^m-1$とすると、$k(v) \le \lfloor m/v \rfloor$
-  という理論的上限がある。理論的上限との差を$d(v)$, $d(v)$の$w$に渡る和を$\Delta$とする。
+  という理論的上限がある。理論的上限との差を$d(v)$,
+  $d(v)$の$1 \le v \le w$に渡る和を$\Delta$とする。
   \begin{gather*}
     d(v) = \lfloor m/v \rfloor - k(v)\\
     \Delta = \sum_{v = 1}^w d(v)
@@ -510,51 +563,54 @@ $32\times 32$ 行列 $T$を選んで、
 
 %\subsection{$v$ビット精度均等分布次元の例}
 \begin{frame}[t]
-  \frametitle{\insertsubsection}
-  $v$ビット精度均等分布次元の例として、Mersenne Twiseter
-  MT19937\cite{MT}(1998 松本,西村)の$v$ビット精度
+  \frametitle{$v$ビット精度均等分布次元の例}
+  $v$ビット精度均等分布次元の例として、Mersenne Twiseter\cite{MT}(1998 松本,西村)
+  のひとつMT19937の$v$ビット精度
   均等分布次元の一部を挙げる。
 
   \begin{table}
     \begin{center}
-      \begin{tabular}{crr} \hline
-        $v$ & $k(v)$ & $d(v)$ \\ \hline
-        1 & 19937 & 0 \\
-        2 & 9968 & 0 \\
-        3 & 6240 & 405 \\
-        4 & 4984 & 0 \\
-        5 & 3738 & 249 \\
-        6 & 3115 & 207 \\
-        7 & 2493 & 355 \\
-        8 & 2492 & 0 \\
-        % 9 & 1869 & 346 \\
-        % 10 & 1869 & 124 \\
-        \vdots & \vdots & \vdots \\
-        31 & 623 & 20 \\
-        32 & 623 & 0 \\ \hline
-        \multicolumn{2}{c}{$\Delta$}& 6750 \\
-        \hline
+      \begin{tabular}{crr|c|crr} \hline
+        $v$ & $k(v)$ & $d(v)$ & $\cdots$ & $v$ & $k(v)$ & $d(v)$ \\ \hline
+        1 & 19937 & 0 &  & 25 & 623 & 174 \\
+        2 & 9968 & 0 &  & 26 & 623 & 143 \\
+        3 & 6240 & 405 &  & 27 & 623 & 115 \\
+        4 & 4984 & 0 & $\cdots$ & 28 & 623 & 89 \\
+        5 & 3738 & 249 &  & 29 & 623 & 64 \\
+        6 & 3115 & 207 &  & 30 & 623 & 41 \\
+        7 & 2493 & 355 &  & 31 & 623 & 20 \\
+        8 & 2492 & 0 &  & 32 & 623 & 0 \\ \hline
       \end{tabular}
+
+      $\Delta = 6750$
     \end{center}
   \end{table}
+
 \end{frame}
 
 %\subsection{$v$ビット精度均等分布次元の計算}
 \begin{frame}[t]
-  \frametitle{\insertsubsection}
+  \frametitle{$v$ビット精度均等分布次元の計算}
 
-  均等分布次元の計算は、
+  \begin{itemize}
+  \item 均等分布次元の計算は、
   %数学的には全射性のチェックなので、
-  線形写像の場合ランクを計算すればよい。
-  しかし、状態空間が大きい場合、ランクの計算ですら困難になる。
+  線形写像のランクを計算すればよい。
+  しかし、状態空間$S$が大きい場合、ランクの計算ですら困難になる。
+  \item PIS法\cite{PIS}(2011 原瀬)を用いると、高速に計算できる。
+    ($O(2w\mathrm{dim}(S)^2)$)
+  \item $v$ビット精度均等分布次元は、出力関数$o$を変えることによって、
+    向上させることが出来る。
+  \item 出力関数$o$を変更するパラメータをテンパリングパラメータという。
+  \end{itemize}
 
-  PIS法\cite{PIS}(2011 原瀬)を用いると、高速に計算できる。
-
-  $v$ビット精度均等分布次元は、出力関数$o$を変えることによって、向上させることが
-  出来る。
-
-  出力関数$o$を変えることによって、$v$ビット精度均等分布次元を向上させることを
-  調律(tempering)という。
+  \begin{block}{MTToolBoxによるサポート}
+    \begin{itemize}
+    \item MTToolBox はPIS法による$v$ビット精度均等分布次元の計算をサポートし、
+      それを改善する。
+    \item MTToolBox はテンパリングパラメータの探索をサポートする。
+    \end{itemize}
+  \end{block}
 \end{frame}
 
 \begin{comment}
@@ -585,7 +641,10 @@ $32\times 32$ 行列 $T$を選んで、
   \item \FLPRNG を開発するためのツールである。
   \item C++ で書かれている。
   \item 周期の計算をサポートする。
-  \item 最大周期となるパラメータを探索することをサポートする。
+%    \begin{itemize}
+%      \item 周期が素数でない場合は、素因数分解
+%    \end{itemize}
+  \item 最大周期となるパラメータの探索をサポートする。
   \item 均等分布次元の計算をサポートする。
   \item テンパリングパラメータの探索をサポートする。
   \end{itemize}
@@ -593,8 +652,10 @@ $32\times 32$ 行列 $T$を選んで、
   \pause
   また、
   \begin{itemize}
-  \item SFMT, MTGP, TinyMT の開発に使用したツールを整理したもの。
-  \item MTGP, TinyMT の Dynamic Creator をサンプルに含む。
+  \item SFMT, MTGP, TinyMT\footnote{SFMT: SIMD用MT, MTGP:GPU用MT, TinyMT:小型MT}
+    の開発に使用したツールを整理したもの。
+  \item MTGP, TinyMT の Dynamic Creator（パラメータ自動生成プログラム）
+    をサンプルに含む。
   \end{itemize}
 \end{frame}
 
@@ -639,22 +700,25 @@ $32\times 32$ 行列 $T$を選んで、
   \pause
   テンパリングパラメータ探索アルゴリズム
   \begin{itemize}
-  \item AlgorithmPartialBitPattern TinyMTDC で使用しているテンパリングパラメータ探索
-  \item AlgorithmBestBits MTDC で使用しているテンパリングパラメータ探索
+  \item AlgorithmPartialBitPattern TinyMT Dynamic Creator で使用しているテンパリングパラメータ探索
+  \item AlgorithmBestBits MT Dynamic Creator で使用しているテンパリングパラメータ探索
   \end{itemize}
 \end{frame}
 
+\subsection{サンプル}
 \begin{frame}[t]
   \frametitle{サンプル}
 
-  \begin{itemize}
-  \item TinyMT
-  \item MTGP
+  ここにサンプルを入れる。
+%  \begin{itemize}
+%  \item TinyMT
+%  \item MTGP
   %\item MT
   %\item XORSHIFT
-  \end{itemize}
+%  \end{itemize}
 \end{frame}
 
+\begin{comment}
 \begin{frame}[t]
   \frametitle{高速化}
 
@@ -663,15 +727,31 @@ $32\times 32$ 行列 $T$を選んで、
   特定のハードウェア上で高速に実行するような部分については、利用者の責任である。
 
 \end{frame}
+\end{comment}
 
 \begin{frame}[t]
   \frametitle{まとめ}
 
+  \FLPRNG の重要な性質
   \begin{itemize}[<+->]
-  \item シミュレーション用疑似乱数生成器を作るなら、\FLPRNG がベスト。
-  \item 最大周期
-  \item 均等分布次元
+  \item 出力列の周期は初期状態（$s_0 \in S$）に依存する。
+  \item 最小多項式の次数が$m=\mathrm{dim}(S)$かつ原始多項式なら最大周期$2^m-1$を達成する。
+    \\
+    このとき、
+    \begin{itemize}
+    \item 周期などの性質は、$\mathbf{0}$以外の初期状態に依存しない。
+    \item $v$ビット精度均等分布次元の計算が可能となる。
+    \end{itemize}
   \end{itemize}
+
+  \pause
+  \vspace{\baselineskip}
+  \begin{block}{MTToolBoxは}
+    \begin{itemize}
+    \item 最大周期となる状態遷移パラメータの探索をサポートする。
+    \item $v$ビット精度均等分布次元を改善するテンパリングパラメータの探索をサポートする。
+    \end{itemize}
+  \end{block}
 \end{frame}
 
 
