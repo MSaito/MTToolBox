@@ -1,0 +1,62 @@
+# scons construct file
+# see http://www.scons.org/
+#
+
+#
+# set LINUX environment variables
+#
+import os
+include_path = []
+os_library_path = []
+os_include_path = os.environ.get('CPLUS_INCLUDE_PATH').split(':')
+if os_include_path :
+    while '' in os_include_path: os_include_path.remove('')
+    for a in os_include_path:
+        include_path.append('-I' + a)
+os_library_path = os_library_path + os.environ.get('LIBRARY_PATH').split(':')
+if os_library_path :
+    while '' in os_library_path: os_library_path.remove('')
+    library_path = os_library_path
+
+#
+# setting for this project
+#
+include_path.append('-I../../include')
+include_path.append('-I.')
+library_path.append('../../lib')
+optlib = ['MTToolBox', 'ntl']
+env = Environment(CFLAGS=['-Wall', '-O3', '-std=c99',
+                          '-Wmissing-prototypes', '-Wextra'],
+                  CXXFLAGS=['-Wall', '-g', '-O3', '-Wextra',
+                            include_path,
+ 			    '-D__STDC_CONSTANT_MACROS',
+			    '-D__STDC_FORMAT_MACROS'])
+env.Append(LIBPATH=library_path)
+
+files = ['tinymt32dc.cpp',
+         'parse_opt.cpp']
+
+#
+# Library check
+#
+conf = Configure(env)
+if not conf.CheckLib('ntl'):
+    print 'Did not find libntl.a or ntl.lib, exiting!'
+    Exit(1)
+if conf.CheckLib('gf2x'):
+    optlib.append('gf2x')
+else:
+    print env.get('LIBPATH')
+    print 'gf2x not found.'
+    Exit(1)
+if conf.CheckLib('gmp'):
+    optlib.append('gmp')
+env = conf.Finish()
+
+#
+# target build
+#
+env.Program('xorshift-1', ['xorshift-1.cpp'], LIBS=optlib)
+env.Program('xorshift-2', ['xorshift-2.cpp'], LIBS=optlib)
+
+Clean('all', Glob('*.o'))
