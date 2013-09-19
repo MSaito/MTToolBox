@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>MTToolBox: AlgorithmTempering.hpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">MTToolBox
+   &#160;<span id="projectnumber">0.2</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 作成： Doxygen 1.8.3.1 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>メインページ</span></a></li>
+      <li><a href="namespaces.html"><span>ネームスペース</span></a></li>
+      <li><a href="annotated.html"><span>データ構造</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_25bad69779203a1e5f1599a258f903fc.html">MTToolBox</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">AlgorithmTempering.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_algorithm_tempering_8hpp.html">説明を見る。</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MTTOOLBOX_ALGORITHM_TEMPERING_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MTTOOLBOX_ALGORITHM_TEMPERING_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;iomanip&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;tr1/memory&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_tempering_calculatable_8hpp.html" title="テンパリングパラメータ探索用の抽象クラス">MTToolBox/TemperingCalculatable.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">namespace </span>MTToolBox {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_tempering.html">   40</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_algorithm_tempering.html" title="疑似乱数生成器の高次元均等分布性を改善するために、テンパ リングパラメータを探索するアルゴリズム">AlgorithmTempering</a> {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_tempering.html#a7a5b0d6c41b9c93c035b2cef7d1b2753" title="テンパリングパラメータを探索する">operator()</a>(<a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html" title="テンパリングを行うGF(2)線形疑似乱数生成器は、このクラスを継承す ることによって、TemperingAlgorithmを使用したテンパリングパラメー タ探索が可能になる。">TemperingCalculatable&lt;U&gt;</a>&amp; rand,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                               <span class="keywordtype">bool</span> verbose = <span class="keyword">false</span>) = 0;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_tempering.html#ade9df36747cbb35467e4dc44d773e556">   56</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_tempering.html#ade9df36747cbb35467e4dc44d773e556" title="LSB からのテンパリングをするのか">isLSBTempering</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    };</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_ALGORITHM_TEMPERING_HPP</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+MTToolBoxに対してThu Sep 19 2013 15:45:10に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.3.1
+</small></address>
+</body>
+</html>
