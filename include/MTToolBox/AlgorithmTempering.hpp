@@ -3,8 +3,7 @@
 /**
  * @file AlgorithmTempering.hpp
  *
- * @brief search tempering parameters so that the random number
- * generator has a good equidistribution property.
+ * @brief テンパリングパラメータ探索アルゴリズムのための抽象クラス
  *
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (The University of Tokyo)
@@ -42,12 +41,19 @@ namespace MTToolBox {
     public:
 
         /**
-         * search tempering parameters.
+         * テンパリングパラメータを探索する
+         * @param[in, out] rand 疑似乱数生成器
+         * @param[in] verbose 余分な情報を表示する
          * @returns 0
          */
-        virtual int operator()(TemperingCalculatable<U>& rand, bool verbose = 0)
-        = 0;
-        virtual bool isLSBTempering() {
+        virtual int operator()(TemperingCalculatable<U>& rand,
+                               bool verbose = false) = 0;
+
+        /**
+         * LSB からのテンパリングをするのか
+         * @return true LSBからのテンパリング
+         */
+        virtual bool isLSBTempering() const {
             return false;
         }
     };

@@ -146,12 +146,6 @@ namespace MTToolBox {
             return search(lg, st, st, verbose, os, true);
         }
 
-#if 0
-        /** getter of rand */
-        std::tr1::shared_ptr<TemperingCalculatable<T> > * getGenerator() {
-            return generator.copy();
-        }
-#endif
         /** 特性多項式のハミングウェイトを返す */
         int getWeight() {
             return weight;
@@ -167,28 +161,12 @@ namespace MTToolBox {
             return poly;
         }
     private:
-        /**
-         * the humming weight of the charateristic polynomial.
-         * e.g the number of terms of characteristic polynomial.
-         */
         int weight;
-        /**
-         * sum of d(v) for all \b v.
-         */
         int delta;
-        /**
-         * searched generator with its parameters.
-         */
-        //std::tr1::shared_ptr<TemperingCalculatable<T> > generator;
-        /**
-         * the characteristic polynomial of linear transition of the
-         * internal state.
-         */
         NTL::GF2X poly;
         std::ostream * out;
         AbstractGenerator<T> * baseGenerator;
 
-        /** print the detail of v-bit accuracy equidistribution */
         void print_kv(int veq[], int mexp, int size) {
             using namespace std;
             for (int i = 0; i < size; i++) {

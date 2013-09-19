@@ -4,7 +4,7 @@
 /**
  * @file MersenneTwister.hpp
  *
- * @brief MersenneTwister generator for generating random parameters.
+ * @brief MersenneTwister generator
  *
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (Hiroshima University)
@@ -12,7 +12,8 @@
  * Copyright (c) 2013 Mutsuo Saito, Makoto Matsumoto and Hiroshima
  * University. All rights reserved.
  *
- * The new BSD License is applied to this software, see LICENSE.txt
+ * The 3-clause BSD License is applied to this software, see
+ * LICENSE.txt
  */
 
 #include <stdint.h>
@@ -21,27 +22,64 @@
 #include <MTToolBox/AbstractGenerator.hpp>
 
 namespace MTToolBox {
+    /**
+     * Mersenne Twister 疑似乱数生成器
+     *
+     * NOTE: この実装では、AbstractGenerator の仕様にあわせて、
+     * 一度の呼び出しで１個の疑似乱数を生成するようにしてある。
+     * そうするとまとめて作る場合よりも生成速度が落ちるので、
+     * 気休め程度でも速度を向上させるために、状態空間より大きな配列を使用して
+     * 剰余演算をビットマスクで済ませるようにしてある。
+     */
     class MersenneTwister : public AbstractGenerator<uint32_t> {
     public:
+        /**
+         * コンストラクタ
+         */
         MersenneTwister() {
             mt = new uint32_t[LARGE_N];
             seed(5489);
         }
+
+        /**
+         * コンストラクタ
+         * @param[in] value 初期化の種
+         */
         MersenneTwister(uint32_t value) {
             mt = new uint32_t[LARGE_N];
             seed(value);
         }
+
+        /**
+         * コンストラクタ
+         * @param[in] value 初期化の種（文字列）
+         */
         MersenneTwister(const std::string& value) {
             mt = new uint32_t[LARGE_N];
             seed(value);
         }
+
+        /**
+         * コンストラクタ
+         * @param[in] value 初期化の種（配列）
+         * @param[in] size 配列の長さ
+         */
         MersenneTwister(const uint32_t *value, int size) {
             mt = new uint32_t[LARGE_N];
             seed(value, size);
         }
+
+        /**
+         * デストラクタ
+         */
         ~MersenneTwister() {
             delete[] mt;
         }
+
+        /**
+         * 32bit整数による初期化
+         * @param[in] value 初期化の種
+         */
         void seed(uint32_t value) {
             mt[0] = value;
             for (mti = 1; mti < N; mti++) {
@@ -50,12 +88,30 @@ namespace MTToolBox {
                      * (mt[mti - 1] ^ (mt[mti - 1] >> 30)) + mti);
             }
         }
-        void seed(const std::string& seed) {
-            seed_array<char>(seed.c_str(), static_cast<int>(seed.size()));
+
+        /**
+         * string文字列による初期化
+         * @param[in] value 初期化の種
+         */
+        void seed(const std::string& value) {
+            seed_array<char>(value.c_str(), static_cast<int>(value.size()));
         }
+
+        /**
+         * char 文字列による初期化
+         * @param[in] value 初期化の種
+         * @param[in] key_length 文字列の長さ
+         */
         void seed(const uint32_t *value, int key_length) {
             seed_array<uint32_t>(value, key_length);
         }
+
+        /**
+         * T 型配列による初期化
+         * @tparam T 配列の要素の型
+         * @param[in] value 初期化の種
+         * @param[in] key_length 文字列の長さ
+         */
         template<class T> void seed_array(const T *value, int key_length) {
             int i, j, k;
             seed(UINT32_C(19650218));
@@ -94,9 +150,19 @@ namespace MTToolBox {
             mt[0] = UINT32_C(0x80000000);
             mti = N;
         }
+
+        /**
+         * 疑似乱数を生成する
+         * @return １個の32bit符号なし整数
+         */
         uint32_t generate() {
             return next();
         }
+
+        /**
+         * 疑似乱数を生成する
+         * @return １個の32bit符号なし整数
+         */
         uint32_t next() {
             using namespace std;
 
@@ -114,6 +180,14 @@ namespace MTToolBox {
             mti = (mti + 1) & LARGE_MASK;
             return y;
         }
+
+        /**
+         * 状態空間のビットサイズである 19937 を返す。
+         *
+         * 配列は状態空間より大きく取ってあるが、それは速度向上のために
+         * 冗長になっているだけで、状態空間の大きさはあくまでも19937である。
+         * @return 常に 19937 を返す
+         */
         int bitSize() const {
             return 19937;
         }

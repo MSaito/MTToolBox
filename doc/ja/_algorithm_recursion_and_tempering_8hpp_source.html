@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>MTToolBox: AlgorithmRecursionAndTempering.hpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">MTToolBox
+   &#160;<span id="projectnumber">0.2</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 作成： Doxygen 1.8.3.1 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>メインページ</span></a></li>
+      <li><a href="namespaces.html"><span>ネームスペース</span></a></li>
+      <li><a href="annotated.html"><span>データ構造</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_25bad69779203a1e5f1599a258f903fc.html">MTToolBox</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">AlgorithmRecursionAndTempering.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_algorithm_recursion_and_tempering_8hpp.html">説明を見る。</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MTTOOLBOX_ALGORITHM_RECURSION_AND_TEMPERING_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MTTOOLBOX_ALGORITHM_RECURSION_AND_TEMPERING_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;ostream&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;iomanip&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;cerrno&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;tr1/memory&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_tempering_calculatable_8hpp.html" title="テンパリングパラメータ探索用の抽象クラス">MTToolBox/TemperingCalculatable.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_algorithm_equidistribution_8hpp.html" title="疑似乱数生成器の出力の均等分布次元を計算する。">MTToolBox/AlgorithmEquidistribution.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_algorithm_recursion_search_8hpp.html" title="状態遷移関数のパラメータを探索する。">MTToolBox/AlgorithmRecursionSearch.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_algorithm_tempering_8hpp.html" title="テンパリングパラメータ探索アルゴリズムのための抽象クラス">MTToolBox/AlgorithmTempering.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="util_8hpp.html" title="ユーティリティ関数群">MTToolBox/util.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">namespace </span>MTToolBox {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">   43</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">AlgorithmRecursionAndTempering</a> {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a3b93431734ad233fb6488ffeab90b9a0">   45</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a3b93431734ad233fb6488ffeab90b9a0">AlgorithmRecursionAndTempering</a>(<a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html">AbstractGenerator&lt;T&gt;</a>&amp; bg) {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            baseGenerator = &amp;bg;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        }</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#abb6464d97f67d13fe698b0aee6a98172">   59</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#abb6464d97f67d13fe698b0aee6a98172" title="状態遷移パラメータとテンパリングパラメータを探索する。">search</a>(<a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html" title="テンパリングを行うGF(2)線形疑似乱数生成器は、このクラスを継承す ることによって、TemperingAlgorithmを使用したテンパリングパラメー タ探索が可能になる。">TemperingCalculatable&lt;T&gt;</a>&amp; lg,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                    <a class="code" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering&lt;T&gt;</a>&amp; st1,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    <a class="code" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering&lt;T&gt;</a>&amp; st2,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keywordtype">bool</span> verbose = <span class="keyword">false</span>,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    std::ostream&amp; os = std::cout,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    <span class="keywordtype">bool</span> no_lsb = <span class="keyword">false</span>) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keyword">using namespace </span>NTL;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keyword">using namespace </span>std::tr1;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            out = &amp;os;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keywordtype">int</span> veq[bit_size&lt;T&gt;()];</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html" title="状態遷移関数のパラメータを探索する。">AlgorithmRecursionSearch&lt;T&gt;</a> <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#abb6464d97f67d13fe698b0aee6a98172" title="状態遷移パラメータとテンパリングパラメータを探索する。">search</a>(lg, *baseGenerator);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keywordtype">int</span> mexp = lg.<a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html#accdd6df63c2639e56b31e5dd205d67d7" title="内部状態空間のビットサイズを返す。">bitSize</a>();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordtype">bool</span> found = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0;; i++) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                <span class="keywordflow">if</span> (search.start(1000 * mexp)) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    found = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="keywordflow">if</span> (verbose) {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    *out &lt;&lt; <span class="stringliteral">&quot;not found in &quot;</span> &lt;&lt; (i + 1) * 10000 &lt;&lt; endl;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">if</span> (!found) {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keywordflow">if</span> (verbose) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                time_t t = time(NULL);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                *out &lt;&lt; <span class="stringliteral">&quot;irreducible parameter is found at &quot;</span> &lt;&lt; ctime(&amp;t);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keywordflow">if</span> (verbose) {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                *out &lt;&lt; <span class="stringliteral">&quot;count = &quot;</span> &lt;&lt; search.getCount() &lt;&lt; endl;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                *out &lt;&lt; lg.<a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html#a691390d61ef3055e664235d978bf524c" title="パラメータの文字列表現を返す。">getParamString</a>() &lt;&lt; endl;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            poly = search.getMinPoly();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            weight = NTL::weight(poly);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keywordflow">if</span> (verbose) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html">AlgorithmEquidsitribution&lt;T&gt;</a> sb(lg, bit_size&lt;T&gt;());</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                <span class="comment">//print_binary(*out, poly);</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                <span class="keywordtype">int</span> delta = sb.<a class="code" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html#a42d62ca316dfb0305ab33b5d13b93f68" title="vビット精度の均等分布次元を計算する。 v = 1 から bit_len までの均等分布次元を計算して、veq[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総...">get_all_equidist</a>(veq);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                print_kv(veq, mexp, bit_size&lt;T&gt;());</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                *out &lt;&lt; <span class="stringliteral">&quot;delta = &quot;</span> &lt;&lt; dec &lt;&lt; delta &lt;&lt; endl;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keywordflow">if</span> (! no_lsb) {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                st2(lg, verbose);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                <span class="keywordflow">if</span> (verbose) {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                    <span class="keywordflow">if</span> (st2.<a class="code" href="class_m_t_tool_box_1_1_algorithm_tempering.html#ade9df36747cbb35467e4dc44d773e556" title="LSB からのテンパリングをするのか">isLSBTempering</a>()) {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                        lg.<a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#aa745cafbeeadec104c36405837ba093f" title="出力の上位ビットと下位ビットを反転する。 これは下位ビットから見た均等分布次元を計測またはテンパリング するために使われる。">setReverseOutput</a>();</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                    }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                    <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html">AlgorithmEquidsitribution&lt;T&gt;</a> sc(lg, bit_size&lt;T&gt;());</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                    delta = sc.<a class="code" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html#a42d62ca316dfb0305ab33b5d13b93f68" title="vビット精度の均等分布次元を計算する。 v = 1 から bit_len までの均等分布次元を計算して、veq[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総...">get_all_equidist</a>(veq);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                    lg.<a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#affd81b264b639a94cb57b38a55356335" title="出力の上位ビットと下位ビットの並びを元に戻す。">resetReverseOutput</a>();</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                    time_t t = time(NULL);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                    *out &lt;&lt; <span class="stringliteral">&quot;lsb tempering parameters are found at &quot;</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                         &lt;&lt; ctime(&amp;t) &lt;&lt; endl;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                    print_kv(veq, mexp, bit_size&lt;T&gt;());</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                    *out &lt;&lt; <span class="stringliteral">&quot;lsb delta = &quot;</span> &lt;&lt; dec &lt;&lt; delta &lt;&lt; endl;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            st1(lg, verbose);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html">AlgorithmEquidsitribution&lt;T&gt;</a> sc(lg, bit_size&lt;T&gt;());</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            delta = sc.<a class="code" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html#a42d62ca316dfb0305ab33b5d13b93f68" title="vビット精度の均等分布次元を計算する。 v = 1 から bit_len までの均等分布次元を計算して、veq[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総...">get_all_equidist</a>(veq);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keywordflow">if</span> (verbose) {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                time_t t = time(NULL);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                *out &lt;&lt; <span class="stringliteral">&quot;tempering parameters are found at &quot;</span> &lt;&lt; ctime(&amp;t)</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                     &lt;&lt; endl;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                *out &lt;&lt; lg.<a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html#a691390d61ef3055e664235d978bf524c" title="パラメータの文字列表現を返す。">getParamString</a>() &lt;&lt; endl;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                print_kv(veq, mexp, bit_size&lt;T&gt;());</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                *out &lt;&lt; <span class="stringliteral">&quot;delta = &quot;</span> &lt;&lt; dec &lt;&lt; delta &lt;&lt; endl;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            }</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        }</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div>
+<div class="line"><a name="l00142"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a19890a875aa2171224eaa05047ca3dd0">  142</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#abb6464d97f67d13fe698b0aee6a98172" title="状態遷移パラメータとテンパリングパラメータを探索する。">search</a>(<a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html" title="テンパリングを行うGF(2)線形疑似乱数生成器は、このクラスを継承す ることによって、TemperingAlgorithmを使用したテンパリングパラメー タ探索が可能になる。">TemperingCalculatable&lt;T&gt;</a>&amp; lg,</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                    <a class="code" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering&lt;T&gt;</a>&amp; st,</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                    <span class="keywordtype">bool</span> verbose = <span class="keyword">false</span>,</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                    std::ostream&amp; os = std::cout) {</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#abb6464d97f67d13fe698b0aee6a98172" title="状態遷移パラメータとテンパリングパラメータを探索する。">search</a>(lg, st, st, verbose, os, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        }</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
+<div class="line"><a name="l00150"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#aa2d4904c355e265b64bd33b5c1a5a2a4">  150</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#aa2d4904c355e265b64bd33b5c1a5a2a4" title="特性多項式のハミングウェイトを返す">getWeight</a>() {</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="keywordflow">return</span> weight;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        }</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#ad4106b96d1a7a79efc8dec88431fee72">  155</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#ad4106b96d1a7a79efc8dec88431fee72" title="均等分布次元の理論値との差の総和を返す。">getDelta</a>() {</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <span class="keywordflow">return</span> delta;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        }</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;</div>
+<div class="line"><a name="l00160"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a72e61744e40ee1c010a3386e73944bdd">  160</a></span>&#160;        <span class="keyword">const</span> NTL::GF2X&amp; <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a72e61744e40ee1c010a3386e73944bdd" title="状態遷移関数の特性多項式を返す。">getCharacteristicPolynomial</a>() {</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            <span class="keywordflow">return</span> poly;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keywordtype">int</span> weight;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keywordtype">int</span> delta;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        NTL::GF2X poly;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        std::ostream * out;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html">AbstractGenerator&lt;T&gt;</a> * baseGenerator;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keywordtype">void</span> print_kv(<span class="keywordtype">int</span> veq[], <span class="keywordtype">int</span> mexp, <span class="keywordtype">int</span> size) {</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                *out &lt;&lt; dec &lt;&lt; i + 1 &lt;&lt; <span class="stringliteral">&quot;:&quot;</span> &lt;&lt; veq[i]</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                     &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; mexp / (i + 1) - veq[i] &lt;&lt; <span class="stringliteral">&quot;)&quot;</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                     &lt;&lt; endl;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            }</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        }</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    };</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;}</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="preprocessor">#endif //MTTOOLBOX_ALGORITHM_RECURSION_AND_TEMPERING_HPP</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+MTToolBoxに対してThu Sep 19 2013 15:45:09に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.3.1
+</small></address>
+</body>
+</html>

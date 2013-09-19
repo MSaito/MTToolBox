@@ -1,8 +1,26 @@
-/* -*- coding:utf-8 -*- */
 #ifndef MTTOOLBOX_ABSTRACT_GENERATOR_HPP
 #define MTTOOLBOX_ABSTRACT_GENERATOR_HPP
+/**
+ * @file AbstractGenerator.hpp
+ *
+ * @brief GF(2)線形疑似乱数生成器の抽象クラス
+ *
+ * @author Mutsuo Saito (Hiroshima University)
+ * @author Makoto Matsumoto (The University of Tokyo)
+ *
+ * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
+ * and Hiroshima University.
+ * All rights reserved.
+ *
+ * The 3-clause BSD License is applied to this software, see
+ * LICENSE.txt
+ */
 
-
+/**
+ * @namespace MTToolBox
+ *
+ * MTToolBox の名前空間
+ */
 namespace MTToolBox {
     /**
      * @class AbstractGenerator

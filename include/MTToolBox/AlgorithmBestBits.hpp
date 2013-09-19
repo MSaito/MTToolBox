@@ -40,6 +40,7 @@ namespace MTToolBox {
         T param[size];
         /** 均等分布次元の理論値との差の総和 */
         int delta;
+
         /**
          * 単純なコンストラクタ
          * @param[in] p テンパリングパラメータ
@@ -176,10 +177,7 @@ namespace MTToolBox {
         }
     private:
         /**
-         * search for one tempering parameter. generate all bit pattern
-         * for v-bit to max_v_bit of the tempering parameter, and calculate
-         * equidistribution property, then select the best bit pattern.
-         * This function calls itself recursively.
+         * テンパリングパラメータを探索する。
          *
          * @param[in,out] rand GF(2)線形疑似乱数生成器、TemperingSearcherのサブクラス
          * @param[in] v_bit 今からテンパリングしようとするビット(上から数えた)
@@ -213,14 +211,7 @@ namespace MTToolBox {
                 current.push_back(pattern);
             }
         }
-#if 0
-        void make_temper_bit(TemperingSearcher<T>& rand, int start, int size,
-                             int param_pos, T pattern) {
-            T mask = make_mask(start, size);
-            rand.setTemperingPattern(mask, pattern, param_pos);
-            rand.setUpTempering();
-        }
-#endif
+
         /**
          * AlgorithmEquidistribution#get_equidist()のラッパー
          *
@@ -244,23 +235,7 @@ namespace MTToolBox {
             }
             return sum;
         }
-#if 0
-        T get_equidist_pattern(TemperingSearcher<T>& rand,
-                               int bit_len_,
-                               int bitSize) {
-            G r(rand);
-            T pattern = 0;
-            shortest_basis<G, T> sb(r, bit_len_);
-            int veq[bit_len_];
-            sb.get_all_equidist(veq);
-            for (int i = 0; i < bit_len_; i++) {
-                if (bitSize / (i + 1) != veq[i]) {
-                    pattern |= 1 << (bit_len_ - i - 1);
-                }
-            }
-            return pattern;
-        }
-#endif
+
         /**
          * v ビット目のテンパリングパラメータを作成する。
          *

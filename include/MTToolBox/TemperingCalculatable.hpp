@@ -1,6 +1,5 @@
 #ifndef MTTOOLBOX_TEMPERING_CALCULATABLE_HPP
 #define MTTOOLBOX_TEMPERING_CALCULATABLE_HPP
-/* -*- coding:utf-8 -*- */
 /**
  * @file TemperingCalculatable.hpp
  * @brief テンパリングパラメータ探索用の抽象クラス
@@ -17,10 +16,14 @@ namespace MTToolBox {
     /**
      * @class TemperingCalculatable
      *
+     * テンパリングを行うGF(2)線形疑似乱数生成器は、このクラスを継承す
+     * ることによって、TemperingAlgorithmを使用したテンパリングパラメー
+     * タ探索が可能になる。
      */
     template<class U>
     class TemperingCalculatable : public EquidistributionCalculatable<U> {
     public:
+
         /**
          * テンパリングパラメータをセットする。
          * @param[in] mask pattern のうち実際にテンパリングパラメータに

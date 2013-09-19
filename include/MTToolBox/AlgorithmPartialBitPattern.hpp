@@ -109,34 +109,33 @@ namespace MTToolBox {
          * このテンパリングパラメータ探索がLSBからの探索であるかどうか
          *@return true LSBからのテンパリングパラメータ探索
          */
-        bool isLSBTempering() {
+        bool isLSBTempering() const {
             return lsb;
         }
     private:
-        /**
-         *
-         *
-         */
         void make_temper_bit(TemperingCalculatable<T>& rand,
                              T mask,
-                             int param_pos, T pattern) {
-            //T mask = make_mask(start, size);
+                             int param_pos,
+                             T pattern) {
             rand.setTemperingPattern(mask, pattern, param_pos);
             rand.setUpTempering();
         }
 
         /**
-         * search for one tempering parameter. generate all bit pattern
-         * for v-bit to max_v_bit of the tempering parameter, and calculate
-         * equidistribution property, then select the best bit pattern.
-         * This function calls itself recursively.
+         * テンパリングパラメータをひとつ探索する。
          *
-         * @param rand linear generator
-         * @param v_bit the bit of tempering parameter is searched
-         * @param param_pos position of current tempering parameter.
-         * @param max_v_bit search stops at this bit.
-         * @param verbose if true output searching process
-         * @return delta an integer which shows equidistribution property.
+         * # v_bit から max_v_bit までのすべてのビットパターンを生成し
+         * # すべてのビットパターンについてvビット精度均等分布次元を計算し
+         * # Δの最も小さかったビットパターンを選択する。
+         * # 同じΔであればハミングウェイトの大きいビットパターンを選択する
+         * なお、このメソッドは再帰する。
+         *
+         * @param rand GF(2)疑似乱数生成器
+         * @param v_bit テンパリングパラメータを探索するビット範囲
+         * @param param_pos 何番目のテンパリングパラメータを探索しているか
+         * @param max_v_bit このビットで探索をやめる
+         * @param verbose true なら探索過程の情報を出力する
+         * @return delta このテンパリングパラメータの設定結果によるΔ
          */
         int search_best_temper(TemperingCalculatable<T>& rand, int v_bit,
                                int param_pos, int max_v_bit, bool verbose) {
@@ -149,7 +148,6 @@ namespace MTToolBox {
             T pattern;
             T mask = make_mask(v_bit, size);
             int length = bit_size<T>() / 4;
-            //for (int i = 0; i < (1 << size); i++) {
             for (int i = (1 << size) -1; i >= 0; i--) {
                 if (lsb) {
                     pattern = static_cast<T>(i) << v_bit;
@@ -157,9 +155,6 @@ namespace MTToolBox {
                     pattern = static_cast<T>(i) << (bit_len - v_bit - size);
                 }
                 make_temper_bit(rand, mask, param_pos, pattern);
-                //rand.setTemperingPattern(mask, pattern, param_pos);
-                //rand.setUpTempering();
-                //delta = get_equidist(rand, bit_len, bitSize);
                 delta = get_equidist(rand, bit_len);
                 if (delta < min_delta) {
                     if (verbose) {
@@ -188,56 +183,29 @@ namespace MTToolBox {
         }
 
         /**
-         * wrapper of shortest_basis#get_equidist()
+         * AlgorithmEquidistributionの呼び出し
          *
-         * @param rand linear generator
-         * @param bit_len_ \b bit_len_ MSBs of equidistribution
-         * property of the generator is calculated.
-         * @returns summation of equidistribution property
-         * from 0 to \b bit_len_ -1 MSBs.
+         * @param rand GF(2)疑似乱数生成器
+         * @param bit_len_ MSB から \b bit_len_ 分の均等分布次元を計算する
+         * @returns Δ 理論値と実現値の差の合計
          */
         int get_equidist(TemperingCalculatable<T>& rand,
                          int bit_len_) {
-            //TemperingCalculatable<T> r(rand);
             AlgorithmEquidsitribution<T> sb(rand, bit_len_);
             int veq[bit_len_];
             int sum = sb.get_all_equidist(veq);
-#if 0
-            int sum = 0;
-            for (int i = 0; i < bit_len_; i++) {
-                sum += (bitSize / (i + 1) - veq[i]) * (bit_len_ - i);
-            }
-#endif
             return sum;
         }
-#if 0
-        T get_equidist_pattern(TemperingCalculatable<T>& rand,
-                               int bit_len_,
-                               int bitSize) {
-            //G r(rand);
-            T pattern = 0;
-            AlgorithmEquidsitribution<T> sb(rand, bit_len_);
-            int veq[bit_len_];
-            sb.get_all_equidist(veq);
-            for (int i = 0; i < bit_len_; i++) {
-                if (bitSize / (i + 1) != veq[i]) {
-                    pattern |= 1 << (bit_len_ - i - 1);
-                }
-            }
-            return pattern;
-        }
-#endif
+
         /**
-         * make mask which has \b size bits 1s form start.<br/>
-         * ex.<br/>
-         * when lsb is false, start = 3, size = 5 then
-         * return 0x1f000000 (0001 1111 0000 0000 0000 0000 0000 0000)<br/>
-         * ex2.<br/>
-         * when lsb is true, start = 2, size = 12 then
-         * return 0x3ffc (0000 0000 0000 0000 0011 1111 1111 1100)<br/>
-         * @param start start bit
-         * @param size size of 1s
-         * @return bit mask
+         * ビットマスク作成
+         *
+         * これはテンパリングパラメータではなく、テンパリングパラメータを
+         * セットする部分をマスクするためのビットマスクである。
+         *
+         * @param start ビットマスクを開始するビット位置
+         * @param size ビットマスクの長さ
+         * @return ビットマスク
          */
         T make_mask(int start, int size) {
             T mask = 0;

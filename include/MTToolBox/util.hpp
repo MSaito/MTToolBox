@@ -29,8 +29,6 @@
 #include <openssl/sha.h>
 #endif
 
-//#define bit_size(tp) (static_cast<int>(sizeof(tp) * 8))
-
 namespace MTToolBox {
     inline static int count_bit(uint16_t x);
     inline static int count_bit(uint32_t x);
@@ -38,10 +36,19 @@ namespace MTToolBox {
     inline static uint32_t reverse_bit(uint32_t x);
     inline static uint64_t reverse_bit(uint64_t x);
 
+    /**
+     * T のビットサイズを返す。
+     *
+     * sizeof に 8 を掛けているだけなので正確ではない。
+     *
+     * @tparam T ビットサイズを知りたい型
+     * @return T のビットサイズ
+     */
     template<typename T>
     int bit_size() {
         return static_cast<int>(sizeof(T) * 8);
     }
+
     /**
      * 使用しない変数のワーニングを止める
      * @param[in] x 使用しない変数へのポインタ
@@ -112,7 +119,7 @@ namespace MTToolBox {
     }
 
     /**
-     * GF(2)ベクトルのパラメータテーブルからより高速で冗長なルックアップテーブルを作成する。
+     * GF(2)ベクトルのパラメータテーブルから、より高速で冗長なルックアップテーブルを作成する。
      * @tparam T テーブル内の符号なし整数の型
      * @param dist_tbl 作成されるルックアップテーブル
      * @param src_tbl 元になるGF(2)ベクトルのテーブル
@@ -239,9 +246,12 @@ namespace MTToolBox {
     }
 
     /**
-     * count the number of 1
+     * 1 の個数を数える
      * SIMD within a Register algorithm
      * citing from a website http://aggregate.org/MAGIC/
+     *
+     * @param x ビットパターン
+     * @returns x の中の1の個数
      */
     inline static int count_bit(uint16_t x) {
         x -= (x >> 1) & UINT16_C(0x5555);
@@ -251,6 +261,19 @@ namespace MTToolBox {
         return (int)(x & 0x1f);
     }
 
+    /**
+     * 1 の個数を数える
+     * SIMD within a Register algorithm
+     * citing from a website http://aggregate.org/MAGIC/
+     */
+    /**
+     * 1 の個数を数える
+     * SIMD within a Register algorithm
+     * citing from a website http://aggregate.org/MAGIC/
+     *
+     * @param x ビットパターン
+     * @returns x の中の1の個数
+     */
     inline static int count_bit(uint32_t x) {
         x -= (x >> 1) & UINT32_C(0x55555555);
         x = ((x >> 2) & UINT32_C(0x33333333)) + (x & UINT32_C(0x33333333));
@@ -260,6 +283,14 @@ namespace MTToolBox {
         return (int)(x & 0x3f);
     }
 
+    /**
+     * 1 の個数を数える
+     * SIMD within a Register algorithm
+     * citing from a website http://aggregate.org/MAGIC/
+     *
+     * @param x ビットパターン
+     * @returns x の中の1の個数
+     */
     inline static int count_bit(uint64_t x) {
         x -= (x >> 1) & UINT64_C(0x5555555555555555);
         x = ((x >> 2) & UINT64_C(0x3333333333333333))
@@ -271,6 +302,14 @@ namespace MTToolBox {
         return (int)(x & 0x7f);
     }
 
+    /**
+     * 1 の個数を数える
+     * SIMD within a Register algorithm
+     * citing from a website http://aggregate.org/MAGIC/
+     *
+     * @param x ビットパターン
+     * @returns x の中の1の個数
+     */
     inline static uint32_t reverse_bit(uint32_t x)
     {
         uint32_t y = 0x55555555;
@@ -284,6 +323,14 @@ namespace MTToolBox {
         return((x >> 16) | (x << 16));
     }
 
+    /**
+     * 1 の個数を数える
+     * SIMD within a Register algorithm
+     * citing from a website http://aggregate.org/MAGIC/
+     *
+     * @param x ビットパターン
+     * @returns x の中の1の個数
+     */
     inline static uint64_t reverse_bit(uint64_t x)
     {
         uint64_t y = UINT64_C(0x5555555555555555);
@@ -298,42 +345,6 @@ namespace MTToolBox {
         x = (((x >> 16) & y) | ((x & y) << 16));
         return((x >> 32) | (x << 32));
     }
-#if 0
-    /**
-     * divide and ceil
-     */
-    inline static int div_ceil(int x, int y) {
-        if (x % y == 0) {
-            return x / y;
-        } else {
-            return x / y + 1;
-        }
-    }
-#endif
-#if 0
-    /**
-     * polynomial to string
-     */
-    inline static void to_str(uint8_t * str, int size, NTL::GF2X& poly) {
-        if (deg(poly) >= size * 8) {
-            std::cerr << "str size too small" << std::endl;
-            throw new std::out_of_range("str size too small");
-        }
-        for (int i = 0; i < size; i++) {
-            str[i] = 0;
-        }
-        int idx = 0;
-        for (int i = 0; i < size; i++) {
-            uint8_t mask = 1;
-            for (int j = 0; j < 8; j++) {
-                if (IsOne(coeff(poly, idx++))) {
-                    str[i] |= mask;
-                }
-                mask <<= 1;
-            }
-        }
-    }
-#endif
 
 }
 #endif //MTTOOLBOX_UTIL_HPP

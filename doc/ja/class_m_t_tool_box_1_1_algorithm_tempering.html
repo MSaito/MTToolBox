@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>MTToolBox: クラス テンプレート MTToolBox::AlgorithmTempering&lt; U &gt;</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">MTToolBox
+   &#160;<span id="projectnumber">0.2</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 作成： Doxygen 1.8.3.1 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>メインページ</span></a></li>
+      <li><a href="namespaces.html"><span>ネームスペース</span></a></li>
+      <li class="current"><a href="annotated.html"><span>データ構造</span></a></li>
+      <li><a href="files.html"><span>ファイル</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>データ構造</span></a></li>
+      <li><a href="hierarchy.html"><span>クラス階層</span></a></li>
+      <li><a href="functions.html"><span>データフィールド</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_m_t_tool_box.html">MTToolBox</a></li><li class="navelem"><a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public メソッド</a>  </div>
+  <div class="headertitle">
+<div class="title">クラス テンプレート MTToolBox::AlgorithmTempering&lt; U &gt;<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>疑似乱数生成器の高次元均等分布性を改善するために、テンパ リングパラメータを探索するアルゴリズム  
+ <a href="class_m_t_tool_box_1_1_algorithm_tempering.html#details">[詳細]</a></p>
+
+<p><code>#include &lt;<a class="el" href="_algorithm_tempering_8hpp_source.html">AlgorithmTempering.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public メソッド</h2></td></tr>
+<tr class="memitem:a7a5b0d6c41b9c93c035b2cef7d1b2753"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html#a7a5b0d6c41b9c93c035b2cef7d1b2753">operator()</a> (<a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html">TemperingCalculatable</a>&lt; U &gt; &amp;rand, bool verbose=false)=0</td></tr>
+<tr class="memdesc:a7a5b0d6c41b9c93c035b2cef7d1b2753"><td class="mdescLeft">&#160;</td><td class="mdescRight">テンパリングパラメータを探索する  <a href="#a7a5b0d6c41b9c93c035b2cef7d1b2753">[詳細]</a><br/></td></tr>
+<tr class="separator:a7a5b0d6c41b9c93c035b2cef7d1b2753"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade9df36747cbb35467e4dc44d773e556"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html#ade9df36747cbb35467e4dc44d773e556">isLSBTempering</a> () const </td></tr>
+<tr class="memdesc:ade9df36747cbb35467e4dc44d773e556"><td class="mdescLeft">&#160;</td><td class="mdescRight">LSB からのテンパリングをするのか  <a href="#ade9df36747cbb35467e4dc44d773e556">[詳細]</a><br/></td></tr>
+<tr class="separator:ade9df36747cbb35467e4dc44d773e556"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">説明</h2>
+<div class="textblock"><h3>template&lt;typename U&gt;<br/>
+class MTToolBox::AlgorithmTempering&lt; U &gt;</h3>
+
+<p>疑似乱数生成器の高次元均等分布性を改善するために、テンパ リングパラメータを探索するアルゴリズム </p>
+<p><b>注意：</b> テンパリングパラメータの探索をしても十分良い高次元均等 分布が得られない場合は、状態遷移関数の変更を考慮した方がよい。状 態遷移関数で十分ビットミックスされていない場合、単純なテンパリン グで均等分布次元を最大化することはできないだろう。</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">U</td><td>疑似乱数生成器の出力の型, 例えば uint32_t など。 </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">関数</h2>
+<a class="anchor" id="ade9df36747cbb35467e4dc44d773e556"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool <a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">MTToolBox::AlgorithmTempering</a>&lt; U &gt;::isLSBTempering </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>LSB からのテンパリングをするのか </p>
+<dl class="section return"><dt>戻り値</dt><dd>true LSBからのテンパリング </dd></dl>
+
+<p><a class="el" href="class_m_t_tool_box_1_1_algorithm_partial_bit_pattern.html#a432b9ef4ec09f9a3296f5561ad30483a">MTToolBox::AlgorithmPartialBitPattern&lt; T, bit_len, param_num, try_bit_len, step, lsb &gt;</a>で再定義されています。</p>
+
+<p>参照元 <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#abb6464d97f67d13fe698b0aee6a98172">MTToolBox::AlgorithmRecursionAndTempering&lt; T &gt;::search()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7a5b0d6c41b9c93c035b2cef7d1b2753"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int <a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">MTToolBox::AlgorithmTempering</a>&lt; U &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html">TemperingCalculatable</a>&lt; U &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rand</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>verbose</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>テンパリングパラメータを探索する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">rand</td><td>疑似乱数生成器 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">verbose</td><td>余分な情報を表示する </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>0 </dd></dl>
+
+<p><a class="el" href="class_m_t_tool_box_1_1_algorithm_partial_bit_pattern.html#a247ec999109b652486231a28eaac2d22">MTToolBox::AlgorithmPartialBitPattern&lt; T, bit_len, param_num, try_bit_len, step, lsb &gt;</a>で実装されています。</p>
+
+</div>
+</div>
+<hr/>このクラスの説明は次のファイルから生成されました:<ul>
+<li><a class="el" href="_algorithm_tempering_8hpp_source.html">AlgorithmTempering.hpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+MTToolBoxに対してThu Sep 19 2013 15:45:10に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.3.1
+</small></address>
+</body>
+</html>

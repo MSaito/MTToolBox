@@ -29,6 +29,7 @@ namespace MTToolBox {
          * このメソッドの内部で、別の疑似乱数生成器を使用してパラメータを
          * 設定すること。TinyMT では疑似乱数ではなくカウントダウンする
          * 数値を元にパラメータを設定しているが、そうしてもよい。
+         * @param[in,out] generator 疑似乱数生成器
          */
         virtual void setUpParam(AbstractGenerator<U>& generator) = 0;
 
@@ -39,6 +40,7 @@ namespace MTToolBox {
          * このメソッドは、Dynamic Creator のように大量のパラメータを探
          * 索する際に使用する。ここで返却する文字列パラメータは状態遷移関数の
          * パラメータだけでなく、テンパリングパラメータも含めてよい。
+         * @return パラメータのヘッダ文字列
          */
         virtual const std::string getHeaderString() = 0;
 
@@ -50,6 +52,7 @@ namespace MTToolBox {
          * getHeaderString() は何もしないようにしてもよい。ここで出力するパ
          * ラメータは状態遷移関数のパラメータだけでなく、テンパリングパ
          * ラメータも出力してよい。
+         * @return パラメータの文字列
          */
         virtual const std::string getParamString() = 0;
     };

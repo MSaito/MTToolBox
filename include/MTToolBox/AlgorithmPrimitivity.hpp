@@ -34,7 +34,6 @@ namespace MTToolBox {
          * メルセンヌ指数を次数とする原始多項式かどうか判定する場合のコンストラクタ
          *
          * operator() によって多項式は degree 次数でかつ既約かテストされる。
-         * @param[in] degree 多項式の望ましい次数
          */
         AlgorithmPrimitivity() {
             primes = new NTL::Vec<NTL::ZZ>;
@@ -44,7 +43,6 @@ namespace MTToolBox {
 
         /**
          * 一般のGF(2)係数の原始多項式かどうか判定する場合のコンストラクタ
-         * @param[in] degree 多項式の望ましい次数
          * @param[in] primes 2<sup>degree</sup> -1の素因数分解に現れる
          * 素数の文字列表現のリスト
          */
@@ -60,8 +58,9 @@ namespace MTToolBox {
         /**
          * poly がコンストラクタで指定した次数の原始多項式かどうか判定する
          *
+         * @param[in] max_degree 状態空間の大きさから定まる最大次数
          * @param[in] poly GF(2)係数多項式
-         * @return true 指定次数の原始多項式の場合
+         * @return true 最大次数の原始多項式の場合
          */
         bool operator()(int max_degree, const NTL::GF2X& poly) const;
     private:

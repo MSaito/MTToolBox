@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>MTToolBox: AlgorithmRecursionSearch.hpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">MTToolBox
+   &#160;<span id="projectnumber">0.2</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 作成： Doxygen 1.8.3.1 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>メインページ</span></a></li>
+      <li><a href="namespaces.html"><span>ネームスペース</span></a></li>
+      <li><a href="annotated.html"><span>データ構造</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_25bad69779203a1e5f1599a258f903fc.html">MTToolBox</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">AlgorithmRecursionSearch.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_algorithm_recursion_search_8hpp.html">説明を見る。</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MTTOOLBOX_ALGORITHM_RECURSION_SEARCH_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MTTOOLBOX_ALGORITHM_RECURSION_SEARCH_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;ostream&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;NTL/GF2X.h&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;NTL/GF2XFactoring.h&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_recursion_searchable_8hpp.html" title="このクラスは状態遷移パラメータ探索を行えるGF(2)線形疑似乱数生成器のクラスである。">MTToolBox/RecursionSearchable.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_algorithm_primitivity_8hpp.html" title="原始多項式判定">MTToolBox/AlgorithmPrimitivity.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="period_8hpp.html" title="最小多項式の計算と原始性の判定">MTToolBox/period.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">namespace </span>MTToolBox {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html">   48</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html" title="状態遷移関数のパラメータを探索する。">AlgorithmRecursionSearch</a> {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a949a60dbd07736f89e0472b399f87bd5">   63</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a949a60dbd07736f89e0472b399f87bd5" title="コンストラクタ">AlgorithmRecursionSearch</a>(<a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html">RecursionSearchable&lt;U&gt;</a>&amp; generator,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                                 <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html" title="GF(2)線形の状態遷移をもつ疑似乱数生成器">AbstractGenerator&lt;U&gt;</a>&amp; bg) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            rand = &amp;generator;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            baseGenerator = &amp;bg;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            count = 0;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            isPrime = &amp;<a class="code" href="namespace_m_t_tool_box.html#a34e4fb3d4edbdec76092186b4f2259ba">MersennePrimitivity</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a7a4ccd8d4af5e5d5204dc5d8aa9ad6f1">   84</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a949a60dbd07736f89e0472b399f87bd5" title="コンストラクタ">AlgorithmRecursionSearch</a>(<a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html">RecursionSearchable&lt;U&gt;</a>&amp; generator,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                                 <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html" title="GF(2)線形の状態遷移をもつ疑似乱数生成器">AbstractGenerator&lt;U&gt;</a>&amp; bg,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                                 <span class="keyword">const</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html" title="原始多項式かどうか判定するアルゴリズムを提供するクラス">AlgorithmPrimitivity</a>&amp; primitivity) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            rand = &amp;generator;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            baseGenerator = &amp;bg;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            count = 0;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            isPrime = &amp;primitivity;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a0944ab4a385b592eed62a33c9f4321c4">  103</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a0944ab4a385b592eed62a33c9f4321c4" title="疑似乱数生成器に状態遷移パラメータをランダムに生成させ、 その状態遷移パラメータのもとで出力列の最小多項式を求める。 最小多項式が求める次数の原始多項式か判定し、原始多項式なら成功して終了。 そうでなけ...">start</a>(<span class="keywordtype">int</span> try_count) {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordtype">long</span> size = rand-&gt;bitSize();</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keywordtype">long</span> degree;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; try_count; i++) {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                rand-&gt;setUpParam(*baseGenerator);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                rand-&gt;seed(1);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                <a class="code" href="namespace_m_t_tool_box.html#a7861dda005fe9d0c519f7e1442a1fa84" title="最小多項式を求める">minpoly</a>(poly, *rand);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                count++;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                degree = deg(poly);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                <span class="keywordflow">if</span> (degree != size) {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                <span class="keywordflow">if</span> ((*isPrime)(size, poly)) {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        }</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#adc7cae723a18a6c33254a125bf38ab9b">  126</a></span>&#160;        <span class="keyword">const</span> std::string <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#adc7cae723a18a6c33254a125bf38ab9b" title="このメソッドは start() が true を返した場合にのみ呼び出すべきである。">getParamString</a>() {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordflow">return</span> rand-&gt;getParamString();</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        }</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
+<div class="line"><a name="l00139"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a9e94884516d6293e2d1766b7827ca826">  139</a></span>&#160;        <span class="keyword">const</span> NTL::GF2X&amp; <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a9e94884516d6293e2d1766b7827ca826" title="このメソッドは start() が true を返した場合にのみ呼び出すべきである。">getMinPoly</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            <span class="keywordflow">return</span> poly;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        }</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;</div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a9236c2a4d44abea90420df381146dd93">  147</a></span>&#160;        <span class="keywordtype">long</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a9236c2a4d44abea90420df381146dd93" title="このインスタンスが作られてからstart() が終了するまでに試行した回数を返す。">getCount</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            <span class="keywordflow">return</span> count;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        }</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html">RecursionSearchable&lt;U&gt;</a> *rand;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html" title="GF(2)線形の状態遷移をもつ疑似乱数生成器">AbstractGenerator&lt;U&gt;</a> *baseGenerator;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keyword">const</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html" title="原始多項式かどうか判定するアルゴリズムを提供するクラス">AlgorithmPrimitivity</a> *isPrime;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        NTL::GF2X poly;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <span class="keywordtype">long</span> count;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    };</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_ALGORITHM_RECURSION_SEARCH_HPP</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+MTToolBoxに対してThu Sep 19 2013 15:45:10に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.3.1
+</small></address>
+</body>
+</html>

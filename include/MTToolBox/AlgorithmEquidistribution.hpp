@@ -42,10 +42,12 @@ namespace MTToolBox {
     template<typename T>
     class linear_generator_vector {
     public:
+
         /**
          * 均等分布次元計算可能な疑似乱数生成器
          */
         typedef EquidistributionCalculatable<T> ECGenerator;
+
         /**
          * コンストラクタ
          *
@@ -122,15 +124,19 @@ namespace MTToolBox {
      * @tparam T 疑似乱数生成器の出力の型
      */
     template<typename T> class AlgorithmEquidsitribution {
+
         /**
          * GF(2)ベクトルとしての疑似乱数生成器
          */
         typedef linear_generator_vector<T> linear_vec;
+
         /*
          * 均等分布次元計算可能な疑似乱数生成器
          */
         typedef EquidistributionCalculatable<T> ECGenerator;
+
     public:
+
         /**
          * コンストラクタ
          *
@@ -148,6 +154,7 @@ namespace MTToolBox {
             basis[bit_len] = new linear_vec(rand);
             basis[bit_len]->next_state(bit_len);
         }
+
         /**
          * デストラクタ
          */
@@ -298,9 +305,7 @@ namespace MTToolBox {
     /**
      * 疑似乱数生成器の状態遷移
      *
-     * 疑似乱数生成器をGF(2)多項式と見た場合は
-     *
-     * @param bit_len bit length from MSB
+     * @param bit_len MSB からの bit 長
      */
     template<typename T>
     void linear_generator_vector<T>::next_state(int bit_len) {
@@ -352,13 +357,21 @@ namespace MTToolBox {
                 throw new std::logic_error("pivot error 1");
             }
 #endif
+            // アルゴリズムとして、全部のcount を平均的に大きくしたい。
+            // 従って count の小さい方を変化させたい
             if (basis[bit_len]->count > basis[pivot_index]->count) {
                 swap(basis[bit_len], basis[pivot_index]);
             }
             basis[bit_len]->add(*basis[pivot_index]);
+            // add の結果 next の最後の1 は必ず 0 になる。
+            // 全部0なら次の状態に進める。（内部でcount が大きくなる）
             if (basis[bit_len]->next == 0) {
                 basis[bit_len]->next_state(bit_len);
                 pivot_index = calc_1pos(basis[bit_len]->next);
+
+            // 全部0でなければ、pivot_index は小さくなる。
+            // pivot_index が 0 になれば最上位bit のみ1なので
+            // 次の add で全部0になる。
             } else {
                 old_pivot = pivot_index;
                 pivot_index = calc_1pos(basis[bit_len]->next);
@@ -368,6 +381,8 @@ namespace MTToolBox {
                 }
             }
         }
+
+        // 計算終了したので最長のベクトルを求める。（長いとはcountが少ないこと）
         int min_count = basis[0]->count;
         for (int i = 1; i < bit_len; i++) {
             if (min_count > basis[i]->count) {

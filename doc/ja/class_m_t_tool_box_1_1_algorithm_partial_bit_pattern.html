@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>MTToolBox: クラス テンプレート MTToolBox::AlgorithmPartialBitPattern&lt; T, bit_len, param_num, try_bit_len, step, lsb &gt;</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">MTToolBox
+   &#160;<span id="projectnumber">0.2</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 作成： Doxygen 1.8.3.1 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>メインページ</span></a></li>
+      <li><a href="namespaces.html"><span>ネームスペース</span></a></li>
+      <li class="current"><a href="annotated.html"><span>データ構造</span></a></li>
+      <li><a href="files.html"><span>ファイル</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>データ構造</span></a></li>
+      <li><a href="hierarchy.html"><span>クラス階層</span></a></li>
+      <li><a href="functions.html"><span>データフィールド</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_m_t_tool_box.html">MTToolBox</a></li><li class="navelem"><a class="el" href="class_m_t_tool_box_1_1_algorithm_partial_bit_pattern.html">AlgorithmPartialBitPattern</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public メソッド</a>  </div>
+  <div class="headertitle">
+<div class="title">クラス テンプレート MTToolBox::AlgorithmPartialBitPattern&lt; T, bit_len, param_num, try_bit_len, step, lsb &gt;</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>疑似乱数生成器の高次元均等分布性を改善するために、テンパ リングパラメータを探索するアルゴリズム  
+ <a href="class_m_t_tool_box_1_1_algorithm_partial_bit_pattern.html#details">[詳細]</a></p>
+
+<p><code>#include &lt;<a class="el" href="_algorithm_partial_bit_pattern_8hpp_source.html">AlgorithmPartialBitPattern.hpp</a>&gt;</code></p>
+<div class="dynheader">
+MTToolBox::AlgorithmPartialBitPattern&lt; T, bit_len, param_num, try_bit_len, step, lsb &gt;に対する継承グラフ</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_m_t_tool_box_1_1_algorithm_partial_bit_pattern.png" usemap="#MTToolBox::AlgorithmPartialBitPattern&lt; T, bit_len, param_num, try_bit_len, step, lsb &gt;_map" alt=""/>
+  <map id="MTToolBox::AlgorithmPartialBitPattern&lt; T, bit_len, param_num, try_bit_len, step, lsb &gt;_map" name="MTToolBox::AlgorithmPartialBitPattern&lt; T, bit_len, param_num, try_bit_len, step, lsb &gt;_map">
+<area href="class_m_t_tool_box_1_1_algorithm_tempering.html" alt="MTToolBox::AlgorithmTempering&lt; T &gt;" shape="rect" coords="0,0,500,24"/>
+</map>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public メソッド</h2></td></tr>
+<tr class="memitem:a247ec999109b652486231a28eaac2d22"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_partial_bit_pattern.html#a247ec999109b652486231a28eaac2d22">operator()</a> (<a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html">TemperingCalculatable</a>&lt; T &gt; &amp;rand, bool verbose=false)</td></tr>
+<tr class="memdesc:a247ec999109b652486231a28eaac2d22"><td class="mdescLeft">&#160;</td><td class="mdescRight">テンパリングパラメータを探索する。  <a href="#a247ec999109b652486231a28eaac2d22">[詳細]</a><br/></td></tr>
+<tr class="separator:a247ec999109b652486231a28eaac2d22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a432b9ef4ec09f9a3296f5561ad30483a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_partial_bit_pattern.html#a432b9ef4ec09f9a3296f5561ad30483a">isLSBTempering</a> () const </td></tr>
+<tr class="memdesc:a432b9ef4ec09f9a3296f5561ad30483a"><td class="mdescLeft">&#160;</td><td class="mdescRight">このテンパリングパラメータ探索がLSBからの探索であるかどうか  <a href="#a432b9ef4ec09f9a3296f5561ad30483a">[詳細]</a><br/></td></tr>
+<tr class="separator:a432b9ef4ec09f9a3296f5561ad30483a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">説明</h2>
+<div class="textblock"><h3>template&lt;typename T, int bit_len, int param_num, int try_bit_len, int step = 5, bool lsb = false&gt;<br/>
+class MTToolBox::AlgorithmPartialBitPattern&lt; T, bit_len, param_num, try_bit_len, step, lsb &gt;</h3>
+
+<p>疑似乱数生成器の高次元均等分布性を改善するために、テンパ リングパラメータを探索するアルゴリズム </p>
+<p>このアルゴリズムはMTGPのテンパリングパラメータを探索するために開 発され、TinyMTのテンパリングパラメータ探索にも使われている。</p>
+<p><b>注意:</b> テンパリングパラメータの探索をしても十分良い高次元均等 分布が得られない場合は、状態遷移関数の変更を考慮した方がよい。状 態遷移関数で十分ビットミックスされていない場合、単純なテンパリン グで均等分布次元を最大化することはできないだろう。</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>疑似乱数生成器の出力の型, 例えば uint32_t など。</td></tr>
+    <tr><td class="paramname">bit_len</td><td>テンパリングパラメータのビット長, 通常は出力のビッ ト長と等しいと思われる。</td></tr>
+    <tr><td class="paramname">param_num</td><td>テンパリングパラメータの数, MTGPでは4, TinyMT では 1</td></tr>
+    <tr><td class="paramname">try_bit_len</td><td>出力のうちテンパリングされる部分の長さ。上位 からこのビット数だけがテンパリングされる。</td></tr>
+    <tr><td class="paramname">step</td><td>一度に何ビットずつビットパターンを生成するか。この 数を大きくすると実行時間が延びるであろう。MTGP では 5 ビットずつ 生成している。</td></tr>
+    <tr><td class="paramname">lsb</td><td>このフラグが指定されると、上位ビットと下位ビットが反 転されて均等分布次元が計算される。つまり下位ビットの均等分布次元 をあげたい時に指定する。TestU01のBigCrushには下位ビットの均等分 布次元を改善することによってパス可能性が高まるテストがある。 </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">関数</h2>
+<a class="anchor" id="a432b9ef4ec09f9a3296f5561ad30483a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , int bit_len, int param_num, int try_bit_len, int step = 5, bool lsb = false&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_m_t_tool_box_1_1_algorithm_partial_bit_pattern.html">MTToolBox::AlgorithmPartialBitPattern</a>&lt; T, bit_len, param_num, try_bit_len, step, lsb &gt;::isLSBTempering </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>このテンパリングパラメータ探索がLSBからの探索であるかどうか </p>
+<dl class="section return"><dt>戻り値</dt><dd>true LSBからのテンパリングパラメータ探索 </dd></dl>
+
+<p><a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html#ade9df36747cbb35467e4dc44d773e556">MTToolBox::AlgorithmTempering&lt; T &gt;</a>を再定義しています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a247ec999109b652486231a28eaac2d22"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , int bit_len, int param_num, int try_bit_len, int step = 5, bool lsb = false&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_m_t_tool_box_1_1_algorithm_partial_bit_pattern.html">MTToolBox::AlgorithmPartialBitPattern</a>&lt; T, bit_len, param_num, try_bit_len, step, lsb &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html">TemperingCalculatable</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rand</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>verbose</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>テンパリングパラメータを探索する。 </p>
+<p>この処理の呼び出しは長時間かかる可能性がある。 </p>
+<dl class="section return"><dt>戻り値</dt><dd>0 </dd></dl>
+
+<p><a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html#a7a5b0d6c41b9c93c035b2cef7d1b2753">MTToolBox::AlgorithmTempering&lt; T &gt;</a>を実装しています。</p>
+
+<p>参照先 <a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html#affd81b264b639a94cb57b38a55356335">MTToolBox::TemperingCalculatable&lt; U &gt;::resetReverseOutput()</a>, と <a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html#aa745cafbeeadec104c36405837ba093f">MTToolBox::TemperingCalculatable&lt; U &gt;::setReverseOutput()</a>.</p>
+
+</div>
+</div>
+<hr/>このクラスの説明は次のファイルから生成されました:<ul>
+<li><a class="el" href="_algorithm_partial_bit_pattern_8hpp_source.html">AlgorithmPartialBitPattern.hpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+MTToolBoxに対してThu Sep 19 2013 15:45:10に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.3.1
+</small></address>
+</body>
+</html>
