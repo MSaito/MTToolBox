@@ -123,7 +123,7 @@ namespace MTToolBox {
      *
      * @tparam T 疑似乱数生成器の出力の型
      */
-    template<typename T> class AlgorithmEquidsitribution {
+    template<typename T> class AlgorithmEquidistribution {
 
         /**
          * GF(2)ベクトルとしての疑似乱数生成器
@@ -143,7 +143,7 @@ namespace MTToolBox {
          * @param rand 均等分布次元計算可能な疑似乱数生成器
          * @param bit_len_ 疑似乱数生成器の出力のビット長
          */
-        AlgorithmEquidsitribution(const ECGenerator& rand, int bit_len_) {
+        AlgorithmEquidistribution(const ECGenerator& rand, int bit_len_) {
             bit_len = bit_len_;
             size = bit_len + 1;
             basis = new linear_vec * [size];
@@ -158,7 +158,7 @@ namespace MTToolBox {
         /**
          * デストラクタ
          */
-        ~AlgorithmEquidsitribution() {
+        ~AlgorithmEquidistribution() {
             for (int i = 0; i < size; i++) {
                 delete basis[i];
             }
@@ -198,7 +198,7 @@ namespace MTToolBox {
      * @param new_len 新しいビット長
      */
     template<typename T>
-    void AlgorithmEquidsitribution<T>::adjust(int new_len) {
+    void AlgorithmEquidistribution<T>::adjust(int new_len) {
         using namespace std;
 
         T mask = (~static_cast<T>(0)) << (sizeof(T) * 8 - new_len);
@@ -245,7 +245,7 @@ namespace MTToolBox {
      * @return 実際のvビット精度の均等分布次元と理論的上限の差の総和
      */
     template<typename T>
-    int AlgorithmEquidsitribution<T>::get_all_equidist(int veq[]) {
+    int AlgorithmEquidistribution<T>::get_all_equidist(int veq[]) {
         using namespace std;
 
         int sum = 0;
@@ -275,7 +275,7 @@ namespace MTToolBox {
      * @return \b bit_len ビット精度の均等分布次元
      */
     template<typename T>
-    int AlgorithmEquidsitribution<T>::get_equidist(int *sum_equidist) {
+    int AlgorithmEquidistribution<T>::get_equidist(int *sum_equidist) {
         using namespace std;
 
         int veq = get_equidist_main(bit_len);
@@ -338,7 +338,7 @@ namespace MTToolBox {
      * @return v ビット精度均等分布次元
      */
     template<typename T>
-    int AlgorithmEquidsitribution<T>::get_equidist_main(int v) {
+    int AlgorithmEquidistribution<T>::get_equidist_main(int v) {
         using namespace std;
         using namespace NTL;
         int bit_len = v;

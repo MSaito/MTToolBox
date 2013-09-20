@@ -6,10 +6,10 @@
  * @brief テンパリングパラメータ探索アルゴリズムのための抽象クラス
  *
  * @author Mutsuo Saito (Hiroshima University)
- * @author Makoto Matsumoto (The University of Tokyo)
+ * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto,
- * Hiroshima University and The University of Tokyo.
+ * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto and
+ * Hiroshima University.
  * All rights reserved.
  *
  * The 3-clause BSD License is applied to this software, see

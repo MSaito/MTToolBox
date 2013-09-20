@@ -8,8 +8,8 @@
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto,
- * Hiroshima University and The University of Tokyo.
+ * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto and
+ * Hiroshima University.
  * All rights reserved.
  *
  * The 3-clause BSD License is applied to this software, see
@@ -94,7 +94,7 @@ namespace MTToolBox {
             poly = search.getMinPoly();
             weight = NTL::weight(poly);
             if (verbose) {
-                AlgorithmEquidsitribution<T> sb(lg, bit_size<T>());
+                AlgorithmEquidistribution<T> sb(lg, bit_size<T>());
                 //print_binary(*out, poly);
                 int delta = sb.get_all_equidist(veq);
                 print_kv(veq, mexp, bit_size<T>());
@@ -106,7 +106,7 @@ namespace MTToolBox {
                     if (st2.isLSBTempering()) {
                         lg.setReverseOutput();
                     }
-                    AlgorithmEquidsitribution<T> sc(lg, bit_size<T>());
+                    AlgorithmEquidistribution<T> sc(lg, bit_size<T>());
                     delta = sc.get_all_equidist(veq);
                     lg.resetReverseOutput();
                     time_t t = time(NULL);
@@ -117,7 +117,7 @@ namespace MTToolBox {
                 }
             }
             st1(lg, verbose);
-            AlgorithmEquidsitribution<T> sc(lg, bit_size<T>());
+            AlgorithmEquidistribution<T> sc(lg, bit_size<T>());
             delta = sc.get_all_equidist(veq);
             if (verbose) {
                 time_t t = time(NULL);

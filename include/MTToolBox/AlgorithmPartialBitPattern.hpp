@@ -191,7 +191,7 @@ namespace MTToolBox {
          */
         int get_equidist(TemperingCalculatable<T>& rand,
                          int bit_len_) {
-            AlgorithmEquidsitribution<T> sb(rand, bit_len_);
+            AlgorithmEquidistribution<T> sb(rand, bit_len_);
             int veq[bit_len_];
             int sum = sb.get_all_equidist(veq);
             return sum;

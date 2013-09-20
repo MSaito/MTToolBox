@@ -57,7 +57,7 @@ namespace mtgp {
             param.mexp = mexp_;
             state_size = mexp_ / (sizeof(uint32_t) * 8) + 1;
             param.mask = (~UINT32_C(0))
-                << (bit_size(uint32_t) * state_size - param.mexp);
+                << (bit_size<uint32_t>() * state_size - param.mexp);
             param.id = id_;
             state = new uint32_t[state_size];
             idx = 0;

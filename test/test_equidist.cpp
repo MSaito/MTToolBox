@@ -13,7 +13,7 @@ SUITE(CALC_EQUIDISTRIBUTION) {
     TEST(EQUI_U32)
     {
         Tiny32 tiny(1234);
-        AlgorithmEquidsitribution<uint32_t> eq(tiny, 32);
+        AlgorithmEquidistribution<uint32_t> eq(tiny, 32);
         int veq[32];
         int delta = eq.get_all_equidist(veq);
 #if 0

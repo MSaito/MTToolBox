@@ -6,7 +6,7 @@
  * @brief GF(2)線形疑似乱数生成器の抽象クラス
  *
  * @author Mutsuo Saito (Hiroshima University)
- * @author Makoto Matsumoto (The University of Tokyo)
+ * @author Makoto Matsumoto (Hiroshima University)
  *
  * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
  * and Hiroshima University.

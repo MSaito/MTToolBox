@@ -78,11 +78,12 @@ namespace mtgp {
 
         const std::string getParamString() {
             using namespace std;
+            using namespace MTToolBox;
             stringstream ss;
             ss << '"' << sha1 << '"' << ",";
             ss << dec << mexp << ",";
             int length = 8;
-            if (bit_size(T) == 32) {
+            if (bit_size<T>() == 32) {
                 ss << "uint32_t,";
                 length = 8;
             } else {

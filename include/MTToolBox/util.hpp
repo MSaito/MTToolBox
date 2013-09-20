@@ -6,7 +6,7 @@
  * @brief ユーティリティ関数群
  *
  * @author Mutsuo Saito (Hiroshima University)
- * @author Makoto Matsumoto (The University of Tokyo)
+ * @author Makoto Matsumoto (Hiroshima University)
  *
  * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
  * and Hiroshima University.

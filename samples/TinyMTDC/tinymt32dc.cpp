@@ -27,7 +27,7 @@
 #include <sstream>
 #include <fstream>
 #include <MTToolBox/AlgorithmRecursionAndTempering.hpp>
-#include "sequential.hpp"
+#include <MTToolBox/Sequential.hpp>
 #include "tinymt32search.hpp"
 #include "parse_opt.hpp"
 

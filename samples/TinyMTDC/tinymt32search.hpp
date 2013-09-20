@@ -25,7 +25,7 @@
 #include <MTToolBox/EquidistributionCalculatable.hpp>
 #include <MTToolBox/AlgorithmPartialBitPattern.hpp>
 #include <MTToolBox/util.hpp>
-#include "sequential.hpp"
+#include <MTToolBox/Sequential.hpp>
 
 /**
  * @namespace tinymt

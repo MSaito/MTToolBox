@@ -1,16 +1,15 @@
-#ifndef SEQUENTIAL_HPP
-#define SEQUENTIAL_HPP
+#ifndef MTTOOLBOX_SEQUENTIAL_HPP
+#define MTTOOLBOX_SEQUENTIAL_HPP
 /**
- * @file sequential.hpp
+ * @file Sequential.hpp
  *
- * @brief Generate sequentially count down numbers.
+ * @brief 順番にカウントダウンする数を生成する
  *
  * @author Mutsuo Saito (Hiroshima University)
- * @author Makoto Matsumoto (The University of Tokyo)
+ * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2011 Mutsuo Saito, Makoto Matsumoto,
- * Hiroshima University and The University of Tokyo.
- * All rights reserved.
+ * Copyright (c) 2013 Mutsuo Saito, Makoto Matsumoto and Hiroshima
+ * University. All rights reserved.
  *
  * The 3-clause BSD License is applied to this software, see
  * LICENSE.txt
@@ -22,16 +21,12 @@
 #include <MTToolBox/AbstractGenerator.hpp>
 #include <MTToolBox/util.hpp>
 
-namespace tinymt {
-    using namespace MTToolBox;
+namespace MTToolBox {
     /**
      * @class Sequential
-     * @brief sequential count down generator
+     * @brief カウントダウン生成器
      *
-     * - sequential count down generator
-     * - This class is able to be used in place of random number generator
-     *
-     * @tparam T output data type, and internal counter type
+     * @tparam T 出力のタイプ
      */
     template<typename T>
     class Sequential : public AbstractGenerator<T> {
@@ -75,7 +70,8 @@ namespace tinymt {
             return work ^ mask;
         }
         int bitSize() const {
-            return bit_size(T);
+            int r = bit_size<T>();
+            return r;
         }
     private:
         T status;
@@ -83,7 +79,7 @@ namespace tinymt {
         bool error;
     };
 }
-//  LocalWords:  namespace
+//  MTTOOLBOX_SEQUENTIAL_HPP
 
 #endif
 
