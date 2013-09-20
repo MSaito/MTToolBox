@@ -20,7 +20,9 @@ SUITE(RECURSION_SEARCH_AND_TEMPER) {
         AlgorithmRecursionAndTempering<uint32_t> searcher(mt);
         searcher.search(tiny, st32, stlsb32, false);
         const string str = tiny.getParamString();
+#if defined(DEBUG)
         cout << str << endl;
+#endif
         CHECK(str.find("tmat") != string::npos);
         CHECK(searcher.getWeight() < 128);
         CHECK(searcher.getDelta() <= 10);

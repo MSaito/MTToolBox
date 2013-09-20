@@ -15,6 +15,16 @@ def libcheck(basename, path):
     return False
 
 #
+# define unitTest
+#
+def runUnitTest(env,target,source):
+    import subprocess
+    app = str(source[0].abspath)
+    if not subprocess.call(app):
+        open(str(target[0]),'w').write("PASSED\n")
+
+
+#
 # set LINUX environment variables
 #
 import os
@@ -55,7 +65,8 @@ test1_files = ['test_period.cpp',
                'test_equidist.cpp']
 test2_files = ['test_temper.cpp',
                'test_search_temper.cpp',
-               'test_linearity.cpp']
+               'test_linearity.cpp',
+               'test_mt.cpp']
 #
 # Library check
 #
@@ -79,15 +90,13 @@ env = conf.Finish()
 #
 # target build
 #
-test1_check = env.Program('test1',
-                          test1_files + env.Object(common_files),
-                          LIBS=optlib)
-test2_check = env.Program('test2',
-                          test2_files + env.Object(common_files),
-                          LIBS=optlib)
 env.Program('test_rtiny', ['test_rtiny.cpp'], LIBS=optlib)
 env.Program('test_rlittle', ['test_rlittle.cpp'], LIBS=optlib)
-test1_check_alias = env.Alias('check1', test1_check, test1_check[0].abspath)
-test2_check_alias = env.Alias('check2', test2_check, test2_check[0].abspath)
-check = env.Alias('check', [test1_check_alias, test2_check_alias])
-env.AlwaysBuild(check)
+test1 = env.Program('test1',
+                    test1_files + env.Object(common_files),
+                    LIBS=optlib)
+test2 = env.Program('test2',
+                    test2_files + env.Object(common_files),
+                    LIBS=optlib)
+Command("test1.passed", test1, runUnitTest)
+Command("test2.passed", test2, runUnitTest)

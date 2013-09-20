@@ -15,10 +15,12 @@ SUITE(TEMPER_SEARCH) {
         AlgorithmPartialBitPattern<uint32_t, 32, 1, 23, 6, false> st32;
         AlgorithmPartialBitPattern<uint32_t, 32, 1, 9, 5, true> stlsb32;
         stringstream ss;
-        stlsb32(tiny, true);
-        st32(tiny, true);
+        stlsb32(tiny, false);
+        st32(tiny, false);
         string str = tiny.getParamString();
+#if defined(DEBUG)
         cout << str << endl;
+#endif
         CHECK(str.find("tmat") != string::npos);
     }
 }
