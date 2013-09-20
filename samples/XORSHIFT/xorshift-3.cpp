@@ -1,9 +1,12 @@
 /*
- * XORSHIFT 128 の v ビット精度均等分布次元のΔを最小にするパラメータを計算する。
+ * XORSHIFT 128 の シフト量a, b, c を全件検索して最大周期となるものだけを出力する
+ * あわせてv ビット精度均等分布次元のΔも出力することによって、最良のパラメータを
+ * 選択できるようにする。
  */
 #include <MTToolBox/EquidistributionCalculatable.hpp>
 #include <MTToolBox/AlgorithmEquidistribution.hpp>
 #include <MTToolBox/AlgorithmRecursionSearch.hpp>
+#include <MTToolBox/AlgorithmPrimitivity.hpp>
 #include <MTToolBox/Sequential.hpp>
 #include <sstream>
 #include <iostream>
@@ -56,6 +59,13 @@ public:
     XorShift * clone() const {
         return new XorShift(*this);
     }
+    /*
+     * この初期化はよい初期化ではない。
+     * 最小多項式の計算や、均等分布次元の計算においては、
+     * 全状態空間が0にならないように注意するだけでよい。
+     * パラメータ決定後、実際に使用するプログラムにおいては、
+     * ちゃんとした初期化を使用すること。
+     */
     void seed(uint32_t v) {
         w = ~v;
         x = y = z = v;
@@ -89,31 +99,36 @@ private:
     uint32_t w;
 };
 
-void search(Sequential<uint32_t> seq) {
+void search(Sequential<uint32_t>& seq, AlgorithmPrimitivity& ap, bool first) {
     XorShift xs(1);
-    AlgorithmRecursionSearch<uint32_t> rs(xs, seq);
+    AlgorithmRecursionSearch<uint32_t> rs(xs, seq, ap);
+    if (first) {
+        cout << "delta:" << xs.getHeaderString() << endl;
+    }
     if (rs.start(0x7fff)) {
-        cout << xs.getParamString();
+        //cout << xs.getParamString();
         AlgorithmEquidistribution<uint32_t> eq(xs, 32);
         int veq[32];
         int delta = eq.get_all_equidist(veq);
-#if 0
-        int bitSize = xs.bitSize();
-        for (int i = 0; i < 32; i++) {
-            cout << "k("<< dec << setw(2) << (i + 1) << "):"
-                 << setw(3) << veq[i] << "  d(" << setw(2) << (i + 1) << "):"
-                 << setw(3) << (bitSize / (i + 1)) - veq[i] << endl;
-        }
-#endif
-        cout << "," << delta << endl;
+        cout << dec << delta << ":";
+        cout << xs.getParamString() << endl;
     }
-    return 0;
 }
 
 int main() {
     Sequential<uint32_t> seq(0, 0x7fff);
-    for(;;) {
-        search(seq);
+    const char * factors128_1[] = {
+        "3", "5", "17", "257", "641", "65537", "274177", "6700417",
+        "67280421310721", NULL};
+    AlgorithmPrimitivity ap(factors128_1);
+    bool first = true;
+    try {
+        for(;;) {
+            search(seq, ap, first);
+            first = false;
+        }
+    } catch (underflow_error e) {
+        return 0;
     }
     return 0;
 }

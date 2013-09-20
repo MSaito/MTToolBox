@@ -1,0 +1,23 @@
+\begin{thebibliography}{1}
+
+\bibitem{PIS}
+S.~Harase.
+\newblock An efficient lattice reduction method for {${\mathbf F}_2$-linear}
+  pseudorandom number generators using {Mulders} and {Storjohann} algorithm.
+\newblock {\em Journal of Computational and Applied Mathematics}, Submitted,
+  January.
+
+\bibitem{MT}
+M.~Matsumoto and T.~Nishimura.
+\newblock Mersenne twister: A 623-dimensionally equidistributed uniform
+  pseudorandom number generator.
+\newblock {\em ACM Trans. on Modeling and Computer Simulation}, 8(1):3--30,
+  January 1998.
+\newblock \url{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}.
+
+\bibitem{MTTOOLBOX}
+M.~Saito and M.~Matsumoto.
+\newblock {MTToolBox}, 2013.
+\newblock \url{https://github.com/MSaito/MTToolBox}.
+
+\end{thebibliography}

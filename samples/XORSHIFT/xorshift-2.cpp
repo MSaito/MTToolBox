@@ -60,7 +60,7 @@ private:
 
 int main() {
     XorShift xs(1);
-    AlgorithmEquidsitribution<uint32_t> eq(xs, 32);
+    AlgorithmEquidistribution<uint32_t> eq(xs, 32);
     int veq[32];
     int delta = eq.get_all_equidist(veq);
     int bitSize = xs.bitSize();

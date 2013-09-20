@@ -43,7 +43,7 @@ namespace MTToolBox {
             mask = p_mask;
             error = false;
         }
-        Sequential(Sequential<T>& src) {
+        Sequential(Sequential<T>& src) : AbstractGenerator<T>() {
             status = src.status;
             mask = src.mask;
             error = src.error;
