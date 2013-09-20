@@ -1,0 +1,4 @@
+[submodule "docs"]
+	path = docs
+	url = https://github.com/MSaito/MTToolBox.git
+	branch = gh-pages
