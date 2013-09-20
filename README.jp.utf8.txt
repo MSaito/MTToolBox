@@ -1,6 +1,9 @@
 # -*- coding:utf-8 -*-
 MTToolBox 疑似乱数生成器開発ライブラリ README ファイル
 
+doxygen ドキュメント http://msaito.github.io/MTToolBox/
+github プロジェクト  https://github.com/MSaito/MTToolBox
+
 1. はじめに
 
 MTToolBox は疑似乱数生成器開発用のC++ライブラリである。このライブラリは

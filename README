@@ -1,17 +1,23 @@
 Currently almost of all documents of this project are written in Japanese.
 See README.jp.utf8.txt
 
-MTToolBox: a pseudo random number generator developping library.
+MTToolBox: a pseudo random number generator developing library.
+
+doxygen documents  http://msaito.github.io/MTToolBox/ (Japanese)
+github project https://github.com/MSaito/MTToolBox (Japanese)
+
+This README is written by M. Saito
+
 
 1. First
 
-MTToolBox is a library for developping pseudo random number
+MTToolBox is a library for developing pseudo random number
 generators(PRNGs) written in C++ language.  MTToolBox is made by
-arranging tools used for developping SFMT, dSFMT, MTGP and TinyMT. In
-this meaning, the library is a proven.
+arranging tools used for developing SFMT, dSFMT, MTGP and TinyMT. In
+this meaning, the library is reliable.
 
-Tools were changing while developping above PRNGs. I've rewritten
-tools for MTToolBox. So in this meaning, the library is not proven.
+Tools were changing while developing above PRNGs. I've rewritten
+tools for MTToolBox. So in this meaning, the library is not reliable.proved.
 Users can make and run samples in samples directory, then can check
 the library.
 
@@ -36,7 +42,7 @@ I need shared_ptr.
 
 UnitTest++
 http://unittest-cpp.sourceforge.net/
-In my simple search, this is the easist library fo Uint Test.
+In my simple search, this is the easiest library for Unit Test.
 UnitTest++ is optional.
 
 openssl
