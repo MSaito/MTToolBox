@@ -113,9 +113,9 @@
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            poly = search.getMinPoly();</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            weight = NTL::weight(poly);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keywordflow">if</span> (verbose) {</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html">AlgorithmEquidsitribution&lt;T&gt;</a> sb(lg, bit_size&lt;T&gt;());</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html" title="疑似乱数生成器の均等分布次元を計算する">AlgorithmEquidistribution&lt;T&gt;</a> sb(lg, bit_size&lt;T&gt;());</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                <span class="comment">//print_binary(*out, poly);</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                <span class="keywordtype">int</span> delta = sb.<a class="code" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html#a42d62ca316dfb0305ab33b5d13b93f68" title="vビット精度の均等分布次元を計算する。 v = 1 から bit_len までの均等分布次元を計算して、veq[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総...">get_all_equidist</a>(veq);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                <span class="keywordtype">int</span> delta = sb.<a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#aaca640ccf163938bf030f9ebbf195b48" title="vビット精度の均等分布次元を計算する。 v = 1 から bit_len までの均等分布次元を計算して、veq[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総...">get_all_equidist</a>(veq);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                print_kv(veq, mexp, bit_size&lt;T&gt;());</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                *out &lt;&lt; <span class="stringliteral">&quot;delta = &quot;</span> &lt;&lt; dec &lt;&lt; delta &lt;&lt; endl;</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            }</div>
@@ -125,8 +125,8 @@
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                    <span class="keywordflow">if</span> (st2.<a class="code" href="class_m_t_tool_box_1_1_algorithm_tempering.html#ade9df36747cbb35467e4dc44d773e556" title="LSB からのテンパリングをするのか">isLSBTempering</a>()) {</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                        lg.<a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#aa745cafbeeadec104c36405837ba093f" title="出力の上位ビットと下位ビットを反転する。 これは下位ビットから見た均等分布次元を計測またはテンパリング するために使われる。">setReverseOutput</a>();</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                    }</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                    <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html">AlgorithmEquidsitribution&lt;T&gt;</a> sc(lg, bit_size&lt;T&gt;());</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                    delta = sc.<a class="code" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html#a42d62ca316dfb0305ab33b5d13b93f68" title="vビット精度の均等分布次元を計算する。 v = 1 から bit_len までの均等分布次元を計算して、veq[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総...">get_all_equidist</a>(veq);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                    <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html" title="疑似乱数生成器の均等分布次元を計算する">AlgorithmEquidistribution&lt;T&gt;</a> sc(lg, bit_size&lt;T&gt;());</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                    delta = sc.<a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#aaca640ccf163938bf030f9ebbf195b48" title="vビット精度の均等分布次元を計算する。 v = 1 から bit_len までの均等分布次元を計算して、veq[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総...">get_all_equidist</a>(veq);</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                    lg.<a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#affd81b264b639a94cb57b38a55356335" title="出力の上位ビットと下位ビットの並びを元に戻す。">resetReverseOutput</a>();</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                    time_t t = time(NULL);</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                    *out &lt;&lt; <span class="stringliteral">&quot;lsb tempering parameters are found at &quot;</span></div>
@@ -136,8 +136,8 @@
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                }</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            }</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            st1(lg, verbose);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html">AlgorithmEquidsitribution&lt;T&gt;</a> sc(lg, bit_size&lt;T&gt;());</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            delta = sc.<a class="code" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html#a42d62ca316dfb0305ab33b5d13b93f68" title="vビット精度の均等分布次元を計算する。 v = 1 から bit_len までの均等分布次元を計算して、veq[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総...">get_all_equidist</a>(veq);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html" title="疑似乱数生成器の均等分布次元を計算する">AlgorithmEquidistribution&lt;T&gt;</a> sc(lg, bit_size&lt;T&gt;());</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            delta = sc.<a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#aaca640ccf163938bf030f9ebbf195b48" title="vビット精度の均等分布次元を計算する。 v = 1 から bit_len までの均等分布次元を計算して、veq[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総...">get_all_equidist</a>(veq);</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keywordflow">if</span> (verbose) {</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                time_t t = time(NULL);</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                *out &lt;&lt; <span class="stringliteral">&quot;tempering parameters are found at &quot;</span> &lt;&lt; ctime(&amp;t)</div>
@@ -189,7 +189,7 @@
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Sep 20 2013 10:31:25に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してWed Sep 25 2013 10:13:58に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

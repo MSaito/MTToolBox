@@ -77,8 +77,8 @@
 : <a class="el" href="class_m_t_tool_box_1_1linear__generator__vector.html#ad09a5f5516d5ea8d95bb35c3e9ab4a01">MTToolBox::linear_generator_vector&lt; T &gt;</a>
 , <a class="el" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a035d42f311fd455ce03bf5d68cc8b45f">MTToolBox::EquidistributionCalculatable&lt; U &gt;</a>
 </li>
-<li>AlgorithmEquidsitribution()
-: <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html#a6262d719dd7ed704ad8a4ee411ff7657">MTToolBox::AlgorithmEquidsitribution&lt; T &gt;</a>
+<li>AlgorithmEquidistribution()
+: <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#af28b73340ccf6cd480eaea0380f1f811">MTToolBox::AlgorithmEquidistribution&lt; T &gt;</a>
 </li>
 <li>AlgorithmPrimitivity()
 : <a class="el" href="class_m_t_tool_box_1_1_algorithm_primitivity.html#a4e50cf1e9104d3137cfc673e34d3f041">MTToolBox::AlgorithmPrimitivity</a>
@@ -95,6 +95,7 @@
 <h3><a class="anchor" id="index_b"></a>- b -</h3><ul>
 <li>bitSize()
 : <a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html#accdd6df63c2639e56b31e5dd205d67d7">MTToolBox::AbstractGenerator&lt; U &gt;</a>
+, <a class="el" href="class_m_t_tool_box_1_1_sequential.html#aad32c0e6951175f7f05b0ff03b08de92">MTToolBox::Sequential&lt; T &gt;</a>
 , <a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#a9eb50b904a3542b0ba8342da46599f0c">MTToolBox::MersenneTwister</a>
 </li>
 </ul>
@@ -118,13 +119,14 @@
 <li>generate()
 : <a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html#ac0654743a78f7eb84630936d16fd945e">MTToolBox::AbstractGenerator&lt; U &gt;</a>
 , <a class="el" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#ad6d0d4c21a0aae94c17c729a33833639">MTToolBox::EquidistributionCalculatable&lt; U &gt;</a>
+, <a class="el" href="class_m_t_tool_box_1_1_sequential.html#aef882621b7bf81b6b63a819e049d61cd">MTToolBox::Sequential&lt; T &gt;</a>
 , <a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#a004016129870e2408ba0d0958a178ac3">MTToolBox::MersenneTwister</a>
 </li>
 <li>get_all_equidist()
-: <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html#a42d62ca316dfb0305ab33b5d13b93f68">MTToolBox::AlgorithmEquidsitribution&lt; T &gt;</a>
+: <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#aaca640ccf163938bf030f9ebbf195b48">MTToolBox::AlgorithmEquidistribution&lt; T &gt;</a>
 </li>
 <li>get_equidist()
-: <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html#a7b4baa9afd2037dc6af5561b7f4dab1b">MTToolBox::AlgorithmEquidsitribution&lt; T &gt;</a>
+: <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#af019eac920a8a06befebdd2199165776">MTToolBox::AlgorithmEquidistribution&lt; T &gt;</a>
 </li>
 <li>getCharacteristicPolynomial()
 : <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a72e61744e40ee1c010a3386e73944bdd">MTToolBox::AlgorithmRecursionAndTempering&lt; T &gt;</a>
@@ -183,6 +185,7 @@
 <h3><a class="anchor" id="index_n"></a>- n -</h3><ul>
 <li>next()
 : <a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#ab803399c82ff1b565346a30eb48e2fa7">MTToolBox::MersenneTwister</a>
+, <a class="el" href="class_m_t_tool_box_1_1_sequential.html#a3d5bb57dd3a63fe16c98f75e67bd5f5f">MTToolBox::Sequential&lt; T &gt;</a>
 </li>
 <li>next_state()
 : <a class="el" href="class_m_t_tool_box_1_1linear__generator__vector.html#ac92fc39dc478110e58ff2e6403154e90">MTToolBox::linear_generator_vector&lt; T &gt;</a>
@@ -202,6 +205,9 @@
 
 
 <h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
+<li>reseed()
+: <a class="el" href="class_m_t_tool_box_1_1_sequential.html#ac1d748561c703204f2fa82367cfbe070">MTToolBox::Sequential&lt; T &gt;</a>
+</li>
 <li>resetReverseOutput()
 : <a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html#affd81b264b639a94cb57b38a55356335">MTToolBox::TemperingCalculatable&lt; U &gt;</a>
 </li>
@@ -216,9 +222,13 @@
 : <a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818">MTToolBox::MersenneTwister</a>
 , <a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html#a2418e6884e583c7ac6f1ecff13c5596d">MTToolBox::AbstractGenerator&lt; U &gt;</a>
 , <a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#ad96982f91435bc8b18a9b6e69fcc3e66">MTToolBox::MersenneTwister</a>
+, <a class="el" href="class_m_t_tool_box_1_1_sequential.html#afd83644313d1e92198d6733e1f4846d3">MTToolBox::Sequential&lt; T &gt;</a>
 </li>
 <li>seed_array()
 : <a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#a3dcc4d91a23d5e1a3f36822a0d2ceb52">MTToolBox::MersenneTwister</a>
+</li>
+<li>Sequential()
+: <a class="el" href="class_m_t_tool_box_1_1_sequential.html#a53b03be6dd589918eeae95c6fb8408b1">MTToolBox::Sequential&lt; T &gt;</a>
 </li>
 <li>setReverseOutput()
 : <a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html#aa745cafbeeadec104c36405837ba093f">MTToolBox::TemperingCalculatable&lt; U &gt;</a>
@@ -249,8 +259,8 @@
 
 
 <h3><a class="anchor" id="index_0x7e"></a>- ~ -</h3><ul>
-<li>~AlgorithmEquidsitribution()
-: <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidsitribution.html#aa9a3d245f18f482cd629d86418b7149f">MTToolBox::AlgorithmEquidsitribution&lt; T &gt;</a>
+<li>~AlgorithmEquidistribution()
+: <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#a038bc8fa787aebe0aed725f68f122bef">MTToolBox::AlgorithmEquidistribution&lt; T &gt;</a>
 </li>
 <li>~AlgorithmPrimitivity()
 : <a class="el" href="class_m_t_tool_box_1_1_algorithm_primitivity.html#a10a7901c16b0ca2a96c9afc9d41db0dc">MTToolBox::AlgorithmPrimitivity</a>
@@ -262,7 +272,7 @@
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Sep 20 2013 10:31:26に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してWed Sep 25 2013 10:13:58に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>
