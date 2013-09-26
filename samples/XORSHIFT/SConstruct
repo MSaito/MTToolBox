@@ -32,9 +32,10 @@ env = Environment(CFLAGS=['-Wall', '-O3', '-std=c99',
  			    '-D__STDC_CONSTANT_MACROS',
 			    '-D__STDC_FORMAT_MACROS'])
 env.Append(LIBPATH=library_path)
-
-files = ['tinymt32dc.cpp',
-         'parse_opt.cpp']
+debug = ARGUMENTS.get('debug', 0)
+if int(debug):
+    env.Append(CXXFLAGS = '-g')
+    env.Append(CXXFLAGS = '-DDEBUG')
 
 #
 # Library check
@@ -59,5 +60,7 @@ env = conf.Finish()
 env.Program('xorshift-1', ['xorshift-1.cpp'], LIBS=optlib)
 env.Program('xorshift-2', ['xorshift-2.cpp'], LIBS=optlib)
 env.Program('xorshift-3', ['xorshift-3.cpp'], LIBS=optlib)
+env.Program('xorshift-4', ['xorshift-4.cpp'], LIBS=optlib)
+env.Program('xorshift-5', ['xorshift-5.cpp'], LIBS=optlib)
 
 Clean('all', Glob('*.o'))
