@@ -26,7 +26,8 @@ include_path.append('-I.')
 library_path.append('../../lib')
 optlib = ['MTToolBox', 'ntl']
 env = Environment(CFLAGS=['-Wall', '-O3', '-std=c99',
-                          '-Wmissing-prototypes', '-Wextra'],
+                          '-Wmissing-prototypes', '-Wextra',
+                          '-DMAIN'],
                   CXXFLAGS=['-Wall', '-g', '-O3', '-Wextra',
                             include_path,
  			    '-D__STDC_CONSTANT_MACROS',
@@ -62,5 +63,6 @@ env.Program('xorshift-2', ['xorshift-2.cpp'], LIBS=optlib)
 env.Program('xorshift-3', ['xorshift-3.cpp'], LIBS=optlib)
 env.Program('xorshift-4', ['xorshift-4.cpp'], LIBS=optlib)
 env.Program('xorshift-5', ['xorshift-5.cpp'], LIBS=optlib)
+env.Program('xorshift128', ['xorshift128.c', 'xorshift128.h'], LIBS=optlib)
 
 Clean('all', Glob('*.o'))

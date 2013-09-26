@@ -19,8 +19,7 @@ using namespace NTL;
 
 class XorShift : public EquidistributionCalculatable<uint32_t> {
 public:
-    XorShift(uint16_t pattern, uint32_t v) {
-        pat = pattern;
+    XorShift(uint32_t v) {
         a = 0;
         b = 0;
         c = 0;
@@ -126,11 +125,13 @@ public:
     int bitSize() const { return 128; }
     void setUpParam(AbstractGenerator<uint32_t>& generator) {
         uint32_t r = generator.generate();
-        a = r & 0x1f;
+        c = r & 0x1f;
         r = r >> 5;
         b = r & 0x1f;
         r = r >> 5;
-        c = r & 0x1f;
+        a = r & 0x1f;
+        r = r >> 5;
+        pat = r & 0x7;
 #if defined(DEBUG)
         cout << dec << pat << "," << a << "," << b << "," << c << endl;
 #endif
@@ -157,16 +158,15 @@ private:
     uint32_t w;
 };
 
-void search(uint16_t pat,
-            Sequential<uint32_t>& seq,
+void search(Sequential<uint32_t>& seq,
             AlgorithmPrimitivity& ap,
             bool first) {
-    XorShift xs(pat, 1);
+    XorShift xs(1);
     AlgorithmRecursionSearch<uint32_t> rs(xs, seq, ap);
     if (first) {
         cout << "delta:" << xs.getHeaderString() << endl;
     }
-    if (rs.start(0x7fff)) {
+    if (rs.start(0x3ffff)) {
         //cout << xs.getParamString();
         AlgorithmEquidistribution<uint32_t> eq(xs, 32);
         int veq[32];
@@ -176,20 +176,16 @@ void search(uint16_t pat,
     }
 }
 
-int main(int argc, char * argv[]) {
-    Sequential<uint32_t> seq(0, 0x7fff);
+int main() {
+    Sequential<uint32_t> seq(0, 0x3ffff);
     const char * factors128_1[] = {
         "3", "5", "17", "257", "641", "65537", "274177", "6700417",
         "67280421310721", NULL};
     AlgorithmPrimitivity ap(factors128_1);
     bool first = true;
-    uint16_t pat = 0;
-    if (argc > 1) {
-        pat = strtoul(argv[1], NULL, 10);
-    }
     try {
         for(;;) {
-            search(pat, seq, ap, first);
+            search(seq, ap, first);
             first = false;
         }
     } catch (underflow_error e) {
