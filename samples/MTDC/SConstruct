@@ -54,7 +54,6 @@ env = conf.Finish()
 # target build
 #
 env.Program('mt1', ['mt1.cpp'], LIBS=optlib)
-#env.Program('xorshift-2', ['xorshift-2.cpp'], LIBS=optlib)
-#env.Program('xorshift-3', ['xorshift-3.cpp'], LIBS=optlib)
+env.Program('mt2', ['mt2.cpp'], LIBS=optlib)
 
 Clean('all', Glob('*.o'))

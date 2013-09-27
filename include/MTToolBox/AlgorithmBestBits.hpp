@@ -21,36 +21,49 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <tr1/memory>
+#include <vector>
 #include <MTToolBox/AlgorithmTempering.hpp>
 #include <MTToolBox/TemperingCalculatable.hpp>
 #include <MTToolBox/AlgorithmEquidistribution.hpp>
+#include <MTToolBox/util.hpp>
 
 namespace MTToolBox {
+    using namespace std;
+    using namespace std::tr1;
+
     /**
      * @class temper_params
      * @brief テンパリングパラメータのクラス
      *
      * @tparam T 個々のテンパリングパラメータの型
-     * @tparam size テンパリングパラメータの個数
      */
-    template<typename T, int size>
+    template<typename T>
     class temper_params {
     public:
         /** テンパリングパラメータ */
-        T param[size];
+        T * param;
         /** 均等分布次元の理論値との差の総和 */
         int delta;
+        /** テンパリングパラメータの数 */
+        int size;
 
         /**
          * 単純なコンストラクタ
-         * @param[in] p テンパリングパラメータ
-         * @param[in] d 均等分布次元の理論値との差の総和
+         * @param[in] param_num テンパリングパラメータの数
          */
-        temper_params(const T p[], int d) {
-            for (int i = 0; i < size; i++) {
-                param[i] = p[i];
+        temper_params(int param_num) {
+            size = param_num;
+            param = new T[param_num];
+            for (int i = 0; i < param_num; i++) {
+                param[i] = 0;
             }
-            delta = d;
+        }
+
+        /**
+         * デストラクタ
+         */
+        ~temper_params() {
+            delete[] param;
         }
     };
 
@@ -69,23 +82,39 @@ namespace MTToolBox {
      * グで均等分布次元を最大化することはできないだろう。
      *
      * @tparam T 疑似乱数生成器の出力の型, 例えば uint32_t など。
-     * @tparam bit_len テンパリングパラメータのビット長, 通常は出力のビット長と等しい
-     * と思われる。
-     * @tparam param_num テンパリングパラメータの数, MTDCでは2。
-     * @tparam shifts テンパリングパラメータと対になるシフト数。正は左シフト。
-     * @tparam lsb このアルゴリズムでは使わない
      */
-    template<typename T,
-             int bit_len,
-             int param_num,
-             const int shifts[],
-             bool lsb = false>
+    template<typename T>
     class AlgorithmBestBits : public AlgorithmTempering<T> {
     public:
         /**
          * テンパリングパラメータのクラス
          */
-        typedef temper_params<T, param_num> tempp;
+        typedef temper_params<T> tempp;
+
+        /**
+         * @param[in] state_bit_length テンパリングパラメータのビット長,
+         * 通常は出力のビット長と等しいと思われる。
+         * @param[in] shift_values テンパリングパラメータと対になるシフト数。
+         * 正は左シフト。現状では右シフトには対応していない。
+         * @param[in] param_num テンパリングパラメータの数, MTDCでは2。
+         */
+        AlgorithmBestBits(int state_bit_length,
+                          const int shift_values[],
+                          int param_num) {
+            bit_len = state_bit_length;
+            size = param_num;
+            shifts = new int[size];
+            for (int i = 0; i < size; i++) {
+                shifts[i] = shift_values[i];
+            }
+        }
+
+        /**
+         * デストラクタ
+         */
+        ~AlgorithmBestBits() {
+            delete[] shifts;
+        }
 
         /**
          * テンパリングパラメータを探索する
@@ -99,41 +128,47 @@ namespace MTToolBox {
          * @param[in] verbose 余分な情報を出力するフラグ
          * @returns 0
          */
-        int operator()(TemperingSearcher<T>& rand,
+        int operator()(TemperingCalculatable<T>& rand,
                        bool verbose = false) {
-            using namespace std;
+//            using namespace std;
             if (verbose) {
                 cout << "searching..." << endl;
             }
+            rand.resetReverseOutput();
+            if (verbose) {
+                cout << "searching from MSB" << endl;
+            }
+#if 0
             if (lsb) {
-                rand.setReverseBit();
+                rand.setReverseOutput();
                 if (verbose) {
                     cout << "searching from LSB" << endl;
                 }
             } else {
-                rand.resetReverseBit();
+                rand.resetReverseOutput();
                 if (verbose) {
                     cout << "searching from MSB" << endl;
                 }
             }
-            shared_ptr<tempp> initial(new tempp());
+#endif
+            shared_ptr<tempp> initial(new tempp(size));
             initial->delta = 0;
-            for (int i = 0; i < param_num; i++) {
+            for (int i = 0; i < size; i++) {
                 initial->param[i] = 0;
             }
 
-            vector<shared_ptr<tempp> > params();
+            vector<shared_ptr<tempp> > params;
             params.push_back(initial);
             int delta;
             for (int p = 0; p < bit_len; p++) {
-                vector<shared_ptr<tempp> > current();
+                vector<shared_ptr<tempp> > current;
                 current.clear();
-                for (int i = 0; i < params.size(); i++) {
-                    search_best_temper(rand, p, params[i],
-                                       current, shifts, verbose);
+                for (unsigned int i = 0; i < params.size(); i++) {
+                    search_best_temper(rand, p, *params[i],
+                                       current, verbose);
                 }
                 delta = rand.bitSize();
-                for (int i = 0; i < current.size(); i++) {
+                for (unsigned int i = 0; i < current.size(); i++) {
                     if (current[i]->delta < delta) {
                         delta = current[i]->delta;
                     }
@@ -142,18 +177,21 @@ namespace MTToolBox {
                     cout << "delta = " << dec << delta << endl;
                 }
                 params.clear();
-                for (int i = 0; i < current.size(); i++) {
+                for (unsigned int i = 0; i < current.size(); i++) {
                     if (current[i]->delta == delta) {
                         params.push_back(current[i]);
                     }
                 }
             }
+
+            // delta を最小にするテンパリングパラメータの中でハミングウェイト最大
+            // のものをテンパリングパラメータにする。(複数のなかで最初に見つかったもの)
             int hamming = 0;
             int index = -1;
-            for (int i = 0; i < params.size(); i++) {
+            for (unsigned int i = 0; i < params.size(); i++) {
                 int h = 0;
                 for (int j = 0; j < size; j++) {
-                    h += bit_count(params[i]->param[j]);
+                    h += count_bit(params[i]->param[j]);
                 }
                 if (hamming < h) {
                     hamming = h;
@@ -169,13 +207,17 @@ namespace MTToolBox {
             if (verbose) {
                 cout << "delta = " << dec << delta << endl;
             }
-            rand.resetReverseBit();
+            rand.resetReverseOutput();
             return 0;
         }
         bool isLSBTempering() {
-            return lsb;
+            return false;
         }
     private:
+        int bit_len;
+        int size;
+//        bool lsb;
+        int * shifts;
         /**
          * テンパリングパラメータを探索する。
          *
@@ -186,28 +228,30 @@ namespace MTToolBox {
          * @param[in] shifts シフト量の配列
          * @param[in] verbose true なら余計な情報を標準出力に表示する。
          */
-        void search_best_temper(TemperingSearcher<T>& rand,
+        void search_best_temper(TemperingCalculatable<T>& rand,
                                 int v_bit,
                                 const tempp& para,
                                 vector<shared_ptr<tempp> >& current,
-                                const int shifts[],
                                 bool verbose) {
-            using namespace std;
             int bitSize = rand.bitSize();
             int delta;
             T mask = 0;
+            int size = bit_size<T>();
             mask = ~mask;
             for (int i = (1 << size) -1; i >= 0; i--) {
-                if (! inRange(i, v_bit, shifts)) {
+                if (! inRange(i, v_bit)) {
                     continue;
                 }
-                shared_ptr<tempp> pattern(new tempp);
+                shared_ptr<tempp> pattern(new tempp(size));
                 make_pattern(*pattern, i, v_bit, para);
                 for (int j = 0; j < size; j++) {
-                    rand.setTemperingPattern(mask, pattern->pattern[j], j);
+                    rand.setTemperingPattern(mask, pattern->param[j], j);
                 }
                 delta = get_equidist(rand, v_bit, bitSize);
                 pattern->delta = delta;
+                if (verbose) {
+                    cout << "delta:" << dec << delta << endl;
+                }
                 current.push_back(pattern);
             }
         }
@@ -222,11 +266,11 @@ namespace MTToolBox {
          * @returns summation of equidistribution property
          * from 0 to \b bit_len_ -1 MSBs.
          */
-        int get_equidist(TemperingSearcher<T>& rand,
+        int get_equidist(TemperingCalculatable<T>& rand,
                          int bit_len_,
                          int bitSize) {
-            TemperingSearcher<T> r(rand);
-            calc_equidist<TemperingSearcher<T>, T> sb(r, bit_len_);
+//            TemperingCalculatable<T> r(rand);
+            AlgorithmEquidistribution<T> sb(rand, bit_len_);
             int veq[bit_len_];
             sb.get_all_equidist(veq);
             int sum = 0;
@@ -250,10 +294,10 @@ namespace MTToolBox {
         void make_pattern(tempp& result,
                           int pat, int v, const tempp& para) const {
             int obSize = bit_size<T>();
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < obSize; i++) {
                 T mask = 1 & (pat >> i);
                 mask = mask << (obSize - 1 - v);
-                result.pattern[i] = para.pattern[i] | mask;
+                result.param[i] = para.param[i] | mask;
             }
         }
 
@@ -268,9 +312,9 @@ namespace MTToolBox {
          * @param[in] shifts シフト量
          * @return true 該当する場合
          */
-        bool inRange(int pat, int v, const int shifts[]) const {
+        bool inRange(int pat, int v) const {
             int obSize = bit_size<T>();
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < obSize; i++) {
                 if ((obSize < v + shifts[i]) && ((pat >> i) != 0)) {
                     return false;
                 }
