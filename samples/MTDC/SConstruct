@@ -29,9 +29,17 @@ env = Environment(CFLAGS=['-Wall', '-O3', '-std=c99',
                           '-Wmissing-prototypes', '-Wextra'],
                   CXXFLAGS=['-Wall', '-g', '-O3', '-Wextra',
                             include_path,
- 			    '-D__STDC_CONSTANT_MACROS',
-			    '-D__STDC_FORMAT_MACROS'])
+                            '-D__STDC_CONSTANT_MACROS',
+                            '-D__STDC_FORMAT_MACROS'])
 env.Append(LIBPATH=library_path)
+debug = ARGUMENTS.get('debug', 0)
+if int(debug) == 1:
+    env.Append(CXXFLAGS = '-g')
+    env.Append(CXXFLAGS = '-DDEBUG')
+    env.Append(CXXFLAGS = '-O0')
+if int(debug) == 2:
+    env.Append(CXXFLAGS = '-g')
+    env.Append(CXXFLAGS = '-O0')
 
 #
 # Library check
@@ -45,7 +53,6 @@ if conf.CheckLib('gf2x'):
 else:
     print env.get('LIBPATH')
     print 'gf2x not found.'
-    Exit(1)
 if conf.CheckLib('gmp'):
     optlib.append('gmp')
 env = conf.Finish()

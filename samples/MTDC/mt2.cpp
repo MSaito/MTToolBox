@@ -1,9 +1,9 @@
 /*
- * MT19937 の DC ビット精度均等分布次元を計算する。
+ * -*- coding:utf-8 -*-
+ * MT19937 のダイナミッククリエイター
  */
 #include <MTToolBox/TemperingCalculatable.hpp>
 #include <MTToolBox/AlgorithmRecursionAndTempering.hpp>
-#include <MTToolBox/AlgorithmBestBits.hpp>
 #include <MTToolBox/MersenneTwister.hpp>
 #include <MTToolBox/util.hpp>
 #include <sstream>
@@ -14,6 +14,7 @@
 #include <fstream>
 #include <iomanip>
 #include <getopt.h>
+#include <MTToolBox/AlgorithmBestBits.hpp>
 
 using namespace std;
 using namespace MTToolBox;
@@ -21,12 +22,32 @@ using namespace NTL;
 
 class MT32Search : public TemperingCalculatable<uint32_t> {
 public:
-    MT32Search(int mexp, int ident, uint32_t v) {
+    MT32Search(int mersenne_exponent, int ident, uint32_t v) {
+        mexp = mersenne_exponent;
         size = mexp / 32 + 1;
         int r = size * 32 - mexp;
         upper_mask = 0;
         upper_mask = (~upper_mask) << r;
         lower_mask = ~upper_mask;
+        maskb = 0;
+        maskc = 0;
+        id = ident;
+        state = new uint32_t[size];
+        reverse = false;
+        seed(v);
+    }
+    MT32Search(int mersenne_exponent, int ident, int position,
+               uint32_t matrix_a, uint32_t v) {
+        mexp = mersenne_exponent;
+        size = mexp / 32 + 1;
+        int r = size * 32 - mexp;
+        upper_mask = 0;
+        upper_mask = (~upper_mask) << r;
+        lower_mask = ~upper_mask;
+        mata = matrix_a;
+        pos = position;
+        maskb = 0;
+        maskc = 0;
         id = ident;
         state = new uint32_t[size];
         reverse = false;
@@ -171,12 +192,30 @@ public:
     bool isReverseOutput() {
         return reverse;
     }
+#if defined(DEBUG)
+    void debug_print() {
+        cout << "mexp:" << dec << mexp << endl;
+        cout << "size:" << dec << size << endl;
+        cout << "reverse:" << reverse << endl;
+        cout << "upper_mask:" << hex << upper_mask << endl;
+        cout << "lower_mask:" << hex << upper_mask << endl;
+        cout << "pos:" << dec << pos << endl;
+        cout << "id:" << dec << id << endl;
+        cout << "mata:" << hex << mata << endl;
+        cout << "maskb:" << hex << maskb << endl;
+        cout << "maskc:" << hex << maskc << endl;
+        for (int i = 0; i < size; i++) {
+            cout << "state[" << dec << i << "]:" << hex << state[i] << endl;
+        }
+        cout << "index:" << dec << index << endl;
+    }
+#endif
 private:
+    int mexp;
+    int size;
     bool reverse;
     uint32_t upper_mask;
     uint32_t lower_mask;
-    int mexp;
-    int size;
     int pos;
     int id;
     uint32_t mata;
@@ -223,7 +262,7 @@ bool parse_opt(options& opt, int argc, char **argv) {
     opt.all = false;
     errno = 0;
     for (;;) {
-        c = getopt_long(argc, argv, "vas:m:f:c:", longopts, NULL);
+        c = getopt_long(argc, argv, "vas:m:f:c:S:", longopts, NULL);
         if (error) {
             break;
         }
@@ -304,6 +343,7 @@ bool parse_opt(options& opt, int argc, char **argv) {
             }
             cerr << endl;
         }
+        opt.mexp = mexp;
         long id = strtol(argv[1], NULL, 10);
         if (errno != 0 || (id < 0 || id > 0xffff)) {
             error = true;
@@ -333,13 +373,47 @@ int main(int argc, char * argv[]) {
     if (! parse_opt(opt, argc, argv)) {
         return -1;
     }
-    MT32Search mt(opt.mexp, opt.uid, 1);
+//    MT32Search mt(opt.mexp, opt.uid, 1);
+    MT32Search mt(521, 1, 10, 0xfd6d0001, 1);
+#if defined(DEBUG)
+    cout << mt.getParamString() << endl;
+#endif
     MersenneTwister mto(opt.seed);
+#if 0
+    AlgorithmRecursionSearch<uint32_t> rs(mt, mto);
+    if (rs.start(opt.mexp * 10)) {
+        cout << mt.getHeaderString() << endl;
+        cout << mt.getParamString() << endl;
+    } else {
+        cout << "not found" << endl;
+        cout << mt.getParamString() << endl;
+    }
+#if defined(DEBUG)
+    mt.debug_print();
+#endif
+    AlgorithmEquidistribution<uint32_t> eq(mt, 32);
+    int veq[32];
+    int delta = eq.get_all_equidist(veq);
+    int bitSize = mt.bitSize();
+    for (int i = 0; i < 32; i++) {
+        cout << "k("<< dec << setw(2) << (i + 1) << "):"
+             << setw(5) << veq[i] << "  d(" << setw(2) << (i + 1) << "):"
+             << setw(5) << (bitSize / (i + 1)) - veq[i] << endl;
+    }
+    cout << "delta:" << delta << endl;
+#endif
+
     static const int shifts[] = {7, 15};
     AlgorithmBestBits<uint32_t> tmp(32, shifts, 2);
+#if 0
     AlgorithmRecursionAndTempering<uint32_t> rt(mto);
+// 521,1,10,fd6d0001,00000000,00000000,
     if (rt.search(mt, tmp, tmp, opt.verbose, cout, true)) {
         return 0;
     }
+#endif
+    tmp(mt, true);
+    cout << mt.getHeaderString() << endl;
+    cout << mt.getParamString() << endl;
     return -1;
 }

@@ -27,6 +27,10 @@
 #include <MTToolBox/AlgorithmEquidistribution.hpp>
 #include <MTToolBox/util.hpp>
 
+#if defined(DEBUG)
+#include <sstream>
+#endif
+
 namespace MTToolBox {
     using namespace std;
     using namespace std::tr1;
@@ -65,6 +69,18 @@ namespace MTToolBox {
         ~temper_params() {
             delete[] param;
         }
+#if defined(DEBUG)
+        string toString() {
+            stringstream ss;
+            ss << "[";
+            ss << dec << delta << ":";
+            for (int i = 0; i < size; i++) {
+                ss << hex << setw(8) << setfill('0') << param[i] << ",";
+            }
+            ss << "]";
+            return ss.str();
+        }
+#endif
     };
 
     /**
@@ -130,27 +146,10 @@ namespace MTToolBox {
          */
         int operator()(TemperingCalculatable<T>& rand,
                        bool verbose = false) {
-//            using namespace std;
-            if (verbose) {
-                cout << "searching..." << endl;
-            }
             rand.resetReverseOutput();
             if (verbose) {
                 cout << "searching from MSB" << endl;
             }
-#if 0
-            if (lsb) {
-                rand.setReverseOutput();
-                if (verbose) {
-                    cout << "searching from LSB" << endl;
-                }
-            } else {
-                rand.resetReverseOutput();
-                if (verbose) {
-                    cout << "searching from MSB" << endl;
-                }
-            }
-#endif
             shared_ptr<tempp> initial(new tempp(size));
             initial->delta = 0;
             for (int i = 0; i < size; i++) {
@@ -160,19 +159,40 @@ namespace MTToolBox {
             vector<shared_ptr<tempp> > params;
             params.push_back(initial);
             int delta;
-            for (int p = 0; p < bit_len; p++) {
+#if defined(DEBUG)
+            cout << "DEBUG: bit_len = " << dec << bit_len << endl;
+#endif
+            int min_shift = get_min_shift(shifts, size);
+            for (int p = 0; p < bit_len - min_shift; p++) {
                 vector<shared_ptr<tempp> > current;
                 current.clear();
                 for (unsigned int i = 0; i < params.size(); i++) {
                     search_best_temper(rand, p, *params[i],
                                        current, verbose);
                 }
-                delta = rand.bitSize();
+#if defined(DEBUG)
+                cout << "DEBUG: current:size = " << dec << current.size()
+                     << endl;
+                for (unsigned int i = 0; i < current.size(); i++) {
+                    cout << "DEBUG:current[" << dec << i << "]:"
+                         << current[i]->toString() << endl;
+                }
+#endif
+                delta = rand.bitSize() * bit_len;
                 for (unsigned int i = 0; i < current.size(); i++) {
                     if (current[i]->delta < delta) {
                         delta = current[i]->delta;
                     }
+#if defined(DEBUG)
+                    else {
+                        cout << "DEBUG: current[i]->delta = " << dec
+                             << current[i]->delta << endl;
+                    }
+#endif
                 }
+#if defined(DEBUG)
+                cout << "DEBUG: delta = " << dec << delta << endl;
+#endif
                 if (verbose) {
                     cout << "delta = " << dec << delta << endl;
                 }
@@ -182,11 +202,15 @@ namespace MTToolBox {
                         params.push_back(current[i]);
                     }
                 }
+#if defined(DEBUG)
+                cout << "DEBUG: params:size = " << dec << params.size()
+                     << endl;
+#endif
             }
 
             // delta を最小にするテンパリングパラメータの中でハミングウェイト最大
             // のものをテンパリングパラメータにする。(複数のなかで最初に見つかったもの)
-            int hamming = 0;
+            int hamming = -1;
             int index = -1;
             for (unsigned int i = 0; i < params.size(); i++) {
                 int h = 0;
@@ -210,6 +234,7 @@ namespace MTToolBox {
             rand.resetReverseOutput();
             return 0;
         }
+
         bool isLSBTempering() {
             return false;
         }
@@ -236,18 +261,24 @@ namespace MTToolBox {
             int bitSize = rand.bitSize();
             int delta;
             T mask = 0;
-            int size = bit_size<T>();
+//            int obSize = bit_size<T>();
             mask = ~mask;
+            // size が 2 なら 11, 10, 01, 00 の4パターン
             for (int i = (1 << size) -1; i >= 0; i--) {
+#if 0
                 if (! inRange(i, v_bit)) {
                     continue;
                 }
+#endif
                 shared_ptr<tempp> pattern(new tempp(size));
                 make_pattern(*pattern, i, v_bit, para);
+#if defined(DEBUG)
+                cout << "*pattern:" << pattern->toString() << endl;
+#endif
                 for (int j = 0; j < size; j++) {
                     rand.setTemperingPattern(mask, pattern->param[j], j);
                 }
-                delta = get_equidist(rand, v_bit, bitSize);
+                delta = get_equidist(rand, v_bit + 1, bitSize);
                 pattern->delta = delta;
                 if (verbose) {
                     cout << "delta:" << dec << delta << endl;
@@ -287,18 +318,23 @@ namespace MTToolBox {
          * \b para \b に1ビット分足して MSB から v ビットのテンパリングパラメータを
          * 作成する。
          * @param[out] result 作成されるテンパリングパラメータ
-         * @param[in] pat 不明
+         * @param[in] pat テンパリングパラメータ数からなるビットパターン
          * @param[in] v 今回作成するビット
          * @param[in] para これまでに作成したテンパリングパラメータ
          */
         void make_pattern(tempp& result,
                           int pat, int v, const tempp& para) const {
             int obSize = bit_size<T>();
-            for (int i = 0; i < obSize; i++) {
+            for (int i = 0; i < result.size; i++) {
                 T mask = 1 & (pat >> i);
                 mask = mask << (obSize - 1 - v);
                 result.param[i] = para.param[i] | mask;
             }
+#if defined(DEBUG)
+            result.delta = 0;
+            cout << "make_pattern:" << dec << pat << ","
+                 << dec << v << "," << result.toString() << endl;
+#endif
         }
 
         /**
@@ -312,6 +348,7 @@ namespace MTToolBox {
          * @param[in] shifts シフト量
          * @return true 該当する場合
          */
+        // 00 なら必ず true を返す。
         bool inRange(int pat, int v) const {
             int obSize = bit_size<T>();
             for (int i = 0; i < obSize; i++) {
@@ -320,6 +357,16 @@ namespace MTToolBox {
                 }
             }
             return true;
+        }
+
+        int get_min_shift(int nums[], int length) {
+            int min = 5000;
+            for (int i = 0; i < length; i++) {
+                if (min > nums[i]) {
+                    min = nums[i];
+                }
+            }
+            return min;
         }
     };
 }

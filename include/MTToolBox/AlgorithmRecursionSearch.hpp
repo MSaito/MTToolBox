@@ -16,7 +16,10 @@
  * LICENSE.txt
  */
 
-#include <ostream>
+//#include <ostream>
+#if defined(DEBUG)
+#include <iostream>
+#endif
 #include <NTL/GF2X.h>
 #include <NTL/GF2XFactoring.h>
 #include <MTToolBox/RecursionSearchable.hpp>
@@ -24,6 +27,7 @@
 #include <MTToolBox/period.hpp>
 
 namespace MTToolBox {
+    using namespace std;
     /**
      * @class AlgorithmRecursionSearch
      * @brief 状態遷移関数のパラメータを探索する。
@@ -110,6 +114,9 @@ namespace MTToolBox {
                 count++;
                 degree = deg(poly);
                 if (degree != size) {
+#if defined(DEBUG)
+                    cout << "degree:" << degree << endl;
+#endif
                     continue;
                 }
                 if ((*isPrime)(size, poly)) {
