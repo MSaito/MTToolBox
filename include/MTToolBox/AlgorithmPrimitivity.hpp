@@ -43,10 +43,10 @@ namespace MTToolBox {
 
         /**
          * 一般のGF(2)係数の原始多項式かどうか判定する場合のコンストラクタ
-         * @param[in] primes 2<sup>degree</sup> -1の素因数分解に現れる
+         * @param[in] prime_factors 2<sup>degree</sup> -1の素因数分解に現れる
          * 素数の文字列表現のリスト
          */
-        AlgorithmPrimitivity(const char * primes[]);
+        AlgorithmPrimitivity(const char * prime_factors[]);
 
         /**
          * デストラクタ
