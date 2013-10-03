@@ -40,6 +40,8 @@ if int(debug) == 1:
 if int(debug) == 2:
     env.Append(CXXFLAGS = '-g')
     env.Append(CXXFLAGS = '-O0')
+if int(debug) == 3:
+    env.Append(CXXFLAGS = '-DDEBUG')
 
 #
 # Library check

@@ -46,8 +46,8 @@ namespace MTToolBox {
     public:
         /** テンパリングパラメータ */
         T * param;
-        /** 均等分布次元の理論値との差の総和 */
-        int delta;
+        /** 均等分布次元 */
+        int kv;
         /** テンパリングパラメータの数 */
         int size;
 
@@ -69,11 +69,28 @@ namespace MTToolBox {
         ~temper_params() {
             delete[] param;
         }
+        /**
+         * kv を無視した比較
+         * @param that 比較対象
+         */
+        bool eql(temper_params<T>& that) {
+            if (size != that.size) {
+                return false;
+            }
+            bool result = true;
+            for (int i = 0; i < size; i++) {
+                if (param[i] != that.param[i]) {
+                    result = false;
+                    break;
+                }
+            }
+            return result;
+        }
 #if defined(DEBUG)
         string toString() {
             stringstream ss;
             ss << "[";
-            ss << dec << delta << ":";
+            ss << dec << kv << ":";
             for (int i = 0; i < size; i++) {
                 ss << hex << setw(8) << setfill('0') << param[i] << ",";
             }
@@ -108,18 +125,23 @@ namespace MTToolBox {
         typedef temper_params<T> tempp;
 
         /**
-         * @param[in] state_bit_length テンパリングパラメータのビット長,
+         * @param[in] out_bit_length テンパリングパラメータのビット長,
          * 通常は出力のビット長と等しいと思われる。
          * @param[in] shift_values テンパリングパラメータと対になるシフト数。
          * 正は左シフト。現状では右シフトには対応していない。
          * @param[in] param_num テンパリングパラメータの数, MTDCでは2。
+         * 7を越えないこと。実際には 2 の場合しかテストしていない。
          */
-        AlgorithmBestBits(int state_bit_length,
+        AlgorithmBestBits(int out_bit_length,
                           const int shift_values[],
-                          int param_num) {
-            bit_len = state_bit_length;
+                          int param_num,
+                          int limit_v) {
+            limit = limit_v;
+            obSize = bit_size<T>();
+            bit_len = out_bit_length;
             size = param_num;
             shifts = new int[size];
+            num_pat = size * (size + 1) / 2;
             for (int i = 0; i < size; i++) {
                 shifts[i] = shift_values[i];
             }
@@ -151,19 +173,19 @@ namespace MTToolBox {
                 cout << "searching from MSB" << endl;
             }
             shared_ptr<tempp> initial(new tempp(size));
-            initial->delta = 0;
+            initial->kv = 0;
             for (int i = 0; i < size; i++) {
                 initial->param[i] = 0;
             }
 
             vector<shared_ptr<tempp> > params;
             params.push_back(initial);
-            int delta;
+            int kv;
 #if defined(DEBUG)
             cout << "DEBUG: bit_len = " << dec << bit_len << endl;
 #endif
-            int min_shift = get_min_shift(shifts, size);
-            for (int p = 0; p < bit_len - min_shift; p++) {
+//            int min_shift = get_min_shift(shifts, size);
+            for (int p = 0; p < limit; p++) {
                 vector<shared_ptr<tempp> > current;
                 current.clear();
                 for (unsigned int i = 0; i < params.size(); i++) {
@@ -178,42 +200,58 @@ namespace MTToolBox {
                          << current[i]->toString() << endl;
                 }
 #endif
-                delta = rand.bitSize() * bit_len;
+                kv = -1;
                 for (unsigned int i = 0; i < current.size(); i++) {
-                    if (current[i]->delta < delta) {
-                        delta = current[i]->delta;
+                    if (current[i]->kv > kv) {
+                        kv = current[i]->kv;
                     }
-#if defined(DEBUG)
+#if defined(DEBUG) && 0
                     else {
-                        cout << "DEBUG: current[i]->delta = " << dec
-                             << current[i]->delta << endl;
+                        cout << "DEBUG: current[i]->kv = " << dec
+                             << current[i]->kv << endl;
                     }
 #endif
                 }
 #if defined(DEBUG)
-                cout << "DEBUG: delta = " << dec << delta << endl;
+                cout << "DEBUG: kv = " << dec << kv << endl;
 #endif
                 if (verbose) {
-                    cout << "delta = " << dec << delta << endl;
+                    cout << "kv = " << dec << kv << endl;
                 }
                 params.clear();
+                //T mask = 0;
+                //mask = (~mask) << (obSize - p - 1);
                 for (unsigned int i = 0; i < current.size(); i++) {
-                    if (current[i]->delta == delta) {
-                        params.push_back(current[i]);
+                    if (current[i]->kv == kv) {
+                        //params.push_back(current[i]);
+#if 0
+                        for (int j = 0; j < size; j++) {
+                            current[i]->param[j] &= mask;
+                        }
+#endif
+                        push_if_notexist(params, current[i]);
                     }
                 }
 #if defined(DEBUG)
                 cout << "DEBUG: params:size = " << dec << params.size()
                      << endl;
+                for (unsigned int i = 0; i < params.size(); i++) {
+                    cout << "DEBUG: params[" << dec << i << "]:"
+                         << params[i]->toString() << endl;
+                }
 #endif
             }
-
-            // delta を最小にするテンパリングパラメータの中でハミングウェイト最大
+#if 0
+            // kv を最大にするテンパリングパラメータの中でハミングウェイト最大
             // のものをテンパリングパラメータにする。(複数のなかで最初に見つかったもの)
             int hamming = -1;
             int index = -1;
             for (unsigned int i = 0; i < params.size(); i++) {
                 int h = 0;
+#if defined(DEBUG)
+                cout << "DEBUG:params[" << dec << i << "]"
+                     << params[i]->toString() << endl;
+#endif
                 for (int j = 0; j < size; j++) {
                     h += count_bit(params[i]->param[j]);
                 }
@@ -222,14 +260,16 @@ namespace MTToolBox {
                     index = i;
                 }
             }
+#endif
             T mask = 0;
             mask = ~mask;
             for (int i = 0; i < size; i++) {
-                rand.setTemperingPattern(mask, params[index]->param[i], i);
+                //rand.setTemperingPattern(mask, params[index]->param[i], i);
+                rand.setTemperingPattern(mask, params[0]->param[i], i);
             }
             rand.setUpTempering();
             if (verbose) {
-                cout << "delta = " << dec << delta << endl;
+                cout << "kv = " << dec << kv << endl;
             }
             rand.resetReverseOutput();
             return 0;
@@ -239,10 +279,13 @@ namespace MTToolBox {
             return false;
         }
     private:
+        int limit;
         int bit_len;
         int size;
+        int obSize;
 //        bool lsb;
         int * shifts;
+        int num_pat;
         /**
          * テンパリングパラメータを探索する。
          *
@@ -258,18 +301,16 @@ namespace MTToolBox {
                                 const tempp& para,
                                 vector<shared_ptr<tempp> >& current,
                                 bool verbose) {
-            int bitSize = rand.bitSize();
-            int delta;
+            int kv = -1;
             T mask = 0;
-//            int obSize = bit_size<T>();
             mask = ~mask;
             // size が 2 なら 11, 10, 01, 00 の4パターン
-            for (int i = (1 << size) -1; i >= 0; i--) {
-#if 0
+            // というのが大きな間違いで、実は 8 パターン
+            num_pat = size * (size + 1) / 2;
+            for (int32_t i = (1 << num_pat) -1; i >= 0; i--) {
                 if (! inRange(i, v_bit)) {
                     continue;
                 }
-#endif
                 shared_ptr<tempp> pattern(new tempp(size));
                 make_pattern(*pattern, i, v_bit, para);
 #if defined(DEBUG)
@@ -278,12 +319,14 @@ namespace MTToolBox {
                 for (int j = 0; j < size; j++) {
                     rand.setTemperingPattern(mask, pattern->param[j], j);
                 }
-                delta = get_equidist(rand, v_bit + 1, bitSize);
-                pattern->delta = delta;
+                pattern->kv = get_equidist(rand, v_bit + 1);
                 if (verbose) {
-                    cout << "delta:" << dec << delta << endl;
+                    cout << "pattern->kv:" << dec << pattern->kv << endl;
                 }
-                current.push_back(pattern);
+                if (pattern->kv >= kv) {
+                    push_if_notexist(current, pattern);
+                    kv = pattern->kv;
+                }
             }
         }
 
@@ -298,17 +341,11 @@ namespace MTToolBox {
          * from 0 to \b bit_len_ -1 MSBs.
          */
         int get_equidist(TemperingCalculatable<T>& rand,
-                         int bit_len_,
-                         int bitSize) {
-//            TemperingCalculatable<T> r(rand);
-            AlgorithmEquidistribution<T> sb(rand, bit_len_);
-            int veq[bit_len_];
+                         int bit_length) {
+            AlgorithmEquidistribution<T> sb(rand, bit_length);
+            int veq[bit_length];
             sb.get_all_equidist(veq);
-            int sum = 0;
-            for (int i = 0; i < bit_len_; i++) {
-                sum += (bitSize / (i + 1) - veq[i]) * (bit_len_ - i);
-            }
-            return sum;
+            return veq[bit_length - 1];
         }
 
         /**
@@ -324,16 +361,55 @@ namespace MTToolBox {
          */
         void make_pattern(tempp& result,
                           int pat, int v, const tempp& para) const {
-            int obSize = bit_size<T>();
+            result.kv = 0;
             for (int i = 0; i < result.size; i++) {
-                T mask = 1 & (pat >> i);
-                mask = mask << (obSize - 1 - v);
-                result.param[i] = para.param[i] | mask;
+                result.param[i] = para.param[i];
             }
+            T para_mask = 0;
+            para_mask = (~para_mask) >> v;
+            int index = 0;
+            int idx = 0;
+            int rdx = size - 1;
+            T mask = 1 << (num_pat - 1);
+            int sum = 0;
+            T one = 1;
+            while (mask != 0) {
+                if ((pat & mask) && (obSize > v + sum + 1)) {
+                    result.param[index] |= (one << (obSize - v - sum - 1))
+                    & para_mask;
+                } else if (((pat & mask) == 0) && (obSize > v + sum + 1)) {
 #if defined(DEBUG)
-            result.delta = 0;
+                    cout << "make_pattern:" << dec << pat << ","
+                         << dec << v << "," << result.toString()
+                         << hex << para_mask
+                         << "," << dec << sum << endl;
+#endif
+                    result.param[index] &= ~(one << (obSize - v - sum - 1));
+#if defined(DEBUG)
+                    cout << "make_pattern:" << dec << pat << ","
+                         << dec << v << "," << result.toString()
+                         << hex << para_mask
+                         << "," << dec << sum
+                         << "," << hex << ~(one << (obSize - v - sum - 1))
+                         << "," << dec << v + sum + 1
+                         << "," << obSize
+                         << endl;
+#endif
+                }
+                mask = mask >> 1;
+                index = index + 1;
+                if (index >= size) {
+                    sum += shifts[rdx];
+                    index = idx;
+                    idx++;
+                    rdx--;
+                }
+            }
+
+#if defined(DEBUG)
             cout << "make_pattern:" << dec << pat << ","
-                 << dec << v << "," << result.toString() << endl;
+                 << dec << v << "," << result.toString()
+                 << hex << para_mask << endl;
 #endif
         }
 
@@ -348,12 +424,30 @@ namespace MTToolBox {
          * @param[in] shifts シフト量
          * @return true 該当する場合
          */
-        // 00 なら必ず true を返す。
         bool inRange(int pat, int v) const {
-            int obSize = bit_size<T>();
-            for (int i = 0; i < obSize; i++) {
+#if 0
+            for (int i = 0; i < size; i++) {
                 if ((obSize < v + shifts[i]) && ((pat >> i) != 0)) {
                     return false;
+                }
+            }
+#endif
+            int index = 0;
+            int idx = 0;
+            int rdx = size - 1;
+            T mask = 1 << (num_pat - 1);
+            int sum = 0;
+            while (mask != 0) {
+                if ((pat & mask) && (v + shifts[index] + sum > obSize)) {
+                    return false;
+                }
+                mask = mask >> 1;
+                index = index + 1;
+                if (index >= size) {
+                    sum += shifts[rdx];
+                    index = idx;
+                    idx++;
+                    rdx--;
                 }
             }
             return true;
@@ -367,6 +461,20 @@ namespace MTToolBox {
                 }
             }
             return min;
+        }
+
+        void push_if_notexist(vector<shared_ptr<tempp> >& vec_temp,
+                              shared_ptr<tempp>& pattern) {
+            bool found = false;
+            for (unsigned int i = 0; i < vec_temp.size(); i++) {
+                if (pattern->eql(*vec_temp[i])) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                vec_temp.push_back(pattern);
+            }
         }
     };
 }
