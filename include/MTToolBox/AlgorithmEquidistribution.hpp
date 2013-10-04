@@ -390,7 +390,8 @@ namespace MTToolBox {
             }
         }
         if (min_count > stateBitSize / bit_len) {
-            cout << "over theoretical bound " << bit_len << endl;
+            cerr << "over theoretical bound " << bit_len << endl;
+            cerr << basis[0]->rand->getParamString() << endl;
             for(int i = 0; i < size; i++) {
                 basis[i]->debug_print();
             }

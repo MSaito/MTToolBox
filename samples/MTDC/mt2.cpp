@@ -14,6 +14,7 @@
 #include <fstream>
 #include <iomanip>
 #include <getopt.h>
+#include <limits.h>
 #include <MTToolBox/AlgorithmBestBits.hpp>
 
 using namespace std;
@@ -146,7 +147,7 @@ public:
     }
 
     void setUpParam(AbstractGenerator<uint32_t>& generator) {
-        pos = generator.generate() % size;
+        pos = generator.generate() % (size - 2) + 2;
         mata = generator.generate();
         if (id >= 0) {
             mata = (mata & UINT32_C(0xffff0000))
@@ -241,7 +242,15 @@ public:
 
 void output_help(string& pgm)
 {
-    cout << pgm << " mexp id --count n --max max_delta --file filename" << endl;
+    cout << pgm
+         << " mexp id [--count n --max max_delta --seed seed_num --verbose]\n"
+         << "mexp             mersenne exponent\n"
+         << "id               identifier\n"
+         << "--count, -c num  output number\n"
+         << "--max, -m delta  parameters less than delta are not showed\n"
+         << "--seed,-s seed   seed of random for parameter generating\n"
+         << "--verbose,-v     output useless messages"
+         << endl;
 }
 
 bool parse_opt(options& opt, int argc, char **argv) {
@@ -250,20 +259,20 @@ bool parse_opt(options& opt, int argc, char **argv) {
     string pgm = argv[0];
     static struct option longopts[] = {
         {"verbose", no_argument, NULL, 'v'},
-        {"all", no_argument, NULL, 'a'},
-        {"seed", required_argument, NULL, 'S'},
-        {"file", required_argument, NULL, 'f'},
-        {"start", required_argument, NULL, 's'},
+//        {"all", no_argument, NULL, 'a'},
+        {"seed", required_argument, NULL, 's'},
+//        {"file", required_argument, NULL, 'f'},
         {"max", required_argument, NULL, 'm'},
         {"count", required_argument, NULL, 'c'},
         {NULL, 0, NULL, 0}};
     opt.verbose = false;
     opt.count = 1;
-    opt.max_delta = 10;
+    opt.max_delta = INT_MAX;
     opt.all = false;
     errno = 0;
     for (;;) {
-        c = getopt_long(argc, argv, "vas:m:f:c:S:", longopts, NULL);
+//        c = getopt_long(argc, argv, "vas:m:f:c:S:", longopts, NULL);
+        c = getopt_long(argc, argv, "vm:c:s:", longopts, NULL);
         if (error) {
             break;
         }
@@ -271,28 +280,30 @@ bool parse_opt(options& opt, int argc, char **argv) {
             break;
         }
         switch (c) {
+#if 0
         case 'a':
             opt.all = true;
             break;
-        case 'v':
-            opt.verbose = true;
-            break;
-        case 's':
+        case 'S':
             opt.start = strtoull(optarg, NULL, 0);
             if (errno) {
                 error = true;
                 cerr << "start must be a number" << endl;
             }
             break;
-        case 'S':
+        case 'f':
+            opt.filename = optarg;
+            break;
+#endif
+        case 'v':
+            opt.verbose = true;
+            break;
+        case 's':
             opt.seed = strtoull(optarg, NULL, 0);
             if (errno) {
                 error = true;
                 cerr << "seed must be a number" << endl;
             }
-            break;
-        case 'f':
-            opt.filename = optarg;
             break;
         case 'm':
             opt.max_delta = strtol(optarg, NULL, 10);
@@ -374,55 +385,25 @@ int main(int argc, char * argv[]) {
     if (! parse_opt(opt, argc, argv)) {
         return -1;
     }
-//    MT32Search mt(opt.mexp, opt.uid, 1);
-//#aaa,mm,nn,rr,ww,wmask,umask,lmask,shift0,shift1,shiftB,shiftC,maskB,maskC
-//83c30001, 8, 17, 23, 32, ffffffff, ff800000, 007fffff, 12, 18, 7, 15, 76b15f80, fdd50000
-//    MT32Search mt(521, 1, 10, 0xfd6d0001, 1);
-//    MT32Search mt(521, 1, 8, 0x83c30001, 0x76b15f80, 0xfdd50000, 1);
-    MT32Search mt(521, 1, 8, 0x83c30001, 0, 0, 1);
-#if defined(DEBUG)
-    cout << mt.getParamString() << endl;
-#endif
+    MT32Search mt(opt.mexp, opt.uid, 1);
     MersenneTwister mto(opt.seed);
-#if 0
-    AlgorithmRecursionSearch<uint32_t> rs(mt, mto);
-    if (rs.start(opt.mexp * 10)) {
-        cout << mt.getHeaderString() << endl;
-        cout << mt.getParamString() << endl;
-    } else {
-        cout << "not found" << endl;
-        cout << mt.getParamString() << endl;
-    }
-#if defined(DEBUG)
-    mt.debug_print();
-#endif
-#endif
-#if 1
     static const int shifts[] = {7, 15};
     AlgorithmBestBits<uint32_t> tmp(32, shifts, 2, 15);
-#if 0
     AlgorithmRecursionAndTempering<uint32_t> rt(mto);
-// 521,1,10,fd6d0001,00000000,00000000,
-//$ ./example4 32 521 1 1
-//#aaa,mm,nn,rr,ww,wmask,umask,lmask,shift0,shift1,shiftB,shiftC,maskB,maskC
-//83c30001, 8, 17, 23, 32, ffffffff, ff800000, 007fffff, 12, 18, 7, 15, 76b15f80, fdd50000
-    if (rt.search(mt, tmp, tmp, opt.verbose, cout, true)) {
-        return 0;
+    cout << mt.getHeaderString() << ", delta" << endl;
+    while (opt.count > 0) {
+        if (rt.search(mt, tmp, tmp, opt.verbose, cout, true)) {
+            int delta = rt.getDelta();
+            if (delta > opt.max_delta) {
+                continue;
+            }
+            cout << mt.getParamString();
+            cout << delta << endl;
+            opt.count--;
+        } else {
+            cout << "not found" << endl;
+            return -1;
+        }
     }
-#endif
-    tmp(mt, true);
-#endif
-    cout << mt.getHeaderString() << endl;
-    cout << mt.getParamString() << endl;
-    AlgorithmEquidistribution<uint32_t> eq(mt, 32);
-    int veq[32];
-    int delta = eq.get_all_equidist(veq);
-    int bitSize = mt.bitSize();
-    for (int i = 0; i < 32; i++) {
-        cout << "k("<< dec << setw(2) << (i + 1) << "):"
-             << setw(5) << veq[i] << "  d(" << setw(2) << (i + 1) << "):"
-             << setw(5) << (bitSize / (i + 1)) - veq[i] << endl;
-    }
-    cout << "delta:" << delta << endl;
-    return -1;
+    return 0;
 }
