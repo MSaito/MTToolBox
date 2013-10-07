@@ -3,8 +3,16 @@
 /**
  * @file AlgorithmBestBits.hpp
  *
- * @brief テンパリングパラメータを探索するアルゴリズムであり、MTDCで使
+ *\japanese
+ * @brief テンパリングパラメータを探索するアルゴリズムであり、MTDC [1]で使
  * 用されているものである。
+ *\endjapanese
+ *\english
+ *
+ * @brief Algorithm for searching tempering parameters.
+ * Dynamic Creator[1] uses this algorithm.
+ *
+ *\endenglish
  *
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (Hiroshima University)
@@ -15,6 +23,13 @@
  *
  * The 3-clause BSD License is applied to this software, see
  * LICENSE.txt
+ *
+ * Reference:
+ * [1] M. Matsumoto and T. Nishimura,
+ * Dynamic Creation of Pseudorandom number generator,
+ * Monte Carlo and Quasi-Monte Carlo Methods 1998,
+ * Springer-Verlag, 56-69, 2000
+ * http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/DC/dc.html
  */
 #include <iostream>
 #include <iomanip>
@@ -37,23 +52,58 @@ namespace MTToolBox {
 
     /**
      * @class temper_params
+     *\japanese
      * @brief テンパリングパラメータのクラス
      *
      * @tparam T 個々のテンパリングパラメータの型
+     *\endjapanese
+     *\english
+     * @brief class which keeps tempering parameters
+     *
+     * @tparam T type of tempering parameters
+     *\endenglish
      */
     template<typename T>
     class temper_params {
     public:
-        /** テンパリングパラメータ */
+        /**
+         *\japanese
+         * テンパリングパラメータの配列
+         *\endjapanese
+         *\english
+         * array of tempering parameters
+         *\endenglish
+         */
         T * param;
-        /** 均等分布次元の理論値との差の総和 */
+        /**
+         *\japanese
+         * 均等分布次元の理論値との差の総和
+         *\endjapanese
+         *\english
+         * Sum of differences between theoretical upper bound and
+         * realized value of dimension of equi-distribution.
+         *\endenglish
+         */
         int delta;
-        /** テンパリングパラメータの数 */
+        /**
+         *\japanese
+         * テンパリングパラメータの数
+         *\endjapanese
+         *\english
+         * Number of tempering parameters.
+         *\endenglish
+         */
         int size;
 
         /**
+         *\japanese
          * 単純なコンストラクタ
          * @param[in] param_num テンパリングパラメータの数
+         *\endjapanese
+         *\english
+         * Simple constructor.
+         * @param[in] param_num number of tempering parameters
+         *\endenglish
          */
         temper_params(int param_num) {
             size = param_num;
@@ -65,7 +115,12 @@ namespace MTToolBox {
         }
 
         /**
+         *\japanese
          * デストラクタ
+         *\endjapanese
+         *\english
+         * Simple destructor
+         *\endenglish
          */
         ~temper_params() {
             delete[] param;
@@ -87,28 +142,51 @@ namespace MTToolBox {
     /**
      * @class AlgorithmBestBits
      *
+     *\japanese
      * @brief テンパリングパラメータを探索するアルゴリズム(MT用)
      *
      * 疑似乱数生成器の高次元均等分布性を改善するために、テンパリングパ
-     * ラメータを探索するアルゴリズムこのアルゴリズムはMTDCのテンパリン
+     * ラメータを探索するアルゴリズム。このアルゴリズムはMTDCのテンパリン
      * グパラメータ探索をシミュレートする。
      *
-     * \b 注意： テンパリングパラメータの探索をしても十分良い高次元均等
+     * \warning テンパリングパラメータの探索をしても十分良い高次元均等
      * 分布が得られない場合は、状態遷移関数の変更を考慮した方がよい。状
      * 態遷移関数で十分ビットミックスされていない場合、単純なテンパリン
      * グで均等分布次元を最大化することはできないだろう。
      *
      * @tparam T 疑似乱数生成器の出力の型, 例えば uint32_t など。
+     *\endjapanese
+     *\english
+     * @brief Algorithm which searches tempering parameters.
+     *
+     * An algorithm which searches tempering parameters which
+     * improve equi-distribution property of pseudo random number
+     * generator. This algorithm simulate the algorithm of
+     * Dynamic creator of Mersenne Twister.
+     *
+     * \warning If you could not get high dimension of
+     * equi-distribution after tempering using parameters got by this
+     * algorithm, you should consider changing the design of random
+     * number generation algorithm.
+     *
+     * @tparam T type of output of pseudo random number generator.
+     *\endenglish
      */
     template<typename T>
     class AlgorithmBestBits : public AlgorithmTempering<T> {
     public:
         /**
+         *\japanese
          * テンパリングパラメータのクラス
+         *\endjapanese
+         *\english
+         * a class which keeps tempering parameters.
+         *\endenglish
          */
         typedef temper_params<T> tempp;
 
         /**
+         *\japanese
          * @param[in] out_bit_length テンパリングパラメータのビット長,
          * 通常は出力のビット長と等しいと思われる。
          * @param[in] shift_values テンパリングパラメータと対になるシフト数。
@@ -119,6 +197,24 @@ namespace MTToolBox {
          * @param[in] limit_v テンパリングパラメータを上位何ビットまでテンパリングするか。
          * ただし、この値+以後のシフト量だけテンパリングする。この値を大きくすると
          * 使用メモリおよび実行時間が著しく増大するであろう。
+         *\endjapanese
+         *\english
+         * @param[in] out_bit_length Bit length of tempering parameters.
+         * usually, this equals to bit length of an output.
+         * @param[in] shift_values Shift values corresponds to
+         * tempering parameter. Positive integers mean left shift and
+         * negative integers are not supported in current version.
+
+         * @param[in] param_num Number of tempering parameters.  In
+         * MTDC, this is two. Do not specify numbers over 7.  Test is
+         * only done for 2. Greater numbers will consume huge CPU time
+         * and huge memories.
+
+         * @param[in] limit_v limit of tempering bit. Each tempering
+         * parameters are searched for limit bit plus shift values of
+         * parameters following to the parameters. Greater limit will
+         * consume huge CPU time and huge memories.
+         *\endenglish
          */
         AlgorithmBestBits(int out_bit_length,
                           const int shift_values[],
@@ -136,13 +232,19 @@ namespace MTToolBox {
         }
 
         /**
+         *\japanese
          * デストラクタ
+         *\endjapanese
+         *\english
+         * A destructor
+         *\endenglish
          */
         ~AlgorithmBestBits() {
             delete[] shifts;
         }
 
         /**
+         *\japanese
          * テンパリングパラメータを探索する
          *
          * テンパリングパラメータを生成し、均等分布次元を計算してよいテ
@@ -152,6 +254,21 @@ namespace MTToolBox {
          * @param[in,out] rand 疑似乱数生成器
          * @param[in] verbose 余分な情報を出力するフラグ
          * @returns 0
+         *\endjapanese
+         *\english
+         *
+         * Search tempering parameters.
+         *
+         * Generate tempering parameters and Calculate dimension of
+         * equi-distribution and then choose tempering parameters
+         * which gives high dimension of equi-distribution.  Searched
+         * tempering parameters are set to the pseudo random number
+         * generator.
+         *
+         * @param[in,out] rand A pseudo random number generator
+         * @param[in] verbose A flag for printing redundant message
+         * @return 0 always zero
+         *\endenglish
          */
         int operator()(TemperingCalculatable<T>& rand,
                        bool verbose = false) {
@@ -200,7 +317,6 @@ namespace MTToolBox {
             T mask = 0;
             mask = ~mask;
             for (int i = 0; i < size; i++) {
-                //rand.setTemperingPattern(mask, params[index]->param[i], i);
                 rand.setTemperingPattern(mask, params[0]->param[i], i);
             }
             rand.setUpTempering();
@@ -211,6 +327,16 @@ namespace MTToolBox {
             return 0;
         }
 
+        /**
+         *\japanese
+         * LSBからのテンパリングかを示す。常にfalse。
+         * @return 常にfalse
+         *\endjapanese
+         *\english
+         * Shows if tempering is from LSB.
+         * @return Always false.
+         *\endenglish
+         */
         bool isLSBTempering() {
             return false;
         }
@@ -223,6 +349,7 @@ namespace MTToolBox {
         int num_pat;
 
         /**
+         *\japanese
          * テンパリングパラメータを探索する。
          *
          * @param[in,out] rand GF(2)線形疑似乱数生成器、TemperingSearcherのサブクラス
@@ -230,6 +357,9 @@ namespace MTToolBox {
          * @param[in] para v_bit -1 ビット目までのテンパリングパラメータ
          * @param[out] current v ビット目のテンパリングパラメータとデルタのvector
          * @param[in] verbose true なら余計な情報を標準出力に表示する。
+         *\endjapanese
+         *\english
+         *\endenglish
          */
         void search_best_temper(TemperingCalculatable<T>& rand,
                                 int v_bit,
@@ -239,8 +369,7 @@ namespace MTToolBox {
             int delta = rand.bitSize() * obSize;
             T mask = 0;
             mask = ~mask;
-            // size が 2 なら 11, 10, 01, 00 の4パターン
-            // というのが大きな間違いで、実は 8 パターン
+            // size が 2 なら 111, 110, 101, 100, 011, 010, 001, 000 の8パターン
             num_pat = size * (size + 1) / 2;
             for (int32_t i = (1 << num_pat) -1; i >= 0; i--) {
                 if (! inRange(i, v_bit)) {
@@ -266,11 +395,22 @@ namespace MTToolBox {
         }
 
         /**
+         *\japanese
          * AlgorithmEquidistribution#get_equidist()のラッパー
          *
          * @param rand 疑似乱数生成器
          * @param bit_len_ \b bit_len_ 長の MSBs の均等分布次元を計算する
          * @returns 均等分布次元の理論値との差を0からbit_lenまで合計したもの
+         *\endjapanese
+         *\english
+         * A wrapper of AlgorithmEquidistribution#get_equidist().
+         *
+         * @param rand A pseudo random number generator.
+         * @param bit_length Calculate dimension of equi-distribution
+         * of \b bit_length MSBs.
+         * @returns A sum of differences of dimension of equi-distribution
+         * between theoretical upper bound and realized value.
+         *\endenglish
          */
         int get_equidist(TemperingCalculatable<T>& rand,
                          int bit_length) {
@@ -280,6 +420,7 @@ namespace MTToolBox {
         }
 
         /**
+         *\japanese
          * v ビット目のテンパリングパラメータを作成する。
          *
          * 既に計算済みの MSBから v - 1 ビットのテンパリングパラメータである
@@ -289,6 +430,21 @@ namespace MTToolBox {
          * @param[in] pat テンパリングパラメータ数からなるビットパターン
          * @param[in] v 今回作成するビット
          * @param[in] para これまでに作成したテンパリングパラメータ
+         *\endjapanese
+         *\english
+         *
+         * Make a part of tempering parameters \b v-th bit from MSB.
+         *
+         * \b para keeps tempering parameters which have \b v - 1 bits
+         * from MSBs. This method make \b v-th bits of tempering
+         * parameters and (\b v + shift_value)-th bits.
+         *
+         * @param[out] result Created tempering parameters.
+         * @param[in] pat Bits pattern used to generate tempering parameters.
+         * @param[in] v A bit position to be created.
+         * @param[in] para One of previously generated tempering parameters.
+         *
+         *\endenglish
          */
         void make_pattern(tempp& result,
                           int pat, int v, const tempp& para) const {
@@ -329,6 +485,7 @@ namespace MTToolBox {
         }
 
         /**
+         *\japanese
          * マスク作成の該当部分かチェックする。
          *
          * シフトによって0になる部分のビットパターンは作らないので、該
@@ -337,6 +494,19 @@ namespace MTToolBox {
          * @param[in] pat ビットパターン
          * @param[in] v ビット位置
          * @return true 該当する場合
+         *\endjapanese
+         *\english
+         *
+         * Check if pattern should be processed.
+         *
+         * Bit pattern which becomes zero by shift out need not
+         * to be created.
+         *
+         * @param[in] pat Bit pattern
+         * @param[in] v Bit position
+         * @return true if bit should be created.
+         *
+         *\endenglish
          */
         bool inRange(int pat, int v) const {
             int index = 0;
