@@ -3,6 +3,7 @@
  *
  * MTToolBox はGF(2)線形疑似乱数生成器を開発するためのライブラリである。
  * - doxygen ドキュメント http://msaito.github.io/MTToolBox/
+ * - doxygen ドキュメント http://msaito.github.io/MTToolBox/en/ (English)
  * - github プロジェクト  https://github.com/MSaito/MTToolBox
  * - スライド http://msaito.github.io/MTToolBox/mttoolbox.pdf
  *

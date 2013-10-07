@@ -1,0 +1,43 @@
+/**
+ *\mainpage
+ *
+ * MTToolBox is a library for developing GF(2)-linear pseudo random
+ * number generators.
+ *<ul>
+ * <li>doxygen documents http://msaito.github.io/MTToolBox/en/
+ * <li>doxygen documents http://msaito.github.io/MTToolBox/ (Japanese)
+ * <li>github project https://github.com/MSaito/MTToolBox
+ * <li>slide http://msaito.github.io/MTToolBox/mttoolbox.pdf (Japanese)
+ *</ul>
+ * MTToolBox supports following points for developing GF(2)-linear
+ * pseudo random number generators.
+ * - check GF(2)-linearity
+ * - calculate minimal polynomial of output sequences of generators.
+ *   - check primitivity of a minimal polynomial of output sequences.
+ * - calculate dimension of equi-distribution.
+ * - search tempering parameters which improve dimension of equi-distribution.
+ *
+ * MTToolBox will be useful for following people.
+ * - people who are familiar with the CPU architecture and want to develop
+ *   high-speed pseudo random number generators.
+ * - people who want to develop pseudo random number generators suitable for
+ *   special hardware.
+ *
+ * MTToolBox has practical samples.
+ * - sample of TinyMT Dynamic Creator
+ * - sample of MTGP Dynamic Creator
+ * - sample of Mersenne Twister Dynamic Creator
+ * - sample of XORSHIFT
+ *
+ * @author Mutsuo Saito, (saito@math.sci.hiroshima-u.ac.jp) Hiroshima University
+ * @author Makoto Matsumoto, Hiroshima University
+ *
+ * @date 2013-10-07
+ *
+ * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
+ * and Hiroshima University.
+ * All rights reserved.
+ *
+ * The 3-clause BSD License is applied to this software.
+ * \verbinclude ./LICENSE.txt
+ */
