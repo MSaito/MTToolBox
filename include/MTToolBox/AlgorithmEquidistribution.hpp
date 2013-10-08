@@ -3,9 +3,19 @@
 /**
  * @file AlgorithmEquidistribution.hpp
  *
+ *\japanese
  * @brief 疑似乱数生成器の出力の均等分布次元を計算する。
  *
  * PIS法[1](原瀬)によって疑似乱数生成器の出力の均等分布次元を計算するアルゴリズム
+ *\endjapanese
+ *
+ *\english
+ * @brief Calculate dimension of equi-distribution of output of pseudo
+ * random number generators.
+ *
+ * Algorithm that calculates dimension of equi-distribution of output
+ * of pseudo random number generators using PIS method[1](S. Harase).
+ *\endenglish
  *
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (Hiroshima University)
@@ -30,6 +40,7 @@
 namespace MTToolBox {
     /**
      * @class linear_generator_vector
+     *\japanese
      * @brief GF(2)ベクトルとしてのGF(2)疑似乱数生成器
      *
      * このクラスはGF(2)ベクトルとしての疑似乱数生成器を表す。また
@@ -38,20 +49,44 @@ namespace MTToolBox {
      * next_state()メソッドによって行われる。
      *
      * @tparam T 疑似乱数生成器の出力の型
+     *\endjapanese
+     *
+     *\english
+     * @brief GF(2) pseudo random number generator as a GF(2) vector.
+     *
+     * This class treats a GF(2) pseudo random number generator as a
+     * GF(2) vector. And also the class treats the generator as a
+     * vector of polynomials over GF(2).
+     *\endenglish
      */
     template<typename T>
     class linear_generator_vector {
     public:
 
         /**
+         *\japanese
          * 均等分布次元計算可能な疑似乱数生成器
+         *\endjapanese
+         *
+         *\english
+         * pseudo random number generator which can calculate
+         * dimension of equi-distribution.
+         *\endenglish
          */
         typedef EquidistributionCalculatable<T> ECGenerator;
 
         /**
+         *\japanese
          * コンストラクタ
          *
-         * @param generator GF(2)疑似乱数生成器
+         * @param generator 均等分布次元を計算するGF(2)疑似乱数生成器
+         *\endjapanese
+         *
+         * Constructor
+         * @param generator GF(2) pseudo random number generator,
+         * whose dimension of equi-distribution will be calculated.
+         *\english
+         *\endenglish
          */
         linear_generator_vector<T>(const ECGenerator& generator) {
             using namespace std::tr1;
@@ -65,6 +100,7 @@ namespace MTToolBox {
         }
 
         /**
+         *\japanese
          * 標準基底コンストラクタ
          *
          * 標準基底を構成するベクトルのひとつを生成する。
@@ -74,6 +110,16 @@ namespace MTToolBox {
          *
          * @param generator GF(2)疑似乱数生成器
          * @param bit_pos 1 の位置
+         *\endjapanese
+         *
+         *\english
+         * Constructor for standard basis.
+         *
+         * Construct a vector which consists standard basis.
+         * As a generator, this generates a number include only one bit once,
+         * and then generate zero forever. For instance, it generates
+         * 1, 0, 0, 0, ... or 8, 0, 0, 0, ...
+         *\endenglish
          */
         linear_generator_vector<T>(const ECGenerator& generator,
                                    int bit_pos) {
@@ -92,59 +138,131 @@ namespace MTToolBox {
         void debug_print();
 
         /**
+         *\japanese
          * GF(2)線形疑似乱数生成器
+         *\endjapanese
+         *
+         *\english
+         * A GF(2) linear pseudo random number generator
+         *\endenglish
          */
         std::tr1::shared_ptr<ECGenerator> rand;
 
         /**
+         *\japanese
          * next_state() が呼ばれた回数
          * これは多項式としてみた場合の次数に関係がある。
+         *\endjapanese
+         *
+         *\english
+         * number which shows counts of next_state() called.
+         * As a polynomial, this is related to degree of polynomial.
+         *\endenglish
          */
         int count;
 
         /**
+         *\japanese
          * ゼロベクトルであるかどうかを示す。
+         *\endjapanese
+         *
+         *\english
+         * Shows if zero vector or not.
+         *\endenglish
          */
         bool zero;
 
         /**
+         *\japanese
          * 疑似乱数生成器の最新の出力（の上位vビット）または
          * 多項式の最高次の係数のなすベクトル
+         *\endjapanese
+         *
+         *\english
+         * latest output of pseudo random number generator, or, a
+         * GF(2) vector consists of coefficients of highest degree
+         * term of polynomial.
+         *\endenglish
          */
         T next;
     };
 
     /**
      * @class AlgorithmEquidistribution
+     *\japanese
      * @brief 疑似乱数生成器の均等分布次元を計算する
      *
      * PIS法(原瀬)によって疑似乱数生成器の出力の均等分布次元を計算する
      * アルゴリズム
      *
      * @tparam T 疑似乱数生成器の出力の型
+     *\endjapanese
+     *
+     *\english
+     * @brief Calculate dimension of equi-distribution of output of
+     * pseudo random number generators.
+     *
+     * Algorithm that calculates dimension of equi-distribution of
+     * output of pseudo random number generators using PIS
+     * method[1](S. Harase).
+     * @tparam type of output of pseudo random number generator.
+     *\endenglish
      */
     template<typename T> class AlgorithmEquidistribution {
 
         /**
+         *\japanese
          * GF(2)ベクトルとしての疑似乱数生成器
+         *\endjapanese
+         *
+         *\english
+         * Pseudo random number generator as a vector.
+         *\endenglish
          */
         typedef linear_generator_vector<T> linear_vec;
 
         /*
+         *\japanese
          * 均等分布次元計算可能な疑似乱数生成器
+         *\endjapanese
+         *\english
+         * Pseudo random number generator which can calculate dimension
+         * of equi-distribution.
+         *\endenglish
          */
         typedef EquidistributionCalculatable<T> ECGenerator;
 
     public:
 
         /**
+         *\japanese
          * コンストラクタ
          *
+         * PIS法の特徴としてvビット精度均等分布次元を計算する際に、k(v+1)
+         * の計算時の中間結果を利用してk(v)の計算の手間を省くことができる。この
+         * クラスではその特徴を反映してk(v)のvをbit_len から1まで変化さ
+         * せて一度に求めることができるようになっている。
+         *
          * @param rand 均等分布次元計算可能な疑似乱数生成器
-         * @param bit_len_ 疑似乱数生成器の出力のビット長
+         * @param bit_length 均等分布次元を計算するMSBからのビット長, k(v)のv
+         * の最初の値
+         *\endjapanese
+         *
+         *\english
+         * Constructor
+         *
+         * PIS method can calculates dimension of equi-distribution of
+         * v-bit accuracy k(v) using intermediate result of
+         * calculation of k(v+1). This class calculate multiple k(v)
+         * varying \b v from \b bit_length to 1.
+         *
+         * @param rand pseudo random number generator
+         * @param bit_length bit length from MSB to calculate dimension
+         * of equi-distribution. This is first v of k(v).
+         *\endenglish
          */
-        AlgorithmEquidistribution(const ECGenerator& rand, int bit_len_) {
-            bit_len = bit_len_;
+        AlgorithmEquidistribution(const ECGenerator& rand, int bit_length) {
+            bit_len = bit_length;
             size = bit_len + 1;
             basis = new linear_vec * [size];
             stateBitSize = rand.bitSize();
@@ -156,7 +274,12 @@ namespace MTToolBox {
         }
 
         /**
+         *\japanese
          * デストラクタ
+         *\endjapanese
+         *\english
+         * Destructor
+         *\endenglish
          */
         ~AlgorithmEquidistribution() {
             for (int i = 0; i < size; i++) {
@@ -172,36 +295,74 @@ namespace MTToolBox {
         void adjust(int new_len);
 
         /**
-         * 標準基底+1個のベクトルからなる配列
+         *\japanese
+         * 標準基底+1個のベクトルからなる配列。
+         * basis という名前だが基底ではなく格子の生成集合という方が正しい。
+         * k(v)を算出した時点では、ゼロベクトルとなっている
+         * ベクトルを除けばv次元の格子の基底となっている。
+         *\endjapanese
+         *
+         *\english
+         * An array consists of standard basis plus one vector.
+         * This array has a name \b basis, but this array is not
+         * basis, this array should be called generating set of
+         * lattice. But this array becomes basis of v dimensional
+         * lattice when k(v) has calculated excluding zero vector.
+         *\endenglish
          */
         linear_vec **basis;
 
         /**
-         * 疑似乱数生成器の出力のビット長
+         *\japanese
+         * vビット精度均等分布次元の計算の v
+         *\endjapanese
+         *\english
+         * \b v of dimension of equi-distribution with v-bit accuracy.
+         *\endenglish
          */
         int bit_len;
 
         /**
+         *\japanese
          * 疑似乱数生成器の状態空間のビット数
+         *\endjapanese
+         *\english
+         * Number of bits in internal state of pseudo random number
+         * generator.
+         *\endenglish
          */
         int stateBitSize;
 
         /**
+         *\japanese
          * basis の配列の要素数
+         *\endjapanese
+         *
+         *\english
+         * Size of array \b basis.
+         *\endenglish
          */
         int size;
     };
 
     /**
+     *\japanese
      * ビット長の調整と主要項の調整
      *
      * @param new_len 新しいビット長
+     *\endjapanese
+     *
+     *\english
+     * Adjust bit length and coefficients of primary terms.
+     * This is needed to use previous intermediate result for
+     * next calculation.
+     *\endenglish
      */
     template<typename T>
     void AlgorithmEquidistribution<T>::adjust(int new_len) {
         using namespace std;
 
-        T mask = (~static_cast<T>(0)) << (sizeof(T) * 8 - new_len);
+        T mask = (~static_cast<T>(0)) << (bit_size<T>() - new_len);
         for (int i = 0; i < size; i++) {
             basis[i]->next = basis[i]->next & mask;
             if (basis[i]->next == 0) {
@@ -212,7 +373,12 @@ namespace MTToolBox {
 
 #if defined(DEBUG)
     /**
+     *\japanese
      * デバッグ出力
+     *\endjapanese
+     *\english
+     * debug output
+     *\endenglish
      */
     template<typename T>
     void linear_generator_vector<T>::debug_print() {
@@ -223,7 +389,6 @@ namespace MTToolBox {
         cout << "zero = " << zero << endl;
         cout << "next = " << hex << next << endl;
         cout << "debug ====" << endl;
-        //rand->debug_print();
     }
 #else
     template<typename T>
@@ -232,17 +397,36 @@ namespace MTToolBox {
 #endif
 
     /**
+     *\japanese
      * vビット精度の均等分布次元を計算する。
-     * v = 1 から \b bit_len までの均等分布次元を計算して、\b veq[]
+     * v = \b bit_len から 1までの均等分布次元を計算して、\b veq[]
      * に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との
      * 差の総和である。
      *
-     * \b 注意： AlgorithmEquidistribution をコンストラクトしてから、
-     * get_all_dquidist() または、get_equidist() のどちらか一方しか
-     * 呼び出すことはできない。
+     * \warning AlgorithmEquidistribution をコンストラクトしてから、
+     * get_all_equidist() または、get_equidist() のどちらか一方を１回し
+     * か呼び出すことはできない。
      *
      * @param[out] veq v ビット精度の均等分布次元の配列
      * @return 実際のvビット精度の均等分布次元と理論的上限の差の総和
+     *\endjapanese
+     *
+     *\english
+     *
+     * Calculate dimension of equi-distribution with v-bit accuracy.
+     *
+     * Calculate dimension of equi-distribution with v-bit accuracy
+     * k(v) for v = \bit_length to 1, and set them into an array \b
+     * veq[].  The return value is sum of d(v)s, which are difference
+     * between k(v) and theoretical upper bound at \b v.
+     *
+     * \warning Only one of get_all_equidist() or get_equidist() can
+     * be called only one time. (Bad interface)
+     *
+     * @param[out] veq an array of k(v)
+     * @return sum of d(v)s
+     *
+     *\endenglish
      */
     template<typename T>
     int AlgorithmEquidistribution<T>::get_all_equidist(int veq[]) {
@@ -267,12 +451,36 @@ namespace MTToolBox {
     }
 
     /**
-     * \b bit_len ビット精度の均等分布次元を計算する。
+     *\japanese
+     * vビット精度の均等分布次元を計算する。
+     *
+     * コンストラクタで指定したbit_length についてk(v)を計算して返す。
      * sum_equidist には、1 から bit_len -1 までの均等分布次元と理論的上限の
      * 差の総和が返される。
      *
+     * \warning AlgorithmEquidistribution をコンストラクトしてから、
+     * get_all_equidist() または、get_equidist() のどちらか一方を１回し
+     * か呼び出すことはできない。
+     *
      * @param sum_equidist 1からbit_len -1 までの理論的上限との差の総和
-     * @return \b bit_len ビット精度の均等分布次元
+     * @return \b bit_length ビット精度の均等分布次元
+     *\endjapanese
+     *
+     *\english
+     * Calculate dimension of equi-distribution with v-bit accuracy.
+     *
+     * Calculate dimension of equi-distribution with v-bit accuracy
+     * k(v) for v = \bit_length.
+     * \b sum_equidist is sum of d(v)s, which are difference
+     * between k(v) and theoretical upper bound at \b v.
+     *
+     * \warning Only one of get_all_equidist() or get_equidist() can
+     * be called only one time. (Bad interface)
+     *
+     * @param[out] sum_equidist sum of d(v)s
+     * @return k(bit_length)
+     *
+     *\endenglish
      */
     template<typename T>
     int AlgorithmEquidistribution<T>::get_equidist(int *sum_equidist) {
@@ -290,8 +498,15 @@ namespace MTToolBox {
     }
 
     /**
+     *\japanese
      * ベクトルの加法
      * @param src このベクトルに足す相手のベクトル
+     *\endjapanese
+     *
+     *\english
+     * Vector addition
+     * @param src source vector to be added to this vector
+     *\endenglish
      */
     template<typename T>
     void linear_generator_vector<T>::add(
@@ -303,9 +518,21 @@ namespace MTToolBox {
     }
 
     /**
+     *\japanese
      * 疑似乱数生成器の状態遷移
      *
+     * 多項式ベクトルとしてみると、すべての多項式を不定元倍する。
+     *
      * @param bit_len MSB からの bit 長
+     *\endjapanese
+     *
+     *\english
+     * State transition of pseudo random number generator.
+     *
+     * As a vector of polynomial, multiply by an indeterminate.
+     * @param bit_len bit length from MSB, or \b \v of k(v) currently
+     * calculating.
+     *\endenglish
      */
     template<typename T>
     void linear_generator_vector<T>::next_state(int bit_len) {
@@ -332,10 +559,20 @@ namespace MTToolBox {
     }
 
     /**
-     * PIS法によるvビット精度均等分布次元の計算
+     *\japanese
+     * PIS法によるvビット精度均等分布次元の計算のメインとなるメソッド
      *
      * @param v MSBからのビット長
      * @return v ビット精度均等分布次元
+     *\endjapanese
+     *
+     *\english
+     * Main method of calculation of dimension of equi-distribution
+     * with v-bit accuracy.
+     *
+     * @param v v of k(v)
+     * @return k(v)
+     *\endenglish
      */
     template<typename T>
     int AlgorithmEquidistribution<T>::get_equidist_main(int v) {
