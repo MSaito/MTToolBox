@@ -48,7 +48,7 @@ namespace MTToolBox {
      * 処理としては不定元倍(x をかける）ことのみをサポートする。これは
      * next_state()メソッドによって行われる。
      *
-     * @tparam T 疑似乱数生成器の出力の型
+     * @tparam U 疑似乱数生成器の出力の型, 符号なし型でなければならない
      *\endjapanese
      *
      *\english
@@ -57,9 +57,12 @@ namespace MTToolBox {
      * This class treats a GF(2) pseudo random number generator as a
      * GF(2) vector. And also the class treats the generator as a
      * vector of polynomials over GF(2).
+     *
+     * @tparam U type of output of pseudo random number
+     * generator. Should be unsigned type.
      *\endenglish
      */
-    template<typename T>
+    template<typename U>
     class linear_generator_vector {
     public:
 
@@ -73,7 +76,7 @@ namespace MTToolBox {
          * dimension of equi-distribution.
          *\endenglish
          */
-        typedef EquidistributionCalculatable<T> ECGenerator;
+        typedef EquidistributionCalculatable<U> ECGenerator;
 
         /**
          *\japanese
@@ -88,7 +91,7 @@ namespace MTToolBox {
          *\english
          *\endenglish
          */
-        linear_generator_vector<T>(const ECGenerator& generator) {
+        linear_generator_vector<U>(const ECGenerator& generator) {
             using namespace std::tr1;
             shared_ptr<ECGenerator>
                 r(reinterpret_cast<ECGenerator *>(generator.clone()));
@@ -121,7 +124,7 @@ namespace MTToolBox {
          * 1, 0, 0, 0, ... or 8, 0, 0, 0, ...
          *\endenglish
          */
-        linear_generator_vector<T>(const ECGenerator& generator,
+        linear_generator_vector<U>(const ECGenerator& generator,
                                    int bit_pos) {
             using namespace std::tr1;
             shared_ptr<ECGenerator>
@@ -130,10 +133,10 @@ namespace MTToolBox {
             rand->setZero();
             count = 0;
             zero = false;
-            next = static_cast<T>(1) << (sizeof(T) * 8 - bit_pos - 1);
+            next = static_cast<U>(1) << (bit_size<U>() * 8 - bit_pos - 1);
         }
 
-        void add(const linear_generator_vector<T>& src);
+        void add(const linear_generator_vector<U>& src);
         void next_state(int bit_len);
         void debug_print();
 
@@ -184,7 +187,7 @@ namespace MTToolBox {
          * term of polynomial.
          *\endenglish
          */
-        T next;
+        U next;
     };
 
     /**
@@ -195,7 +198,7 @@ namespace MTToolBox {
      * PIS法(原瀬)によって疑似乱数生成器の出力の均等分布次元を計算する
      * アルゴリズム
      *
-     * @tparam T 疑似乱数生成器の出力の型
+     * @tparam U 疑似乱数生成器の出力の型
      *\endjapanese
      *
      *\english
@@ -208,7 +211,7 @@ namespace MTToolBox {
      * @tparam type of output of pseudo random number generator.
      *\endenglish
      */
-    template<typename T> class AlgorithmEquidistribution {
+    template<typename U> class AlgorithmEquidistribution {
 
         /**
          *\japanese
@@ -219,7 +222,7 @@ namespace MTToolBox {
          * Pseudo random number generator as a vector.
          *\endenglish
          */
-        typedef linear_generator_vector<T> linear_vec;
+        typedef linear_generator_vector<U> linear_vec;
 
         /*
          *\japanese
@@ -230,7 +233,7 @@ namespace MTToolBox {
          * of equi-distribution.
          *\endenglish
          */
-        typedef EquidistributionCalculatable<T> ECGenerator;
+        typedef EquidistributionCalculatable<U> ECGenerator;
 
     public:
 
@@ -358,11 +361,11 @@ namespace MTToolBox {
      * next calculation.
      *\endenglish
      */
-    template<typename T>
-    void AlgorithmEquidistribution<T>::adjust(int new_len) {
+    template<typename U>
+    void AlgorithmEquidistribution<U>::adjust(int new_len) {
         using namespace std;
 
-        T mask = (~static_cast<T>(0)) << (bit_size<T>() - new_len);
+        U mask = (~static_cast<U>(0)) << (bit_size<U>() - new_len);
         for (int i = 0; i < size; i++) {
             basis[i]->next = basis[i]->next & mask;
             if (basis[i]->next == 0) {
@@ -380,8 +383,8 @@ namespace MTToolBox {
      * debug output
      *\endenglish
      */
-    template<typename T>
-    void linear_generator_vector<T>::debug_print() {
+    template<typename U>
+    void linear_generator_vector<U>::debug_print() {
         using namespace std;
 
         cout << "debug ====" << endl;
@@ -391,8 +394,8 @@ namespace MTToolBox {
         cout << "debug ====" << endl;
     }
 #else
-    template<typename T>
-    void linear_generator_vector<T>::debug_print() {
+    template<typename U>
+    void linear_generator_vector<U>::debug_print() {
     }
 #endif
 
@@ -428,8 +431,8 @@ namespace MTToolBox {
      *
      *\endenglish
      */
-    template<typename T>
-    int AlgorithmEquidistribution<T>::get_all_equidist(int veq[]) {
+    template<typename U>
+    int AlgorithmEquidistribution<U>::get_all_equidist(int veq[]) {
         using namespace std;
 
         int sum = 0;
@@ -482,8 +485,8 @@ namespace MTToolBox {
      *
      *\endenglish
      */
-    template<typename T>
-    int AlgorithmEquidistribution<T>::get_equidist(int *sum_equidist) {
+    template<typename U>
+    int AlgorithmEquidistribution<U>::get_equidist(int *sum_equidist) {
         using namespace std;
 
         int veq = get_equidist_main(bit_len);
@@ -508,9 +511,9 @@ namespace MTToolBox {
      * @param src source vector to be added to this vector
      *\endenglish
      */
-    template<typename T>
-    void linear_generator_vector<T>::add(
-        const linear_generator_vector<T>& src) {
+    template<typename U>
+    void linear_generator_vector<U>::add(
+        const linear_generator_vector<U>& src) {
         using namespace std;
 
         rand->add(*src.rand);
@@ -534,8 +537,8 @@ namespace MTToolBox {
      * calculating.
      *\endenglish
      */
-    template<typename T>
-    void linear_generator_vector<T>::next_state(int bit_len) {
+    template<typename U>
+    void linear_generator_vector<U>::next_state(int bit_len) {
         using namespace std;
 
         if (zero) {
@@ -574,8 +577,8 @@ namespace MTToolBox {
      * @return k(v)
      *\endenglish
      */
-    template<typename T>
-    int AlgorithmEquidistribution<T>::get_equidist_main(int v) {
+    template<typename U>
+    int AlgorithmEquidistribution<U>::get_equidist_main(int v) {
         using namespace std;
         using namespace NTL;
         int bit_len = v;

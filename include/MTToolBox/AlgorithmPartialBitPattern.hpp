@@ -49,7 +49,7 @@ namespace MTToolBox {
      * 態遷移関数で十分ビットミックスされていない場合、単純なテンパリン
      * グで均等分布次元を最大化することはできないだろう。
      *
-     * @tparam T 疑似乱数生成器の出力の型, 例えば uint32_t など。
+     * @tparam U 疑似乱数生成器の出力の型, 例えば uint32_t など。
      *
      * @tparam bit_len テンパリングパラメータのビット長, 通常は出力のビッ
      * ト長と等しいと思われる。
@@ -84,7 +84,7 @@ namespace MTToolBox {
      * algorithm, you should consider changing the design of random
      * number generation algorithm.
      *
-     * @tparam T type of output of pseudo random number generator,
+     * @tparam U type of output of pseudo random number generator,
      * for example, uint32_t. Only unsigned numbers are allowed.
      *
      * @tparam bit_len bit length of variable for tempering parameter
@@ -103,10 +103,10 @@ namespace MTToolBox {
      * MSB.
      *\endenglish
      */
-    template<typename T,
+    template<typename U,
              int bit_len, int param_num, int try_bit_len, int step = 5,
              bool lsb = false>
-    class AlgorithmPartialBitPattern : public AlgorithmTempering<T> {
+    class AlgorithmPartialBitPattern : public AlgorithmTempering<U> {
     public:
         /**
          *\japanese
@@ -127,7 +127,7 @@ namespace MTToolBox {
          * @return always zero.
          *\endenglish
          */
-        int operator()(TemperingCalculatable<T>& rand,
+        int operator()(TemperingCalculatable<U>& rand,
                        bool verbose = false) {
             using namespace std;
             if (verbose) {
@@ -176,10 +176,10 @@ namespace MTToolBox {
             return lsb;
         }
     private:
-        void make_temper_bit(TemperingCalculatable<T>& rand,
-                             T mask,
+        void make_temper_bit(TemperingCalculatable<U>& rand,
+                             U mask,
                              int param_pos,
-                             T pattern) {
+                             U pattern) {
             rand.setTemperingPattern(mask, pattern, param_pos);
             rand.setUpTempering();
         }
@@ -233,22 +233,22 @@ namespace MTToolBox {
          * selected bit pattern.
          *\endenglish
          */
-        int search_best_temper(TemperingCalculatable<T>& rand, int v_bit,
+        int search_best_temper(TemperingCalculatable<U>& rand, int v_bit,
                                int param_pos, int max_v_bit, bool verbose) {
             using namespace std;
             int bitSize = rand.bitSize();
             int delta;
             int min_delta = bitSize * bit_len;
-            T min_pattern = 0;
+            U min_pattern = 0;
             int size = max_v_bit - v_bit;
-            T pattern;
-            T mask = make_mask(v_bit, size);
-            int length = bit_size<T>() / 4;
+            U pattern;
+            U mask = make_mask(v_bit, size);
+            int length = bit_size<U>() / 4;
             for (int i = (1 << size) -1; i >= 0; i--) {
                 if (lsb) {
-                    pattern = static_cast<T>(i) << v_bit;
+                    pattern = static_cast<U>(i) << v_bit;
                 } else {
-                    pattern = static_cast<T>(i) << (bit_len - v_bit - size);
+                    pattern = static_cast<U>(i) << (bit_len - v_bit - size);
                 }
                 make_temper_bit(rand, mask, param_pos, pattern);
                 delta = get_equidist(rand, bit_len);
@@ -296,9 +296,9 @@ namespace MTToolBox {
          *
          *\endenglish
          */
-        int get_equidist(TemperingCalculatable<T>& rand,
+        int get_equidist(TemperingCalculatable<U>& rand,
                          int bit_length) {
-            AlgorithmEquidistribution<T> sb(rand, bit_length);
+            AlgorithmEquidistribution<U> sb(rand, bit_length);
             int veq[bit_length];
             int sum = sb.get_all_equidist(veq);
             return sum;
@@ -328,8 +328,8 @@ namespace MTToolBox {
          * @return bit mask
          *\endenglish
          */
-        T make_mask(int start, int size) {
-            T mask = 0;
+        U make_mask(int start, int size) {
+            U mask = 0;
             mask = ~mask;
             if (start + size > bit_len) {
                 size = bit_len - start;

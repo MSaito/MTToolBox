@@ -55,15 +55,15 @@ namespace MTToolBox {
      *\japanese
      * @brief テンパリングパラメータのクラス
      *
-     * @tparam T 個々のテンパリングパラメータの型
+     * @tparam U 個々のテンパリングパラメータの型, 符号なし型でなければならない
      *\endjapanese
      *\english
      * @brief class which keeps tempering parameters
      *
-     * @tparam T type of tempering parameters
+     * @tparam U type of tempering parameters, should be unsigned type.
      *\endenglish
      */
-    template<typename T>
+    template<typename U>
     class temper_params {
     public:
         /**
@@ -74,7 +74,7 @@ namespace MTToolBox {
          * array of tempering parameters
          *\endenglish
          */
-        T * param;
+        U * param;
         /**
          *\japanese
          * 均等分布次元の理論値との差の総和
@@ -108,7 +108,7 @@ namespace MTToolBox {
         temper_params(int param_num) {
             size = param_num;
             delta = 0;
-            param = new T[param_num];
+            param = new U[param_num];
             for (int i = 0; i < param_num; i++) {
                 param[i] = 0;
             }
@@ -154,7 +154,7 @@ namespace MTToolBox {
      * 態遷移関数で十分ビットミックスされていない場合、単純なテンパリン
      * グで均等分布次元を最大化することはできないだろう。
      *
-     * @tparam T 疑似乱数生成器の出力の型, 例えば uint32_t など。
+     * @tparam U 疑似乱数生成器の出力の型, 符号なし型であること、例えば uint32_t など。
      *\endjapanese
      *\english
      * @brief Algorithm which searches tempering parameters.
@@ -169,11 +169,12 @@ namespace MTToolBox {
      * algorithm, you should consider changing the design of random
      * number generation algorithm.
      *
-     * @tparam T type of output of pseudo random number generator.
+     * @tparam U type of output of pseudo random number generator.
+     * Should be unsigned type.
      *\endenglish
      */
-    template<typename T>
-    class AlgorithmBestBits : public AlgorithmTempering<T> {
+    template<typename U>
+    class AlgorithmBestBits : public AlgorithmTempering<U> {
     public:
         /**
          *\japanese
@@ -183,7 +184,7 @@ namespace MTToolBox {
          * a class which keeps tempering parameters.
          *\endenglish
          */
-        typedef temper_params<T> tempp;
+        typedef temper_params<U> tempp;
 
         /**
          *\japanese
@@ -221,7 +222,7 @@ namespace MTToolBox {
                           int param_num,
                           int limit_v) {
             limit = limit_v;
-            obSize = bit_size<T>();
+            obSize = bit_size<U>();
             bit_len = out_bit_length;
             size = param_num;
             shifts = new int[size];
@@ -270,7 +271,7 @@ namespace MTToolBox {
          * @return 0 always zero
          *\endenglish
          */
-        int operator()(TemperingCalculatable<T>& rand,
+        int operator()(TemperingCalculatable<U>& rand,
                        bool verbose = false) {
             rand.resetReverseOutput();
             if (verbose) {
@@ -314,7 +315,7 @@ namespace MTToolBox {
                     }
                 }
             }
-            T mask = 0;
+            U mask = 0;
             mask = ~mask;
             for (int i = 0; i < size; i++) {
                 rand.setTemperingPattern(mask, params[0]->param[i], i);
@@ -361,13 +362,13 @@ namespace MTToolBox {
          *\english
          *\endenglish
          */
-        void search_best_temper(TemperingCalculatable<T>& rand,
+        void search_best_temper(TemperingCalculatable<U>& rand,
                                 int v_bit,
                                 const tempp& para,
                                 vector<shared_ptr<tempp> >& current,
                                 bool verbose) {
             int delta = rand.bitSize() * obSize;
-            T mask = 0;
+            U mask = 0;
             mask = ~mask;
             // size が 2 なら 111, 110, 101, 100, 011, 010, 001, 000 の8パターン
             num_pat = size * (size + 1) / 2;
@@ -412,9 +413,9 @@ namespace MTToolBox {
          * between theoretical upper bound and realized value.
          *\endenglish
          */
-        int get_equidist(TemperingCalculatable<T>& rand,
+        int get_equidist(TemperingCalculatable<U>& rand,
                          int bit_length) {
-            AlgorithmEquidistribution<T> sb(rand, bit_length);
+            AlgorithmEquidistribution<U> sb(rand, bit_length);
             int veq[bit_length];
             return sb.get_all_equidist(veq);
         }
@@ -452,14 +453,14 @@ namespace MTToolBox {
             for (int i = 0; i < result.size; i++) {
                 result.param[i] = para.param[i];
             }
-            T para_mask = 0;
+            U para_mask = 0;
             para_mask = (~para_mask) >> v;
             int index = 0;
             int idx = 0;
             int rdx = size - 1;
-            T mask = 1 << (num_pat - 1);
+            U mask = 1 << (num_pat - 1);
             int sum = 0;
-            T one = 1;
+            U one = 1;
             while (mask != 0) {
                 if ((pat & mask) && (obSize > v + sum + 1)) {
                     result.param[index] |= (one << (obSize - v - sum - 1))
@@ -512,7 +513,7 @@ namespace MTToolBox {
             int index = 0;
             int idx = 0;
             int rdx = size - 1;
-            T mask = 1 << (num_pat - 1);
+            U mask = 1 << (num_pat - 1);
             int sum = 0;
             while (mask != 0) {
                 if ((pat & mask) && (v + shifts[index] + sum > obSize)) {
