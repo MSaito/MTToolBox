@@ -416,7 +416,7 @@ namespace MTToolBox {
      * Calculate dimension of equi-distribution with v-bit accuracy.
      *
      * Calculate dimension of equi-distribution with v-bit accuracy
-     * k(v) for v = \bit_length to 1, and set them into an array \b
+     * k(v) for v = \b bit_length to 1, and set them into an array \b
      * veq[].  The return value is sum of d(v)s, which are difference
      * between k(v) and theoretical upper bound at \b v.
      *
@@ -470,7 +470,7 @@ namespace MTToolBox {
      * Calculate dimension of equi-distribution with v-bit accuracy.
      *
      * Calculate dimension of equi-distribution with v-bit accuracy
-     * k(v) for v = \bit_length.
+     * k(v) for v = \b bit_length.
      * \b sum_equidist is sum of d(v)s, which are difference
      * between k(v) and theoretical upper bound at \b v.
      *
@@ -530,7 +530,7 @@ namespace MTToolBox {
      * State transition of pseudo random number generator.
      *
      * As a vector of polynomial, multiply by an indeterminate.
-     * @param bit_len bit length from MSB, or \b \v of k(v) currently
+     * @param bit_len bit length from MSB, or \b v of k(v) currently
      * calculating.
      *\endenglish
      */

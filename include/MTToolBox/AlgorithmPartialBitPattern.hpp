@@ -3,8 +3,16 @@
 /**
  * @file AlgorithmPartialBitPattern.hpp
  *
+ *\japanese
  * @brief 疑似乱数生成器の高次元均等分布性を改善するために、テンパ
  * リングパラメータを探索するアルゴリズム
+ *\endjapanese
+ *
+ *\english
+ * @brief Algorithm that search tempering parameters to improve
+ * dimension of equi-distribution of output of pseudo random number
+ * generator.
+ *\endenglish
  *
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (Hiroshima University)
@@ -29,13 +37,14 @@ namespace MTToolBox {
     /**
      * @class AlgorithmPartialBitPattern
      *
+     *\japanese
      * @brief 疑似乱数生成器の高次元均等分布性を改善するために、テンパ
      * リングパラメータを探索するアルゴリズム
      *
      * このアルゴリズムはMTGPのテンパリングパラメータを探索するために開
      * 発され、TinyMTのテンパリングパラメータ探索にも使われている。
      *
-     * \b 注意: テンパリングパラメータの探索をしても十分良い高次元均等
+     * \warning テンパリングパラメータの探索をしても十分良い高次元均等
      * 分布が得られない場合は、状態遷移関数の変更を考慮した方がよい。状
      * 態遷移関数で十分ビットミックスされていない場合、単純なテンパリン
      * グで均等分布次元を最大化することはできないだろう。
@@ -59,6 +68,40 @@ namespace MTToolBox {
      * 転されて均等分布次元が計算される。つまり下位ビットの均等分布次元
      * をあげたい時に指定する。TestU01のBigCrushには下位ビットの均等分
      * 布次元を改善することによってパス可能性が高まるテストがある。
+     *\endjapanese
+     *
+     *\english
+     * @brief Algorithm that search tempering parameters to improve
+     * dimension of equi-distribution of output of pseudo random
+     * number generator.
+     *
+     * This algorithm was developed when we design Mersenne Twister
+     * for Graphic Processors (MTGP). This algorithm also is used in
+     * Tiny Mersenne Twister (TinyMT).
+     *
+     * \warning If you could not get high dimension of
+     * equi-distribution after tempering using parameters got by this
+     * algorithm, you should consider changing the design of random
+     * number generation algorithm.
+     *
+     * @tparam T type of output of pseudo random number generator,
+     * for example, uint32_t. Only unsigned numbers are allowed.
+     *
+     * @tparam bit_len bit length of variable for tempering parameter
+     *
+     * @tparam param_num number of tempering parameters, for instance,
+     * four for MTGP and one for TinyMT.
+     *
+     * @tparam try_bit_len length of tempering part of output.
+     *
+     * @tparam step specify how many bits are generated as bit pattern.
+     * If large number is specified, it will consume huge CPU time.
+     * For example, five is specified in MTGP parameter search.
+     *
+     * @tparam lsb When \b lsb is true, meaning of MSBs and LSBs are
+     * changed.  This program calculate equi-distribution from LSB not
+     * MSB.
+     *\endenglish
      */
     template<typename T,
              int bit_len, int param_num, int try_bit_len, int step = 5,
@@ -66,10 +109,23 @@ namespace MTToolBox {
     class AlgorithmPartialBitPattern : public AlgorithmTempering<T> {
     public:
         /**
+         *\japanese
          * テンパリングパラメータを探索する。
          *
          * この処理の呼び出しは長時間かかる可能性がある。
-         * @returns 0
+         * @param rand テンパリングパラメータを探索する疑似乱数生成器
+         * @param verbose 冗長な出力をするフラグ
+         * @return 常に0を返す
+         *\endjapanese
+         *
+         *\english
+         * Search tempering parameters. Searched parameters are
+         * set to \b rand.
+         * This process may consume large CPU time.
+         * @param rand pseudo random number generator
+         * @param verbose if true output redundant messages.
+         * @return always zero.
+         *\endenglish
          */
         int operator()(TemperingCalculatable<T>& rand,
                        bool verbose = false) {
@@ -106,8 +162,15 @@ namespace MTToolBox {
         }
 
         /**
+         *\japanese
          * このテンパリングパラメータ探索がLSBからの探索であるかどうか
          *@return true LSBからのテンパリングパラメータ探索
+         *\endjapanese
+         *
+         *\english
+         * Shows if searching tempering parameters is from LSBs.
+         *@return true if searching is from LSBs.
+         *\endenglish
          */
         bool isLSBTempering() const {
             return lsb;
@@ -122,12 +185,18 @@ namespace MTToolBox {
         }
 
         /**
+         *\japanese
          * テンパリングパラメータをひとつ探索する。
          *
-         * # v_bit から max_v_bit までのすべてのビットパターンを生成し
-         * # すべてのビットパターンについてvビット精度均等分布次元を計算し
-         * # Δの最も小さかったビットパターンを選択する。
-         * # 同じΔであればハミングウェイトの大きいビットパターンを選択する
+         * vビット精度均等分布次元をk(v)とする。vにおけるk(v)の理論的上限と
+         * 実際のk(v)の差をd(v)とする。vを変化させたd(v)の和をΔで表す。
+         *<ol>
+         * <li>v_bit から max_v_bit までのすべてのビットパターンを生成し</li>
+         * <li>すべてのビットパターンについてk(v),d(v)をそれぞれ計算し</li>
+         * <li>v-bit から max_v_bitまでのd(v)の和(Δ)の最も小さかったビッ
+         * トパターンを選択する。</li>
+         * <li>同じΔであればハミングウェイトの大きいビットパターンを選択する</li>
+         *</ol>
          * なお、このメソッドは再帰する。
          *
          * @param rand GF(2)疑似乱数生成器
@@ -136,6 +205,33 @@ namespace MTToolBox {
          * @param max_v_bit このビットで探索をやめる
          * @param verbose true なら探索過程の情報を出力する
          * @return delta このテンパリングパラメータの設定結果によるΔ
+         *\endjapanese
+         *
+         *\english
+         * Search a tempering parameter.
+         *
+         * Search the best tempering parameter. Here, k(v) means dimension
+         * of equi-distribution with v-bit accuracy, d(v) means the difference
+         * between k(v) and the theoretical upper bound at v. &Delta; means
+         * sum of d(v) for some vs.
+         *<ol>
+         * <li>Generates all bit patterns from v_bit to max_v_bit,</li>
+         * <li>Calculates k(v) and d(v) for all bit patterns,</li>
+         * <li>Select the bit pattern which gives the least &Delta;
+         * for v = 1 to max_v_bit.</li>
+         * <li>Select the bit pattern whose hamming weight is the largest for
+         * the bit patterns whose &Delta;s are same.</li>
+         *</ol>
+         * This method calls itself recursively.
+         *
+         * @param rand GF(2)-linear pseudo random number generator
+         * @param v_bit start position bit of searching tempering parameter
+         * @param param_pos index of tempering parameter
+         * @param max_v_bit end position bit of searching tempering parameter
+         * @param verbose if true, output redundant message.
+         * @return delta &Delta; for v = 1 to max_v_bit for the
+         * selected bit pattern.
+         *\endenglish
          */
         int search_best_temper(TemperingCalculatable<T>& rand, int v_bit,
                                int param_pos, int max_v_bit, bool verbose) {
@@ -158,7 +254,7 @@ namespace MTToolBox {
                 delta = get_equidist(rand, bit_len);
                 if (delta < min_delta) {
                     if (verbose) {
-                        cout << "pattern chagne " << hex << min_pattern
+                        cout << "pattern change " << hex << min_pattern
                              << ":" << pattern << endl;
                     }
                     min_delta = delta;
@@ -166,7 +262,7 @@ namespace MTToolBox {
                 } else if (delta == min_delta) {
                     if (count_bit(min_pattern) < count_bit(pattern)) {
                         if (verbose) {
-                            cout << "pattern chagne " << hex << min_pattern
+                            cout << "pattern change " << hex << min_pattern
                                  << ":" << pattern << endl;
                         }
                         min_pattern = pattern;
@@ -183,21 +279,33 @@ namespace MTToolBox {
         }
 
         /**
+         *\japanese
          * AlgorithmEquidistributionの呼び出し
          *
          * @param rand GF(2)疑似乱数生成器
-         * @param bit_len_ MSB から \b bit_len_ 分の均等分布次元を計算する
+         * @param bit_length MSB から \b bit_len_ 分の均等分布次元を計算する
          * @returns Δ 理論値と実現値の差の合計
+         *\endjapanese
+         *
+         *\english
+         * Wrapper of AlgorithmEquidistribution
+         *
+         * @param rand GF(2)-linear pseudo random number generator
+         * @param bit_length calculate k(v)s for v = 1 to \b bit_length.
+         * @returns &Delta; for v = 1 to \b bit_length.
+         *
+         *\endenglish
          */
         int get_equidist(TemperingCalculatable<T>& rand,
-                         int bit_len_) {
-            AlgorithmEquidistribution<T> sb(rand, bit_len_);
-            int veq[bit_len_];
+                         int bit_length) {
+            AlgorithmEquidistribution<T> sb(rand, bit_length);
+            int veq[bit_length];
             int sum = sb.get_all_equidist(veq);
             return sum;
         }
 
         /**
+         *\japanese
          * ビットマスク作成
          *
          * これはテンパリングパラメータではなく、テンパリングパラメータを
@@ -206,6 +314,19 @@ namespace MTToolBox {
          * @param start ビットマスクを開始するビット位置
          * @param size ビットマスクの長さ
          * @return ビットマスク
+         *\endjapanese
+         *
+         *\english
+         * Making bit mask
+         *
+         * This bit mask is not a tempering parameter,
+         * This bit mask is used when set a tempering parameter to random
+         * number generators.
+         *
+         * @param start start position of bit mask
+         * @param size size of bit mask
+         * @return bit mask
+         *\endenglish
          */
         T make_mask(int start, int size) {
             T mask = 0;
