@@ -48,9 +48,13 @@ namespace MTToolBox {
     /**
      * @class AlgorithmRecursionAndTempering
      *\japanese
-     * # 状態遷移関数の特性多項式が原始多項式となるような疑似乱数生成器のパラメータを探索する。
-     * # 均等分布次元がよくなるようなテンパリングパラメータを探索する。
-     *
+     * \warning このクラスでは、パラメータ探索をする疑似乱数生成器の状態空間のサイズは
+     * メルセンヌ指数であると想定されている。
+     *<ol>
+     * <li>状態遷移関数の特性多項式が原始多項式となるような疑似乱数生成
+     * 器のパラメータを探索する。
+     * <li>均等分布次元がよくなるようなテンパリングパラメータを探索する。
+     *</ol>
      * @tparam U 疑似乱数生成器の出力の型, 符号なし型であること
      *\endjapanese
      *
@@ -64,6 +68,8 @@ namespace MTToolBox {
      * equi-distribution of output of pseudo random number
      * generator.</li>
      *</ol>
+     * \warning The size of internal state of the generator whose
+     * parameters are searched is supporsed to be Mersenne Exponent.
      *
      * @tparam U Type of output of pseudo random number
      * generator. Should be unsigned number.
