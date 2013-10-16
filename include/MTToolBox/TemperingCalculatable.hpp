@@ -16,6 +16,16 @@
  * Users can search tempering parameters by making GF(2)-linear
  * pseudo random generator class which inherits from this class.
  *\endenglish
+ *
+ * @author Mutsuo Saito (Hiroshima University)
+ * @author Makoto Matsumoto (Hiroshima University)
+ *
+ * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
+ * and Hiroshima University.
+ * All rights reserved.
+ *
+ * The 3-clause BSD License is applied to this software, see
+ * LICENSE.txt
  */
 #include <stdint.h>
 #include <inttypes.h>
