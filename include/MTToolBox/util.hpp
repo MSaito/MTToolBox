@@ -3,7 +3,13 @@
 /**
  * @file util.hpp
  *
+ *\japanese
  * @brief ユーティリティ関数群
+ *\endjapanese
+ *
+ *\english
+ * @brief Utility functions
+ *\endenglish
  *
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (Hiroshima University)
@@ -37,12 +43,23 @@ namespace MTToolBox {
     inline static uint64_t reverse_bit(uint64_t x);
 
     /**
+     *\japanese
      * T のビットサイズを返す。
      *
      * sizeof に 8 を掛けているだけなので正確ではない。
      *
      * @tparam T ビットサイズを知りたい型
      * @return T のビットサイズ
+     *\endjapanese
+     *
+     *\english
+     * Returns bit size of T
+     *
+     * This is not correct because just multiply sizeof(T) by eight.
+     *
+     * @tparam T type
+     * @return bit size of T
+     *\endenglish
      */
     template<typename T>
     int bit_size() {
@@ -50,18 +67,34 @@ namespace MTToolBox {
     }
 
     /**
+     *\japanese
      * 使用しない変数のワーニングを止める
      * @param[in] x 使用しない変数へのポインタ
+     *\endjapanese
+     *
+     *\english
+     * Stop warning of unused variable
+     * @param[in] x pointer to unused variable
+     *\endenglish
      */
     inline static void UNUSED_VARIABLE(void * x) {
         (void)x;
     }
 
     /**
+     *\japanese
      * n を越えない最大の2のべき乗を返す。
      * @tparam T n の整数型
      * @param[in] n 整数
      * @returns n を越えない最大の2のべき乗
+     *\endjapanese
+     *
+     *\english
+     * Return greatest power of two not greater than \b n
+     * @tparam T type of \b n
+     * @param[in] n integer
+     * @return greatest 2<sup>x</sup> \< = n
+     *\endenglish
      */
     template<typename T>
     T floor2p(T n) {
@@ -73,12 +106,24 @@ namespace MTToolBox {
     }
 
     /**
-     * 出力ストリーム os に多項式 poly を01の文字列で出力する。
+     *\japanese
+     * 出力ストリーム \b os に多項式 \b poly を01の文字列で出力する。
+     *
      * 次数の低い項の係数が先に出力される。（昇巾順）
      *
      * @param[in,out] os 出力ストリーム
      * @param[in] poly 出力される多項式
      * @param[in] breakline 真なら32文字出力ごとに改行される。
+     *\endjapanese
+     *
+     *\english
+     * Outputs coefficients of \b poly to \b os.
+     *
+     * Coefficients of low degree terms are outputted first.
+     * @param[in, out] os output stream
+     * @param[in] poly polynomial to be outputted
+     * @param[in] breakline if true, line break after every 32 terms.
+     *\endenglish
      */
     inline static void print_binary(std::ostream& os,
                                     NTL::GF2X& poly,
@@ -102,12 +147,25 @@ namespace MTToolBox {
     }
 
     /**
+     *\japanese
      * input を start と end の間の数に変換する。
+     *
      * 偏りは気にしない。
-     * @param input 入力
-     * @param start 範囲の開始
-     * @param end 範囲の終了
-     * @return \b start <= \b r <= \b end となるような r
+     * @param[in] input 入力
+     * @param[in] start 範囲の開始
+     * @param[in] end 範囲の終了
+     * @return \b start \<= \b r \<= \b end となるような r
+     *\endjapanese
+     *
+     *\english
+     * Changes input to number between start and end
+     *
+     * This conversion may not be uniformly distributed.
+     * @param[in] input input
+     * @param[in] start start of range
+     * @param[in] end end of range
+     * @return r satisfies that \b start \<= r \<= \b end
+     *\endenglish
      */
     template<typename T>
     int get_range(T input, int start, int end) {
@@ -119,11 +177,21 @@ namespace MTToolBox {
     }
 
     /**
+     *\japanese
      * GF(2)ベクトルのパラメータテーブルから、より高速で冗長なルックアップテーブルを作成する。
      * @tparam T テーブル内の符号なし整数の型
-     * @param dist_tbl 作成されるルックアップテーブル
-     * @param src_tbl 元になるGF(2)ベクトルのテーブル
-     * @param size \b dist_table　のサイズ
+     * @param[out] dist_tbl 作成されるルックアップテーブル
+     * @param[in] src_tbl 元になるGF(2)ベクトルのテーブル
+     * @param[in] size \b dist_tbl　のサイズ
+     *\endjapanese
+     *
+     *\english
+     * Makes a fast and redundant lookup table from a tabale of GF(2) vectors.
+     * @tparam T type of elements in tables.
+     * @param[out] dist_tbl a lookup table to be made
+     * @param[in] src_tbl table of GF(2) vectors.
+     * @param[in] size size of \b dist_tbl
+     *\endenglish
      */
     template<typename T>
     void fill_table(T dist_tbl[], T src_tbl[], int size) {
@@ -138,14 +206,28 @@ namespace MTToolBox {
 
 #if defined(USE_SHA)
     /**
+     *\japanese
      * GF(2)係数多項式のSHA1ダイジェストを計算する。
      *
      * 多項式の係数を昇巾の順で01からなる文字列に変換し、その後その文字
-     * 列のSHA1ダイジェストを計算する。計算されたSHA1ダイジェストは十六進文字列
-     * として返される
+     * 列のSHA1ダイジェストを計算する。計算されたSHA1ダイジェストは十六
+     * 進文字列として返される
      *
      * @param[out] str 出力文字列
      * @param[in] poly GF(2)係数多項式
+     *\endjapanese
+     *
+     *\english
+     * Calculates SHA1 digest of polynomial over GF(2).
+     *
+     * Convert polynomial to a string of 0 and 1, where coefficient
+     * of lowest degree appears first. Then Calculate SHA1 digest of
+     * the string. Finally, the calculated digest is converted to
+     * a hexadecimal string and returned.
+     *
+     * @param[out] str output string
+     * @param[in] poly polynomial over GF(2)
+     *\endenglish
      */
     inline static void poly_sha1(std::string& str, const NTL::GF2X& poly) {
         using namespace NTL;
@@ -174,18 +256,25 @@ namespace MTToolBox {
 #endif
 
     /**
+     *\japanese
      * 入力をビット列とみなして最上位の1の位置を0とした最も右側の（下位の）1の位置を返す。
      *
-     * 例<ul>
-     * <li>calc_1pos(0x8000U) は 0を返す。
-     * <li>calc_1pos(0x8002U) は14を返す。
-     * <li>calc_1pos(0) は -1 を返す。
-     * </ul>
-     *
-     * このアルゴリズムは以下を参照した
+     * 1の位置を求めるアルゴリズムは以下のページのものを使用した。
      * @see http://aggregate.org/MAGIC/#Trailing Zero Count
      * @param[in] x 入力
      * @return 最下位の1のあるビットの上位から数えた位置を返す。
+     *\endjapanese
+     *
+     *\english
+     * Returns the position of 1 which appears lowest (most right
+     * side) in \b x, where the position of MSB becomes zero.
+     *
+     * Algorithm to search position of 1 is from this page;
+     * @see http://aggregate.org/MAGIC/#Trailing Zero Count
+     * @param[in] x input
+     * @return the position of 1 which appears lowest (most right
+     * side) in \b x, where the position of MSB becomes zero.
+     *\endenglish
      */
     static inline int calc_1pos(uint16_t x)
     {
@@ -198,18 +287,28 @@ namespace MTToolBox {
     }
 
     /**
-     * 入力をビット列とみなして最上位の1の位置を0とした最も右側の（下位の）1の位置を返す。
-     *
+     *\japanese
+     * \copydoc calc_1pos(uint16_t)
      * 例<ul>
      * <li>calc_1pos(0x80000000U) は 0を返す。
      * <li>calc_1pos(0x80000002U) は30を返す。
      * <li>calc_1pos(0) は -1 を返す。
      * </ul>
-     *
-     * このアルゴリズムは以下を参照した
-     * @see http://aggregate.org/MAGIC/#Trailing Zero Count
      * @param[in] x 入力
      * @return 最下位の1のあるビットの上位から数えた位置を返す。
+     *\endjapanese
+     *
+     *\english
+     * \copydoc calc_1pos(uint16_t)
+     * Example<ul>
+     * <li>calc_1pos(0x80000000U) returns 0.
+     * <li>calc_1pos(0x80000002U) returns 30.
+     * <li>calc_1pos(0) returns -1.
+     * </ul>
+     * @param[in] x input
+     * @return the position of 1 which appears lowest (most right
+     * side) in \b x, where the position of MSB becomes zero.
+     *\endenglish
      */
     static inline int calc_1pos(uint32_t x)
     {
@@ -222,18 +321,28 @@ namespace MTToolBox {
     }
 
     /**
-     * 入力をビット列とみなして最上位の1の位置を0とした最も右側の（下位の）1の位置を返す。
-     *
+     *\japanese
+     * \copydoc calc_1pos(uint16_t)
      * 例<ul>
      * <li>calc_1pos(UINT64_C(0x8000000000000000)) は 0を返す。
      * <li>calc_1pos(UINT64_C(0x8000000000000002)) は62を返す。
      * <li>calc_1pos(0) は -1 を返す。
      * </ul>
-     *
-     * このアルゴリズムは以下を参照にした
-     * @see http://aggregate.org/MAGIC/#Trailing Zero Count
      * @param[in] x 入力
      * @return 最下位の1のあるビットの上位から数えた位置を返す。
+     *\endjapanese
+     *
+     *\english
+     * \copydoc calc_1pos(uint16_t)
+     * Example<ul>
+     * <li>calc_1pos(UINT64_C(0x8000000000000000)) returns 0.
+     * <li>calc_1pos(UINT64_C(0x8000000000000002)) returns 62.
+     * <li>calc_1pos(0) returns -1.
+     * </ul>
+     * @param[in] x input
+     * @return the position of 1 which appears lowest (most right
+     * side) in \b x, where the position of MSB becomes zero.
+     *\endenglish
      */
     static inline int calc_1pos(uint64_t x)
     {
@@ -246,12 +355,24 @@ namespace MTToolBox {
     }
 
     /**
+     *\japanese
      * 1 の個数を数える
+     *
+     * レジスタ内SIMDアルゴリズム
+     * http://aggregate.org/MAGIC/ より引用
+     *
+     * @param[in] x ビットパターン
+     * @returns x の中の1の個数
+     *\endjapanese
+     *
+     *\english
+     * Counts number of 1s.
+     *
      * SIMD within a Register algorithm
      * citing from a website http://aggregate.org/MAGIC/
-     *
-     * @param x ビットパターン
-     * @returns x の中の1の個数
+     * @param[in] x bit pattern
+     * @return number of 1s in \b x.
+     *\endenglish
      */
     inline static int count_bit(uint16_t x) {
         x -= (x >> 1) & UINT16_C(0x5555);
@@ -262,17 +383,17 @@ namespace MTToolBox {
     }
 
     /**
-     * 1 の個数を数える
-     * SIMD within a Register algorithm
-     * citing from a website http://aggregate.org/MAGIC/
-     */
-    /**
-     * 1 の個数を数える
-     * SIMD within a Register algorithm
-     * citing from a website http://aggregate.org/MAGIC/
-     *
+     *\japanese
+     * \copydoc count_bit(uint16_t)
      * @param x ビットパターン
      * @returns x の中の1の個数
+     *\endjapanese
+     *
+     *\english
+     * \copydoc count_bit(uint16_t)
+     * @param[in] x bit pattern
+     * @return number of 1s in \b x.
+     *\endenglish
      */
     inline static int count_bit(uint32_t x) {
         x -= (x >> 1) & UINT32_C(0x55555555);
@@ -284,12 +405,17 @@ namespace MTToolBox {
     }
 
     /**
-     * 1 の個数を数える
-     * SIMD within a Register algorithm
-     * citing from a website http://aggregate.org/MAGIC/
-     *
+     *\japanese
+     * \copydoc count_bit(uint16_t)
      * @param x ビットパターン
      * @returns x の中の1の個数
+     *\endjapanese
+     *
+     *\english
+     * \copydoc count_bit(uint16_t)
+     * @param[in] x bit pattern
+     * @return number of 1s in \b x.
+     *\endenglish
      */
     inline static int count_bit(uint64_t x) {
         x -= (x >> 1) & UINT64_C(0x5555555555555555);
@@ -303,12 +429,26 @@ namespace MTToolBox {
     }
 
     /**
-     * 1 の個数を数える
+     *\japanese
+     * ビットを反転する
+     *
+     * 入力ビットの上位と下位を反転する。最上位ビットは最下位ビットになる
+     * レジスタ内SIMDアルゴリズム
+     * http://aggregate.org/MAGIC/ より引用
+     * @param x ビットパターン
+     * @returns x を反転したビットパターン
+     *\endjapanese
+     *
+     *\english
+     * Reverse bits
+     *
+     * Reverse upper side and lower side in input.
+     * The MSB bocomes the LSB.
      * SIMD within a Register algorithm
      * citing from a website http://aggregate.org/MAGIC/
-     *
-     * @param x ビットパターン
-     * @returns x の中の1の個数
+     * @param[in] x bit pattern
+     * @return reverse of \b x
+     *\endenglish
      */
     inline static uint32_t reverse_bit(uint32_t x)
     {
@@ -324,12 +464,17 @@ namespace MTToolBox {
     }
 
     /**
-     * 1 の個数を数える
-     * SIMD within a Register algorithm
-     * citing from a website http://aggregate.org/MAGIC/
-     *
+     *\japanese
+     * \copydoc reverse_bit(uint32_t)
      * @param x ビットパターン
-     * @returns x の中の1の個数
+     * @returns x を反転したビットパターン
+     *\endjapanese
+     *
+     *\english
+     * \copydoc count_bit(uint16_t)
+     * @param[in] x bit pattern
+     * @return reverse of \b x
+     *\endenglish
      */
     inline static uint64_t reverse_bit(uint64_t x)
     {
