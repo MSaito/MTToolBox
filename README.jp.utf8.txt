@@ -2,6 +2,7 @@
 MTToolBox 疑似乱数生成器開発ライブラリ README ファイル
 
 doxygen ドキュメント http://msaito.github.io/MTToolBox/
+doxygen ドキュメント http://msaito.github.io/MTToolBox/en/ (英語)
 github プロジェクト  https://github.com/MSaito/MTToolBox
 
 1. はじめに
@@ -29,6 +30,7 @@ MTToolBox はGF(2)線形疑似乱数生成器を作成するためのライブ�
 2. 必要ライブラリ
 
 NTL
+version 6.0 以降
 http://www.shoup.net/ntl/
 GF(2)係数多項式の計算に使用。このプロジェクトがC++で書かれている最大の
 理由はNTLを使うためである。

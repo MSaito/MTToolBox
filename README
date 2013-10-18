@@ -3,6 +3,7 @@ See README.jp.utf8.txt
 
 MTToolBox: a pseudo random number generator developing library.
 
+doxygen documents  http://msaito.github.io/MTToolBox/en/
 doxygen documents  http://msaito.github.io/MTToolBox/ (Japanese)
 github project https://github.com/MSaito/MTToolBox (Japanese)
 
@@ -33,6 +34,7 @@ mistakes.
 2. Dependent Libraries
 
 NTL
+version 6.0 or later
 http://www.shoup.net/ntl/
 using calculation of GF(2)polynomials. To use NTL, MTToolBox is written
 in C++.
