@@ -66,7 +66,7 @@ MTToolBox::EquidistributionCalculatable&lt; U &gt;に対する継承グラフ</d
   <img src="class_m_t_tool_box_1_1_equidistribution_calculatable.png" usemap="#MTToolBox::EquidistributionCalculatable&lt; U &gt;_map" alt=""/>
   <map id="MTToolBox::EquidistributionCalculatable&lt; U &gt;_map" name="MTToolBox::EquidistributionCalculatable&lt; U &gt;_map">
 <area href="class_m_t_tool_box_1_1_recursion_searchable.html" alt="MTToolBox::RecursionSearchable&lt; U &gt;" shape="rect" coords="0,56,268,80"/>
-<area href="class_m_t_tool_box_1_1_abstract_generator.html" title="GF(2)線形の状態遷移をもつ疑似乱数生成器" alt="MTToolBox::AbstractGenerator&lt; U &gt;" shape="rect" coords="0,0,268,24"/>
+<area href="class_m_t_tool_box_1_1_abstract_generator.html" title="疑似乱数生成器" alt="MTToolBox::AbstractGenerator&lt; U &gt;" shape="rect" coords="0,0,268,24"/>
 <area href="class_m_t_tool_box_1_1_tempering_calculatable.html" title="テンパリングを行うGF(2)線形疑似乱数生成器は、このクラスを継承す ることによって、TemperingAlgorithmを使用したテンパリングパラメー タ探索が可能になる。" alt="MTToolBox::TemperingCalculatable&lt; U &gt;" shape="rect" coords="0,168,268,192"/>
 </map>
  </div></div>
@@ -117,7 +117,7 @@ class MTToolBox::EquidistributionCalculatable&lt; U &gt;</h3>
 <p>GF(2)線形疑似乱数生成器を設計するならば、均等分布次元を計算して おいた方がよいであろう。均等分布次元を計算するためには、出力関数 も含めてGF(2)線形であることが必要である。均等分布次元は状態空間 の大きさによって上限が決まるので、状態空間の大きさを固定した時に どのくらい上限に近づけるかという点に理論的な関心がある。一方、多 変数（多次元）の数値積分などの実際の問題領域においては、均等分布 次元の大きさそのものが問題であり、その点から言えば、状態空間の大 きな疑似乱数生成器を開発し、均等分布次元の値を大きくすることの方 が理論的上限に近いかどうかよりも重要である。</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">U</td><td>疑似乱数生成器の出力のタイプ </td></tr>
+    <tr><td class="paramname">U</td><td>疑似乱数生成器の出力のタイプ、符号なし型でなければならない。 </td></tr>
   </table>
   </dd>
 </dl>
@@ -147,10 +147,10 @@ template&lt;class U&gt; </div>
 </div><div class="memdoc">
 
 <p>GF(2)線形疑似乱数生成器の状態空間を加算し、内部状態を変更する。 </p>
-<p><b>注意：</b> 配列を使ってラウンドロビン方式で状態空間を保持している場合、 このメソッドを実装する際に、インデックスを一致させて加算することが重要である。 <b>state</b> を状態配列、<b>size</b> を配列のサイズ、<b>index</b> をラウンドロビンの インデックスとすると以下のような加算が必要になる。 </p>
-<pre class="fragment"> for (int i = 0; i &lt; size; i++) {
-   state[(index + i) % size] ^= that.state[(that.index + i) % size];
- }
+<dl class="section warning"><dt>警告</dt><dd>配列を使ってラウンドロビン方式で状態空間を保持している場合、 このメソッドを実装する際に、インデックスを一致させて加算することが重要である。 <b>state</b> を状態配列、<b>size</b> を配列のサイズ、<b>index</b> をラウンドロビンの インデックスとすると以下のような加算が必要になる。</dd></dl>
+<pre class="fragment">for (int i = 0; i &lt; size; i++) {
+  state[(index + i) % size] ^= that.state[(that.index + i) % size];
+}
 </pre> 
 </div>
 </div>
@@ -231,7 +231,7 @@ template&lt;class U&gt; </div>
 </div><div class="memdoc">
 
 <p>状態空間がすべてゼロかチェックする。 </p>
-<p><b>注意：</b> メルセンヌツイスタのように、欠けた配列を使用する場合は、 真の状態空間がすべてゼロかチェックする必要がある。言い換えると、 必要なマスクをして余分な部分を排除してからゼロチェックする べきである。</p>
+<dl class="section warning"><dt>警告</dt><dd>メルセンヌツイスタのように、欠けた配列を使用する場合は、 真の状態空間がすべてゼロかチェックする必要がある。言い換えると、 必要なマスクをして余分な部分を排除してからゼロチェックする べきである。</dd></dl>
 <dl class="section return"><dt>戻り値</dt><dd>true なら状態空間がすべてゼロ </dd></dl>
 
 </div>
@@ -269,7 +269,7 @@ template&lt;class U&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Oct 4 2013 10:36:09に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してFri Oct 18 2013 10:53:50に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

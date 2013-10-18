@@ -55,7 +55,7 @@
 </div><!--header-->
 <div class="contents">
 
-<p>GF(2)線形の状態遷移をもつ疑似乱数生成器  
+<p>疑似乱数生成器  
  <a href="class_m_t_tool_box_1_1_abstract_generator.html#details">[詳細]</a></p>
 
 <p><code>#include &lt;<a class="el" href="_abstract_generator_8hpp_source.html">AbstractGenerator.hpp</a>&gt;</code></p>
@@ -87,7 +87,7 @@ Public メソッド</h2></td></tr>
 <div class="textblock"><h3>template&lt;class U&gt;<br/>
 class MTToolBox::AbstractGenerator&lt; U &gt;</h3>
 
-<p>GF(2)線形の状態遷移をもつ疑似乱数生成器 </p>
+<p>疑似乱数生成器 </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">U</td><td>疑似乱数生成器の出力の型 </td></tr>
@@ -120,10 +120,11 @@ template&lt;class U&gt; </div>
 
 <p>内部状態空間のビットサイズを返す。 </p>
 <p>内部状態空間のビットサイズ、つまりGF(2)線形空間の次元を返す。 メルセンヌツイスタのように欠けた配列を使用している場合は、実 際に使用されている部分のビットサイズを返すこと。 </p>
+<dl class="section return"><dt>戻り値</dt><dd>状態空間のビットサイズ </dd></dl>
 
 <p><a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#a9eb50b904a3542b0ba8342da46599f0c">MTToolBox::MersenneTwister</a>, と <a class="el" href="class_m_t_tool_box_1_1_sequential.html#aad32c0e6951175f7f05b0ff03b08de92">MTToolBox::Sequential&lt; T &gt;</a>で実装されています。</p>
 
-<p>参照元 <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#af28b73340ccf6cd480eaea0380f1f811">MTToolBox::AlgorithmEquidistribution&lt; T &gt;::AlgorithmEquidistribution()</a>, <a class="el" href="namespace_m_t_tool_box.html#a7861dda005fe9d0c519f7e1442a1fa84">MTToolBox::minpoly()</a>, <a class="el" href="class_m_t_tool_box_1_1_algorithm_best_bits.html#a72ec1da4f8b91065db20b5289219e3ab">MTToolBox::AlgorithmBestBits&lt; T &gt;::operator()()</a>, と <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#abb6464d97f67d13fe698b0aee6a98172">MTToolBox::AlgorithmRecursionAndTempering&lt; T &gt;::search()</a>.</p>
+<p>参照元 <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#a77415bdcee26484cc929213c60a3d1f9">MTToolBox::AlgorithmEquidistribution&lt; U &gt;::AlgorithmEquidistribution()</a>, <a class="el" href="namespace_m_t_tool_box.html#a7861dda005fe9d0c519f7e1442a1fa84">MTToolBox::minpoly()</a>, <a class="el" href="class_m_t_tool_box_1_1_algorithm_best_bits.html#ab9c3f8c9b585c61012266f7340cbbe61">MTToolBox::AlgorithmBestBits&lt; U &gt;::operator()()</a>, と <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a893bd8f23f666a4b3f88c199ceea463f">MTToolBox::AlgorithmRecursionAndTempering&lt; U &gt;::search()</a>.</p>
 
 </div>
 </div>
@@ -204,7 +205,7 @@ template&lt;class U&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Oct 4 2013 10:36:09に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してFri Oct 18 2013 10:53:50に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

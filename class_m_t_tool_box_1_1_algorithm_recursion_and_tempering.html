@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>MTToolBox: クラス テンプレート MTToolBox::AlgorithmRecursionAndTempering&lt; T &gt;</title>
+<title>MTToolBox: クラス テンプレート MTToolBox::AlgorithmRecursionAndTempering&lt; U &gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -51,7 +51,7 @@
   <div class="summary">
 <a href="#pub-methods">Public メソッド</a>  </div>
   <div class="headertitle">
-<div class="title">クラス テンプレート MTToolBox::AlgorithmRecursionAndTempering&lt; T &gt;</div>  </div>
+<div class="title">クラス テンプレート MTToolBox::AlgorithmRecursionAndTempering&lt; U &gt;</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -59,52 +59,56 @@
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public メソッド</h2></td></tr>
-<tr class="memitem:a3b93431734ad233fb6488ffeab90b9a0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a3b93431734ad233fb6488ffeab90b9a0">AlgorithmRecursionAndTempering</a> (<a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html">AbstractGenerator</a>&lt; T &gt; &amp;bg)</td></tr>
-<tr class="separator:a3b93431734ad233fb6488ffeab90b9a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb6464d97f67d13fe698b0aee6a98172"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#abb6464d97f67d13fe698b0aee6a98172">search</a> (<a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html">TemperingCalculatable</a>&lt; T &gt; &amp;lg, <a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering</a>&lt; T &gt; &amp;st1, <a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering</a>&lt; T &gt; &amp;st2, bool verbose=false, std::ostream &amp;os=std::cout, bool no_lsb=false)</td></tr>
-<tr class="memdesc:abb6464d97f67d13fe698b0aee6a98172"><td class="mdescLeft">&#160;</td><td class="mdescRight">状態遷移パラメータとテンパリングパラメータを探索する。  <a href="#abb6464d97f67d13fe698b0aee6a98172">[詳細]</a><br/></td></tr>
-<tr class="separator:abb6464d97f67d13fe698b0aee6a98172"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19890a875aa2171224eaa05047ca3dd0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a19890a875aa2171224eaa05047ca3dd0">search</a> (<a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html">TemperingCalculatable</a>&lt; T &gt; &amp;lg, <a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering</a>&lt; T &gt; &amp;st, bool verbose=false, std::ostream &amp;os=std::cout)</td></tr>
-<tr class="memdesc:a19890a875aa2171224eaa05047ca3dd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">MSBからの均等分布次元のみを向上させたい場合の探索を行う。  <a href="#a19890a875aa2171224eaa05047ca3dd0">[詳細]</a><br/></td></tr>
-<tr class="separator:a19890a875aa2171224eaa05047ca3dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2d4904c355e265b64bd33b5c1a5a2a4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#aa2d4904c355e265b64bd33b5c1a5a2a4">getWeight</a> ()</td></tr>
-<tr class="memdesc:aa2d4904c355e265b64bd33b5c1a5a2a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">特性多項式のハミングウェイトを返す  <a href="#aa2d4904c355e265b64bd33b5c1a5a2a4">[詳細]</a><br/></td></tr>
-<tr class="separator:aa2d4904c355e265b64bd33b5c1a5a2a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4106b96d1a7a79efc8dec88431fee72"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#ad4106b96d1a7a79efc8dec88431fee72">getDelta</a> ()</td></tr>
-<tr class="memdesc:ad4106b96d1a7a79efc8dec88431fee72"><td class="mdescLeft">&#160;</td><td class="mdescRight">均等分布次元の理論値との差の総和を返す。  <a href="#ad4106b96d1a7a79efc8dec88431fee72">[詳細]</a><br/></td></tr>
-<tr class="separator:ad4106b96d1a7a79efc8dec88431fee72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72e61744e40ee1c010a3386e73944bdd"><td class="memItemLeft" align="right" valign="top">const NTL::GF2X &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a72e61744e40ee1c010a3386e73944bdd">getCharacteristicPolynomial</a> ()</td></tr>
-<tr class="memdesc:a72e61744e40ee1c010a3386e73944bdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">状態遷移関数の特性多項式を返す。  <a href="#a72e61744e40ee1c010a3386e73944bdd">[詳細]</a><br/></td></tr>
-<tr class="separator:a72e61744e40ee1c010a3386e73944bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac26259b9f12006c296ccb342eb207315"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#ac26259b9f12006c296ccb342eb207315">AlgorithmRecursionAndTempering</a> (<a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html">AbstractGenerator</a>&lt; U &gt; &amp;bg)</td></tr>
+<tr class="memdesc:ac26259b9f12006c296ccb342eb207315"><td class="mdescLeft">&#160;</td><td class="mdescRight">コンストラクタ  <a href="#ac26259b9f12006c296ccb342eb207315">[詳細]</a><br/></td></tr>
+<tr class="separator:ac26259b9f12006c296ccb342eb207315"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a893bd8f23f666a4b3f88c199ceea463f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a893bd8f23f666a4b3f88c199ceea463f">search</a> (<a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html">TemperingCalculatable</a>&lt; U &gt; &amp;lg, <a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering</a>&lt; U &gt; &amp;st1, <a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering</a>&lt; U &gt; &amp;st2, bool verbose=false, std::ostream &amp;os=std::cout, bool no_lsb=false)</td></tr>
+<tr class="memdesc:a893bd8f23f666a4b3f88c199ceea463f"><td class="mdescLeft">&#160;</td><td class="mdescRight">状態遷移パラメータとテンパリングパラメータを探索する。  <a href="#a893bd8f23f666a4b3f88c199ceea463f">[詳細]</a><br/></td></tr>
+<tr class="separator:a893bd8f23f666a4b3f88c199ceea463f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5872b157a25fa70ad2e42d40f931b2e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#af5872b157a25fa70ad2e42d40f931b2e">search</a> (<a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html">TemperingCalculatable</a>&lt; U &gt; &amp;lg, <a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering</a>&lt; U &gt; &amp;st, bool verbose=false, std::ostream &amp;os=std::cout)</td></tr>
+<tr class="memdesc:af5872b157a25fa70ad2e42d40f931b2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">MSBからの均等分布次元のみを向上させたい場合の探索を行う。 状態遷移関数のパラメータは探索する。  <a href="#af5872b157a25fa70ad2e42d40f931b2e">[詳細]</a><br/></td></tr>
+<tr class="separator:af5872b157a25fa70ad2e42d40f931b2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af823ed4b367e2e2a987a5bab595eef86"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#af823ed4b367e2e2a987a5bab595eef86">getWeight</a> ()</td></tr>
+<tr class="memdesc:af823ed4b367e2e2a987a5bab595eef86"><td class="mdescLeft">&#160;</td><td class="mdescRight">特性多項式のハミングウェイトを返す  <a href="#af823ed4b367e2e2a987a5bab595eef86">[詳細]</a><br/></td></tr>
+<tr class="separator:af823ed4b367e2e2a987a5bab595eef86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e79c69c2b2f2ca5b2ccc51ba3e6b13a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a7e79c69c2b2f2ca5b2ccc51ba3e6b13a">getDelta</a> ()</td></tr>
+<tr class="memdesc:a7e79c69c2b2f2ca5b2ccc51ba3e6b13a"><td class="mdescLeft">&#160;</td><td class="mdescRight">均等分布次元の理論値との差の総和を返す。  <a href="#a7e79c69c2b2f2ca5b2ccc51ba3e6b13a">[詳細]</a><br/></td></tr>
+<tr class="separator:a7e79c69c2b2f2ca5b2ccc51ba3e6b13a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0afb10b807f2072a5bc9b72cabb50c5e"><td class="memItemLeft" align="right" valign="top">const NTL::GF2X &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a0afb10b807f2072a5bc9b72cabb50c5e">getCharacteristicPolynomial</a> ()</td></tr>
+<tr class="memdesc:a0afb10b807f2072a5bc9b72cabb50c5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">状態遷移関数の特性多項式を返す。  <a href="#a0afb10b807f2072a5bc9b72cabb50c5e">[詳細]</a><br/></td></tr>
+<tr class="separator:a0afb10b807f2072a5bc9b72cabb50c5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">説明</h2>
-<div class="textblock"><h3>template&lt;typename T&gt;<br/>
-class MTToolBox::AlgorithmRecursionAndTempering&lt; T &gt;</h3>
+<div class="textblock"><h3>template&lt;typename U&gt;<br/>
+class MTToolBox::AlgorithmRecursionAndTempering&lt; U &gt;</h3>
 
-<ul>
-<li>状態遷移関数の特性多項式が原始多項式となるような疑似乱数生成器のパラメータを探索する。</li>
-<li>均等分布次元がよくなるようなテンパリングパラメータを探索する。</li>
-</ul>
+<dl class="section warning"><dt>警告</dt><dd>このクラスでは、パラメータ探索をする疑似乱数生成器の状態空間のサイズは メルセンヌ指数であると想定されている。 <ol>
+<li>
+状態遷移関数の特性多項式が原始多項式となるような疑似乱数生成 器のパラメータを探索する。 </li>
+<li>
+均等分布次元がよくなるようなテンパリングパラメータを探索する。 </li>
+</ol>
+</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>疑似乱数生成器の出力の型 </td></tr>
+    <tr><td class="paramname">U</td><td>疑似乱数生成器の出力の型, 符号なし型であること </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">コンストラクタとデストラクタ</h2>
-<a class="anchor" id="a3b93431734ad233fb6488ffeab90b9a0"></a>
+<a class="anchor" id="ac26259b9f12006c296ccb342eb207315"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename U &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">MTToolBox::AlgorithmRecursionAndTempering</a>&lt; T &gt;::<a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">AlgorithmRecursionAndTempering</a> </td>
+          <td class="memname"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">MTToolBox::AlgorithmRecursionAndTempering</a>&lt; U &gt;::<a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">AlgorithmRecursionAndTempering</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html">AbstractGenerator</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html">AbstractGenerator</a>&lt; U &gt; &amp;&#160;</td>
           <td class="paramname"><em>bg</em></td><td>)</td>
           <td></td>
         </tr>
@@ -116,20 +120,28 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>コンストラクタ </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bg</td><td>パラメータをランダムサーチするための疑似乱数生成器を指定する。 この疑似乱数生成器に限り、GF(2)線形である必要はない。疑似乱数生成器である 必要すらない。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">関数</h2>
-<a class="anchor" id="a72e61744e40ee1c010a3386e73944bdd"></a>
+<a class="anchor" id="a0afb10b807f2072a5bc9b72cabb50c5e"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename U &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const NTL::GF2X&amp; <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">MTToolBox::AlgorithmRecursionAndTempering</a>&lt; T &gt;::getCharacteristicPolynomial </td>
+          <td class="memname">const NTL::GF2X&amp; <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">MTToolBox::AlgorithmRecursionAndTempering</a>&lt; U &gt;::getCharacteristicPolynomial </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -143,20 +155,21 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>状態遷移関数の特性多項式を返す。 </p>
+<dl class="section return"><dt>戻り値</dt><dd>状態遷移関数の特性多項式 </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="ad4106b96d1a7a79efc8dec88431fee72"></a>
+<a class="anchor" id="a7e79c69c2b2f2ca5b2ccc51ba3e6b13a"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename U &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">MTToolBox::AlgorithmRecursionAndTempering</a>&lt; T &gt;::getDelta </td>
+          <td class="memname">int <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">MTToolBox::AlgorithmRecursionAndTempering</a>&lt; U &gt;::getDelta </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -170,20 +183,21 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>均等分布次元の理論値との差の総和を返す。 </p>
+<dl class="section return"><dt>戻り値</dt><dd>均等分布次元の理論値との差の総和 </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="aa2d4904c355e265b64bd33b5c1a5a2a4"></a>
+<a class="anchor" id="af823ed4b367e2e2a987a5bab595eef86"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename U &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">MTToolBox::AlgorithmRecursionAndTempering</a>&lt; T &gt;::getWeight </td>
+          <td class="memname">int <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">MTToolBox::AlgorithmRecursionAndTempering</a>&lt; U &gt;::getWeight </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -197,34 +211,35 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>特性多項式のハミングウェイトを返す </p>
+<dl class="section return"><dt>戻り値</dt><dd>特性多項式のハミングウェイト </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="abb6464d97f67d13fe698b0aee6a98172"></a>
+<a class="anchor" id="a893bd8f23f666a4b3f88c199ceea463f"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename U &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">MTToolBox::AlgorithmRecursionAndTempering</a>&lt; T &gt;::search </td>
+          <td class="memname">bool <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">MTToolBox::AlgorithmRecursionAndTempering</a>&lt; U &gt;::search </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html">TemperingCalculatable</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html">TemperingCalculatable</a>&lt; U &gt; &amp;&#160;</td>
           <td class="paramname"><em>lg</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering</a>&lt; U &gt; &amp;&#160;</td>
           <td class="paramname"><em>st1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering</a>&lt; U &gt; &amp;&#160;</td>
           <td class="paramname"><em>st2</em>, </td>
         </tr>
         <tr>
@@ -270,33 +285,45 @@ template&lt;typename T &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>戻り値</dt><dd>原始多項式を発見した </dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>true 原始多項式を発見しテンパリングパラメータを設定した場合</dd></dl>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lg</td><td>GF(2)-linear pseudo random number generator whose parameters are to be searched. </td></tr>
+    <tr><td class="paramname">st1</td><td>Algorithm for searching tempering parameters. </td></tr>
+    <tr><td class="paramname">st2</td><td>Algorithm for searching tempering parameters from LSB. </td></tr>
+    <tr><td class="paramname">verbose</td><td>if true redundant messages will be outputed. </td></tr>
+    <tr><td class="paramname">os</td><td>output stream for redundant messages. </td></tr>
+    <tr><td class="paramname">no_lsb</td><td>if true, <b>st2</b> will not be used. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>false if no tempering parameters which gives proper state transition function are found. </dd></dl>
 
-<p>参照先 <a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html#accdd6df63c2639e56b31e5dd205d67d7">MTToolBox::AbstractGenerator&lt; U &gt;::bitSize()</a>, <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#aaca640ccf163938bf030f9ebbf195b48">MTToolBox::AlgorithmEquidistribution&lt; T &gt;::get_all_equidist()</a>, <a class="el" href="class_m_t_tool_box_1_1_recursion_searchable.html#a691390d61ef3055e664235d978bf524c">MTToolBox::RecursionSearchable&lt; U &gt;::getParamString()</a>, <a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html#ade9df36747cbb35467e4dc44d773e556">MTToolBox::AlgorithmTempering&lt; U &gt;::isLSBTempering()</a>, <a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html#affd81b264b639a94cb57b38a55356335">MTToolBox::TemperingCalculatable&lt; U &gt;::resetReverseOutput()</a>, と <a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html#aa745cafbeeadec104c36405837ba093f">MTToolBox::TemperingCalculatable&lt; U &gt;::setReverseOutput()</a>.</p>
+<p>参照先 <a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html#accdd6df63c2639e56b31e5dd205d67d7">MTToolBox::AbstractGenerator&lt; U &gt;::bitSize()</a>, <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#ac4dc41633a5a978bde318b9216b3d338">MTToolBox::AlgorithmEquidistribution&lt; U &gt;::get_all_equidist()</a>, <a class="el" href="class_m_t_tool_box_1_1_recursion_searchable.html#a691390d61ef3055e664235d978bf524c">MTToolBox::RecursionSearchable&lt; U &gt;::getParamString()</a>, <a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html#ade9df36747cbb35467e4dc44d773e556">MTToolBox::AlgorithmTempering&lt; U &gt;::isLSBTempering()</a>, <a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html#affd81b264b639a94cb57b38a55356335">MTToolBox::TemperingCalculatable&lt; U &gt;::resetReverseOutput()</a>, と <a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html#aa745cafbeeadec104c36405837ba093f">MTToolBox::TemperingCalculatable&lt; U &gt;::setReverseOutput()</a>.</p>
 
-<p>参照元 <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a19890a875aa2171224eaa05047ca3dd0">MTToolBox::AlgorithmRecursionAndTempering&lt; T &gt;::search()</a>.</p>
+<p>参照元 <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#af5872b157a25fa70ad2e42d40f931b2e">MTToolBox::AlgorithmRecursionAndTempering&lt; U &gt;::search()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a19890a875aa2171224eaa05047ca3dd0"></a>
+<a class="anchor" id="af5872b157a25fa70ad2e42d40f931b2e"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename U &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">MTToolBox::AlgorithmRecursionAndTempering</a>&lt; T &gt;::search </td>
+          <td class="memname">bool <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html">MTToolBox::AlgorithmRecursionAndTempering</a>&lt; U &gt;::search </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html">TemperingCalculatable</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_m_t_tool_box_1_1_tempering_calculatable.html">TemperingCalculatable</a>&lt; U &gt; &amp;&#160;</td>
           <td class="paramname"><em>lg</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_m_t_tool_box_1_1_algorithm_tempering.html">AlgorithmTempering</a>&lt; U &gt; &amp;&#160;</td>
           <td class="paramname"><em>st</em>, </td>
         </tr>
         <tr>
@@ -324,7 +351,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>MSBからの均等分布次元のみを向上させたい場合の探索を行う。 </p>
+<p>MSBからの均等分布次元のみを向上させたい場合の探索を行う。 状態遷移関数のパラメータは探索する。 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
     <tr><td class="paramname">lg</td><td>テンパリングパラメータ計算可能な疑似乱数生成器 </td></tr>
@@ -336,7 +363,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>戻り値</dt><dd>特性多項式が原始多項式となるような状態遷移パラメータを発見した </dd></dl>
 
-<p>参照先 <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#abb6464d97f67d13fe698b0aee6a98172">MTToolBox::AlgorithmRecursionAndTempering&lt; T &gt;::search()</a>.</p>
+<p>参照先 <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a893bd8f23f666a4b3f88c199ceea463f">MTToolBox::AlgorithmRecursionAndTempering&lt; U &gt;::search()</a>.</p>
 
 </div>
 </div>
@@ -346,7 +373,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Oct 4 2013 10:36:09に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してFri Oct 18 2013 10:53:50に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

@@ -59,6 +59,16 @@
  <a href="class_m_t_tool_box_1_1_algorithm_tempering.html#details">[詳細]</a></p>
 
 <p><code>#include &lt;<a class="el" href="_algorithm_tempering_8hpp_source.html">AlgorithmTempering.hpp</a>&gt;</code></p>
+<div class="dynheader">
+MTToolBox::AlgorithmTempering&lt; U &gt;に対する継承グラフ</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_m_t_tool_box_1_1_algorithm_tempering.png" usemap="#MTToolBox::AlgorithmTempering&lt; U &gt;_map" alt=""/>
+  <map id="MTToolBox::AlgorithmTempering&lt; U &gt;_map" name="MTToolBox::AlgorithmTempering&lt; U &gt;_map">
+<area href="class_m_t_tool_box_1_1_algorithm_best_bits.html" title="テンパリングパラメータを探索するアルゴリズム(MT用)" alt="MTToolBox::AlgorithmBestBits&lt; U &gt;" shape="rect" coords="0,56,501,80"/>
+<area href="class_m_t_tool_box_1_1_algorithm_partial_bit_pattern.html" title="疑似乱数生成器の高次元均等分布性を改善するために、テンパ リングパラメータを探索するアルゴリズム" alt="MTToolBox::AlgorithmPartialBitPattern&lt; U, bit_len, param_num, try_bit_len, step, lsb &gt;" shape="rect" coords="511,56,1012,80"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public メソッド</h2></td></tr>
@@ -74,7 +84,7 @@ Public メソッド</h2></td></tr>
 class MTToolBox::AlgorithmTempering&lt; U &gt;</h3>
 
 <p>疑似乱数生成器の高次元均等分布性を改善するために、テンパ リングパラメータを探索するアルゴリズム </p>
-<p><b>注意：</b> テンパリングパラメータの探索をしても十分良い高次元均等 分布が得られない場合は、状態遷移関数の変更を考慮した方がよい。状 態遷移関数で十分ビットミックスされていない場合、単純なテンパリン グで均等分布次元を最大化することはできないだろう。</p>
+<dl class="section warning"><dt>警告</dt><dd>テンパリングパラメータの探索をしても十分良い高次元均等 分布が得られない場合は、状態遷移関数の変更を考慮した方がよい。状 態遷移関数で十分ビットミックスされていない場合、単純なテンパリン グで均等分布次元を最大化することはできないだろう。</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">U</td><td>疑似乱数生成器の出力の型, 例えば uint32_t など。 </td></tr>
@@ -108,9 +118,9 @@ template&lt;typename U&gt; </div>
 <p>LSB からのテンパリングをするのか </p>
 <dl class="section return"><dt>戻り値</dt><dd>true LSBからのテンパリング </dd></dl>
 
-<p><a class="el" href="class_m_t_tool_box_1_1_algorithm_partial_bit_pattern.html#a432b9ef4ec09f9a3296f5561ad30483a">MTToolBox::AlgorithmPartialBitPattern&lt; T, bit_len, param_num, try_bit_len, step, lsb &gt;</a>で再定義されています。</p>
+<p><a class="el" href="class_m_t_tool_box_1_1_algorithm_partial_bit_pattern.html#ae5de869feda9bd3ab47ce95e5f4ddbb3">MTToolBox::AlgorithmPartialBitPattern&lt; U, bit_len, param_num, try_bit_len, step, lsb &gt;</a>で再定義されています。</p>
 
-<p>参照元 <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#abb6464d97f67d13fe698b0aee6a98172">MTToolBox::AlgorithmRecursionAndTempering&lt; T &gt;::search()</a>.</p>
+<p>参照元 <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a893bd8f23f666a4b3f88c199ceea463f">MTToolBox::AlgorithmRecursionAndTempering&lt; U &gt;::search()</a>.</p>
 
 </div>
 </div>
@@ -158,7 +168,7 @@ template&lt;typename U&gt; </div>
 </dl>
 <dl class="section return"><dt>戻り値</dt><dd>0 </dd></dl>
 
-<p><a class="el" href="class_m_t_tool_box_1_1_algorithm_best_bits.html#a72ec1da4f8b91065db20b5289219e3ab">MTToolBox::AlgorithmBestBits&lt; T &gt;</a>, と <a class="el" href="class_m_t_tool_box_1_1_algorithm_partial_bit_pattern.html#a247ec999109b652486231a28eaac2d22">MTToolBox::AlgorithmPartialBitPattern&lt; T, bit_len, param_num, try_bit_len, step, lsb &gt;</a>で実装されています。</p>
+<p><a class="el" href="class_m_t_tool_box_1_1_algorithm_best_bits.html#ab9c3f8c9b585c61012266f7340cbbe61">MTToolBox::AlgorithmBestBits&lt; U &gt;</a>, と <a class="el" href="class_m_t_tool_box_1_1_algorithm_partial_bit_pattern.html#a324fde63da9bc26ca8e699b0f81ade13">MTToolBox::AlgorithmPartialBitPattern&lt; U, bit_len, param_num, try_bit_len, step, lsb &gt;</a>で実装されています。</p>
 
 </div>
 </div>
@@ -168,7 +178,7 @@ template&lt;typename U&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Oct 4 2013 10:36:09に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してFri Oct 18 2013 10:53:50に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

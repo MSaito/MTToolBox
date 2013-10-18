@@ -53,29 +53,29 @@
 <a href="_recursion_searchable_8hpp.html">説明を見る。</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MTTOOLBOX_RECURSION_SEARCHABLE_HPP</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MTTOOLBOX_RECURSION_SEARCHABLE_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;inttypes.h&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_abstract_generator_8hpp.html" title="GF(2)線形疑似乱数生成器の抽象クラス">MTToolBox/AbstractGenerator.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>MTToolBox {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> U&gt;</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html">   23</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html">RecursionSearchable</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html" title="GF(2)線形の状態遷移をもつ疑似乱数生成器">AbstractGenerator</a>&lt;U&gt; {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html#a6d0f3b7fa913f2803c7b9d47fce8ab15" title="状態遷移関数のパラメータを設定する。">setUpParam</a>(<a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html" title="GF(2)線形の状態遷移をもつ疑似乱数生成器">AbstractGenerator&lt;U&gt;</a>&amp; generator) = 0;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">virtual</span> <span class="keyword">const</span> std::string <a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html#a11102153fda3375f1e6b27985c1581a5" title="パラメータのヘッダ文字列を返す。">getHeaderString</a>() = 0;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">virtual</span> <span class="keyword">const</span> std::string <a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html#a691390d61ef3055e664235d978bf524c" title="パラメータの文字列表現を返す。">getParamString</a>() = 0;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    };</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_RECURSION_SEARCHABLE_HPP</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;inttypes.h&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_abstract_generator_8hpp.html" title="GF(2)線形疑似乱数生成器の抽象クラス">MTToolBox/AbstractGenerator.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">namespace </span>MTToolBox {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> U&gt;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html">   41</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html">RecursionSearchable</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html" title="疑似乱数生成器">AbstractGenerator</a>&lt;U&gt; {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html#a6d0f3b7fa913f2803c7b9d47fce8ab15" title="状態遷移関数のパラメータを設定する。">setUpParam</a>(<a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html" title="疑似乱数生成器">AbstractGenerator&lt;U&gt;</a>&amp; generator) = 0;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keyword">virtual</span> <span class="keyword">const</span> std::string <a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html#a11102153fda3375f1e6b27985c1581a5" title="パラメータのヘッダ文字列を返す。">getHeaderString</a>() = 0;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keyword">virtual</span> <span class="keyword">const</span> std::string <a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html#a691390d61ef3055e664235d978bf524c" title="パラメータの文字列表現を返す。">getParamString</a>() = 0;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    };</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_RECURSION_SEARCHABLE_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Oct 4 2013 10:36:09に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してFri Oct 18 2013 10:53:50に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

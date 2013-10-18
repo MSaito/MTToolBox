@@ -93,7 +93,7 @@ Public メソッド</h2></td></tr>
 <tr class="memdesc:ab3af8f22217708e437d02c62bab3a73f"><td class="mdescLeft">&#160;</td><td class="mdescRight">string文字列による初期化  <a href="#ab3af8f22217708e437d02c62bab3a73f">[詳細]</a><br/></td></tr>
 <tr class="separator:ab3af8f22217708e437d02c62bab3a73f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad96982f91435bc8b18a9b6e69fcc3e66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#ad96982f91435bc8b18a9b6e69fcc3e66">seed</a> (const uint32_t *value, int key_length)</td></tr>
-<tr class="memdesc:ad96982f91435bc8b18a9b6e69fcc3e66"><td class="mdescLeft">&#160;</td><td class="mdescRight">char 文字列による初期化  <a href="#ad96982f91435bc8b18a9b6e69fcc3e66">[詳細]</a><br/></td></tr>
+<tr class="memdesc:ad96982f91435bc8b18a9b6e69fcc3e66"><td class="mdescLeft">&#160;</td><td class="mdescRight">符号なし整数配列による初期化  <a href="#ad96982f91435bc8b18a9b6e69fcc3e66">[詳細]</a><br/></td></tr>
 <tr class="separator:ad96982f91435bc8b18a9b6e69fcc3e66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3dcc4d91a23d5e1a3f36822a0d2ceb52"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:a3dcc4d91a23d5e1a3f36822a0d2ceb52"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#a3dcc4d91a23d5e1a3f36822a0d2ceb52">seed_array</a> (const T *value, int key_length)</td></tr>
@@ -111,7 +111,7 @@ Public メソッド</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">説明</h2>
 <div class="textblock"><p>Mersenne Twister 疑似乱数生成器 </p>
-<p>NOTE: この実装では、AbstractGenerator の仕様にあわせて、 一度の呼び出しで１個の疑似乱数を生成するようにしてある。 そうするとまとめて作る場合よりも生成速度が落ちるので、 気休め程度でも速度を向上させるために、状態空間より大きな配列を使用して 剰余演算をビットマスクで済ませるようにしてある。 </p>
+<dl class="section note"><dt>覚え書き</dt><dd>この実装では、AbstractGenerator の仕様にあわせて、 一度の呼び出しで１個の疑似乱数を生成するようにしてある。 そうするとまとめて作る場合よりも生成速度が落ちるので、 気休め程度でも速度を向上させるために、状態空間より大きな配列を使用して 剰余演算をビットマスクで済ませるようにしてある。 </dd></dl>
 </div><h2 class="groupheader">コンストラクタとデストラクタ</h2>
 <a class="anchor" id="a3bbfacc70833a1ace156f3f90347b7ec"></a>
 <div class="memitem">
@@ -466,11 +466,11 @@ Public メソッド</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>char 文字列による初期化 </p>
+<p>符号なし整数配列による初期化 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>初期化の種 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">key_length</td><td>文字列の長さ </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">key_length</td><td>配列の長さ </td></tr>
   </table>
   </dd>
 </dl>
@@ -536,7 +536,7 @@ template&lt;class T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Oct 4 2013 10:36:09に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してFri Oct 18 2013 10:53:50に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>
