@@ -1,6 +1,7 @@
 *.o
 *~
 .sconf_temp/
+localSconsLib.pyc
 config.log
 .sconsign.dblite
 lib/libMTToolBox.a

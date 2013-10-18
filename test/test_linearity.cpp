@@ -1,6 +1,6 @@
 #include <sstream>
 #include <MTToolBox/TestLinearity.hpp>
-#include <UnitTest++/UnitTest++.h>
+#include <UnitTest++.h>
 #include "test_temper_searcher.hpp"
 
 using namespace MTToolBox;

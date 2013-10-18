@@ -1,4 +1,4 @@
-#include <UnitTest++/UnitTest++.h>
+#include <UnitTest++.h>
 
 int
 main()

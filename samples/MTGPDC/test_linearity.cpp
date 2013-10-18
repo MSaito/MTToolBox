@@ -1,6 +1,6 @@
 #include <sstream>
 #include <MTToolBox/TestLinearity.hpp>
-#include <UnitTest++/UnitTest++.h>
+#include <UnitTest++.h>
 #include "MTGP32search.hpp"
 #include "mtgp_param.h"
 

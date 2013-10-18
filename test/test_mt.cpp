@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <MTToolBox/MersenneTwister.hpp>
-#include <UnitTest++/UnitTest++.h>
+#include <UnitTest++.h>
 
 using namespace MTToolBox;
 using namespace std;

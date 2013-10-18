@@ -5,18 +5,13 @@
 #
 # set LINUX environment variables
 #
-import os
-include_path = []
-os_library_path = []
-os_include_path = os.environ.get('CPLUS_INCLUDE_PATH').split(':')
-if os_include_path :
-    while '' in os_include_path: os_include_path.remove('')
-    for a in os_include_path:
-        include_path.append('-I' + a)
-os_library_path = os_library_path + os.environ.get('LIBRARY_PATH').split(':')
-if os_library_path :
-    while '' in os_library_path: os_library_path.remove('')
-    library_path = os_library_path
+import sys,os
+sys.path.append('../../')
+import localSconsLib
+
+include_path = localSconsLib.getOSIncPath()
+library_path = localSconsLib.getOSLibPath()
+include_path = localSconsLib.convIncPath(include_path)
 
 #
 # setting for this project
@@ -30,8 +25,8 @@ env = Environment(CFLAGS=['-Wall', '-O3', '-std=c99',
                           '-DMAIN'],
                   CXXFLAGS=['-Wall', '-g', '-O3', '-Wextra',
                             include_path,
- 			    '-D__STDC_CONSTANT_MACROS',
-			    '-D__STDC_FORMAT_MACROS'])
+                            '-D__STDC_CONSTANT_MACROS',
+                            '-D__STDC_FORMAT_MACROS'])
 env.Append(LIBPATH=library_path)
 debug = ARGUMENTS.get('debug', 0)
 if int(debug):

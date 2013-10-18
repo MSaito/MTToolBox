@@ -3,7 +3,7 @@
 #include <inttypes.h>
 #include <MTToolBox/AlgorithmEquidistribution.hpp>
 #include <MTToolBox/AbstractGenerator.hpp>
-#include <UnitTest++/UnitTest++.h>
+#include <UnitTest++.h>
 #include "test_generator.hpp"
 
 using namespace MTToolBox;

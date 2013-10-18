@@ -3,44 +3,20 @@
 #
 
 #
-# define check for libUnitTest++.a
-#
-def libcheck(basename, path):
-    name = basename + '.lib'
-    if os.name == 'posix' or os.name == 'mac':
-        name = 'lib' + basename + '.a'
-    for a in path:
-        if os.path.exists(a + '/' + name):
-            return True
-    return False
-
-#
-# define unitTest
-#
-def runUnitTest(env,target,source):
-    import subprocess
-    app = str(source[0].abspath)
-    if not subprocess.call(app):
-        open(str(target[0]),'w').write("PASSED\n")
-
-
-#
 # set LINUX environment variables
 #
-import os
-include_path = []
-#os_library_path = ['/usr/lib', '/usr/local/lib']
-os_library_path = []
-os_include_path = os.environ.get('CPLUS_INCLUDE_PATH').split(':')
-if os_include_path :
-    while '' in os_include_path: os_include_path.remove('')
-    for a in os_include_path:
-        include_path.append('-I' + a)
-os_library_path = os_library_path + os.environ.get('LIBRARY_PATH').split(':')
-if os_library_path :
-    while '' in os_library_path: os_library_path.remove('')
-    library_path = os_library_path
-#print library_path
+import sys,os
+sys.path.append('../')
+import localSconsLib
+
+include_path = localSconsLib.getOSIncPath()
+library_path = localSconsLib.getOSLibPath()
+unit_test_path = localSconsLib.getSubPath('UnitTest++.h',
+                                          include_path,
+                                          'UnitTest++')
+if unit_test_path:
+    include_path.append(unit_test_path)
+include_path = localSconsLib.convIncPath(include_path)
 
 #
 # setting for this project
@@ -55,8 +31,8 @@ env = Environment(CFLAGS=['-Wall', '-O3', '-std=c99',
                           '-Wmissing-prototypes', '-Wextra'],
                   CXXFLAGS=['-Wall', '-g', '-O3', '-Wextra',
                             include_path,
- 			    '-D__STDC_CONSTANT_MACROS',
-			    '-D__STDC_FORMAT_MACROS'])
+                            '-D__STDC_CONSTANT_MACROS',
+                            '-D__STDC_FORMAT_MACROS'])
 env.Append(LIBPATH=library_path)
 
 common_files = ['tinymt32.c', 'tinymt64.c', 'main.cpp']
@@ -74,15 +50,12 @@ conf = Configure(env)
 if not conf.CheckLib('ntl'):
     print 'Did not find libntl.a or ntl.lib, exiting!'
     Exit(1)
-if not conf.CheckLib('UnitTest++') and not libcheck('UnitTest++', library_path) :
+if (not conf.CheckLib('UnitTest++') and
+        (not libcheck('UnitTest++', library_path))) :
     print 'Did not find UnitTest++ library.'
     Exit(1)
 if conf.CheckLib('gf2x'):
     optlib.append('gf2x')
-else:
-    print env.get('LIBPATH')
-    print 'gf2x not found.'
-    Exit(1)
 if conf.CheckLib('gmp'):
     optlib.append('gmp')
 env = conf.Finish()
@@ -98,5 +71,5 @@ test1 = env.Program('test1',
 test2 = env.Program('test2',
                     test2_files + env.Object(common_files),
                     LIBS=optlib)
-Command("test1.passed", test1, runUnitTest)
-Command("test2.passed", test2, runUnitTest)
+Command("test1.passed", test1, localSconsLib.runUnitTest)
+Command("test2.passed", test2, localSconsLib.runUnitTest)

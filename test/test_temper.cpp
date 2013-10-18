@@ -1,6 +1,6 @@
 #include <sstream>
 #include <MTToolBox/AlgorithmPartialBitPattern.hpp>
-#include <UnitTest++/UnitTest++.h>
+#include <UnitTest++.h>
 #include <NTL/GF2X.h>
 #include "test_temper_searcher.hpp"
 
