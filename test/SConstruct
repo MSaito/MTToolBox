@@ -16,24 +16,19 @@ unit_test_path = localSconsLib.getSubPath('UnitTest++.h',
                                           'UnitTest++')
 if unit_test_path:
     include_path.append(unit_test_path)
-include_path = localSconsLib.convIncPath(include_path)
-
 #
 # setting for this project
 #
-include_path.append('-I../include')
-include_path.append('-I.')
-library_path.append('../lib')
+include_option = ['../include', '.']
+library_option = ['../lib']
 optlib = ['MTToolBox', 'ntl', 'UnitTest++']
-#envcc = Environment(CCFLAGS=['-Wall', '-O3', '-std=c99',
-#                             '-Wmissing-prototypes', '-Wextra'])
 env = Environment(CFLAGS=['-Wall', '-O3', '-std=c99',
                           '-Wmissing-prototypes', '-Wextra'],
                   CXXFLAGS=['-Wall', '-g', '-O3', '-Wextra',
-                            include_path,
                             '-D__STDC_CONSTANT_MACROS',
                             '-D__STDC_FORMAT_MACROS'])
-env.Append(LIBPATH=library_path)
+env.Append(LIBPATH=library_path + library_option)
+env.Append(CPPPATH=include_path + include_option)
 
 common_files = ['tinymt32.c', 'tinymt64.c', 'main.cpp']
 test1_files = ['test_period.cpp',
@@ -50,11 +45,15 @@ conf = Configure(env)
 if not conf.CheckLib('ntl'):
     print 'Did not find libntl.a or ntl.lib, exiting!'
     Exit(1)
-if (not conf.CheckLib('UnitTest++') and
-        (not libcheck('UnitTest++', library_path))) :
-    print 'Did not find UnitTest++ library.'
-    Exit(1)
-if conf.CheckLib('gf2x'):
+#if (not conf.CheckLib('UnitTest++') and
+#        (not libcheck('UnitTest++', library_path))) :
+#    print 'Did not find UnitTest++ library.'
+#    Exit(1)
+if not unit_test_path:
+    print 'Did not find UnitTest++ Header.'
+    print 'Skipping unit test.'
+    Exit(0)
+if conf.CheckHeader('gf2x.h'):
     optlib.append('gf2x')
 if conf.CheckLib('gmp'):
     optlib.append('gmp')

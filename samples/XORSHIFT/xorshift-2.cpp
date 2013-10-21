@@ -50,7 +50,9 @@ public:
         x = y = z = v;
     }
     int bitSize() const { return 128; }
-    void setUpParam(AbstractGenerator<uint32_t>& generator){}
+    void setUpParam(AbstractGenerator<uint32_t>& generator){
+        UNUSED_VARIABLE(&generator);
+    }
     const std::string getHeaderString(){return ""; }
     const std::string getParamString(){return ""; }
 private:

@@ -5,15 +5,12 @@
 #
 # define check for libUnitTest++.a
 #
-#def libcheck(basename, path):
-#    import os
-#    name = basename + '.lib'
-#    if os.name == 'posix' or os.name == 'mac':
-#        name = 'lib' + basename + '.a'
-#    for a in path:
-#        if os.path.exists(a + '/' + name):
-#            return True
-#    return False
+def checkHeader(header, path):
+    import os
+    for a in path:
+        if os.path.exists(os.path.join(a, header)):
+            return True
+    return False
 
 def getSubPath(name, path, dirname):
     import os

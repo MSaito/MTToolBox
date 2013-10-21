@@ -23,9 +23,9 @@ void xorshift128_init(xorshift128_t * xor, uint32_t seed)
 {
     uint32_t ar[4];
     ar[0] = seed;
-    for (int i = 0; i < 8; i++) {
-        ar[i] = UINT32_C(1812433253) * (ar[i - 1]
-                                        ^ (ar[i - 1] >> 30))
+    for (int i = 1; i < 8; i++) {
+        ar[i % 4] = UINT32_C(1812433253) * (ar[(i - 1) % 4]
+                                        ^ (ar[(i - 1) % 4] >> 30))
             + i;
     }
     xor->x = ar[0];

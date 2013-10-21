@@ -63,6 +63,17 @@ namespace MTToolBox {
 
         /**
          *\japanese
+         * 仮想デストラクタ（必須）
+         *\endjapanese
+         *
+         *\english
+         * Virtual destructor (always required)
+         *\endenglish
+         */
+        virtual ~AlgorithmTempering() {}
+
+        /**
+         *\japanese
          * テンパリングパラメータを探索する
          * @param[in, out] rand 疑似乱数生成器
          * @param[in] verbose 余分な情報を表示する

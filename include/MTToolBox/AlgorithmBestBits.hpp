@@ -285,7 +285,7 @@ namespace MTToolBox {
 
             vector<shared_ptr<tempp> > params;
             params.push_back(initial);
-            int delta;
+            int delta = 0;
 #if defined(DEBUG)
             cout << "DEBUG: bit_len = " << dec << bit_len << endl;
 #endif

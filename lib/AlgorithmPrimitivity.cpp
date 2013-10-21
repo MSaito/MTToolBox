@@ -15,7 +15,7 @@ namespace MTToolBox {
         mersenne = false;
         stringstream ss;
         long length = 0;
-        for (int i = 0; prime_factors[i] > 0; i++) {
+        for (int i = 0; prime_factors[i]; i++) {
             length = i + 1;
         }
         this->primes = new Vec<ZZ>;

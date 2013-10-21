@@ -57,17 +57,24 @@ namespace mtgp {
             for (int i = 0; i < 16; i++) {
                 tp[i] = that.tp[i];
             }
+#if defined(USE_SHA)
             for (int i = 0; i < SHA_DIGEST_LENGTH * 2; i++) {
                 sha1[i] = that.sha1[i];
             }
+            sha1[0] = that.sha1[0];
+#endif
         }
 
         void set_sha1(std::string& src) {
+#if defined(USE_SHA)
             unsigned int sha1_length = SHA_DIGEST_LENGTH * 2 + 1;
             for (unsigned int i = 0; i < sha1_length && i < src.size(); i++) {
                 sha1[i] = src[i];
             }
             sha1[sha1_length - 1] = 0;
+#else
+            sha1[0] = 0;
+#endif
         }
 
         const std::string getHeaderString() {
@@ -140,7 +147,11 @@ namespace mtgp {
         T p[16];
         T tmp_tbl[4];
         T tp[16];
+#if defined(USE_SHA)
         char sha1[SHA_DIGEST_LENGTH * 2 + 1];
+#else
+        char sha1[1];
+#endif
     };
 }
 #endif

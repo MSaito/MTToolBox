@@ -54,6 +54,17 @@ namespace MTToolBox {
 
         /**
          *\japanese
+         * 仮想デストラクタ（必須）
+         *\endjapanese
+         *
+         *\english
+         * Virtual destructor (always required)
+         *\endenglish
+         */
+        virtual ~TemperingCalculatable() {}
+
+        /**
+         *\japanese
          * テンパリングパラメータをセットする。
          * @param[in] mask \b pattern のうち実際にテンパリングパラメータに
          * 設定するべき部分を指定する。

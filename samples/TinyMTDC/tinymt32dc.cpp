@@ -84,7 +84,7 @@ int search(tinymt_options& opt, int count) {
                 continue;
             }
             //g = all.get_rand();
-            tinymt32_param param = g.get_param();
+            //tinymt32_param param = g.get_param();
             int weight = all.getWeight();
             GF2X poly = all.getCharacteristicPolynomial();
             if (i == 0) {

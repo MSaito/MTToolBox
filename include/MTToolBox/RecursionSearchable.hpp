@@ -43,6 +43,17 @@ namespace MTToolBox {
 
         /**
          *\japanese
+         * 仮想デストラクタ（必須）
+         *\endjapanese
+         *
+         *\english
+         * Virtual destructor (always required)
+         *\endenglish
+         */
+        virtual ~RecursionSearchable() {};
+
+        /**
+         *\japanese
          * 状態遷移関数のパラメータを設定する。
          *
          * このメソッドの内部で、別の疑似乱数生成器を使用してパラメータを

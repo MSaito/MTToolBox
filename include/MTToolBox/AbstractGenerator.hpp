@@ -50,6 +50,17 @@ namespace MTToolBox {
 
         /**
          *\japanese
+         * 仮想デストラクタ（必須）
+         *\endjapanese
+         *
+         *\english
+         * Virtual destructor (always required)
+         *\endenglish
+         */
+        virtual ~AbstractGenerator() {}
+
+        /**
+         *\japanese
          * 内部状態を次状態に遷移し、疑似乱数をひとつ出力する。
          * @return 疑似乱数
          *\endjapanese

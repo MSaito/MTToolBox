@@ -69,10 +69,12 @@ int indexed_search(mtgp_options& opt, bool first) {
         NTL::GF2X poly = all.getCharacteristicPolynomial();
         int weight = all.getWeight();
         int delta = all.getDelta();
+        mtgp_param<uint32_t> param = mtgp.get_param();
+#if defined(USE_SHA)
         string sha1;
         poly_sha1(sha1, poly);
-        mtgp_param<uint32_t> param = mtgp.get_param();
         param.set_sha1(sha1);
+#endif
         mtgp.set_param(param);
         if (first) {
             cout << '#' << mtgp.getHeaderString() << endl;

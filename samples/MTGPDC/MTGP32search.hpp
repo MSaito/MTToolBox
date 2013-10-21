@@ -272,7 +272,7 @@ namespace mtgp {
          * @return true if all elements of status is zero
          */
         bool isZero() const {
-            if (state[idx] & mask != 0) {
+            if ((state[idx] & mask) != 0) {
                 return false;
             }
             for (int i = 1; i < state_size; i++) {

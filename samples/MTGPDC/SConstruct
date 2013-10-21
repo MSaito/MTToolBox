@@ -16,22 +16,20 @@ unit_test_path = localSconsLib.getSubPath('UnitTest++.h',
                                           'UnitTest++')
 if unit_test_path:
     include_path.append(unit_test_path)
-include_path = localSconsLib.convIncPath(include_path)
 
 #
 # setting for this project
 #
-include_path.append('-I../../include')
-include_path.append('-I.')
-library_path.append('../../lib')
+include_option = ['../../include', '.']
+library_option = ['../../lib']
 optlib = ['MTToolBox', 'ntl']
 env = Environment(CFLAGS=['-Wall', '-O3', '-std=c99',
                           '-Wmissing-prototypes', '-Wextra'],
                   CXXFLAGS=['-Wall', '-g', '-O3', '-Wextra',
-                            include_path,
                             '-D__STDC_CONSTANT_MACROS',
                             '-D__STDC_FORMAT_MACROS'])
-env.Append(LIBPATH=library_path)
+env.Append(LIBPATH=library_path + library_option)
+env.Append(CPPPATH=include_path + include_option)
 
 files = ['MTGP32dc.cpp',
          'parse_opt.cpp']
@@ -53,7 +51,7 @@ if conf.CheckLib('gf2x'):
     optlib.append('gf2x')
 if conf.CheckLib('gmp'):
     optlib.append('gmp')
-if conf.CheckLib('UnitTest++') or libcheck('UnitTest++', library_path) :
+if unit_test_path:
     unit_test = True
 else:
     print "don't exexcute unit test."
@@ -70,6 +68,7 @@ env.Program('MTGP32dc', files, LIBS=optlib)
 #
 if unit_test:
     optlib.append('UnitTest++')
-    env.Program('test', test_files, LIBS=optlib)
+    test = env.Program('test', test_files, LIBS=optlib)
+    Command("test.passed", test, localSconsLib.runUnitTest)
 
 Clean('all', Glob('*.o'))

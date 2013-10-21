@@ -48,7 +48,19 @@ namespace MTToolBox {
     class EquidistributionCalculatable : public RecursionSearchable<U> {
     public:
         using AbstractGenerator<U>::generate;
-        /*
+
+        /**
+         *\japanese
+         * 仮想デストラクタ（必須）
+         *\endjapanese
+         *
+         *\english
+         * Virtual destructor (always required)
+         *\endenglish
+         */
+        virtual ~EquidistributionCalculatable(){};
+
+        /**
          *\japanese
          * 自分のコピーを返す。
          *
@@ -63,7 +75,7 @@ namespace MTToolBox {
          */
         virtual EquidistributionCalculatable<U> * clone() const = 0;
 
-        /*
+        /**
          *\japanese
          * 上位(MSBから) \b outBitLen だけ出力する。
          *

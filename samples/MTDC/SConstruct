@@ -16,17 +16,16 @@ include_path = localSconsLib.convIncPath(include_path)
 #
 # setting for this project
 #
-include_path.append('-I../../include')
-include_path.append('-I.')
-library_path.append('../../lib')
+include_option = ['../../include', '.']
+library_option = ['../../lib']
 optlib = ['MTToolBox', 'ntl']
 env = Environment(CFLAGS=['-Wall', '-O3', '-std=c99',
                           '-Wmissing-prototypes', '-Wextra'],
                   CXXFLAGS=['-Wall', '-g', '-O3', '-Wextra',
-                            include_path,
                             '-D__STDC_CONSTANT_MACROS',
                             '-D__STDC_FORMAT_MACROS'])
-env.Append(LIBPATH=library_path)
+env.Append(LIBPATH=library_path + library_option)
+env.Append(CPPPATH=include_path + include_option)
 debug = ARGUMENTS.get('debug', 0)
 if int(debug) == 1:
     env.Append(CXXFLAGS = '-g')
