@@ -1,2 +1,2 @@
 SConscript(['MTDC/SConstruct', 'MTGPDC/SConstruct',
-            'TinyMT/SConstruct', 'XORSHIFT/SConstruct'])
+            'TinyMTDC/SConstruct', 'XORSHIFT/SConstruct'])

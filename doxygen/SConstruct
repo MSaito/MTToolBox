@@ -1,0 +1,6 @@
+import os
+env = Environment(ENV = os.environ)
+env.Command('../docs/index.html', ['mainpage.jp.txt', 'doxygen.jp.cfg'],
+            'doxygen doxygen.jp.cfg')
+env.Command('../docs/en/index.html', ['mainpage.en.txt', 'doxygen.en.cfg'],
+            'doxygen doxygen.en.cfg')

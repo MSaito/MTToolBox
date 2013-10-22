@@ -49,10 +49,6 @@ if not conf.CheckLib('ntl'):
 #        (not libcheck('UnitTest++', library_path))) :
 #    print 'Did not find UnitTest++ library.'
 #    Exit(1)
-if not unit_test_path:
-    print 'Did not find UnitTest++ Header.'
-    print 'Skipping unit test.'
-    Exit(0)
 if conf.CheckHeader('gf2x.h'):
     optlib.append('gf2x')
 if conf.CheckLib('gmp'):
@@ -62,13 +58,17 @@ env = conf.Finish()
 #
 # target build
 #
-env.Program('test_rtiny', ['test_rtiny.cpp'], LIBS=optlib)
-env.Program('test_rlittle', ['test_rlittle.cpp'], LIBS=optlib)
-test1 = env.Program('test1',
-                    test1_files + env.Object(common_files),
-                    LIBS=optlib)
-test2 = env.Program('test2',
-                    test2_files + env.Object(common_files),
-                    LIBS=optlib)
-Command("test1.passed", test1, localSconsLib.runUnitTest)
-Command("test2.passed", test2, localSconsLib.runUnitTest)
+if unit_test_path:
+    env.Program('test_rtiny', ['test_rtiny.cpp'], LIBS=optlib)
+    env.Program('test_rlittle', ['test_rlittle.cpp'], LIBS=optlib)
+    test1 = env.Program('test1',
+                        test1_files + env.Object(common_files),
+                        LIBS=optlib)
+    test2 = env.Program('test2',
+                        test2_files + env.Object(common_files),
+                        LIBS=optlib)
+    Command("test1.passed", test1, localSconsLib.runUnitTest)
+    Command("test2.passed", test2, localSconsLib.runUnitTest)
+else:
+    print 'Did not find UnitTest++ Header.'
+    print 'Skipping unit test.'
