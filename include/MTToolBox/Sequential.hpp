@@ -71,7 +71,7 @@ namespace MTToolBox {
          *\endenglish
          */
         Sequential(T p_mask) {
-            status = reinterpret_cast<T>(-1);
+            status = static_cast<T>(-1);
             mask = p_mask;
             error = false;
         }
