@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.3.1"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
 <title>MTToolBox: クラス テンプレート MTToolBox::AlgorithmRecursionSearch&lt; U &gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -26,7 +26,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 作成： Doxygen 1.8.3.1 -->
+<!-- 作成： Doxygen 1.8.5 -->
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>メインページ</span></a></li>
@@ -72,10 +72,10 @@ Public メソッド</h2></td></tr>
 <tr class="memdesc:a0944ab4a385b592eed62a33c9f4321c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">状態遷移パラメータの探索を開始する  <a href="#a0944ab4a385b592eed62a33c9f4321c4">[詳細]</a><br/></td></tr>
 <tr class="separator:a0944ab4a385b592eed62a33c9f4321c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc7cae723a18a6c33254a125bf38ab9b"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#adc7cae723a18a6c33254a125bf38ab9b">getParamString</a> ()</td></tr>
-<tr class="memdesc:adc7cae723a18a6c33254a125bf38ab9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">疑似乱数生成器のパラメータを表す文字列を返す このメソッドは <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a0944ab4a385b592eed62a33c9f4321c4" title="状態遷移パラメータの探索を開始する">start()</a> が true を返した場合にのみ呼び出すべきである。  <a href="#adc7cae723a18a6c33254a125bf38ab9b">[詳細]</a><br/></td></tr>
+<tr class="memdesc:adc7cae723a18a6c33254a125bf38ab9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">疑似乱数生成器のパラメータを表す文字列を返す このメソッドは <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a0944ab4a385b592eed62a33c9f4321c4" title="状態遷移パラメータの探索を開始する ">start()</a> が true を返した場合にのみ呼び出すべきである。  <a href="#adc7cae723a18a6c33254a125bf38ab9b">[詳細]</a><br/></td></tr>
 <tr class="separator:adc7cae723a18a6c33254a125bf38ab9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e94884516d6293e2d1766b7827ca826"><td class="memItemLeft" align="right" valign="top">const NTL::GF2X &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a9e94884516d6293e2d1766b7827ca826">getMinPoly</a> () const </td></tr>
-<tr class="memdesc:a9e94884516d6293e2d1766b7827ca826"><td class="mdescLeft">&#160;</td><td class="mdescRight">最小多項式を返す このメソッドは <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a0944ab4a385b592eed62a33c9f4321c4" title="状態遷移パラメータの探索を開始する">start()</a> が true を返した場合にのみ呼び出すべきである。  <a href="#a9e94884516d6293e2d1766b7827ca826">[詳細]</a><br/></td></tr>
+<tr class="memdesc:a9e94884516d6293e2d1766b7827ca826"><td class="mdescLeft">&#160;</td><td class="mdescRight">最小多項式を返す このメソッドは <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a0944ab4a385b592eed62a33c9f4321c4" title="状態遷移パラメータの探索を開始する ">start()</a> が true を返した場合にのみ呼び出すべきである。  <a href="#a9e94884516d6293e2d1766b7827ca826">[詳細]</a><br/></td></tr>
 <tr class="separator:a9e94884516d6293e2d1766b7827ca826"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9236c2a4d44abea90420df381146dd93"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a9236c2a4d44abea90420df381146dd93">getCount</a> () const </td></tr>
 <tr class="memdesc:a9236c2a4d44abea90420df381146dd93"><td class="mdescLeft">&#160;</td><td class="mdescRight">このインスタンスが作られてからstart() が終了するまでに試行した回数を返す。  <a href="#a9236c2a4d44abea90420df381146dd93">[詳細]</a><br/></td></tr>
@@ -90,9 +90,9 @@ class MTToolBox::AlgorithmRecursionSearch&lt; U &gt;</h3>
 <p>コンストラクタに与えるgenerator はこのクラスのstart()メソッドを 呼び出すと変更される。そしてstart()がtrueを返したなら、変更後の generatorはその状態遷移関数が既約な特性多項式を持つように変更さ れているはずである。従って変更後のgeneratorからパラメータを取得 することによって状態遷移関数が既約となるパラメータを取得できる。</p>
 <ol>
 <li>
-<a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a0944ab4a385b592eed62a33c9f4321c4" title="状態遷移パラメータの探索を開始する">start()</a>メソッドを呼ぶ。 </li>
+<a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a0944ab4a385b592eed62a33c9f4321c4" title="状態遷移パラメータの探索を開始する ">start()</a>メソッドを呼ぶ。 </li>
 <li>
-<a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a0944ab4a385b592eed62a33c9f4321c4" title="状態遷移パラメータの探索を開始する">start()</a>メソッドがtrueを 返したら、getMinpoly(), <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a9236c2a4d44abea90420df381146dd93" title="このインスタンスが作られてからstart() が終了するまでに試行した回数を返す。">getCount()</a>などのメソッドを呼んで情報を取 得する。またgeneratorのgetParamString() からも情報を取得できる。 </li>
+<a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a0944ab4a385b592eed62a33c9f4321c4" title="状態遷移パラメータの探索を開始する ">start()</a>メソッドがtrueを 返したら、getMinpoly(), <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a9236c2a4d44abea90420df381146dd93" title="このインスタンスが作られてからstart() が終了するまでに試行した回数を返す。 ">getCount()</a>などのメソッドを呼んで情報を取 得する。またgeneratorのgetParamString() からも情報を取得できる。 </li>
 </ol>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -258,7 +258,7 @@ template&lt;typename U &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>最小多項式を返す このメソッドは <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a0944ab4a385b592eed62a33c9f4321c4" title="状態遷移パラメータの探索を開始する">start()</a> が true を返した場合にのみ呼び出すべきである。 </p>
+<p>最小多項式を返す このメソッドは <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a0944ab4a385b592eed62a33c9f4321c4" title="状態遷移パラメータの探索を開始する ">start()</a> が true を返した場合にのみ呼び出すべきである。 </p>
 <p>一般には最小多項式は初期状態と出力関数に依存するが、GF(2)線 形疑似乱数生成器の最大周期を与えるような最小多項式は一つであ る。</p>
 <dl class="section return"><dt>戻り値</dt><dd>最小多項式 </dd></dl>
 
@@ -287,7 +287,7 @@ template&lt;typename U &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>疑似乱数生成器のパラメータを表す文字列を返す このメソッドは <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a0944ab4a385b592eed62a33c9f4321c4" title="状態遷移パラメータの探索を開始する">start()</a> が true を返した場合にのみ呼び出すべきである。 </p>
+<p>疑似乱数生成器のパラメータを表す文字列を返す このメソッドは <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_search.html#a0944ab4a385b592eed62a33c9f4321c4" title="状態遷移パラメータの探索を開始する ">start()</a> が true を返した場合にのみ呼び出すべきである。 </p>
 <dl class="section return"><dt>戻り値</dt><dd>疑似乱数生成器のパラメータを表す文字列 </dd></dl>
 
 </div>
@@ -347,9 +347,9 @@ template&lt;typename U &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Oct 18 2013 10:53:50に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してFri Dec 6 2013 10:50:04に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.3.1
+</a> 1.8.5
 </small></address>
 </body>
 </html>

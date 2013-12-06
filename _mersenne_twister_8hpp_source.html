@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.3.1"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
 <title>MTToolBox: MersenneTwister.hpp ソースファイル</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -26,7 +26,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 作成： Doxygen 1.8.3.1 -->
+<!-- 作成： Doxygen 1.8.5 -->
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>メインページ</span></a></li>
@@ -56,36 +56,36 @@
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;inttypes.h&gt;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_abstract_generator_8hpp.html" title="GF(2)線形疑似乱数生成器の抽象クラス">MTToolBox/AbstractGenerator.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_abstract_generator_8hpp.html">MTToolBox/AbstractGenerator.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span>MTToolBox {</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html">   48</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html" title="Mersenne Twister 疑似乱数生成器">MersenneTwister</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html" title="疑似乱数生成器">AbstractGenerator</a>&lt;uint32_t&gt; {</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html">   48</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html">MersenneTwister</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html">AbstractGenerator</a>&lt;uint32_t&gt; {</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a3bbfacc70833a1ace156f3f90347b7ec">   59</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a3bbfacc70833a1ace156f3f90347b7ec" title="コンストラクタ">MersenneTwister</a>() {</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html#a3bbfacc70833a1ace156f3f90347b7ec">   59</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a3bbfacc70833a1ace156f3f90347b7ec">MersenneTwister</a>() {</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            mt = <span class="keyword">new</span> uint32_t[LARGE_N];</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818" title="32bit整数による初期化">seed</a>(5489);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818">seed</a>(5489);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a94a178fec5ab5596f309f4cc3b67d4b6">   75</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a94a178fec5ab5596f309f4cc3b67d4b6" title="コンストラクタ">MersenneTwister</a>(uint32_t value) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html#a94a178fec5ab5596f309f4cc3b67d4b6">   75</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a94a178fec5ab5596f309f4cc3b67d4b6">MersenneTwister</a>(uint32_t value) {</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            mt = <span class="keyword">new</span> uint32_t[LARGE_N];</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818" title="32bit整数による初期化">seed</a>(value);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818">seed</a>(value);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a17c2448b77d444c242b05b4dc17f02d6">   91</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a17c2448b77d444c242b05b4dc17f02d6" title="コンストラクタ">MersenneTwister</a>(<span class="keyword">const</span> std::string&amp; value) {</div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html#a17c2448b77d444c242b05b4dc17f02d6">   91</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a17c2448b77d444c242b05b4dc17f02d6">MersenneTwister</a>(<span class="keyword">const</span> std::string&amp; value) {</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            mt = <span class="keyword">new</span> uint32_t[LARGE_N];</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818" title="32bit整数による初期化">seed</a>(value);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818">seed</a>(value);</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        }</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a533e1427d2b45315f90dcd35e256c3a4">  109</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a533e1427d2b45315f90dcd35e256c3a4" title="コンストラクタ">MersenneTwister</a>(<span class="keyword">const</span> uint32_t *value, <span class="keywordtype">int</span> size) {</div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html#a533e1427d2b45315f90dcd35e256c3a4">  109</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a533e1427d2b45315f90dcd35e256c3a4">MersenneTwister</a>(<span class="keyword">const</span> uint32_t *value, <span class="keywordtype">int</span> size) {</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            mt = <span class="keyword">new</span> uint32_t[LARGE_N];</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818" title="32bit整数による初期化">seed</a>(value, size);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818">seed</a>(value, size);</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        }</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
-<div class="line"><a name="l00123"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a92b6dfd1e9b7633e6fd3476f1b15bd09">  123</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a92b6dfd1e9b7633e6fd3476f1b15bd09" title="デストラクタ">~MersenneTwister</a>() {</div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html#a92b6dfd1e9b7633e6fd3476f1b15bd09">  123</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a92b6dfd1e9b7633e6fd3476f1b15bd09">~MersenneTwister</a>() {</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            <span class="keyword">delete</span>[] mt;</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        }</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
-<div class="line"><a name="l00138"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818">  138</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818" title="32bit整数による初期化">seed</a>(uint32_t value) {</div>
+<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818">  138</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818">seed</a>(uint32_t value) {</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            mt[0] = value;</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            <span class="keywordflow">for</span> (mti = 1; mti &lt; N; mti++) {</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                mt[mti] =</div>
@@ -94,17 +94,17 @@
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            }</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        }</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
-<div class="line"><a name="l00158"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#ab3af8f22217708e437d02c62bab3a73f">  158</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#ab3af8f22217708e437d02c62bab3a73f" title="string文字列による初期化">seed</a>(<span class="keyword">const</span> std::string&amp; value) {</div>
+<div class="line"><a name="l00158"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html#ab3af8f22217708e437d02c62bab3a73f">  158</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#ab3af8f22217708e437d02c62bab3a73f">seed</a>(<span class="keyword">const</span> std::string&amp; value) {</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            seed_array&lt;char&gt;(value.c_str(), <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(value.size()));</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        }</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
-<div class="line"><a name="l00175"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#ad96982f91435bc8b18a9b6e69fcc3e66">  175</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#ad96982f91435bc8b18a9b6e69fcc3e66" title="符号なし整数配列による初期化">seed</a>(<span class="keyword">const</span> uint32_t *value, <span class="keywordtype">int</span> key_length) {</div>
+<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html#ad96982f91435bc8b18a9b6e69fcc3e66">  175</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#ad96982f91435bc8b18a9b6e69fcc3e66">seed</a>(<span class="keyword">const</span> uint32_t *value, <span class="keywordtype">int</span> key_length) {</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            seed_array&lt;uint32_t&gt;(value, key_length);</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        }</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
-<div class="line"><a name="l00194"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a3dcc4d91a23d5e1a3f36822a0d2ceb52">  194</a></span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a3dcc4d91a23d5e1a3f36822a0d2ceb52" title="T 型配列による初期化">seed_array</a>(<span class="keyword">const</span> T *value, <span class="keywordtype">int</span> key_length) {</div>
+<div class="line"><a name="l00194"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html#a3dcc4d91a23d5e1a3f36822a0d2ceb52">  194</a></span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a3dcc4d91a23d5e1a3f36822a0d2ceb52">seed_array</a>(<span class="keyword">const</span> T *value, <span class="keywordtype">int</span> key_length) {</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            <span class="keywordtype">int</span> i, j, k;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818" title="32bit整数による初期化">seed</a>(UINT32_C(19650218));</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818">seed</a>(UINT32_C(19650218));</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            i = 1;</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;            j = 0;</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;            <span class="keywordflow">if</span> (N &gt; key_length) {</div>
@@ -141,11 +141,11 @@
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            mti = N;</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        }</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;</div>
-<div class="line"><a name="l00244"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a004016129870e2408ba0d0958a178ac3">  244</a></span>&#160;        uint32_t <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a004016129870e2408ba0d0958a178ac3" title="疑似乱数を生成する">generate</a>() {</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#ab803399c82ff1b565346a30eb48e2fa7" title="疑似乱数を生成する">next</a>();</div>
+<div class="line"><a name="l00244"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html#a004016129870e2408ba0d0958a178ac3">  244</a></span>&#160;        uint32_t <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a004016129870e2408ba0d0958a178ac3">generate</a>() {</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#ab803399c82ff1b565346a30eb48e2fa7">next</a>();</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        }</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
-<div class="line"><a name="l00259"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#ab803399c82ff1b565346a30eb48e2fa7">  259</a></span>&#160;        uint32_t <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#ab803399c82ff1b565346a30eb48e2fa7" title="疑似乱数を生成する">next</a>() {</div>
+<div class="line"><a name="l00259"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html#ab803399c82ff1b565346a30eb48e2fa7">  259</a></span>&#160;        uint32_t <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#ab803399c82ff1b565346a30eb48e2fa7">next</a>() {</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            <span class="keyword">using namespace </span>std;</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            <span class="keyword">const</span> uint32_t LARGE_MASK = UINT32_C(0x3ff);</div>
@@ -163,7 +163,7 @@
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <span class="keywordflow">return</span> y;</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        }</div>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
-<div class="line"><a name="l00291"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a9eb50b904a3542b0ba8342da46599f0c">  291</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a9eb50b904a3542b0ba8342da46599f0c" title="状態空間のビットサイズである 19937 を返す。">bitSize</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00291"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html#a9eb50b904a3542b0ba8342da46599f0c">  291</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a9eb50b904a3542b0ba8342da46599f0c">bitSize</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            <span class="keywordflow">return</span> 19937;</div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        }</div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keyword">private</span>:</div>
@@ -180,12 +180,27 @@
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    };</div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;}</div>
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_MERSENNETWISTER_HPP</span></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_a3dcc4d91a23d5e1a3f36822a0d2ceb52"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#a3dcc4d91a23d5e1a3f36822a0d2ceb52">MTToolBox::MersenneTwister::seed_array</a></div><div class="ttdeci">void seed_array(const T *value, int key_length)</div><div class="ttdoc">T 型配列による初期化 </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:194</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_abstract_generator_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_abstract_generator.html">MTToolBox::AbstractGenerator</a></div><div class="ttdoc">疑似乱数生成器 </div><div class="ttdef"><b>Definition:</b> AbstractGenerator.hpp:48</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_a004016129870e2408ba0d0958a178ac3"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#a004016129870e2408ba0d0958a178ac3">MTToolBox::MersenneTwister::generate</a></div><div class="ttdeci">uint32_t generate()</div><div class="ttdoc">疑似乱数を生成する </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:244</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_a3bbfacc70833a1ace156f3f90347b7ec"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#a3bbfacc70833a1ace156f3f90347b7ec">MTToolBox::MersenneTwister::MersenneTwister</a></div><div class="ttdeci">MersenneTwister()</div><div class="ttdoc">コンストラクタ </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:59</div></div>
+<div class="ttc" id="_abstract_generator_8hpp_html"><div class="ttname"><a href="_abstract_generator_8hpp.html">AbstractGenerator.hpp</a></div><div class="ttdoc">GF(2)線形疑似乱数生成器の抽象クラス </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_aedde3447ffea2853af24dcda61dd9818"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818">MTToolBox::MersenneTwister::seed</a></div><div class="ttdeci">void seed(uint32_t value)</div><div class="ttdoc">32bit整数による初期化 </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:138</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html">MTToolBox::MersenneTwister</a></div><div class="ttdoc">Mersenne Twister 疑似乱数生成器 </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:48</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_a92b6dfd1e9b7633e6fd3476f1b15bd09"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#a92b6dfd1e9b7633e6fd3476f1b15bd09">MTToolBox::MersenneTwister::~MersenneTwister</a></div><div class="ttdeci">~MersenneTwister()</div><div class="ttdoc">デストラクタ </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:123</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_a9eb50b904a3542b0ba8342da46599f0c"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#a9eb50b904a3542b0ba8342da46599f0c">MTToolBox::MersenneTwister::bitSize</a></div><div class="ttdeci">int bitSize() const </div><div class="ttdoc">状態空間のビットサイズである 19937 を返す。 </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:291</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_a94a178fec5ab5596f309f4cc3b67d4b6"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#a94a178fec5ab5596f309f4cc3b67d4b6">MTToolBox::MersenneTwister::MersenneTwister</a></div><div class="ttdeci">MersenneTwister(uint32_t value)</div><div class="ttdoc">コンストラクタ </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:75</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_a533e1427d2b45315f90dcd35e256c3a4"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#a533e1427d2b45315f90dcd35e256c3a4">MTToolBox::MersenneTwister::MersenneTwister</a></div><div class="ttdeci">MersenneTwister(const uint32_t *value, int size)</div><div class="ttdoc">コンストラクタ </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:109</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_ab803399c82ff1b565346a30eb48e2fa7"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#ab803399c82ff1b565346a30eb48e2fa7">MTToolBox::MersenneTwister::next</a></div><div class="ttdeci">uint32_t next()</div><div class="ttdoc">疑似乱数を生成する </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:259</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_ab3af8f22217708e437d02c62bab3a73f"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#ab3af8f22217708e437d02c62bab3a73f">MTToolBox::MersenneTwister::seed</a></div><div class="ttdeci">void seed(const std::string &amp;value)</div><div class="ttdoc">string文字列による初期化 </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:158</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_ad96982f91435bc8b18a9b6e69fcc3e66"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#ad96982f91435bc8b18a9b6e69fcc3e66">MTToolBox::MersenneTwister::seed</a></div><div class="ttdeci">void seed(const uint32_t *value, int key_length)</div><div class="ttdoc">符号なし整数配列による初期化 </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:175</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_a17c2448b77d444c242b05b4dc17f02d6"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#a17c2448b77d444c242b05b4dc17f02d6">MTToolBox::MersenneTwister::MersenneTwister</a></div><div class="ttdeci">MersenneTwister(const std::string &amp;value)</div><div class="ttdoc">コンストラクタ </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:91</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Oct 18 2013 10:53:50に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してFri Dec 6 2013 10:50:04に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.3.1
+</a> 1.8.5
 </small></address>
 </body>
 </html>

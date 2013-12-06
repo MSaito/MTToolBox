@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.3.1"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
 <title>MTToolBox: period.hpp ソースファイル</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -26,7 +26,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 作成： Doxygen 1.8.3.1 -->
+<!-- 作成： Doxygen 1.8.5 -->
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>メインページ</span></a></li>
@@ -56,45 +56,54 @@
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;NTL/GF2X.h&gt;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;NTL/vector.h&gt;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_abstract_generator_8hpp.html" title="GF(2)線形疑似乱数生成器の抽象クラス">MTToolBox/AbstractGenerator.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_abstract_generator_8hpp.html">MTToolBox/AbstractGenerator.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">namespace </span>MTToolBox {</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt; <span class="keywordtype">void</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="code" href="namespace_m_t_tool_box.html#a7861dda005fe9d0c519f7e1442a1fa84">   53</a></span>&#160;    <a class="code" href="namespace_m_t_tool_box.html#a7861dda005fe9d0c519f7e1442a1fa84" title="最小多項式を求める">minpoly</a>(NTL::GF2X&amp; poly, <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html" title="疑似乱数生成器">AbstractGenerator&lt;U&gt;</a>&amp; generator, <span class="keywordtype">int</span> pos = 0)</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#a7861dda005fe9d0c519f7e1442a1fa84">   53</a></span>&#160;    <a class="code" href="namespace_m_t_tool_box.html#a7861dda005fe9d0c519f7e1442a1fa84">minpoly</a>(NTL::GF2X&amp; poly, <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html">AbstractGenerator&lt;U&gt;</a>&amp; generator, <span class="keywordtype">int</span> pos = 0)</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">using namespace </span>std;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">using namespace </span>NTL;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        Vec&lt;GF2&gt; v;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordtype">int</span> size = generator.<a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html#accdd6df63c2639e56b31e5dd205d67d7" title="内部状態空間のビットサイズを返す。">bitSize</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordtype">int</span> size = generator.<a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html#accdd6df63c2639e56b31e5dd205d67d7">bitSize</a>();</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        v.SetLength(2 * size);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 2 * size; i++) {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            v[i] = (generator.<a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html#ac0654743a78f7eb84630936d16fd945e" title="内部状態を次状態に遷移し、疑似乱数をひとつ出力する。">generate</a>() &gt;&gt; pos) &amp; 1;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            v[i] = (generator.<a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html#ac0654743a78f7eb84630936d16fd945e">generate</a>() &gt;&gt; pos) &amp; 1;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        MinPolySeq(poly, v, size);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespace_m_t_tool_box.html#a321a25e0bd1bf2447a2dfffd9f960fa5" title="2degree -1 が素数となるかどうかを返す">isMexp</a>(uint32_t degree);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespace_m_t_tool_box.html#a321a25e0bd1bf2447a2dfffd9f960fa5">isMexp</a>(uint32_t degree);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespace_m_t_tool_box.html#a910150b2b4a1db3af4e77c498c1835dc" title="既約判定">isIrreducible</a>(<span class="keyword">const</span> NTL::GF2X&amp; poly);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespace_m_t_tool_box.html#a910150b2b4a1db3af4e77c498c1835dc">isIrreducible</a>(<span class="keyword">const</span> NTL::GF2X&amp; poly);</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespace_m_t_tool_box.html#a07f94dcf95c07af9dca861231891dbb0" title="原始性判定">isPrime</a>(<span class="keyword">const</span> NTL::GF2X&amp; poly);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespace_m_t_tool_box.html#a07f94dcf95c07af9dca861231891dbb0">isPrime</a>(<span class="keyword">const</span> NTL::GF2X&amp; poly);</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespace_m_t_tool_box.html#a07f94dcf95c07af9dca861231891dbb0" title="原始性判定">isPrime</a>(<span class="keyword">const</span> NTL::GF2X&amp; poly, <span class="keywordtype">int</span> degree,</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespace_m_t_tool_box.html#a07f94dcf95c07af9dca861231891dbb0">isPrime</a>(<span class="keyword">const</span> NTL::GF2X&amp; poly, <span class="keywordtype">int</span> degree,</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                 <span class="keyword">const</span> NTL::Vec&lt;NTL::ZZ&gt;&amp; prime_factors);</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespace_m_t_tool_box.html#a07f94dcf95c07af9dca861231891dbb0" title="原始性判定">isPrime</a>(<span class="keyword">const</span> NTL::GF2X&amp; poly,</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespace_m_t_tool_box.html#a07f94dcf95c07af9dca861231891dbb0">isPrime</a>(<span class="keyword">const</span> NTL::GF2X&amp; poly,</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                 <span class="keywordtype">int</span> degree, <span class="keyword">const</span> <span class="keywordtype">char</span> * prime_factors[]);</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespace_m_t_tool_box.html#a14bcb3353334840e792ed780d1157e5c" title="指定された次数の原始多項式がpolyの因数分解に含まれているか判定する。">hasFactorOfDegree</a>(NTL::GF2X&amp; poly, <span class="keywordtype">long</span> degree);</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespace_m_t_tool_box.html#a14bcb3353334840e792ed780d1157e5c">hasFactorOfDegree</a>(NTL::GF2X&amp; poly, <span class="keywordtype">long</span> degree);</div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;}</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_PERIOD_HPP</span></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a14bcb3353334840e792ed780d1157e5c"><div class="ttname"><a href="namespace_m_t_tool_box.html#a14bcb3353334840e792ed780d1157e5c">MTToolBox::hasFactorOfDegree</a></div><div class="ttdeci">bool hasFactorOfDegree(NTL::GF2X &amp;poly, long degree)</div><div class="ttdoc">指定された次数の原始多項式がpolyの因数分解に含まれているか判定する。 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_abstract_generator_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_abstract_generator.html">MTToolBox::AbstractGenerator</a></div><div class="ttdoc">疑似乱数生成器 </div><div class="ttdef"><b>Definition:</b> AbstractGenerator.hpp:48</div></div>
+<div class="ttc" id="_abstract_generator_8hpp_html"><div class="ttname"><a href="_abstract_generator_8hpp.html">AbstractGenerator.hpp</a></div><div class="ttdoc">GF(2)線形疑似乱数生成器の抽象クラス </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a7861dda005fe9d0c519f7e1442a1fa84"><div class="ttname"><a href="namespace_m_t_tool_box.html#a7861dda005fe9d0c519f7e1442a1fa84">MTToolBox::minpoly</a></div><div class="ttdeci">void minpoly(NTL::GF2X &amp;poly, AbstractGenerator&lt; U &gt; &amp;generator, int pos=0)</div><div class="ttdoc">最小多項式を求める </div><div class="ttdef"><b>Definition:</b> period.hpp:53</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a910150b2b4a1db3af4e77c498c1835dc"><div class="ttname"><a href="namespace_m_t_tool_box.html#a910150b2b4a1db3af4e77c498c1835dc">MTToolBox::isIrreducible</a></div><div class="ttdeci">bool isIrreducible(const NTL::GF2X &amp;poly)</div><div class="ttdoc">既約判定 </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a321a25e0bd1bf2447a2dfffd9f960fa5"><div class="ttname"><a href="namespace_m_t_tool_box.html#a321a25e0bd1bf2447a2dfffd9f960fa5">MTToolBox::isMexp</a></div><div class="ttdeci">bool isMexp(uint32_t degree)</div><div class="ttdoc">2degree -1 が素数となるかどうかを返す </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_abstract_generator_html_accdd6df63c2639e56b31e5dd205d67d7"><div class="ttname"><a href="class_m_t_tool_box_1_1_abstract_generator.html#accdd6df63c2639e56b31e5dd205d67d7">MTToolBox::AbstractGenerator::bitSize</a></div><div class="ttdeci">virtual int bitSize() const =0</div><div class="ttdoc">内部状態空間のビットサイズを返す。 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_abstract_generator_html_ac0654743a78f7eb84630936d16fd945e"><div class="ttname"><a href="class_m_t_tool_box_1_1_abstract_generator.html#ac0654743a78f7eb84630936d16fd945e">MTToolBox::AbstractGenerator::generate</a></div><div class="ttdeci">virtual U generate()=0</div><div class="ttdoc">内部状態を次状態に遷移し、疑似乱数をひとつ出力する。 </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a07f94dcf95c07af9dca861231891dbb0"><div class="ttname"><a href="namespace_m_t_tool_box.html#a07f94dcf95c07af9dca861231891dbb0">MTToolBox::isPrime</a></div><div class="ttdeci">bool isPrime(const NTL::GF2X &amp;poly)</div><div class="ttdoc">原始性判定 </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Oct 18 2013 10:53:50に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してFri Dec 6 2013 10:50:04に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.3.1
+</a> 1.8.5
 </small></address>
 </body>
 </html>

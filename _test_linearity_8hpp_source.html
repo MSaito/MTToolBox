@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.3.1"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
 <title>MTToolBox: TestLinearity.hpp ソースファイル</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -26,7 +26,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 作成： Doxygen 1.8.3.1 -->
+<!-- 作成： Doxygen 1.8.5 -->
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>メインページ</span></a></li>
@@ -55,18 +55,18 @@
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;iomanip&gt;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_abstract_generator_8hpp.html" title="GF(2)線形疑似乱数生成器の抽象クラス">MTToolBox/AbstractGenerator.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_equidistribution_calculatable_8hpp.html" title="このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。">MTToolBox/EquidistributionCalculatable.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_abstract_generator_8hpp.html">MTToolBox/AbstractGenerator.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_equidistribution_calculatable_8hpp.html">MTToolBox/EquidistributionCalculatable.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">namespace </span>MTToolBox {</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_test_linearity.html">   78</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_test_linearity.html" title="疑似乱数生成器がGF(2)線形であるかどうかテストする">TestLinearity</a> {</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_test_linearity.html">   78</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_test_linearity.html">TestLinearity</a> {</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_test_linearity.html#a25fd7013237916e69b2eb22f6cf42ab3">   96</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_m_t_tool_box_1_1_test_linearity.html#a25fd7013237916e69b2eb22f6cf42ab3" title="generator がGF(2)線形であるかどうかテストする。">operator()</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html" title="このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。">EquidistributionCalculatable&lt;U&gt;</a>&amp; generator) {</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html" title="このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。">EquidistributionCalculatable&lt;U&gt;</a> *g1 = generator.<a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a409a625346710b6b083b1038a166f17e">clone</a>();</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html" title="このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。">EquidistributionCalculatable&lt;U&gt;</a> *g2 = generator.<a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a409a625346710b6b083b1038a166f17e">clone</a>();</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            g1-&gt;<a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html#a2418e6884e583c7ac6f1ecff13c5596d" title="内部状態を初期化する。">seed</a>(1234);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            g2-&gt;<a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html#a2418e6884e583c7ac6f1ecff13c5596d" title="内部状態を初期化する。">seed</a>(4321);</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_test_linearity.html#a25fd7013237916e69b2eb22f6cf42ab3">   96</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_m_t_tool_box_1_1_test_linearity.html#a25fd7013237916e69b2eb22f6cf42ab3">operator()</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">EquidistributionCalculatable&lt;U&gt;</a>&amp; generator) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">EquidistributionCalculatable&lt;U&gt;</a> *g1 = generator.<a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a409a625346710b6b083b1038a166f17e">clone</a>();</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">EquidistributionCalculatable&lt;U&gt;</a> *g2 = generator.<a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a409a625346710b6b083b1038a166f17e">clone</a>();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            g1-&gt;<a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html#a2418e6884e583c7ac6f1ecff13c5596d">seed</a>(1234);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            g2-&gt;<a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html#a2418e6884e583c7ac6f1ecff13c5596d">seed</a>(4321);</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keywordtype">bool</span> result = test1(*g1) &amp;&amp; test2(*g1, *g2);</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <span class="keyword">delete</span> g1;</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keyword">delete</span> g2;</div>
@@ -74,9 +74,9 @@
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        }</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordtype">bool</span> test1(<a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html" title="このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。">EquidistributionCalculatable&lt;U&gt;</a>&amp; g1) {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordtype">bool</span> test1(<a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">EquidistributionCalculatable&lt;U&gt;</a>&amp; g1) {</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html" title="このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。">EquidistributionCalculatable&lt;U&gt;</a> *g2 = g1.<a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a409a625346710b6b083b1038a166f17e">clone</a>();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">EquidistributionCalculatable&lt;U&gt;</a> *g2 = g1.<a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a409a625346710b6b083b1038a166f17e">clone</a>();</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keywordtype">bool</span> result = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            g2-&gt;add(g1);</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 100; i++) {</div>
@@ -131,12 +131,19 @@
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    };</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;}</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_TEST_LINEARITY_HPP</span></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_equidistribution_calculatable_html_a409a625346710b6b083b1038a166f17e"><div class="ttname"><a href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a409a625346710b6b083b1038a166f17e">MTToolBox::EquidistributionCalculatable::clone</a></div><div class="ttdeci">virtual EquidistributionCalculatable&lt; U &gt; * clone() const =0</div><div class="ttdoc">自分のコピーを返す。 </div></div>
+<div class="ttc" id="_abstract_generator_8hpp_html"><div class="ttname"><a href="_abstract_generator_8hpp.html">AbstractGenerator.hpp</a></div><div class="ttdoc">GF(2)線形疑似乱数生成器の抽象クラス </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_equidistribution_calculatable_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">MTToolBox::EquidistributionCalculatable</a></div><div class="ttdoc">このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。 </div><div class="ttdef"><b>Definition:</b> EquidistributionCalculatable.hpp:48</div></div>
+<div class="ttc" id="_equidistribution_calculatable_8hpp_html"><div class="ttname"><a href="_equidistribution_calculatable_8hpp.html">EquidistributionCalculatable.hpp</a></div><div class="ttdoc">このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_abstract_generator_html_a2418e6884e583c7ac6f1ecff13c5596d"><div class="ttname"><a href="class_m_t_tool_box_1_1_abstract_generator.html#a2418e6884e583c7ac6f1ecff13c5596d">MTToolBox::AbstractGenerator::seed</a></div><div class="ttdeci">virtual void seed(U value)=0</div><div class="ttdoc">内部状態を初期化する。 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_test_linearity_html_a25fd7013237916e69b2eb22f6cf42ab3"><div class="ttname"><a href="class_m_t_tool_box_1_1_test_linearity.html#a25fd7013237916e69b2eb22f6cf42ab3">MTToolBox::TestLinearity::operator()</a></div><div class="ttdeci">bool operator()(const EquidistributionCalculatable&lt; U &gt; &amp;generator)</div><div class="ttdoc">generator がGF(2)線形であるかどうかテストする。 </div><div class="ttdef"><b>Definition:</b> TestLinearity.hpp:96</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_test_linearity_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_test_linearity.html">MTToolBox::TestLinearity</a></div><div class="ttdoc">疑似乱数生成器がGF(2)線形であるかどうかテストする </div><div class="ttdef"><b>Definition:</b> TestLinearity.hpp:78</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Oct 18 2013 10:53:50に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してFri Dec 6 2013 10:50:04に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.3.1
+</a> 1.8.5
 </small></address>
 </body>
 </html>

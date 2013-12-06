@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.3.1"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
 <title>MTToolBox: AlgorithmPrimitivity.hpp ソースファイル</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -26,7 +26,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 作成： Doxygen 1.8.3.1 -->
+<!-- 作成： Doxygen 1.8.5 -->
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>メインページ</span></a></li>
@@ -56,38 +56,87 @@
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;NTL/GF2X.h&gt;</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;NTL/ZZ.h&gt;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;NTL/vector.h&gt;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="period_8hpp.html" title="最小多項式の計算と原始性の判定">MTToolBox/period.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="period_8hpp.html">MTToolBox/period.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span>MTToolBox {</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html">   42</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html" title="原始多項式かどうか判定するアルゴリズムを提供するクラス">AlgorithmPrimitivity</a> {</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_primitivity.html">   42</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html">AlgorithmPrimitivity</a> {</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html#a4e50cf1e9104d3137cfc673e34d3f041">   55</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html#a4e50cf1e9104d3137cfc673e34d3f041" title="メルセンヌ指数を次数とする原始多項式かどうか判定する場合のコンストラクタ">AlgorithmPrimitivity</a>() {</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_primitivity.html#a4e50cf1e9104d3137cfc673e34d3f041">   55</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html#a4e50cf1e9104d3137cfc673e34d3f041">AlgorithmPrimitivity</a>() {</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            primes = <span class="keyword">new</span> NTL::Vec&lt;NTL::ZZ&gt;;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            primes-&gt;SetLength(0);</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            mersenne = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html#a4e50cf1e9104d3137cfc673e34d3f041" title="メルセンヌ指数を次数とする原始多項式かどうか判定する場合のコンストラクタ">AlgorithmPrimitivity</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * prime_factors[]);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html#a4e50cf1e9104d3137cfc673e34d3f041">AlgorithmPrimitivity</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * prime_factors[]);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html#a10a7901c16b0ca2a96c9afc9d41db0dc">   84</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html#a10a7901c16b0ca2a96c9afc9d41db0dc" title="デストラクタ">~AlgorithmPrimitivity</a>() {</div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_primitivity.html#a10a7901c16b0ca2a96c9afc9d41db0dc">   84</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html#a10a7901c16b0ca2a96c9afc9d41db0dc">~AlgorithmPrimitivity</a>() {</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keyword">delete</span> primes;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        }</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html#ac4d894c30c21a2fa7a25331ff495a5a2" title="poly が指定した次数の原始多項式かどうか判定する">operator()</a>(<span class="keywordtype">int</span> max_degree, <span class="keyword">const</span> NTL::GF2X&amp; poly) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_primitivity.html#ac4d894c30c21a2fa7a25331ff495a5a2">operator()</a>(<span class="keywordtype">int</span> max_degree, <span class="keyword">const</span> NTL::GF2X&amp; poly) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordtype">bool</span> mersenne;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        NTL::Vec&lt;NTL::ZZ&gt; * primes;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    };</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> AlgorithmPrimitivity <a class="code" href="namespace_m_t_tool_box.html#a34e4fb3d4edbdec76092186b4f2259ba">MersennePrimitivity</a>;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_ALGORITHM_PRIMITIVITY_HPP</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> AlgorithmPrimitivity <a class="code" href="namespace_m_t_tool_box.html#a34e4fb3d4edbdec76092186b4f2259ba">MersennePrimitivity</a>;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_m_t_tool_box.html#a2fe4107d6c4f4dbb809fd66ec2dbee45">prime_factors2_128_1</a>[];</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_m_t_tool_box.html#a99207a7c9ddd352220636cd36b1a8799">prime_factors2_160_1</a>[];</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_m_t_tool_box.html#aa5379d649fd6a9f9e5547b8e373a9fbf">prime_factors2_192_1</a>[];</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_m_t_tool_box.html#a61499a45bffaa0ba8af6cfe0c21f9151">prime_factors2_224_1</a>[];</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_m_t_tool_box.html#a3ffddfdc0cdf7ebd6e37e0e43e4de02e">prime_factors2_256_1</a>[];</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_m_t_tool_box.html#a1445b9146c030fe12bf611fb3752df36">prime_factors2_288_1</a>[];</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_m_t_tool_box.html#a5ac57ea226f682e507c79ad1338d9dd9">prime_factors2_320_1</a>[];</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_m_t_tool_box.html#a52dd8cd81d96b308b5088db059275762">prime_factors2_352_1</a>[];</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_m_t_tool_box.html#a6fd7146bb2466447d04f74ce5f7def80">prime_factors2_384_1</a>[];</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_m_t_tool_box.html#a5c746ad021307f50c2005d6043ab5a05">prime_factors2_416_1</a>[];</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_m_t_tool_box.html#ab416912e186693889f954d3491d6cb0c">prime_factors2_448_1</a>[];</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_m_t_tool_box.html#a95557bee413c7de118239b94ca73585b">prime_factors2_480_1</a>[];</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_m_t_tool_box.html#a6f33f9f028e13832f14873b6deb7a32c">prime_factors2_512_1</a>[];</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_m_t_tool_box.html#a98557ab36e5ee51547221d9938db98cb">prime_factors2_544_1</a>[];</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;}</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_ALGORITHM_PRIMITIVITY_HPP</span></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_aa5379d649fd6a9f9e5547b8e373a9fbf"><div class="ttname"><a href="namespace_m_t_tool_box.html#aa5379d649fd6a9f9e5547b8e373a9fbf">MTToolBox::prime_factors2_192_1</a></div><div class="ttdeci">const char * prime_factors2_192_1[]</div><div class="ttdoc">2192-1 の素因数分解に現れる素数のリスト </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a6f33f9f028e13832f14873b6deb7a32c"><div class="ttname"><a href="namespace_m_t_tool_box.html#a6f33f9f028e13832f14873b6deb7a32c">MTToolBox::prime_factors2_512_1</a></div><div class="ttdeci">const char * prime_factors2_512_1[]</div><div class="ttdoc">2512-1 の素因数分解に現れる素数のリスト </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a2fe4107d6c4f4dbb809fd66ec2dbee45"><div class="ttname"><a href="namespace_m_t_tool_box.html#a2fe4107d6c4f4dbb809fd66ec2dbee45">MTToolBox::prime_factors2_128_1</a></div><div class="ttdeci">const char * prime_factors2_128_1[]</div><div class="ttdoc">2128-1 の素因数分解に現れる素数のリスト </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_primitivity_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_primitivity.html">MTToolBox::AlgorithmPrimitivity</a></div><div class="ttdoc">原始多項式かどうか判定するアルゴリズムを提供するクラス </div><div class="ttdef"><b>Definition:</b> AlgorithmPrimitivity.hpp:42</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_primitivity_html_a10a7901c16b0ca2a96c9afc9d41db0dc"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_primitivity.html#a10a7901c16b0ca2a96c9afc9d41db0dc">MTToolBox::AlgorithmPrimitivity::~AlgorithmPrimitivity</a></div><div class="ttdeci">~AlgorithmPrimitivity()</div><div class="ttdoc">デストラクタ </div><div class="ttdef"><b>Definition:</b> AlgorithmPrimitivity.hpp:84</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a34e4fb3d4edbdec76092186b4f2259ba"><div class="ttname"><a href="namespace_m_t_tool_box.html#a34e4fb3d4edbdec76092186b4f2259ba">MTToolBox::MersennePrimitivity</a></div><div class="ttdeci">const AlgorithmPrimitivity MersennePrimitivity</div><div class="ttdoc">状態空間のビットサイズがメルセンヌ指数の疑似乱数生成器の 最小多項式の原始性を判定するアルゴリズム </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_primitivity_html_a4e50cf1e9104d3137cfc673e34d3f041"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_primitivity.html#a4e50cf1e9104d3137cfc673e34d3f041">MTToolBox::AlgorithmPrimitivity::AlgorithmPrimitivity</a></div><div class="ttdeci">AlgorithmPrimitivity()</div><div class="ttdoc">メルセンヌ指数を次数とする原始多項式かどうか判定する場合のコンストラクタ </div><div class="ttdef"><b>Definition:</b> AlgorithmPrimitivity.hpp:55</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a98557ab36e5ee51547221d9938db98cb"><div class="ttname"><a href="namespace_m_t_tool_box.html#a98557ab36e5ee51547221d9938db98cb">MTToolBox::prime_factors2_544_1</a></div><div class="ttdeci">const char * prime_factors2_544_1[]</div><div class="ttdoc">2544-1 の素因数分解に現れる素数のリスト </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a61499a45bffaa0ba8af6cfe0c21f9151"><div class="ttname"><a href="namespace_m_t_tool_box.html#a61499a45bffaa0ba8af6cfe0c21f9151">MTToolBox::prime_factors2_224_1</a></div><div class="ttdeci">const char * prime_factors2_224_1[]</div><div class="ttdoc">2224-1 の素因数分解に現れる素数のリスト </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a5ac57ea226f682e507c79ad1338d9dd9"><div class="ttname"><a href="namespace_m_t_tool_box.html#a5ac57ea226f682e507c79ad1338d9dd9">MTToolBox::prime_factors2_320_1</a></div><div class="ttdeci">const char * prime_factors2_320_1[]</div><div class="ttdoc">2320-1 の素因数分解に現れる素数のリスト </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a5c746ad021307f50c2005d6043ab5a05"><div class="ttname"><a href="namespace_m_t_tool_box.html#a5c746ad021307f50c2005d6043ab5a05">MTToolBox::prime_factors2_416_1</a></div><div class="ttdeci">const char * prime_factors2_416_1[]</div><div class="ttdoc">2416-1 の素因数分解に現れる素数のリスト </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_primitivity_html_ac4d894c30c21a2fa7a25331ff495a5a2"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_primitivity.html#ac4d894c30c21a2fa7a25331ff495a5a2">MTToolBox::AlgorithmPrimitivity::operator()</a></div><div class="ttdeci">bool operator()(int max_degree, const NTL::GF2X &amp;poly) const </div><div class="ttdoc">poly が指定した次数の原始多項式かどうか判定する </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a99207a7c9ddd352220636cd36b1a8799"><div class="ttname"><a href="namespace_m_t_tool_box.html#a99207a7c9ddd352220636cd36b1a8799">MTToolBox::prime_factors2_160_1</a></div><div class="ttdeci">const char * prime_factors2_160_1[]</div><div class="ttdoc">2160-1 の素因数分解に現れる素数のリスト </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_ab416912e186693889f954d3491d6cb0c"><div class="ttname"><a href="namespace_m_t_tool_box.html#ab416912e186693889f954d3491d6cb0c">MTToolBox::prime_factors2_448_1</a></div><div class="ttdeci">const char * prime_factors2_448_1[]</div><div class="ttdoc">2448-1 の素因数分解に現れる素数のリスト </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a1445b9146c030fe12bf611fb3752df36"><div class="ttname"><a href="namespace_m_t_tool_box.html#a1445b9146c030fe12bf611fb3752df36">MTToolBox::prime_factors2_288_1</a></div><div class="ttdeci">const char * prime_factors2_288_1[]</div><div class="ttdoc">2288-1 の素因数分解に現れる素数のリスト </div></div>
+<div class="ttc" id="period_8hpp_html"><div class="ttname"><a href="period_8hpp.html">period.hpp</a></div><div class="ttdoc">最小多項式の計算と原始性の判定 </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a95557bee413c7de118239b94ca73585b"><div class="ttname"><a href="namespace_m_t_tool_box.html#a95557bee413c7de118239b94ca73585b">MTToolBox::prime_factors2_480_1</a></div><div class="ttdeci">const char * prime_factors2_480_1[]</div><div class="ttdoc">2480-1 の素因数分解に現れる素数のリスト </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a3ffddfdc0cdf7ebd6e37e0e43e4de02e"><div class="ttname"><a href="namespace_m_t_tool_box.html#a3ffddfdc0cdf7ebd6e37e0e43e4de02e">MTToolBox::prime_factors2_256_1</a></div><div class="ttdeci">const char * prime_factors2_256_1[]</div><div class="ttdoc">2256-1 の素因数分解に現れる素数のリスト </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a6fd7146bb2466447d04f74ce5f7def80"><div class="ttname"><a href="namespace_m_t_tool_box.html#a6fd7146bb2466447d04f74ce5f7def80">MTToolBox::prime_factors2_384_1</a></div><div class="ttdeci">const char * prime_factors2_384_1[]</div><div class="ttdoc">2384-1 の素因数分解に現れる素数のリスト </div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a52dd8cd81d96b308b5088db059275762"><div class="ttname"><a href="namespace_m_t_tool_box.html#a52dd8cd81d96b308b5088db059275762">MTToolBox::prime_factors2_352_1</a></div><div class="ttdeci">const char * prime_factors2_352_1[]</div><div class="ttdoc">2352-1 の素因数分解に現れる素数のリスト </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Oct 18 2013 10:53:50に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してFri Dec 6 2013 10:50:04に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.3.1
+</a> 1.8.5
 </small></address>
 </body>
 </html>

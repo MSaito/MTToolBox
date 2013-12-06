@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.3.1"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
 <title>MTToolBox: TemperingCalculatable.hpp ソースファイル</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -26,7 +26,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 作成： Doxygen 1.8.3.1 -->
+<!-- 作成： Doxygen 1.8.5 -->
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>メインページ</span></a></li>
@@ -55,32 +55,43 @@
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;inttypes.h&gt;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_equidistribution_calculatable_8hpp.html" title="このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。">MTToolBox/EquidistributionCalculatable.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_equidistribution_calculatable_8hpp.html">MTToolBox/EquidistributionCalculatable.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">namespace </span>MTToolBox {</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> U&gt;</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html">   52</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html" title="テンパリングを行うGF(2)線形疑似乱数生成器は、このクラスを継承す ることによって、TemperingAlgorithmを使用したテンパリングパラメー タ探索が可能になる。">TemperingCalculatable</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html" title="このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。">EquidistributionCalculatable</a>&lt;U&gt; {</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_tempering_calculatable.html">   52</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html">TemperingCalculatable</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">EquidistributionCalculatable</a>&lt;U&gt; {</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#ad3c87029aa33c3c5e32dbf2240358959" title="テンパリングパラメータをセットする。">setTemperingPattern</a>(U mask, U pattern, <span class="keywordtype">int</span> index) = 0;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#a5a10880f9fe74953ffb9054378c71554" title="テンパリングテーブルの準備が必要な場合はここで準備する。 MTGP の場合はルックアップテーブルの準備をしている。 テンパリングパラメータの数が1の場合はおそらく準備をする必要はない。">setUpTempering</a>() = 0;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#aa745cafbeeadec104c36405837ba093f" title="出力の上位ビットと下位ビットを反転する。 これは下位ビットから見た均等分布次元を計測またはテンパリング するために使われる。">setReverseOutput</a>() = 0;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#affd81b264b639a94cb57b38a55356335" title="出力の上位ビットと下位ビットの並びを元に戻す。">resetReverseOutput</a>() = 0;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_tempering_calculatable.html#a833f3e230b011aa723eb97b6ad527de9">   64</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#a833f3e230b011aa723eb97b6ad527de9">~TemperingCalculatable</a>() {}</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#ad3c87029aa33c3c5e32dbf2240358959">setTemperingPattern</a>(U mask, U pattern, <span class="keywordtype">int</span> index) = 0;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#a5a10880f9fe74953ffb9054378c71554">setUpTempering</a>() = 0;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#aa745cafbeeadec104c36405837ba093f">setReverseOutput</a>() = 0;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#a8c4c5dd43c0dad856df1a6e7ad9b76c1" title="出力の上位ビットと下位ビットが反転しているかを返す。">isReverseOutput</a>() = 0;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    };</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;}</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_TEMPERING_CALCULATABLE_HPP</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#affd81b264b639a94cb57b38a55356335">resetReverseOutput</a>() = 0;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_m_t_tool_box_1_1_tempering_calculatable.html#a8c4c5dd43c0dad856df1a6e7ad9b76c1">isReverseOutput</a>() = 0;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    };</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_TEMPERING_CALCULATABLE_HPP</span></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_equidistribution_calculatable_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">MTToolBox::EquidistributionCalculatable</a></div><div class="ttdoc">このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。 </div><div class="ttdef"><b>Definition:</b> EquidistributionCalculatable.hpp:48</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_tempering_calculatable_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_tempering_calculatable.html">MTToolBox::TemperingCalculatable</a></div><div class="ttdoc">テンパリングを行うGF(2)線形疑似乱数生成器は、このクラスを継承す ることによって、TemperingAlgorithmを使用したテンパリングパラメー タ探索が可能になる。 ...</div><div class="ttdef"><b>Definition:</b> TemperingCalculatable.hpp:52</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_tempering_calculatable_html_affd81b264b639a94cb57b38a55356335"><div class="ttname"><a href="class_m_t_tool_box_1_1_tempering_calculatable.html#affd81b264b639a94cb57b38a55356335">MTToolBox::TemperingCalculatable::resetReverseOutput</a></div><div class="ttdeci">virtual void resetReverseOutput()=0</div><div class="ttdoc">出力の上位ビットと下位ビットの並びを元に戻す。 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_tempering_calculatable_html_ad3c87029aa33c3c5e32dbf2240358959"><div class="ttname"><a href="class_m_t_tool_box_1_1_tempering_calculatable.html#ad3c87029aa33c3c5e32dbf2240358959">MTToolBox::TemperingCalculatable::setTemperingPattern</a></div><div class="ttdeci">virtual void setTemperingPattern(U mask, U pattern, int index)=0</div><div class="ttdoc">テンパリングパラメータをセットする。 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_tempering_calculatable_html_a8c4c5dd43c0dad856df1a6e7ad9b76c1"><div class="ttname"><a href="class_m_t_tool_box_1_1_tempering_calculatable.html#a8c4c5dd43c0dad856df1a6e7ad9b76c1">MTToolBox::TemperingCalculatable::isReverseOutput</a></div><div class="ttdeci">virtual bool isReverseOutput()=0</div><div class="ttdoc">出力の上位ビットと下位ビットが反転しているかを返す。 </div></div>
+<div class="ttc" id="_equidistribution_calculatable_8hpp_html"><div class="ttname"><a href="_equidistribution_calculatable_8hpp.html">EquidistributionCalculatable.hpp</a></div><div class="ttdoc">このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_tempering_calculatable_html_aa745cafbeeadec104c36405837ba093f"><div class="ttname"><a href="class_m_t_tool_box_1_1_tempering_calculatable.html#aa745cafbeeadec104c36405837ba093f">MTToolBox::TemperingCalculatable::setReverseOutput</a></div><div class="ttdeci">virtual void setReverseOutput()=0</div><div class="ttdoc">出力の上位ビットと下位ビットを反転する。 これは下位ビットから見た均等分布次元を計測またはテンパリング するために使われる。 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_tempering_calculatable_html_a833f3e230b011aa723eb97b6ad527de9"><div class="ttname"><a href="class_m_t_tool_box_1_1_tempering_calculatable.html#a833f3e230b011aa723eb97b6ad527de9">MTToolBox::TemperingCalculatable::~TemperingCalculatable</a></div><div class="ttdeci">virtual ~TemperingCalculatable()</div><div class="ttdoc">仮想デストラクタ（必須） </div><div class="ttdef"><b>Definition:</b> TemperingCalculatable.hpp:64</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_tempering_calculatable_html_a5a10880f9fe74953ffb9054378c71554"><div class="ttname"><a href="class_m_t_tool_box_1_1_tempering_calculatable.html#a5a10880f9fe74953ffb9054378c71554">MTToolBox::TemperingCalculatable::setUpTempering</a></div><div class="ttdeci">virtual void setUpTempering()=0</div><div class="ttdoc">テンパリングテーブルの準備が必要な場合はここで準備する。 MTGP の場合はルックアップテーブルの準備をしている。 テンパリングパラメータの数が1の場合はおそらく準備をする必要はない。 ...</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Oct 18 2013 10:53:50に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してFri Dec 6 2013 10:50:04に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.3.1
+</a> 1.8.5
 </small></address>
 </body>
 </html>

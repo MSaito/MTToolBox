@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.3.1"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
 <title>MTToolBox: EquidistributionCalculatable.hpp ソースファイル</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -26,7 +26,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 作成： Doxygen 1.8.3.1 -->
+<!-- 作成： Doxygen 1.8.5 -->
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>メインページ</span></a></li>
@@ -55,66 +55,45 @@
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;inttypes.h&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_recursion_searchable_8hpp.html" title="このクラスは状態遷移パラメータ探索を行えるGF(2)線形疑似乱数生 成器のクラスである。">MTToolBox/RecursionSearchable.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_recursion_searchable_8hpp.html">MTToolBox/RecursionSearchable.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>MTToolBox {</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> U&gt;</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">   48</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html" title="このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。">EquidistributionCalculatable</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html">RecursionSearchable</a>&lt;U&gt; {</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">   48</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">EquidistributionCalculatable</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_tool_box_1_1_recursion_searchable.html">RecursionSearchable</a>&lt;U&gt; {</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">using</span> <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html" title="疑似乱数生成器">AbstractGenerator&lt;U&gt;::generate</a>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">         *\japanese</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">         * 自分のコピーを返す。</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">         *</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">         * @note clone には問題があるが、テンプレートよりよいと判断する。</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">         * @return 自分自身のコピー</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">         *\endjapanese</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">         *</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">         *\english</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">         * Return copy of myself.</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">         * @return copy of myself.</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">         *\endenglish</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">         */</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html" title="このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。">EquidistributionCalculatable&lt;U&gt;</a> * <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a409a625346710b6b083b1038a166f17e">clone</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">         *\japanese</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">         * 上位(MSBから) \b outBitLen だけ出力する。</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">         *</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">         * それ以外のビットは0でなければならない。</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">         * 均等分布次元の計算にとって重要なメソッドである。</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">         * このメソッドを実行すると、状態空間の遷移も行われる。</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">         * @param[in] outBitLen 上位から何ビット出力するかを指定する。</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">         * @return 上位 \b outBitLen 以外は0の出力</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">         *\endjapanese</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">         *</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">         *\english</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">         * output \b outBitLen from MSB.</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">         *</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">         * Remained bits should be all zeros.</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">         * Users should call statte transition function inside</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">         * this method.</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">         * @param[in] outBitLen Shows how many bits are outputed.</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">         * @return an integer whose \b outBiteLen bits from MSB.</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">         *\endenglish</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">         */</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keyword">virtual</span> U <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html#ac0654743a78f7eb84630936d16fd945e" title="内部状態を次状態に遷移し、疑似乱数をひとつ出力する。">generate</a>(<span class="keywordtype">int</span> outBitLen) = 0;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a035d42f311fd455ce03bf5d68cc8b45f" title="GF(2)線形疑似乱数生成器の状態空間を加算し、内部状態を変更する。">add</a>(<a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html" title="このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。">EquidistributionCalculatable</a>&amp; that) = 0;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a5064c3d1b262288dda87f3eb732716f2" title="状態空間をすべてゼロにセットする。">setZero</a>() = 0;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a89cffd810ea9670d728ffd78fb4d4fa2" title="状態空間がすべてゼロかチェックする。">isZero</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    };</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_EQUIDISTRIBUTION_CALCULATABLE_HPP</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">using</span> <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html">AbstractGenerator&lt;U&gt;::generate</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a81a22fd93b1f288fb367818887600138">   61</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a81a22fd93b1f288fb367818887600138">~EquidistributionCalculatable</a>(){};</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">EquidistributionCalculatable&lt;U&gt;</a> * <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a409a625346710b6b083b1038a166f17e">clone</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keyword">virtual</span> U <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html#ac0654743a78f7eb84630936d16fd945e">generate</a>(<span class="keywordtype">int</span> outBitLen) = 0;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a035d42f311fd455ce03bf5d68cc8b45f">add</a>(<a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">EquidistributionCalculatable</a>&amp; that) = 0;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a5064c3d1b262288dda87f3eb732716f2">setZero</a>() = 0;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a89cffd810ea9670d728ffd78fb4d4fa2">isZero</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    };</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;}</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_EQUIDISTRIBUTION_CALCULATABLE_HPP</span></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_abstract_generator_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_abstract_generator.html">MTToolBox::AbstractGenerator</a></div><div class="ttdoc">疑似乱数生成器 </div><div class="ttdef"><b>Definition:</b> AbstractGenerator.hpp:48</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_equidistribution_calculatable_html_a409a625346710b6b083b1038a166f17e"><div class="ttname"><a href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a409a625346710b6b083b1038a166f17e">MTToolBox::EquidistributionCalculatable::clone</a></div><div class="ttdeci">virtual EquidistributionCalculatable&lt; U &gt; * clone() const =0</div><div class="ttdoc">自分のコピーを返す。 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_equidistribution_calculatable_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">MTToolBox::EquidistributionCalculatable</a></div><div class="ttdoc">このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。 </div><div class="ttdef"><b>Definition:</b> EquidistributionCalculatable.hpp:48</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_equidistribution_calculatable_html_a5064c3d1b262288dda87f3eb732716f2"><div class="ttname"><a href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a5064c3d1b262288dda87f3eb732716f2">MTToolBox::EquidistributionCalculatable::setZero</a></div><div class="ttdeci">virtual void setZero()=0</div><div class="ttdoc">状態空間をすべてゼロにセットする。 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_equidistribution_calculatable_html_a035d42f311fd455ce03bf5d68cc8b45f"><div class="ttname"><a href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a035d42f311fd455ce03bf5d68cc8b45f">MTToolBox::EquidistributionCalculatable::add</a></div><div class="ttdeci">virtual void add(EquidistributionCalculatable &amp;that)=0</div><div class="ttdoc">GF(2)線形疑似乱数生成器の状態空間を加算し、内部状態を変更する。 </div></div>
+<div class="ttc" id="_recursion_searchable_8hpp_html"><div class="ttname"><a href="_recursion_searchable_8hpp.html">RecursionSearchable.hpp</a></div><div class="ttdoc">このクラスは状態遷移パラメータ探索を行えるGF(2)線形疑似乱数生 成器のクラスである。 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_equidistribution_calculatable_html_a81a22fd93b1f288fb367818887600138"><div class="ttname"><a href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a81a22fd93b1f288fb367818887600138">MTToolBox::EquidistributionCalculatable::~EquidistributionCalculatable</a></div><div class="ttdeci">virtual ~EquidistributionCalculatable()</div><div class="ttdoc">仮想デストラクタ（必須） </div><div class="ttdef"><b>Definition:</b> EquidistributionCalculatable.hpp:61</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_recursion_searchable_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_recursion_searchable.html">MTToolBox::RecursionSearchable</a></div><div class="ttdef"><b>Definition:</b> RecursionSearchable.hpp:41</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_equidistribution_calculatable_html_a89cffd810ea9670d728ffd78fb4d4fa2"><div class="ttname"><a href="class_m_t_tool_box_1_1_equidistribution_calculatable.html#a89cffd810ea9670d728ffd78fb4d4fa2">MTToolBox::EquidistributionCalculatable::isZero</a></div><div class="ttdeci">virtual bool isZero() const =0</div><div class="ttdoc">状態空間がすべてゼロかチェックする。 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_abstract_generator_html_ac0654743a78f7eb84630936d16fd945e"><div class="ttname"><a href="class_m_t_tool_box_1_1_abstract_generator.html#ac0654743a78f7eb84630936d16fd945e">MTToolBox::AbstractGenerator::generate</a></div><div class="ttdeci">virtual U generate()=0</div><div class="ttdoc">内部状態を次状態に遷移し、疑似乱数をひとつ出力する。 </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Oct 18 2013 10:53:50に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+MTToolBoxに対してFri Dec 6 2013 10:50:04に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.3.1
+</a> 1.8.5
 </small></address>
 </body>
 </html>
