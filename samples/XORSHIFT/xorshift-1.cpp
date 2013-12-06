@@ -2,6 +2,7 @@
  * XORSHIFT 128
  */
 #include <MTToolBox/AbstractGenerator.hpp>
+#include <MTToolBox/AlgorithmPrimitivity.hpp>
 #include <MTToolBox/period.hpp>
 #include <iostream>
 #include <iomanip>
@@ -37,10 +38,7 @@ int main() {
     GF2X poly;
     minpoly<uint32_t>(poly, xs);
     cout << "degree = " << deg(poly) << endl;
-    const char * factors128_1[] = {
-        "3", "5", "17", "257", "641", "65537", "274177", "6700417",
-        "67280421310721", NULL};
-    if (isPrime(poly, 128, factors128_1)) {
+    if (isPrime(poly, 128, prime_factors2_128_1)) {
         cout << "period is 2^128 -1." << endl;
     } else {
         cout << "period is unknown." << endl;

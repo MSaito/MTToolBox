@@ -178,10 +178,7 @@ void search(Sequential<uint32_t>& seq,
 
 int main() {
     Sequential<uint32_t> seq(0, 0x3ffff);
-    const char * factors128_1[] = {
-        "3", "5", "17", "257", "641", "65537", "274177", "6700417",
-        "67280421310721", NULL};
-    AlgorithmPrimitivity ap(factors128_1);
+    AlgorithmPrimitivity ap(prime_factors2_128_1);
     bool first = true;
     try {
         for(;;) {

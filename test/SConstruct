@@ -37,7 +37,8 @@ test1_files = ['test_period.cpp',
 test2_files = ['test_temper.cpp',
                'test_search_temper.cpp',
                'test_linearity.cpp',
-               'test_mt.cpp']
+               'test_mt.cpp',
+               'test_primefactors.cpp']
 #
 # Library check
 #

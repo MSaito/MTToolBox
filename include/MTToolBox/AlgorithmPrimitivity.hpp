@@ -67,7 +67,7 @@ namespace MTToolBox {
          *
          *\english
          * Constructor for general polynomial with GF(2) coefficients.
-         * @param[in] prime_factors List of charactor strings of primes
+         * @param[in] prime_factors List of character strings of primes
          * which appear in integer factorization of 2<sup>degree</sup>-1.
          *\endenglish
          */
@@ -109,6 +109,188 @@ namespace MTToolBox {
         NTL::Vec<NTL::ZZ> * primes;
     };
 
+    /**
+     *\japanese
+     * 状態空間のビットサイズがメルセンヌ指数の疑似乱数生成器の
+     * 最小多項式の原始性を判定するアルゴリズム
+     *\endjapanese
+     *
+     *\english
+     * An algorithm which checks if given polynomial is a
+     * primitive polynomial of given degree for pseudo
+     * random number generator whose internal state size
+     * is Mersenne exponent.
+     *\endenglish
+     */
     extern const AlgorithmPrimitivity MersennePrimitivity;
+
+    /**
+     *\japanese
+     * 2<sup>128</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>128</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_128_1[];
+
+    /**
+     *\japanese
+     * 2<sup>160</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>160</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_160_1[];
+
+    /**
+     *\japanese
+     * 2<sup>192</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>192</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_192_1[];
+
+    /**
+     *\japanese
+     * 2<sup>224</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>224</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_224_1[];
+
+    /**
+     *\japanese
+     * 2<sup>256</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>256</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_256_1[];
+
+    /**
+     *\japanese
+     * 2<sup>288</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>288</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_288_1[];
+
+    /**
+     *\japanese
+     * 2<sup>320</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>320</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_320_1[];
+
+    /**
+     *\japanese
+     * 2<sup>352</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>352</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_352_1[];
+
+    /**
+     *\japanese
+     * 2<sup>384</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>384</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_384_1[];
+
+    /**
+     *\japanese
+     * 2<sup>416</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>416</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_416_1[];
+
+    /**
+     *\japanese
+     * 2<sup>448</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>448</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_448_1[];
+
+    /**
+     *\japanese
+     * 2<sup>480</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>480</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_480_1[];
+
+    /**
+     *\japanese
+     * 2<sup>512</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>512</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_512_1[];
+
+    /**
+     *\japanese
+     * 2<sup>544</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>544</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_544_1[];
+
 }
 #endif // MTTOOLBOX_ALGORITHM_PRIMITIVITY_HPP
