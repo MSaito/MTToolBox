@@ -52,6 +52,6 @@ env.Program('xorshift-2', ['xorshift-2.cpp'], LIBS=optlib)
 env.Program('xorshift-3', ['xorshift-3.cpp'], LIBS=optlib)
 env.Program('xorshift-4', ['xorshift-4.cpp'], LIBS=optlib)
 env.Program('xorshift-5', ['xorshift-5.cpp'], LIBS=optlib)
-env.Program('xorshift128', ['xorshift128.c', 'xorshift128.h'], LIBS=optlib)
+env.Program('xorshift128', ['xorshift128.c'], LIBS=optlib)
 
 Clean('all', Glob('*.o'))
