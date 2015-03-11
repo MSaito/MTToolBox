@@ -28,7 +28,6 @@
 #include <inttypes.h>
 #include <stdint.h>
 #include <stdexcept>
-#include <tr1/memory>
 #include <NTL/GF2X.h>
 
 #if defined(USE_SHA)

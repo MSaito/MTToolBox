@@ -32,7 +32,11 @@
  * algorithm. Journal of Computational and Applied Mathematics,
  * 236(2):141–149, August 2011. doi:10.1016/j.cam.2011.06.005.
  */
+#if __cplusplus >= 201103L
+#include <memory>
+#else
 #include <tr1/memory>
+#endif
 #include <stdexcept>
 #include <MTToolBox/EquidistributionCalculatable.hpp>
 #include <MTToolBox/util.hpp>
@@ -92,7 +96,10 @@ namespace MTToolBox {
          *\endenglish
          */
         linear_generator_vector<U>(const ECGenerator& generator) {
-            using namespace std::tr1;
+#if __cplusplus >= 201103L
+#else
+	    using namespace std::tr1;
+#endif
             shared_ptr<ECGenerator>
                 r(reinterpret_cast<ECGenerator *>(generator.clone()));
             rand = r;
@@ -126,7 +133,10 @@ namespace MTToolBox {
          */
         linear_generator_vector<U>(const ECGenerator& generator,
                                    int bit_pos) {
-            using namespace std::tr1;
+#if __cplusplus >= 201103L
+#else
+	    using namespace std::tr1;
+#endif
             shared_ptr<ECGenerator>
                 r(reinterpret_cast<ECGenerator *>(generator.clone()));
             rand = r;
@@ -149,7 +159,11 @@ namespace MTToolBox {
          * A GF(2) linear pseudo random number generator
          *\endenglish
          */
+#if __cplusplus >= 201103L
+        std::shared_ptr<ECGenerator> rand;
+#else
         std::tr1::shared_ptr<ECGenerator> rand;
+#endif
 
         /**
          *\japanese

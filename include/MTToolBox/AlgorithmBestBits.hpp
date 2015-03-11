@@ -35,7 +35,11 @@
 #include <iomanip>
 #include <cstdlib>
 #include <unistd.h>
+#if __cplusplus >= 201103L
+#include <memory>
+#else
 #include <tr1/memory>
+#endif
 #include <vector>
 #include <MTToolBox/AlgorithmTempering.hpp>
 #include <MTToolBox/TemperingCalculatable.hpp>
@@ -48,7 +52,10 @@
 
 namespace MTToolBox {
     using namespace std;
+#if __cplusplus >= 201103L
+#else
     using namespace std::tr1;
+#endif
 
     /**
      * @class temper_params

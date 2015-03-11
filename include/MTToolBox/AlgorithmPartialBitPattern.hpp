@@ -28,7 +28,6 @@
 #include <iomanip>
 #include <cstdlib>
 #include <unistd.h>
-#include <tr1/memory>
 #include <MTToolBox/AlgorithmTempering.hpp>
 #include <MTToolBox/TemperingCalculatable.hpp>
 #include <MTToolBox/AlgorithmEquidistribution.hpp>
