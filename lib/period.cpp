@@ -158,18 +158,25 @@ namespace MTToolBox {
             int degree, const char * prime_factors[])
     {
         Vec<ZZ> zz_table;
-        stringstream ss;
         long length = 0;
         for (int i = 0; prime_factors[i]; i++) {
             length = i + 1;
         }
         zz_table.SetLength(length);
         for (int i = 0; prime_factors[i]; i++) {
+#if defined(ISTREAM)
+	    stringstream ss;
             ss << prime_factors[i];
             ss << " ";
             ZZ w;
             ss >> w;
             zz_table[i] = w;
+#else
+	    int64_t i64 = strtoll(prime_factors[i], NULL, 10);
+	    ZZ w;
+	    w = i64;
+	    zz_table[i] = w;
+#endif
         }
         return isPrime(poly, degree, zz_table);
     }

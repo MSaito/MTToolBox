@@ -490,5 +490,29 @@ namespace MTToolBox {
         return((x >> 32) | (x << 32));
     }
 
+    /**
+     *\japanese
+     * 多項式の最小公倍数を求める。
+     * @param[out] lcm x と y の最小公倍数多項式
+     * @param[in] x 多項式
+     * @param[in] y 多項式
+     *\endjapanese
+     *
+     *\english
+     * Calculate the Least Common Multiple of x and y.
+     * @param[out] lcm the Least Common Multiple of x and y.
+     * @param[in] x a polynomial
+     * @param[in] y a polynomial
+     *\endenglish
+     */
+    inline static void LCM(NTL::GF2X& lcm, const NTL::GF2X& x,
+			   const NTL::GF2X& y) {
+	using namespace NTL;
+	GF2X gcd;
+	mul(lcm, x, y);
+	GCD(gcd, x, y);
+	lcm /= gcd;
+    }
+
 }
 #endif //MTTOOLBOX_UTIL_HPP
