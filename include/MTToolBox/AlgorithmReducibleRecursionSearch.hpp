@@ -150,16 +150,24 @@ namespace MTToolBox {
 		irreducible = poly;
                 count++;
 		if (deg(irreducible) < mexp) {
+#if defined(DEBUG)
+		    cout << "poly deg = " << deg(poly) << " skip" << endl;
+#endif
 		    continue;
 		}
 		if (!hasFactorOfDegree(poly, mexp)) {
+#if defined(DEBUG)
+		    cout << "not has factor of degree poly deg = "
+			 << deg(poly) << " skip" << endl;
+#endif
 		    continue;
 		}
 		int size = rand->bitSize();
                 degree = deg(poly);
                 if (degree != size) {
 #if defined(DEBUG)
-                    cout << "degree:" << degree << endl;
+                    cout << "degree:" << degree << "degree != size skip"
+			 << endl;
 #endif
                     continue;
                 }

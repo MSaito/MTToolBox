@@ -3,6 +3,7 @@
 #include <NTL/ZZ.h>
 #include <NTL/vector.h>
 #include <MTToolBox/period.hpp>
+#include <ctype.h>
 
 
 namespace MTToolBox {
@@ -163,18 +164,21 @@ namespace MTToolBox {
             length = i + 1;
         }
         zz_table.SetLength(length);
-        for (int i = 0; prime_factors[i]; i++) {
+        for (int i = 0; prime_factors[i] != NULL; i++) {
+            ZZ w;
 #if defined(ISTREAM)
 	    stringstream ss;
             ss << prime_factors[i];
             ss << " ";
-            ZZ w;
             ss >> w;
             zz_table[i] = w;
 #else
-	    int64_t i64 = strtoll(prime_factors[i], NULL, 10);
-	    ZZ w;
-	    w = i64;
+	    for (const char * p = prime_factors[i]; *p != 0; p++) {
+		if (!isdigit(*p)) {
+		    break;
+		}
+		w = w * 10 + (*p) - '0';
+	    }
 	    zz_table[i] = w;
 #endif
         }
