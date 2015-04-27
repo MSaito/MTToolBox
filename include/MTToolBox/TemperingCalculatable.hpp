@@ -49,7 +49,8 @@ namespace MTToolBox {
      *\endenglish
      */
     template<class U>
-    class TemperingCalculatable : public EquidistributionCalculatable<U> {
+    class TemperingCalculatable
+        : virtual public EquidistributionCalculatable<U> {
     public:
 
         /**

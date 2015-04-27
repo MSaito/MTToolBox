@@ -21,7 +21,7 @@
  * The 3-clause BSD License is applied to this software, see
  * LICENSE.txt
  */
-#include <stdio.h>
+//#include <stdio.h>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -506,13 +506,73 @@ namespace MTToolBox {
      *\endenglish
      */
     inline static void LCM(NTL::GF2X& lcm, const NTL::GF2X& x,
-			   const NTL::GF2X& y) {
-	using namespace NTL;
-	GF2X gcd;
-	mul(lcm, x, y);
-	GCD(gcd, x, y);
-	lcm /= gcd;
+                           const NTL::GF2X& y) {
+        using namespace NTL;
+        GF2X gcd;
+        GCD(gcd, x, y);
+        mul(lcm, x, y);
+        lcm /= gcd;
     }
 
+    /**
+     *\japanese
+     * 符号なし整数をGF(2)ベクトルに変換する。
+     * 上位ビットがベクトルの初めの要素になる。（デバッグの時見やすいように）
+     * @param[out] result 結果のGF(2)ベクトル
+     * @param[in] value 変換元符号なし整数
+     *\endjapanese
+     *
+     *\english
+     * convert unsigned integer to GF(2) vector
+     * MSB of unsigned integer becomes first element of the vector.
+     * @param[out] result The result vector
+     * @param[in] value source integer
+     *\endenglish
+     */
+    template<typename U>
+    inline static void toGF2Vec(NTL::vec_GF2& result, U value) {
+        U mask = 1;
+        int bitSize = bit_size<U>();
+        result.SetLength(bitSize);
+        mask = mask << (bitSize - 1);
+        for (int i = 0; i < bitSize; i++) {
+            if (value & mask) {
+                result.put(i, 1);
+            } else {
+                result.put(i, 0);
+            }
+            mask = mask >> 1;
+        }
+    }
+
+    /**
+     *\japanese
+     * GF(2)ベクトルを符号なし整数に変換する。
+     * 上位ビットがベクトルの初めの要素になる。（デバッグの時見やすいように）
+     * @param[in] value 変換元GF(2)ベクトル
+     * @return 変換後符合なし整数
+     *\endjapanese
+     *
+     *\english
+     * convert GF(2) vector to unsigned integer
+     * the first element of vector becomes the MSB of the result integer.
+     * @param[in] value source vector
+     * @return resulted integer
+     *\endenglish
+     */
+    template<typename U>
+    inline static U fromGF2Vec(NTL::vec_GF2& value) {
+        U result = 0;
+        U mask = 1;
+        int bitSize = bit_size<U>();
+        mask = mask << (bitSize - 1);
+        for (int i = 0; i < bitSize; i++) {
+            if (!IsZero(value[i])) {
+                result |= mask;
+            }
+            mask = mask >> 1;
+        }
+        return result;
+    }
 }
 #endif //MTTOOLBOX_UTIL_HPP

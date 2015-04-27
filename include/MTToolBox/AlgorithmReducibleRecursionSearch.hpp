@@ -6,8 +6,8 @@
  *\japanese
  * @brief 可約ジェネレータの状態遷移関数のパラメータを探索する。
  *
- * F_2疑似乱数生成器の状態遷移関数の特性多項式が、指定されたメルセンヌ
- * 指数次でかつ規約な因子を持つようなパラメータを探索する。
+ * F_2疑似乱数生成器の状態遷移関数の特性多項式が、「指定されたメルセンヌ
+ * 指数次でかつ規約な因子」を持つようなパラメータを探索する。
  *
  *\endjapanese
  *
@@ -15,14 +15,14 @@
  * @brief Search parameters of state transition function.  Search
  * parameters of state transition function of reducible pseudo random
  * number generator so that the characteristic polynomial of the
- * function will contain a polynomial which has specified mersenne
+ * function will have a factor polynomial which has specified mersenne
  * expornent degree and is irreducible.
  *\endenglish
  *
- * @author Mutsuo Saito (Hiroshima University)
+ * @author Mutsuo Saito (Manieth Corp.)
  * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2014 Mutsuo Saito, Makoto Matsumoto,
+ * Copyright (C) 2014 Mutsuo Saito, Makoto Matsumoto, Manieth Corp.
  * and Hiroshima University.
  * All rights reserved.
  *
@@ -35,17 +35,21 @@
 #endif
 #include <NTL/GF2X.h>
 #include <NTL/GF2XFactoring.h>
-#include <MTToolBox/RecursionSearchable.hpp>
+#include <MTToolBox/ReducibleGenerator.hpp>
 #include <MTToolBox/AlgorithmPrimitivity.hpp>
 #include <MTToolBox/period.hpp>
 #include <MTToolBox/util.hpp>
 
 namespace MTToolBox {
     using namespace std;
+
+    template<typename U>
+    void calcCharacteristicPolynomial(RecursionSearchable<U> *rand,
+                                      NTL::GF2X& poly);
     /**
      * @class AlgorithmReducibleRecursionSearch
      *\japanese
-     * @brief 状態遷移関数のパラメータを探索する。
+     * @brief 可約ジェネレータの状態遷移関数のパラメータを探索する。
      *
      * GF(2)線形疑似乱数生成器の状態遷移関数の特性多項式が既約なメルセ
      * ンヌ指数次の因子をもつをもつようなパラメータを探索する。
@@ -72,17 +76,18 @@ namespace MTToolBox {
      * primitive.
      * @tparam U Type of output of pseudo random number
      * generator. Should be unsigned number.
+     * @tparam V Type of output of base generator. Should be unsigned number.
      *\endenglish
      */
-    template<typename U>
+    template<typename U, typename V = U>
     class AlgorithmReducibleRecursionSearch {
     public:
         /**
          *\japanese
          * コンストラクタ
          *
-         * このコンストラクタでは、状態空間の大きさがメルセンヌ指数の場合を
-         * 想定している。
+         * このコンストラクタでは、状態空間の大きさがメルセンヌ指数より
+         * 少し大きい２のべき乗の場合を想定している。
          *
          * bg はgenerator とは異なるインスタンスである必要がある。
          * 通常の場合、bg にはMersenneTwisterのインスタンスを与えるとよい。
@@ -94,152 +99,95 @@ namespace MTToolBox {
          *
          *\english
          * Constructor
-         * Size of internal state is supposed to be Mersenne Exponent.
+         * Size of internal state is supposed to be power of 2 and
+         * larger than Mersenne Exponent.
          * @param[in,out] generator GF(2)-linear generator whose parameters will
          * be searched. The generator will be changed.
          * @param[in,out] bg a generator used for generating numbers to make
          * parameters. This generator is not need to be GF(2)-linear
-         * pseudo random number generator, for example, TinyMTDC in
-         * sample directory uses sequential counter.
+         * pseudo random number generator.
          *\endenglish
          */
-        AlgorithmReducibleRecursionSearch(RecursionSearchable<U>& generator,
-                                 AbstractGenerator<U>& bg) {
+        AlgorithmReducibleRecursionSearch(ReducibleGenerator<U>& generator,
+                                 AbstractGenerator<V>& bg) {
             rand = &generator;
             baseGenerator = &bg;
             count = 0;
         }
 
         /**
-         *\japanese
-         * 状態遷移パラメータの探索を開始する
-         *<ol>
-         * <li>疑似乱数生成器に状態遷移パラメータをランダムに生成させ、
-         * <li>その状態遷移パラメータのもとで出力列の最小多項式を求める。
-         * <li>最小多項式が求める次数の原始多項式を最大既約因子として含
-         * むか判定し、原始多項式なら成功して終了。
-         * <li>そうでなければ、状態遷移パラメータのランダム生成から繰り返す。
-         * <li>繰り返しの回数が try_count を越えると失敗して終了する。
-         *</ol>
-         * @param try_count 試行回数の上限
-         * @return true 求める次数の最大既約因子を含む最小多項式が得られた場合
-         *\endjapanese
-         *
-         *\english
-         * Start searching recursion parameters.
-         *<ol>
-         * <li>the generator make parameters randomly
-         * (RecursionSearchable.setUpParam()),
-         * <li>calculate minimal polynomial of the generator,
-         * <li>check if the polynomial has max possible degree and
-         * is primitive.
-         * <li>if check OK, then return true.
-         * <li>else repeat from 1.
-         *</ol>
-         * If repeat count is over \b try_count, then return false.
-         * @param[in] try_count maximum count of try
-         * @return true when proper minimal polynomial is gotten.
-         *\endenglish
+         * @copydoc AlgorithmRecursionSearch::start
          */
-        bool start(int try_count, long mexp) {
+        bool start(int try_count) {
             long degree;
+            long mexp = rand->getMexp();
             for (int i = 0; i < try_count; i++) {
                 rand->setUpParam(*baseGenerator);
                 rand->seed(1);
+#if defined(DEBUG)
+                cout << "rand param:";
+                cout << rand->getParamString() << endl;
+#endif
                 minpoly(poly, *rand);
-		irreducible = poly;
+                irreducible = poly;
                 count++;
-		if (deg(irreducible) < mexp) {
+                if (deg(irreducible) < mexp) {
 #if defined(DEBUG)
-		    cout << "poly deg = " << deg(poly) << " skip" << endl;
-#endif
-		    continue;
-		}
-		if (!hasFactorOfDegree(poly, mexp)) {
-#if defined(DEBUG)
-		    cout << "not has factor of degree poly deg = "
-			 << deg(poly) << " skip" << endl;
-#endif
-		    continue;
-		}
-		int size = rand->bitSize();
-                degree = deg(poly);
-                if (degree != size) {
-#if defined(DEBUG)
-                    cout << "degree:" << degree << "degree != size skip"
-			 << endl;
+                    cout << "irrepoly deg = " << deg(irreducible)
+                         << " skip" << endl;
 #endif
                     continue;
                 }
-		return true;
+                bool hasFactor = hasFactorOfDegree(irreducible, mexp);
+#if defined(DEBUG)
+                cout << "has factor = " << hasFactor << endl;
+#endif
+                if (!hasFactor) {
+#if defined(DEBUG)
+                    cout << "not has factor of degree irrepoly deg = "
+                         << deg(irreducible) << " skip" << endl;
+#endif
+                    continue;
+                }
+                degree = deg(irreducible);
+                if (degree != mexp) {
+#if defined(DEBUG)
+                    cout << "degree:" << degree << "degree != mexp skip"
+                         << endl;
+#endif
+                    continue;
+                }
+                return true;
             }
             return false;
         }
 
         /**
-         *\japanese
-         * 疑似乱数生成器のパラメータを表す文字列を返す
-         * このメソッドは start() が true を返した場合にのみ呼び出すべきである。
-         * @return 疑似乱数生成器のパラメータを表す文字列
-         *\endjapanese
-         *
-         *\english
-         * Returns a string which shows parameters of pseudo random
-         * Call this method only after start() returns true.
-         * @return String which shows parameters of pseudo random
-         * number generator.
-         *\endenglish
+         * @copydoc AlgorithmRecursionSearch::getParamString
          */
         const std::string getParamString() {
             return rand->getParamString();
         }
 
         /**
+         * @copydoc AlgorithmRecursionSearch::getCharacteristicPolynomial
          *\japanese
-         * 特性多項式を返すように勉める
-         * このメソッドは start() が true を返した場合にのみ呼び出すべきである。
-         *
-	 * このメソッドは特性多項式を返すように勉めるが、特性多項式を返さない場合がある。
-	 * 返却した多項式の次数が状態空間の次元と異なる場合、特性多項式ではない。
-	 *
-         * @return 特性多項式
+         * このメソッドが返すのは特性多項式ではない可能性がある。
          *\endjapanese
          *
          *\english
-         * Try to returns a chaminimal polynomial of output of the pseudo
-         * random number generator.
-         * Call this method shoud be called only after start() returns true.
-	 * This method may returns non characteristic polynomial. When
-	 * degree of returnd polynomial does not equal to the dimension of
-	 * internal state, returned one is not the characteristic polynomial.
-         * @return a characteristic polynomial
+         * This method may return a polynomial which may not be a
+         * characteristic polynomial.
          *\endenglish
          */
         const NTL::GF2X& getCharacteristicPolynomial() {
-	    int bitsize = bit_size<U>();
-	    NTL::GF2X minpol;
-	    NTL::GF2X lcmpoly = poly;
-	    int size = rand->bitSize();
-	    for (int i = 0; i < bitsize; i++) {
-		if (deg(lcmpoly) == size) {
-		    break;
-		}
-		minpoly(minpol, *rand, i);
-		LCM(lcmpoly, lcmpoly, minpol);
-	    }
-	    poly = lcmpoly;
             return poly;
         }
 
-
         /**
          *\japanese
-         * 最大既約因子を返す
+         * 特性多項式のメルセンヌ指数次の大きな既約因子を返す
          * このメソッドは start() が true を返した場合にのみ呼び出すべきである。
-         *
-         * 一般には最小多項式は初期状態と出力関数に依存するが、GF(2)線
-         * 形疑似乱数生成器の最大周期を与えるような最小多項式は一つであ
-         * る。
          *
          * @return 最大既約因子
          *\endjapanese
@@ -251,9 +199,9 @@ namespace MTToolBox {
          * @return a maxmun irreducible factor of minimal polynomial
          *\endenglish
          */
-	const NTL::GF2X& getIrreducibleFactor() const {
-	    return irreducible;
-	}
+        const NTL::GF2X& getIrreducibleFactor() const {
+            return irreducible;
+        }
 
         /**
          *\japanese
@@ -271,11 +219,40 @@ namespace MTToolBox {
         }
 
     private:
-        RecursionSearchable<U> *rand;
-        AbstractGenerator<U> *baseGenerator;
+        ReducibleGenerator<U> *rand;
+        AbstractGenerator<V> *baseGenerator;
         NTL::GF2X poly;
-	NTL::GF2X irreducible;
+        NTL::GF2X irreducible;
         long count;
+
     };
+
+    template<typename U>
+    void calcCharacteristicPolynomial(ReducibleGenerator<U> *rand,
+                                      NTL::GF2X& poly)
+    {
+#if defined(DEBUG)
+        cout << "calcCharacteristicPolynomial start" << endl;
+#endif
+        int bitsize = bit_size<U>();
+        NTL::GF2X minpol;
+        NTL::GF2X lcmpoly = poly;
+        int size = rand->bitSize();
+        for (int i = 0; i < bitsize; i++) {
+            if (deg(lcmpoly) == size) {
+                poly = lcmpoly;
+#if defined(DEBUG)
+                cout << "calcCharacteristicPolynomial end" << endl;
+#endif
+                return;
+            }
+            minpoly(minpol, *rand, i);
+            LCM(lcmpoly, lcmpoly, minpol);
+        }
+        poly = lcmpoly;
+#if defined(DEBUG)
+        cout << "calcCharacteristicPolynomial end" << endl;
+#endif
+    }
 }
 #endif // MTTOOLBOX_ALGORITHM_REDUCIBLE_RECURSION_SEARCH_HPP

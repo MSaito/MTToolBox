@@ -35,11 +35,21 @@
 #include <iomanip>
 #include <cstdlib>
 #include <unistd.h>
+#if defined(__has_include) // clang
+#if __has_include(<memory>)
+#include <memory>
+#else
+#define MTTOOLBOX_USE_TR1
+#include <tr1/memory>
+#endif
+#else // not clang
 #if __cplusplus >= 201103L
 #include <memory>
 #else
+#define MTTOOLBOX_USE_TR1
 #include <tr1/memory>
 #endif
+#endif // clang
 #include <vector>
 #include <MTToolBox/AlgorithmTempering.hpp>
 #include <MTToolBox/TemperingCalculatable.hpp>
@@ -52,10 +62,10 @@
 
 namespace MTToolBox {
     using namespace std;
-#if __cplusplus >= 201103L
-#else
+#if defined(MTTOOLBOX_USE_TR1)
     using namespace std::tr1;
 #endif
+
 
     /**
      * @class temper_params
@@ -345,7 +355,7 @@ namespace MTToolBox {
          * @return Always false.
          *\endenglish
          */
-        bool isLSBTempering() {
+        bool isLSBTempering() const {
             return false;
         }
     private:
@@ -539,5 +549,7 @@ namespace MTToolBox {
         }
     };
 }
-
+#if defined(MTTOOLBOX_USE_TR1)
+#undef MTTOOLBOX_USE_TR1
+#endif
 #endif // MTTOOLBOX_ALGORITHM_BEST_BITS_HPP

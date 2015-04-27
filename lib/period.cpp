@@ -5,7 +5,6 @@
 #include <MTToolBox/period.hpp>
 #include <ctype.h>
 
-
 namespace MTToolBox {
     using namespace std;
     using namespace NTL;
@@ -19,36 +18,7 @@ namespace MTToolBox {
      23209, 44497, 86243, 110503, 132049, 216091, 756839, 859433,
      1257787, 1398269, 2976221, 3021377, 6972593, 13466917,
      20996011, 25964951, -1};
-#if 0
-    /**
-     * generator の生成する数列の最小多項式を求める
-     * pos はビット位置であり、p = 0 はLSB を指定することになる。
-     * generator は出力ではないが、疑似乱数を生成するために、内部状態が
-     * 更新される。
-     * @param[out] poly 最小多項式
-     * @param[in] generator F_2 線形疑似乱数生成器
-     * @param[in] pos ビット位置
-     */
-    void
-    minpoly(NTL::GF2X& poly, U128Generator& generator, int pos)
-    {
-        Vec<GF2> v;
-        int size = generator.bitSize();
-        v.SetLength(2 * size);
-        int index;
-        if (pos < 64) {
-            index = 0;
-        } else {
-            index = 1;
-            pos = pos - 64;
-        }
-        for (int i = 0; i < 2 * size; i++) {
-            uint128_t u = generator.generate();
-            v[i] = (u.u64[index] >> pos) & 1;
-        }
-        MinPolySeq(poly, v, size);
-    }
-#endif
+
     /**
      * 既約判定
      * poly が既約であるか判定する。
@@ -167,19 +137,19 @@ namespace MTToolBox {
         for (int i = 0; prime_factors[i] != NULL; i++) {
             ZZ w;
 #if defined(ISTREAM)
-	    stringstream ss;
+            stringstream ss;
             ss << prime_factors[i];
             ss << " ";
             ss >> w;
             zz_table[i] = w;
 #else
-	    for (const char * p = prime_factors[i]; *p != 0; p++) {
-		if (!isdigit(*p)) {
-		    break;
-		}
-		w = w * 10 + (*p) - '0';
-	    }
-	    zz_table[i] = w;
+            for (const char * p = prime_factors[i]; *p != 0; p++) {
+                if (!isdigit(*p)) {
+                    break;
+                }
+                w = w * 10 + (*p) - '0';
+            }
+            zz_table[i] = w;
 #endif
         }
         return isPrime(poly, degree, zz_table);
@@ -204,41 +174,31 @@ namespace MTToolBox {
         int m;
 
         t2m = t2;
-        //DPRINT("degree = %u\n", degree);
-        //DPRINTPOLY("poly =", poly);
         if (deg(poly) < degree) {
-            return 0;
+            return false;
         }
         t = t1;
         t += t2m;
 
         for (m = 1; deg(poly) > degree; m++) {
-            //DPRINTPOLY("t =", t);
             for(;;) {
                 GCD(alpha, poly, t);
-                //DPRINTPOLY("alpha =", alpha);
                 if (IsOne(alpha)) {
                     break;
                 }
                 poly /= alpha;
-                //DPRINTPOLY("f =", poly);
                 if (deg(poly) < degree) {
-                    return 0;
+                    return false;
                 }
-            }
-            if ((deg(poly) > degree) && (deg(poly) <= degree + m)) {
-                //DPRINT("maybe poly is larger m = %d, DEG = %u\n", m,
-                //     (unsigned int)deg(poly));
-                return 0;
             }
             t2m *= t2m;
             t2m %= poly;
             add(t, t2m, t1);
         }
         if (deg(poly) != degree) {
-            return 0;
+            return false;
         }
-        return static_cast<bool>(IterIrredTest(poly));
+        return isIrreducible(poly);
     }
 
 }

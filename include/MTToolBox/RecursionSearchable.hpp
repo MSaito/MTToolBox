@@ -37,8 +37,9 @@ namespace MTToolBox {
      * be unsigned integer.
      *\endenglish
      */
-    template<class U>
-    class RecursionSearchable : public AbstractGenerator<U> {
+    template<typename U>
+    class RecursionSearchable
+        : virtual public AbstractGenerator<U> {
     public:
 
         /**

@@ -44,8 +44,9 @@ namespace MTToolBox {
      * be unsinged number.
      *\endenglish
      */
-    template<class U>
-    class EquidistributionCalculatable : public RecursionSearchable<U> {
+    template<typename U>
+    class EquidistributionCalculatable
+        : virtual public RecursionSearchable<U> {
     public:
         using AbstractGenerator<U>::generate;
 

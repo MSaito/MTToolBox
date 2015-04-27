@@ -32,11 +32,21 @@
  * algorithm. Journal of Computational and Applied Mathematics,
  * 236(2):141–149, August 2011. doi:10.1016/j.cam.2011.06.005.
  */
+#if defined(__has_include) // clang
+#if __has_include(<memory>)
+#include <memory>
+#else
+#define MTTOOLBOX_USE_TR1
+#include <tr1/memory>
+#endif
+#else // not clang
 #if __cplusplus >= 201103L
 #include <memory>
 #else
+#define MTTOOLBOX_USE_TR1
 #include <tr1/memory>
 #endif
+#endif // clang
 #include <stdexcept>
 #include <MTToolBox/EquidistributionCalculatable.hpp>
 #include <MTToolBox/util.hpp>
@@ -96,14 +106,15 @@ namespace MTToolBox {
          *\endenglish
          */
         linear_generator_vector<U>(const ECGenerator& generator) {
-#if __cplusplus >= 201103L
+#if defined(MTTOOLBOX_USE_TR1)
+            using namespace std::tr1;
 #else
-	    using namespace std::tr1;
+	    using namespace std;
 #endif
             shared_ptr<ECGenerator>
                 r(reinterpret_cast<ECGenerator *>(generator.clone()));
             rand = r;
-            rand->seed(1);
+            //rand->seed(1);
             count = 0;
             zero = false;
             next = 0;
@@ -133,9 +144,10 @@ namespace MTToolBox {
          */
         linear_generator_vector<U>(const ECGenerator& generator,
                                    int bit_pos) {
-#if __cplusplus >= 201103L
+#if defined(MTTOOLBOX_USE_TR1)
+            using namespace std::tr1;
 #else
-	    using namespace std::tr1;
+	    using namespace std;
 #endif
             shared_ptr<ECGenerator>
                 r(reinterpret_cast<ECGenerator *>(generator.clone()));
@@ -159,12 +171,11 @@ namespace MTToolBox {
          * A GF(2) linear pseudo random number generator
          *\endenglish
          */
-#if __cplusplus >= 201103L
-        std::shared_ptr<ECGenerator> rand;
+#if defined(MTTOOLBOX_USE_TR1)
+	std::tr1::shared_ptr<ECGenerator> rand;
 #else
-        std::tr1::shared_ptr<ECGenerator> rand;
+	std::shared_ptr<ECGenerator> rand;
 #endif
-
         /**
          *\japanese
          * next_state() が呼ばれた回数
@@ -654,5 +665,7 @@ namespace MTToolBox {
         return min_count;
     }
 }
+#if defined(MTTOOLBOX_USE_TR1)
+#undef MTTOOLBOX_USE_TR1
+#endif
 #endif // MTTOOLBOX_ALGORITHM_EQUIDISTRIBUTION_HPP
-
