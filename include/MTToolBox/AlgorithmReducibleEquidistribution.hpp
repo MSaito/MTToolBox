@@ -44,7 +44,7 @@ namespace MTToolBox {
      * generator. Should be unsigned number.
      *\endenglish
      */
-    template<typename U>
+    template<typename U, typename G>
     class AlgorithmReducibleEquidistribution {
     public:
         /**
@@ -65,11 +65,10 @@ namespace MTToolBox {
          * generator.
          *\endenglish
          */
-        AlgorithmReducibleEquidistribution(const ReducibleGenerator<U>& rg,
+        AlgorithmReducibleEquidistribution(const G& rg,
                                            const NTL::GF2X irreducibleFactor,
                                            int bit_length) {
-            ReducibleGenerator<U> * rand
-                = reinterpret_cast<ReducibleGenerator<U> *>(rg.clone());
+            G * rand = new G(rg);
             NTL::GF2X poly(0,1);
             calcCharacteristicPolynomial(rand, poly);
             NTL::GF2X quotient = poly / irreducibleFactor;

@@ -71,7 +71,7 @@ namespace MTToolBox {
      * generator. Should be unsigned number.
      * \endenglish
      */
-    template<typename U>
+    template<typename U, typename G>
     class AlgorithmReducibleRecursionAndTempering {
     public:
         /**
@@ -122,7 +122,7 @@ namespace MTToolBox {
          * state transition function are found.
          *\endenglish
          */
-        bool search(ReducibleTemperingCalculatable<U>& rg,
+        bool search(G& rg,
                     AlgorithmTempering<U>& st1,
                     AlgorithmTempering<U>& st2,
                     bool verbose = false,
@@ -134,7 +134,7 @@ namespace MTToolBox {
             out = &os;
             int veq[bit_size<U>()];
             AlgorithmReducibleRecursionSearch<U> search(rg, *baseGenerator);
-            AlgorithmCalculateParity<U> cp;
+            AlgorithmCalculateParity<U, G> cp;
             int mexp = rg.getMexp();
             bool found = false;
             for (int i = 0;; i++) {

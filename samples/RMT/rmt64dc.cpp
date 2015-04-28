@@ -86,7 +86,7 @@ int search(rmt_options& opt, int count) {
     //AlgorithmBestBits<uint64_t> tmp(64, shifts, 2, 15);
     typedef AlgorithmPartialBitPattern<uint64_t, 64, 2, 63, 6> st64;
     st64 st;
-    AlgorithmReducibleRecursionAndTempering<uint64_t> all(mt);
+    AlgorithmReducibleRecursionAndTempering<uint64_t, RMT64Search> all(mt);
     int i = 0;
     cout << "# "
 	 << g.getHeaderString()

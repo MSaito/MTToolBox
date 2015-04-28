@@ -135,10 +135,9 @@ namespace MTToolBox {
      *\endenglish
      */
     template<typename U>
-    void annihilate(ReducibleGenerator<U>* rg,
+    void annihilate(EquidistributionCalculatable<U>* rg,
                     const NTL::GF2X& poly) {
-        ReducibleGenerator<U> *other
-            = reinterpret_cast<ReducibleGenerator<U>*>(rg->clone());
+        EquidistributionCalculatable<U> *other = rg->clone();
         rg->setZero();
         for (int i = 0; i <= deg(poly); i++) {
             if (coeff(poly, i) != 0) {

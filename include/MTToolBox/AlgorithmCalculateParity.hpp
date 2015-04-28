@@ -82,7 +82,7 @@ namespace MTToolBox {
      * @brief Calculate the parity check vector of reducible generator.
      *\endenglish
      */
-    template<typename U>
+    template<typename U, typename G>
     class AlgorithmCalculateParity {
 
     public:
@@ -102,7 +102,7 @@ namespace MTToolBox {
          * @return the period certification vector (parity vector)
          *\endenglish
          */
-        U searchParity (ReducibleGenerator<U>& g, const NTL::GF2X& f) {
+        U searchParity (G& g, const NTL::GF2X& f) {
             int mexp = g.getMexp();
 #if defined(DEBUG)
             cout << "searchParity start" << endl;
@@ -117,13 +117,12 @@ namespace MTToolBox {
             int bit_pos = 0;
 
             for (int i = 0; i < word_width; i++) {
-                bases[i].rg
-                    = reinterpret_cast<ReducibleGenerator<U>*>(g.clone());
+                bases[i].rg = new G(g);
                 bases[i].rg->setZero();
                 bases[i].zero = true;
                 bases[i].next = 0;
             }
-            work_base.rg = reinterpret_cast<ReducibleGenerator<U>*>(g.clone());
+            work_base.rg = new G(g);
             work_base.rg->setZero();
             work_base.zero = true;
             work_base.next = 0;
@@ -179,7 +178,7 @@ namespace MTToolBox {
         struct internal_state {
             bool zero;
             U next;
-            ReducibleGenerator<U> *rg;
+            G * rg;
         };
 
         int word_width;

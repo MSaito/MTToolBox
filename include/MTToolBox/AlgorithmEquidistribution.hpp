@@ -111,8 +111,7 @@ namespace MTToolBox {
 #else
 	    using namespace std;
 #endif
-            shared_ptr<ECGenerator>
-                r(reinterpret_cast<ECGenerator *>(generator.clone()));
+            shared_ptr<ECGenerator> r(generator.clone());
             rand = r;
             //rand->seed(1);
             count = 0;
@@ -149,8 +148,7 @@ namespace MTToolBox {
 #else
 	    using namespace std;
 #endif
-            shared_ptr<ECGenerator>
-                r(reinterpret_cast<ECGenerator *>(generator.clone()));
+            shared_ptr<ECGenerator> r(generator.clone());
             rand = r;
             rand->setZero();
             count = 0;
