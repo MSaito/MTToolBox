@@ -169,7 +169,8 @@ namespace MTToolBox {
     template<typename T>
     int get_range(T input, int start, int end) {
         if (end < start) {
-            printf("get_range:%d, %d\n", start, end);
+            //printf("get_range:%d, %d\n", start, end);
+	    std::cout << "get_range:" << start << ", " << end << std::endl;
             exit(0);
         }
         return input % (end - start + 1) + start;
