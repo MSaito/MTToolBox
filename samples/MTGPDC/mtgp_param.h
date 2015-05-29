@@ -73,6 +73,7 @@ namespace mtgp {
             }
             sha1[sha1_length - 1] = 0;
 #else
+            MTToolBox::UNUSED_VARIABLE(&src);
             sha1[0] = 0;
 #endif
         }
