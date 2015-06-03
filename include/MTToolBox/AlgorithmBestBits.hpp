@@ -35,21 +35,12 @@
 #include <iomanip>
 #include <cstdlib>
 #include <unistd.h>
-#if defined(__has_include) // clang
-#if __has_include(<memory>)
-#include <memory>
-#else
-#define MTTOOLBOX_USE_TR1
-#include <tr1/memory>
-#endif
-#else // not clang
 #if __cplusplus >= 201103L
 #include <memory>
-#else
+#else // memory
 #define MTTOOLBOX_USE_TR1
 #include <tr1/memory>
 #endif
-#endif // clang
 #include <vector>
 #include <MTToolBox/AlgorithmTempering.hpp>
 #include <MTToolBox/TemperingCalculatable.hpp>
@@ -65,7 +56,6 @@ namespace MTToolBox {
 #if defined(MTTOOLBOX_USE_TR1)
     using namespace std::tr1;
 #endif
-
 
     /**
      * @class temper_params

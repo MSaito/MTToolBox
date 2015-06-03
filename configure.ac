@@ -21,6 +21,7 @@ AC_PROG_CC
 
 # Checks for header files.
 AC_CHECK_HEADERS([inttypes.h limits.h stdint.h stdlib.h string.h unistd.h])
+#AC_CHECK_
 
 # Checks for typedefs, structures, and compiler characteristics.
 #AC_CHECK_HEADER_STDBOOL
@@ -41,5 +42,5 @@ AC_CHECK_LIB(gmp, __gmpz_init)
 AC_CONFIG_FILES([Makefile include/Makefile lib/Makefile samples/Makefile \
 			  samples/MTDC/Makefile samples/MTGPDC/Makefile \
 			  samples/XORSHIFT/Makefile samples/RMT/Makefile \
-			  samples/TinyMTDC/Makefile])
+			  samples/TinyMTDC/Makefile test/Makefile])
 AC_OUTPUT

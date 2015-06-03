@@ -1,3 +1,5 @@
+#include <iostream>
+#include <iomanip>
 #include <sstream>
 #include "test_generator.hpp"
 #include <MTToolBox/period.hpp>
