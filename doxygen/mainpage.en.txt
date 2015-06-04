@@ -24,10 +24,11 @@
  *   special hardware.
  *
  * MTToolBox has practical samples.
+ * - sample of XORSHIFT and tutorial of MTToolBox
  * - sample of TinyMT Dynamic Creator
  * - sample of MTGP Dynamic Creator
  * - sample of Mersenne Twister Dynamic Creator
- * - sample of XORSHIFT
+ * - sample of RMT
  *
  * @author Mutsuo Saito, (saito@math.sci.hiroshima-u.ac.jp) Hiroshima University
  * @author Makoto Matsumoto, Hiroshima University
