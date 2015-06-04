@@ -10,12 +10,12 @@ using namespace MTToolBox;
 using namespace NTL;
 using namespace std;
 
-int period_u32(void);
-int period_u64(void);
-int is_irreducible(void);
-int is_prime(void);
-int is_prime2(void);
-int has_factor(void);
+bool period_u32(void);
+bool period_u64(void);
+bool is_irreducible(void);
+bool is_prime(void);
+bool is_prime2(void);
+bool has_factor(void);
 
 int main()
 {
@@ -41,7 +41,7 @@ int main()
     return 0;
 }
 
-int period_u32(void)
+bool period_u32(void)
 {
     cout << "testing period u32 ...";
     Tiny32 tiny(1234);
@@ -49,13 +49,13 @@ int period_u32(void)
     minpoly(poly, tiny);
     if (deg(poly) == tiny.bitSize()) {
         cout << "ok" << endl;
-        return 0;
+        return true;
     }
     cout << "NG" << endl;
-    return -1;
+    return false;
 }
 
-int period_u64(void)
+bool period_u64(void)
 {
     cout << "testing period u64 ...";
     Tiny64 tiny(1234);
@@ -63,13 +63,13 @@ int period_u64(void)
     minpoly(poly, tiny);
     if (deg(poly) == tiny.bitSize()) {
         cout << "ok" << endl;
-        return 0;
+        return true;
     }
     cout << "NG" << endl;
-    return -1;
+    return false;
 }
 
-int is_irreducible(void)
+bool is_irreducible(void)
 {
     cout << "testing irreducible ...";
     Tiny64 tiny(1234);
@@ -77,7 +77,7 @@ int is_irreducible(void)
     minpoly(poly, tiny);
     if (!isIrreducible(poly)) {
         cout << "NG" << endl;
-        return -1;
+        return false;
     }
 
     // reducible
@@ -85,12 +85,12 @@ int is_irreducible(void)
     minpoly(poly, rt);
     if (isIrreducible(poly)) {
         cout << "NG" << endl;
-        return -1;
+        return false;
     }
-    return 0;
+    return true;
 }
 
-int is_prime(void)
+bool is_prime(void)
 {
     cout << "testing prime 2 ...";
     Tiny64 tiny(1234);
@@ -98,13 +98,13 @@ int is_prime(void)
     minpoly(poly, tiny);
     if (!isPrime(poly)) {
         cout << "NG" << endl;
-        return -1;
+        return false;
     }
     cout << "ok" << endl;
-    return 0;
+    return true;
 }
 
-int is_prime2(void)
+bool is_prime2(void)
 {
     cout << "testing prime 2 ...";
     const char * table[] = {"3", "5", "17", "257", "641", "65537", "274177",
@@ -114,7 +114,7 @@ int is_prime2(void)
     minpoly(poly, tiny);
     if (!isPrime(poly, 128, table)) {
         cout << "NG" << endl;
-        return -1;
+        return false;
     }
 
     // irreducible but not prime
@@ -122,11 +122,12 @@ int is_prime2(void)
     minpoly(poly, rt);
     if (isPrime(poly, 128, table)) {
         cout << "NG" << endl;
+        return false;
     }
-    return -1;
+    return true;
 }
 
-int has_factor(void)
+bool has_factor(void)
 {
     cout << "has factor ...";
     RLittle32 little(0x80903834, 7, 1, 31, 26, 26, 1234);
@@ -134,7 +135,7 @@ int has_factor(void)
     minpoly(poly, little);
     if (!hasFactorOfDegree(poly, 521)) {
         cout << "NG" << endl;
-        return -1;
+        return false;
     }
 
     // does not have
@@ -142,9 +143,9 @@ int has_factor(void)
     minpoly(poly, little2);
     if (hasFactorOfDegree(poly, 521)) {
         cout << "NG" << endl;
-        return -1;
+        return false;
     }
-    return 0;
+    return true;
 }
 
 #if 0

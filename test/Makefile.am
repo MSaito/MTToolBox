@@ -1,5 +1,7 @@
 check_PROGRAMS = test_mt test_period test_search test_equidist \
 	test_temper test_search_temper test_linearity test_primefactors
+TESTS = test_mt test_period test_search test_equidist \
+	test_temper test_search_temper test_linearity test_primefactors
 test_mt_SOURCES = test_mt.cpp tinymt32.c tinymt32.h tinymt64.c tinymt64.h
 test_period_SOURCES = test_period.cpp tinymt32.c tinymt32.h tinymt64.c \
 	tinymt64.h

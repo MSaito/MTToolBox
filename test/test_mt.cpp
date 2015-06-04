@@ -7,8 +7,8 @@
 using namespace MTToolBox;
 using namespace std;
 
-int array_seed(void);
-int single_seed(void);
+bool array_seed(void);
+bool single_seed(void);
 
 int main(void)
 {
@@ -22,7 +22,7 @@ int main(void)
     return 0;
 }
 
-int array_seed(void)
+bool array_seed(void)
 {
     cout << "testing array_seed ...";
     MersenneTwister mt;
@@ -40,14 +40,14 @@ int array_seed(void)
     }
     if (success) {
         cout << "ok" << endl;
-        return 0;
+        return true;
     } else {
         cout << "NG" << endl;
-        return -1;
+        return false;
     }
 }
 
-int single_seed(void)
+bool single_seed(void)
 {
     cout << "testing single_seed ...";
     MersenneTwister mt(5489);
@@ -62,10 +62,10 @@ int single_seed(void)
     }
     if (success) {
         cout << "ok" << endl;
-        return 0;
+        return true;
     } else {
         cout << "NG" << endl;
-        return -1;
+        return false;
     }
 }
 #if 0
