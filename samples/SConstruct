@@ -1,3 +1,0 @@
-SConscript(['MTDC/SConstruct', 'MTGPDC/SConstruct',
-            'TinyMTDC/SConstruct', 'XORSHIFT/SConstruct',
-	    'RMT/SConstruct'])

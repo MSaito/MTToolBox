@@ -28,9 +28,9 @@ xorshift4_LDADD = -lMTToolBox -lntl
 xorshift5_LDADD = -lMTToolBox -lntl
 xorshift128_LDADD = -lMTToolBox -lntl
 
-EXTRA_DIST = README.utf8.ja.txt
+EXTRA_DIST = README README.utf8.ja.txt
 
-AM_CXXFLAGS = -Wall -g -O3 -I../../include -Wextra -D__STDC_CONSTANT_MACROS \
+AM_CXXFLAGS = -Wall -g -O2 -I../../include -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS
-AM_CFLAGS = -Wall -g -O3 -Wextra -std=c99
+AM_CFLAGS = -Wall -g -O2 -Wextra -std=c99
 

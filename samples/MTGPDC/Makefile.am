@@ -11,7 +11,7 @@ test_LDFLAGS = -L../../lib
 MTGP32dc_LDADD = -lMTToolBox -lntl
 test_LDADD = -lMTToolBox -lntl
 
-AM_CXXFLAGS = -Wall -I../../include -g -O3 -Wextra -D__STDC_CONSTANT_MACROS \
+AM_CXXFLAGS = -Wall -I../../include -g -O2 -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS
 
 

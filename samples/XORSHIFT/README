@@ -1,0 +1,59 @@
+
+Sample of XORSHIFT
+
+Files in this directory are samples of calculating
+dimension of equidistribution of XORSHIFT[1](2003 Marsaglia).
+And this is also tutorial of MersenneTwisterToolBox.
+
+1. Calculate the minimal polynomial of 128-bit XORSHIFT.
+
+At first, we need to confirm that the period of XORSHIFT
+is maximum. This is done by calculating the minimal polynomial
+of the generator and confirming primitivity of the polynomial.
+
+A sample program xorshift-1.cpp calculates the minimal polynomial of
+xorshift and check the primitivity of the polynomial.  The parameters
+of xorshift are picked up from [1].
+
+2. Calculate dimension of equidistribution of v-bit accuracy of 128-bit
+xorshift.
+
+A sample program xorshift-2.cpp calculate the dimension of
+equidistribution of v-bit accuracy of xorshift.
+
+3. Calculate the shift parameter of 128-bit xorshift which achieves
+the best dimension of equidistribution of v-bit accuracy.
+Number of shift parameters are three and the rang of shift is
+0 to 31, we can search all cases (2^15).
+We can use Sequential.hpp for all cases search.
+
+A sample program xorshift-3.cpp does this.
+
+4. The really best parameters of XORSHIFT were studied by Panneton and
+L'Ecuyer [2].
+
+The Parameters on the study are not only shift value but also
+right shift or left shift.
+
+A sample program xorshift-4 calculates above parameters of 128-bit
+xorshift. And if you sort the result, you will know the best parameter
+matches the above study.
+
+5. Implementation
+MersenneTwisterToolBox is a tool to develop F2-linear pesudo random number
+generators.
+We need to implement the developed algorithm and parameters, considering
+portability or performance.
+
+xorshift.h and xorshift.c are samples of implementation.
+
+References
+[1] Marsaglia, G. 2003. Xorshift RNGs.
+Journal of Statistical Software 8, 14, 1-6.
+See http://www.jstatsoft.org/v08/i14/xorshift.pdf.
+
+[2] F. Panneton and P. L'Ecuyer,
+On the Xorshift Random Number Generators,
+ACM Transactions on Modeling and Computer Simulation,
+2005, 15, 346-361
+

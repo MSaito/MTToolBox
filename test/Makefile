@@ -95,7 +95,9 @@ TESTS = test_mt$(EXEEXT) test_period$(EXEEXT) test_search$(EXEEXT) \
 	test_primefactors$(EXEEXT)
 subdir = test
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_0x.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_11.m4 \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
@@ -437,7 +439,7 @@ CPP = gcc -E
 CPPFLAGS = 
 CXX = g++
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -O2
+CXXFLAGS = -g -O2 -std=c++11
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -447,6 +449,7 @@ ECHO_T =
 EGREP = /usr/bin/grep -E
 EXEEXT = 
 GREP = /usr/bin/grep
+HAVE_CXX11 = 1
 INSTALL = /opt/local/bin/ginstall -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}

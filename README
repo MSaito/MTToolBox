@@ -39,22 +39,12 @@ http://www.shoup.net/ntl/
 using calculation of GF(2)polynomials. To use NTL, MTToolBox is written
 in C++.
 
-tr1/shared_ptr C++/tr1, C++11
-I need shared_ptr.
-
-UnitTest++
-http://unittest-cpp.sourceforge.net/
-In my simple search, this is the easiest library for Unit Test.
-UnitTest++ is optional.
+shared_ptr: C++/tr1 or C++11
 
 openssl
 http://www.openssl.org/
 using in MTGP sample.
 openssl is optional.
-
-scons
-http://www.scons.org/
-For me, Autotools are hard to use.
 
 
 

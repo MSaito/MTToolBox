@@ -3,15 +3,12 @@
 
 AC_PREREQ([2.69])
 AC_INIT([MTToolBox], [0.2.1], [saito@manieth.com])
-AC_PACKAGE_NAME('MTToolBox')
-AC_PACKAGE_TARNAME('MTToolBox')
 AC_CONFIG_SRCDIR([lib/period.cpp])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIRS([m4])
 AM_INIT_AUTOMAKE
 #LT_INIT
 AC_PROG_RANLIB
-AC_SUBST(PACKAGE_NAME, 'MTToolBox')
 
 # Checks for programs.
 AC_PROG_CXX
@@ -21,7 +18,8 @@ AC_PROG_CC
 
 # Checks for header files.
 AC_CHECK_HEADERS([inttypes.h limits.h stdint.h stdlib.h string.h unistd.h])
-#AC_CHECK_
+AX_CXX_COMPILE_STDCXX_0X
+AX_CXX_COMPILE_STDCXX_11(noext, optional)
 
 # Checks for typedefs, structures, and compiler characteristics.
 #AC_CHECK_HEADER_STDBOOL

@@ -12,6 +12,6 @@ mt2_LDADD = -lMTToolBox -lntl
 
 #AM_LINKFLAGS = -L ../../lib
 
-AM_CXXFLAGS = -Wall -I../../include -g -O3 -Wextra -D__STDC_CONSTANT_MACROS \
+AM_CXXFLAGS = -Wall -I../../include -g -O2 -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS
 

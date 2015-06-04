@@ -87,7 +87,9 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_0x.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_11.m4 \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
@@ -224,6 +226,7 @@ ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 GREP = @GREP@
+HAVE_CXX11 = @HAVE_CXX11@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -295,8 +298,8 @@ top_srcdir = @top_srcdir@
 EXTRA_DIST = NEWS.jp.utf8.txt README.jp.utf8.txt include test doxygen slide
 ACLOCAL_AMFLAGS = -I m4
 SUBDIRS = lib samples include test
-AM_CFLAGS = -O3 -Wall -Wextra -Wno-unused-parameter -std=c99
-AM_CXXFLAGS = -O3 -Wall -Wextra -Wno-unused-parameter -std=c++11
+AM_CFLAGS = -O2 -Wall -Wextra -std=c99
+AM_CXXFLAGS = -O2 -Wall -Wextra -Wno-unused-parameter -std=c++11
 AM_LIBS = -lntl
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
