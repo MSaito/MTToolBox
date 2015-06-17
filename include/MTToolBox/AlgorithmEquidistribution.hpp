@@ -35,9 +35,18 @@
 #if __cplusplus >= 201103L
 #include <memory>
 #else
+#if defined(__clang__)
+#if __has_include(<tr1/memory>)
 #define MTTOOLBOX_USE_TR1
 #include <tr1/memory>
-#endif
+#else
+#include <memory>
+#endif // __has_indlude
+#else  // not clang
+#define MTTOOLBOX_USE_TR1
+#include <tr1/memory>
+#endif // clang
+#endif // cplusplus version
 #include <stdexcept>
 #include <MTToolBox/EquidistributionCalculatable.hpp>
 #include <MTToolBox/util.hpp>
@@ -97,7 +106,7 @@ namespace MTToolBox {
          *\endenglish
          */
         linear_generator_vector<U>(const ECGenerator& generator) {
-#if defined(MTTOOLBOX_USE_TR1) || __cplusplus < 201103L
+#if defined(MTTOOLBOX_USE_TR1)
             using namespace std::tr1;
 #else
             using namespace std;
@@ -134,7 +143,7 @@ namespace MTToolBox {
          */
         linear_generator_vector<U>(const ECGenerator& generator,
                                    int bit_pos) {
-#if defined(MTTOOLBOX_USE_TR1) || __cplusplus < 201103L
+#if defined(MTTOOLBOX_USE_TR1)
             using namespace std::tr1;
 #else
             using namespace std;
@@ -160,7 +169,7 @@ namespace MTToolBox {
          * A GF(2) linear pseudo random number generator
          *\endenglish
          */
-#if defined(MTTOOLBOX_USE_TR1) || __cplusplus < 201103L
+#if defined(MTTOOLBOX_USE_TR1)
         std::tr1::shared_ptr<ECGenerator> rand;
 #else
         std::shared_ptr<ECGenerator> rand;
