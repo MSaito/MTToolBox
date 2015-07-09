@@ -153,7 +153,7 @@ namespace MTToolBox {
             rand->setZero();
             count = 0;
             zero = false;
-            next = static_cast<U>(1) << (bit_size<U>() * 8 - bit_pos - 1);
+            next = static_cast<U>(1) << (bit_size<U>() - bit_pos - 1);
         }
 
         void add(const linear_generator_vector<U>& src);
