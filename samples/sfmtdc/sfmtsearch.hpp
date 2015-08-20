@@ -1,5 +1,5 @@
-#ifndef SFMTSEARCH_WEIGHT_HPP
-#define SFMTSEARCH_WEIGHT_HPP
+#ifndef SFMTSEARCH_HPP
+#define SFMTSEARCH_HPP
 /**
  * @file SFMTsearch.hpp
  *

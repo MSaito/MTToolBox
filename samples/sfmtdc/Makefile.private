@@ -17,48 +17,21 @@ OBJS = cpu_feature.o aligned_alloc.o
 
 all: test
 
-calc_equidist_weight: calc_equidist.cpp sfmtsearch.hpp \
+calc_equidist: calc_equidist.cpp sfmtsearch.hpp \
 	AlgorithmSIMDEquidistribution.hpp Annihilate.h Annihilate.o
-	$(CXX) $(CXXFLAGS) -DPIS_WEIGHT -o $@ calc_equidist.cpp Annihilate.o
+	$(CXX) $(CXXFLAGS) -o $@ calc_equidist.cpp Annihilate.o
 
-calc_equidist_tate: calc_equidist.cpp sfmtsearch.hpp \
-	AlgorithmSIMDEquidistributionTate.hpp Annihilate.h Annihilate.o
-	$(CXX) $(CXXFLAGS) -DPIS_TATE -o $@ calc_equidist.cpp Annihilate.o
-
-calc_equidist_single: calc_equidist.cpp sfmtsearch.hpp \
-	AlgorithmSIMDEquidistributionSingle.hpp Annihilate.h Annihilate.o
-	$(CXX) $(CXXFLAGS) -DPIS_SINGLE -o $@ calc_equidist.cpp Annihilate.o
-
-calc_equidist_simple: calc_equidist.cpp sfmtsearchweight.hpp \
-	AlgorithmSIMDEquidistributionSimple.hpp Annihilate.h Annihilate.o
-	$(CXX) $(CXXFLAGS) -DPIS_SIMPLE -o $@ calc_equidist.cpp Annihilate.o
-
-calc_equidist_classic: calc_equidist.cpp sfmtsearch.hpp \
-	AlgorithmSIMDEquidistributionClassic.hpp Annihilate.h Annihilate.o
-	$(CXX) $(CXXFLAGS) -DCLASSIC -o $@ calc_equidist.cpp Annihilate.o
-
-test_linearity: test_linearity.cpp sfmtsearchweight.hpp
+test_linearity: test_linearity.cpp sfmtsearch.hpp
 	$(CXX) $(CXXFLAGS) -o $@ test_linearity.cpp
 
-test_period: test_period.cpp sfmtsearchweight.hpp Annihilate.o
+test_period: test_period.cpp sfmtsearch.hpp Annihilate.o
 	$(CXX) $(CXXFLAGS) -o $@ test_period.cpp Annihilate.o
 
 sfmtdc: sfmtdc.cpp sfmtsearch.hpp AlgorithmSIMDEquidistribution.hpp \
 	Annihilate.o Annihilate.h
 	$(CXX) $(CXXFLAGS) -o $@ sfmtdc.cpp Annihilate.o
 
-simd512dc: simd512dc.cpp simd512.hpp
-	$(CXX) $(CXXFLAGS) -o $@ simd512dc.cpp
-
-calc_equidist512PRE: calc_equidist512.cpp simd512.hpp \
-	AlgorithmSIMDEquidistributionSimple.hpp
-	$(CXX) $(CXXFLAGS) -DSTART_PRE -o $@ calc_equidist512.cpp
-
-calc_equidist512POST: calc_equidist512.cpp simd512.hpp \
-	AlgorithmSIMDEquidistributionSimple.hpp
-	$(CXX) $(CXXFLAGS) -o $@ calc_equidist512.cpp
-
-Annihilate.o: sfmtsearchweight.hpp Annihilate.cpp Annihilate.h
+Annihilate.o: sfmtsearch.hpp Annihilate.cpp Annihilate.h
 	$(CXX) $(CXXFLAGS) -c Annihilate.cpp
 
 .cpp.o:

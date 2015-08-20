@@ -36,7 +36,7 @@ bool anni(sfmt& sf)
 #endif
     annihilate<w128_t>(&sf, quotient);
     minpoly<w128_t>(poly, sf);
-    cout << "after annihilate deg poly = " << dec << deg(poly) << endl;
+    //cout << "after annihilate deg poly = " << dec << deg(poly) << endl;
     return true;
 }
 
