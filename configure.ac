@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([MTToolBox], [0.2.2], [saito@manieth.com])
+AC_INIT([MTToolBox], [0.2.3], [saito@manieth.com])
 AC_CONFIG_SRCDIR([lib/period.cpp])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIRS([m4])
@@ -40,5 +40,6 @@ AC_CHECK_LIB(gmp, __gmpz_init)
 AC_CONFIG_FILES([Makefile include/Makefile lib/Makefile samples/Makefile \
 			  samples/MTDC/Makefile samples/MTGPDC/Makefile \
 			  samples/XORSHIFT/Makefile samples/RMT/Makefile \
-			  samples/TinyMTDC/Makefile test/Makefile])
+			  samples/TinyMTDC/Makefile samples/sfmtdc/Makefile \
+			  test/Makefile])
 AC_OUTPUT

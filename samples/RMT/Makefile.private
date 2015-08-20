@@ -1,0 +1,33 @@
+# -*- Makefile -*-
+WARN = -Wall -Wextra
+#UNROLL = -funroll-loops
+OPTI = -O2 #-msse4.2 -mssse3 -msse2 $(UNROLL)
+#DEBUG = -DDEBUG -g -ggdb #-O0
+#DEBUG = -DDEBUG
+#SANITY = -fsanitize=address -fno-omit-frame-pointer -g
+CXX = g++
+#CXX = clang++
+#OBJS = period.o AlgorithmPrimitivity.o
+STD = -std=c++11
+INCLUDE = -I$(HOME)/git/MTToolbox/include
+LIB = -lntl -lgmp -lgf2x -lMTToolBox
+CXXFLAGS = -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS \
+$(OPTI) $(WARN) $(STD) $(DEBUG) $(INCLUDE) $(SANITY) $(LIB)
+OBJS = cpu_feature.o aligned_alloc.o
+
+all: test
+
+calc_equidist: calc_equidist.cpp rmt64.hpp
+	$(CXX) $(CXXFLAGS) -o $@ calc_equidist.cpp
+
+calc_period: calc_period.cpp rmt64.hpp
+	$(CXX) $(CXXFLAGS) -o $@ calc_period.cpp
+
+rmt64dc: rmt64dc.cpp rmt64.hpp
+	$(CXX) $(CXXFLAGS) -o $@ rmt64dc.cpp
+
+.cpp.o:
+	$(CXX) $(CXXFLAGS) -c $<
+
+clean:
+	rm -rf *.o *~ *.dSYM

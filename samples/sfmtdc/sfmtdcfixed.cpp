@@ -31,6 +31,7 @@
 #include <MTToolBox/MersenneTwister.hpp>
 #include <NTL/GF2X.h>
 #include <getopt.h>
+#define SFMT_PARAM_FIXED 1
 #include "sfmtsearch.hpp"
 #include "AlgorithmSIMDEquidistribution.hpp"
 #include "Annihilate.h"

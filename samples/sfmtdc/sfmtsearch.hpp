@@ -463,10 +463,18 @@ namespace MTToolBox {
          */
         void setUpParam(AbstractGenerator<uint32_t>& mt) {
             param.pos1 = mt.generate() % (size - 2) + 1;
+#if defined(SFMT_PARAM_FIXED)
+            // These parameters are not best ones.
+            param.sl1 = 19;
+            param.sl2 = 1;
+            param.sr1 = 7;
+            param.sr2 = 1;
+#else
             param.sl1 = mt.generate() % (32 - 1) + 1;
             param.sl2 = (mt.generate() % 4) * 2 + 1;
             param.sr1 = mt.generate() % (32 - 1) + 1;
             param.sr2 = (mt.generate() % 4) * 2 + 1;
+#endif
             param.msk1 = mt.generate() | mt.generate();
             param.msk2 = mt.generate() | mt.generate();
             param.msk3 = mt.generate() | mt.generate();

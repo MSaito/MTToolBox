@@ -31,6 +31,10 @@ sfmtdc: sfmtdc.cpp sfmtsearch.hpp AlgorithmSIMDEquidistribution.hpp \
 	Annihilate.o Annihilate.h
 	$(CXX) $(CXXFLAGS) -o $@ sfmtdc.cpp Annihilate.o
 
+sfmtdcfixed: sfmtdcfixed.cpp sfmtsearch.hpp AlgorithmSIMDEquidistribution.hpp \
+	Annihilate.o Annihilate.h
+	$(CXX) $(CXXFLAGS) -o $@ sfmtdcfixed.cpp Annihilate.o
+
 Annihilate.o: sfmtsearch.hpp Annihilate.cpp Annihilate.h
 	$(CXX) $(CXXFLAGS) -c Annihilate.cpp
 
