@@ -44,9 +44,9 @@ namespace MTToolBox {
      * be unsinged number.
      *\endenglish
      */
-    template<typename U>
+    template<typename U, typename V = U>
     class EquidistributionCalculatable
-        : virtual public RecursionSearchable<U> {
+        : virtual public RecursionSearchable<U, V> {
     public:
         using AbstractGenerator<U>::generate;
 
@@ -74,7 +74,7 @@ namespace MTToolBox {
          * @return copy of myself.
          *\endenglish
          */
-        virtual EquidistributionCalculatable<U> * clone() const = 0;
+        virtual EquidistributionCalculatable<U, V> * clone() const = 0;
 
         /**
          *\japanese
@@ -121,7 +121,7 @@ namespace MTToolBox {
          }
          @endverbatim
          */
-        virtual void add(EquidistributionCalculatable& that) = 0;
+        virtual void add(EquidistributionCalculatable<U, V>& that) = 0;
 
         /**
          *\japanese

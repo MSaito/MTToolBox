@@ -1,7 +1,7 @@
-#ifndef MTTOOLBOX_ALGORITHM_EQUIDISTRIBUTION_HPP
-#define MTTOOLBOX_ALGORITHM_EQUIDISTRIBUTION_HPP
+#ifndef MTTOOLBOX_ALGORITHM_SIMD_EQUIDISTRIBUTION_SIMPLE_HPP
+#define MTTOOLBOX_ALGORITHM_SIMD_EQUIDISTRIBUTION_SIMPLE_HPP
 /**
- * @file AlgorithmEquidistribution.hpp
+ * @file AlgorithmSIMDEquidistribution.hpp
  *
  *\japanese
  * @brief 疑似乱数生成器の出力の均等分布次元を計算する。
@@ -17,10 +17,10 @@
  * of pseudo random number generators using PIS method[1](S. Harase).
  *\endenglish
  *
- * @author Mutsuo Saito (Hiroshima University)
+ * @author Mutsuo Saito (Manieth Corp.)
  * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
+ * Copyright (C) 2015 Mutsuo Saito, Makoto Matsumoto, Manieth Corp
  * and Hiroshima University.
  * All rights reserved.
  *
@@ -48,11 +48,17 @@
 #endif // clang
 #endif // cplusplus version
 #include <stdexcept>
-#include <MTToolBox/EquidistributionCalculatable.hpp>
-#include <MTToolBox/period.hpp>
+//#include <MTToolBox/EquidistributionCalculatable.hpp>
 #include <MTToolBox/util.hpp>
+#include <limits.h>
 
 namespace MTToolBox {
+    struct SIMDInfo {
+        int bitSize;
+        int bitMode;
+        int elementNo;
+    };
+
     /**
      * @class linear_generator_vector
      *\japanese
@@ -77,21 +83,9 @@ namespace MTToolBox {
      * generator. Should be unsigned type.
      *\endenglish
      */
-    template<typename U, typename V = U>
-    class linear_generator_vector {
+    template<typename U, typename SIMDGenerator>
+    class simd_linear_generator_vector {
     public:
-
-        /**
-         *\japanese
-         * 均等分布次元計算可能な疑似乱数生成器
-         *\endjapanese
-         *
-         *\english
-         * pseudo random number generator which can calculate
-         * dimension of equi-distribution.
-         *\endenglish
-         */
-        typedef EquidistributionCalculatable<U, V> ECGenerator;
 
         /**
          *\japanese
@@ -106,18 +100,21 @@ namespace MTToolBox {
          *\english
          *\endenglish
          */
-        linear_generator_vector<U, V>(const ECGenerator& generator) {
+        simd_linear_generator_vector<U, SIMDGenerator>(
+            const SIMDGenerator& generator,
+            SIMDInfo& info)
+            {
 #if defined(MTTOOLBOX_USE_TR1)
             using namespace std::tr1;
 #else
             using namespace std;
 #endif
-            shared_ptr<ECGenerator> r(generator.clone());
+            shared_ptr<SIMDGenerator> r(new SIMDGenerator(generator));
             rand = r;
-            //rand->seed(1);
             count = 0;
             zero = false;
             setZero(next);
+            this->info = info;
         }
 
         /**
@@ -142,26 +139,29 @@ namespace MTToolBox {
          * 1, 0, 0, 0, ... or 8, 0, 0, 0, ...
          *\endenglish
          */
-        linear_generator_vector<U, V>(const ECGenerator& generator,
-                                   int bit_pos) {
+        simd_linear_generator_vector<U, SIMDGenerator>(
+            const SIMDGenerator& generator,
+            int bit_pos, SIMDInfo& info) {
 #if defined(MTTOOLBOX_USE_TR1)
             using namespace std::tr1;
 #else
             using namespace std;
 #endif
-            shared_ptr<ECGenerator> r(generator.clone());
+            shared_ptr<SIMDGenerator> r(new SIMDGenerator(generator));
             rand = r;
             rand->setZero();
             count = 0;
             zero = false;
             next = getOne<U>() << (bit_size<U>() - bit_pos - 1);
+            this->info = info;
 #if defined(DEBUG)
             cout << "DEBUG:" << dec << bit_pos << ":"
                  << hex << next << endl;
 #endif
         }
 
-        void add(const linear_generator_vector<U, V>& src);
+        void add(const simd_linear_generator_vector<U, SIMDGenerator>& src);
+        void get_next(int bit_len);
         void next_state(int bit_len);
         void debug_print();
 
@@ -175,9 +175,9 @@ namespace MTToolBox {
          *\endenglish
          */
 #if defined(MTTOOLBOX_USE_TR1)
-        std::tr1::shared_ptr<ECGenerator> rand;
+        std::tr1::shared_ptr<SIMDGenerator> rand;
 #else
-        std::shared_ptr<ECGenerator> rand;
+        std::shared_ptr<SIMDGenerator> rand;
 #endif
         /**
          *\japanese
@@ -216,6 +216,7 @@ namespace MTToolBox {
          *\endenglish
          */
         U next;
+        SIMDInfo info;
     };
 
     /**
@@ -239,8 +240,8 @@ namespace MTToolBox {
      * @tparam type of output of pseudo random number generator.
      *\endenglish
      */
-    template<typename U, typename V = U>
-    class AlgorithmEquidistribution {
+    template<typename U, typename SIMDGenerator>
+    class AlgorithmSIMDEquidistribution {
 
         /**
          *\japanese
@@ -251,19 +252,7 @@ namespace MTToolBox {
          * Pseudo random number generator as a vector.
          *\endenglish
          */
-        typedef linear_generator_vector<U, V> linear_vec;
-
-        /*
-         *\japanese
-         * 均等分布次元計算可能な疑似乱数生成器
-         *\endjapanese
-         *\english
-         * Pseudo random number generator which can calculate dimension
-         * of equi-distribution.
-         *\endenglish
-         */
-        typedef EquidistributionCalculatable<U, V> ECGenerator;
-
+        typedef simd_linear_generator_vector<U, SIMDGenerator> linear_vec;
     public:
 
         /**
@@ -293,21 +282,33 @@ namespace MTToolBox {
          * of equi-distribution. This is first v of k(v).
          *\endenglish
          */
-        AlgorithmEquidistribution(const ECGenerator& rand, int bit_length,
-                                  int mexp = 0) {
-            bit_len = bit_length;
-            size = bit_len + 1;
+        AlgorithmSIMDEquidistribution(const SIMDGenerator& rand,
+                                      int bit_length,
+                                      SIMDInfo info,
+                                      int maxbitsize) {
+#if defined(DEBUG)
+            cout << "AlgorithmSIMDEquidistribution constructer start" << endl;
+            cout << "bit_length = " << dec << bit_length << endl;
+#endif
+            int bit_len = bit_length;
+            int bit_size = bit_len * info.elementNo;
+#if defined(DEBUG)
+            cout << "bit_size = " << dec << bit_size << endl;
+#endif
+            this->info = info;
+            size = bit_size + 1;
             basis = new linear_vec * [size];
-            if (mexp == 0) {
-                stateBitSize = rand.bitSize();
-            } else {
-                stateBitSize = mexp;
+            stateBitSize = maxbitsize;
+            for (int i = 0; i < bit_size; i++) {
+                basis[i] = new linear_vec(rand, i, info);
             }
-            for (int i = 0; i < bit_len; i++) {
-                basis[i] = new linear_vec(rand, i);
-            }
-            basis[bit_len] = new linear_vec(rand);
-            basis[bit_len]->next_state(bit_len);
+            basis[bit_size] = new linear_vec(rand, info);
+            basis[bit_size]->next_state(bit_len);
+#if defined(DEBUG)
+            cout << "zero = " << dec << basis[bit_size]->zero << endl;
+            cout << "count = " << dec << basis[bit_size]->count << endl;
+            cout << "AlgorithmSIMDEquidistribution constructer end" << endl;
+#endif
         }
 
         /**
@@ -318,18 +319,16 @@ namespace MTToolBox {
          * Destructor
          *\endenglish
          */
-        ~AlgorithmEquidistribution() {
+        ~AlgorithmSIMDEquidistribution() {
             for (int i = 0; i < size; i++) {
                 delete basis[i];
             }
             delete[] basis;
         }
 
-        int get_all_equidist(int veq[]);
-        int get_equidist(int *sum_equidist);
+        int get_equidist(int bitLen);
     private:
         int get_equidist_main(int bit_len);
-        void adjust(int new_len);
 
         /**
          *\japanese
@@ -357,7 +356,7 @@ namespace MTToolBox {
          * \b v of dimension of equi-distribution with v-bit accuracy.
          *\endenglish
          */
-        int bit_len;
+        //int bit_len;
 
         /**
          *\japanese
@@ -379,35 +378,9 @@ namespace MTToolBox {
          * Size of array \b basis.
          *\endenglish
          */
+        SIMDInfo info;
         int size;
     };
-
-    /**
-     *\japanese
-     * ビット長の調整と主要項の調整
-     *
-     * @param new_len 新しいビット長
-     *\endjapanese
-     *
-     *\english
-     * Adjust bit length and coefficients of primary terms.
-     * This is needed to use previous intermediate result for
-     * next calculation.
-     *\endenglish
-     */
-    template<typename U, typename V>
-    void AlgorithmEquidistribution<U, V>::adjust(int new_len) {
-        using namespace std;
-        U tmp;
-        setZero(tmp);
-        U mask = ~tmp << (bit_size<U>() - new_len);
-        for (int i = 0; i < size; i++) {
-            basis[i]->next = basis[i]->next & mask;
-            if (isZero(basis[i]->next)) {
-                basis[i]->next_state(new_len);
-            }
-        }
-    }
 
 #if defined(DEBUG)
     /**
@@ -419,18 +392,16 @@ namespace MTToolBox {
      *\endenglish
      */
     template<typename U, typename V>
-    void linear_generator_vector<U, V>::debug_print() {
+    void simd_linear_generator_vector<U, V>::debug_print() {
         using namespace std;
 
-        cout << "debug ====" << endl;
-        cout << "count = " << dec << count << endl;
-        cout << "zero = " << zero << endl;
-        cout << "next = " << hex << next << endl;
-        cout << "debug ====" << endl;
+        cout << "count = " << dec << count;
+        cout << " zero = " << dec << zero;
+        cout << " next = " << hex << next << endl;
     }
 #else
     template<typename U, typename V>
-    void linear_generator_vector<U, V>::debug_print() {
+    void simd_linear_generator_vector<U, V>::debug_print() {
     }
 #endif
 
@@ -467,72 +438,10 @@ namespace MTToolBox {
      *\endenglish
      */
     template<typename U, typename V>
-    int AlgorithmEquidistribution<U, V>::get_all_equidist(int veq[]) {
+    int AlgorithmSIMDEquidistribution<U, V>::get_equidist(int bitLen)
+    {
         using namespace std;
-
-        int sum = 0;
-
-        veq[bit_len - 1] = get_equidist_main(bit_len);
-#if defined(DEBUG)
-        for (int i = 0; i < size; i++) {
-            basis[i]->debug_print();
-        }
-#endif
-        sum += stateBitSize / bit_len - veq[bit_len - 1];
-        bit_len--;
-        for (; bit_len >= 1; bit_len--) {
-            adjust(bit_len);
-            veq[bit_len - 1] = get_equidist_main(bit_len);
-            sum += stateBitSize / bit_len - veq[bit_len - 1];
-        }
-        return sum;
-    }
-
-    /**
-     *\japanese
-     * vビット精度の均等分布次元を計算する。
-     *
-     * コンストラクタで指定したbit_length についてk(v)を計算して返す。
-     * sum_equidist には、1 から bit_len -1 までの均等分布次元と理論的上限の
-     * 差の総和が返される。
-     *
-     * \warning AlgorithmEquidistribution をコンストラクトしてから、
-     * get_all_equidist() または、get_equidist() のどちらか一方を１回し
-     * か呼び出すことはできない。
-     *
-     * @param sum_equidist 1からbit_len -1 までの理論的上限との差の総和
-     * @return \b bit_length ビット精度の均等分布次元
-     *\endjapanese
-     *
-     *\english
-     * Calculate dimension of equi-distribution with v-bit accuracy.
-     *
-     * Calculate dimension of equi-distribution with v-bit accuracy
-     * k(v) for v = \b bit_length.
-     * \b sum_equidist is sum of d(v)s, which are difference
-     * between k(v) and theoretical upper bound at \b v.
-     *
-     * \warning Only one of get_all_equidist() or get_equidist() can
-     * be called only one time. (Bad interface)
-     *
-     * @param[out] sum_equidist sum of d(v)s
-     * @return k(bit_length)
-     *
-     *\endenglish
-     */
-    template<typename U, typename V>
-    int AlgorithmEquidistribution<U, V>::get_equidist(int *sum_equidist) {
-        using namespace std;
-
-        int veq = get_equidist_main(bit_len);
-        int sum = 0;
-        bit_len--;
-        for (; bit_len >= 1; bit_len--) {
-            adjust(bit_len);
-            sum += stateBitSize / bit_len - get_equidist_main(bit_len);
-        }
-        *sum_equidist = sum;
-        return veq;
+        return get_equidist_main(bitLen);
     }
 
     /**
@@ -546,15 +455,65 @@ namespace MTToolBox {
      * @param src source vector to be added to this vector
      *\endenglish
      */
-    template<typename U, typename V>
-    void linear_generator_vector<U, V>::add(
-        const linear_generator_vector<U, V>& src) {
+    template<typename U, typename SIMDGenerator>
+    void simd_linear_generator_vector<U, SIMDGenerator>::add(
+        const simd_linear_generator_vector<U, SIMDGenerator>& src) {
         using namespace std;
 
         rand->add(*src.rand);
         next ^= src.next;
     }
 
+    /**
+     * weight を考慮してnextを作る。prev もセットする。
+     *
+     */
+    template<typename U, typename SIMDGenerator>
+    void simd_linear_generator_vector<U, SIMDGenerator>::get_next(int bitSize) {
+        using namespace std;
+        U w = rand->generate();
+#if defined(DEBUG) && 0
+        cout << "w = " << w << endl;
+#endif
+        bitSize = bitSize * info.elementNo;
+        setZero(next);
+        int k = info.bitSize - 1;
+        if (info.bitMode == 32) {
+            for (int i = 0; i < info.elementNo; i++) {
+                uint32_t mask = UINT32_C(0x80000000);
+                for (int j = 0; j < bitSize; j += info.elementNo) {
+                    if (w.u[i] & mask) {
+                        setBitOfPos(&next, k, 1);
+                    } else {
+                        setBitOfPos(&next, k, 0);
+                    }
+                    k--;
+                    mask = mask >> 1;
+                }
+            }
+        } else {
+            for (int i = 0; i < info.elementNo; i++) {
+                uint64_t mask = UINT64_C(0x8000000000000000);
+                for (int j = 0; j < bitSize; j += info.elementNo) {
+                    if (w.u64[i] & mask) {
+                        setBitOfPos(&next, k, 1);
+                    } else {
+                        setBitOfPos(&next, k, 0);
+                    }
+                    k--;
+                    mask = mask >> 1;
+                }
+            }
+        }
+#if defined(DEBUG)
+        if (!isZero(next)) {
+            cout << "bitSize = " << dec << bitSize;
+            cout << " info.elementNo = " << dec << info.elementNo << endl;
+            cout << "get_next w = " << hex << w << endl;
+            cout << "get_next next = " << next << endl;
+        }
+#endif
+    }
     /**
      *\japanese
      * 疑似乱数生成器の状態遷移
@@ -573,14 +532,14 @@ namespace MTToolBox {
      *\endenglish
      */
     template<typename U, typename V>
-    void linear_generator_vector<U, V>::next_state(int bit_len) {
+    void simd_linear_generator_vector<U, V>::next_state(int bitLen) {
         using namespace std;
 
         if (zero) {
             return;
         }
         int zero_count = 0;
-        next = rand->generate(bit_len);
+        get_next(bitLen);
         count++;
         while (isZero(next)) {
             zero_count++;
@@ -591,7 +550,7 @@ namespace MTToolBox {
                 }
                 break;
             }
-            next = rand->generate(bit_len);
+            get_next(bitLen);
             count++;
         }
     }
@@ -612,27 +571,39 @@ namespace MTToolBox {
      * @return k(v)
      *\endenglish
      */
-    template<typename U, typename V>
-    int AlgorithmEquidistribution<U, V>::get_equidist_main(int v) {
+    template<typename U, typename SIMDGenerator>
+    int AlgorithmSIMDEquidistribution<U, SIMDGenerator>::
+    get_equidist_main(int v)
+    {
         using namespace std;
         using namespace NTL;
-        int bit_len = v;
+#if defined(DEBUG)
+        cout << "get_equidist_main start" << endl;
+        cout << "v = " << dec << v << endl;
+#endif
+        int bitSize = v * info.elementNo;
         int pivot_index;
         int old_pivot = 0;
 
-        pivot_index = calc_1pos(basis[bit_len]->next);
-        while (!basis[bit_len]->zero) {
+        pivot_index = calc_1pos(basis[bitSize]->next);
+#if defined(DEBUG)
+        cout << "get_equidist_main step 1" << endl;
+#endif
+        while (!basis[bitSize]->zero) {
+#if defined(DEBUG)
+            cout << "get_equidist_main step 2" << endl;
+#endif
 #if defined(DEBUG)
             if (pivot_index == -1) {
                 cout << "pivot_index = " << dec << pivot_index << endl;
-                cout << "zero = " << basis[bit_len]->zero << endl;
-                cout << "next = " << hex << basis[bit_len]->next << endl;
+                cout << "zero = " << basis[bitSize]->zero << endl;
+                cout << "next = " << hex << basis[bitSize]->next << endl;
                 throw new std::logic_error("pivot error 0");
             }
-            if (pivot_index >= bit_len) {
+            if (pivot_index >= bitSize) {
                 cout << "pivot_index = " << dec << pivot_index << endl;
-                cout << "bit_len = " << bit_len << endl;
-                cout << "next = " << hex << basis[bit_len]->next << endl;
+                cout << "bitSize = " << bitSize << endl;
+                cout << "next = " << hex << basis[bitSize]->next << endl;
                 throw new std::logic_error("pivot error 0.1");
             }
             if (pivot_index != calc_1pos(basis[pivot_index]->next)) {
@@ -641,43 +612,43 @@ namespace MTToolBox {
                 cerr << "calc_1pos:" << dec
                      << calc_1pos(basis[pivot_index]->next) << endl;
                 cerr << "next:" << hex << basis[pivot_index]->next << endl;
+                for (int i = 0; i < bitSize; i++) {
+                    cerr << dec << i << ":" << hex << basis[i]->next << endl;
+                }
                 throw new std::logic_error("pivot error 1");
             }
 #endif
             // アルゴリズムとして、全部のcount を平均的に大きくしたい。
             // 従って count の小さい方を変化させたい
-            if (basis[bit_len]->count > basis[pivot_index]->count) {
-                swap(basis[bit_len], basis[pivot_index]);
+            if (basis[bitSize]->count > basis[pivot_index]->count) {
+                swap(basis[bitSize], basis[pivot_index]);
             }
 #if defined(DEBUG)
-            cout << "before add bit_len next = " << hex
-                 << basis[bit_len]->next << "  count = " << dec
-                 << basis[bit_len]->count << endl;
+            cout << "before add bitSize next = " << hex
+                 << basis[bitSize]->next << endl;
             cout << "before add pivot   next = " << hex
-                 << basis[pivot_index]->next << "  count = " << dec
-                 << basis[pivot_index]->count << endl;
+                 << basis[pivot_index]->next << endl;
 #endif
-            basis[bit_len]->add(*basis[pivot_index]);
+            basis[bitSize]->add(*basis[pivot_index]);
 #if defined(DEBUG)
-            cout << "after  add bit_len next = " << hex
-                 << basis[bit_len]->next << "  count = " << dec
-                 << basis[bit_len]->count << endl;
+            cout << "after  add bitSize next = " << hex
+                 << basis[bitSize]->next << endl;
 #endif
             // add の結果 next の最後の1 は必ず 0 になる。
             // 全部0なら次の状態に進める。（内部でcount が大きくなる）
-            if (isZero(basis[bit_len]->next)) {
-                basis[bit_len]->next_state(bit_len);
-                pivot_index = calc_1pos(basis[bit_len]->next);
+            if (isZero(basis[bitSize]->next)) {
+                basis[bitSize]->next_state(v);
+                pivot_index = calc_1pos(basis[bitSize]->next);
 #if defined(DEBUG)
                 cout << "zero" << endl;
                 cout << "pivot_index = " << dec << pivot_index << endl;
-                if (pivot_index >= bit_len) {
+                if (pivot_index >= bitSize) {
                     cout << "pivot_index = " << dec << pivot_index << endl;
-                    cout << "bit_len = " << bit_len << endl;
-                    cout << "next = " << hex << basis[bit_len]->next << endl;
+                    cout << "bitSize = " << bitSize << endl;
+                    cout << "next = " << hex << basis[bitSize]->next << endl;
                     throw new std::logic_error("pivot error 1.1");
                 }
-                if (basis[bit_len]->zero) {
+                if (basis[bitSize]->zero) {
                     cout << "loop exit condition" << endl;
                 } else if (pivot_index == -1) {
                     cerr << "pivot error 1.1" << endl;
@@ -689,11 +660,11 @@ namespace MTToolBox {
             // 次の add で全部0になる。
             } else {
                 old_pivot = pivot_index;
-                pivot_index = calc_1pos(basis[bit_len]->next);
-                if (pivot_index >= bit_len) {
+                pivot_index = calc_1pos(basis[bitSize]->next);
+                if (pivot_index >= bitSize) {
                     cout << "pivot_index = " << dec << pivot_index << endl;
-                    cout << "bit_len = " << bit_len << endl;
-                    cout << "next = " << hex << basis[bit_len]->next << endl;
+                    cout << "bitSize = " << bitSize << endl;
+                    cout << "next = " << hex << basis[bitSize]->next << endl;
                     throw new std::logic_error("pivot error 2");
                 }
                 if (old_pivot <= pivot_index) {
@@ -706,32 +677,122 @@ namespace MTToolBox {
         }
 
         // 計算終了したので最長のベクトルを求める。（長いとはcountが少ないこと）
+#if defined(DEBUG)
+        for (int i = 0; i < bitSize; i++) {
+            cout << dec << i << ": count = " << basis[i]->count << endl;
+        }
+#endif
         int min_count = basis[0]->count;
-        for (int i = 1; i < bit_len; i++) {
+//        int min_count = INT_MAX;
+        for (int i = 1; i < bitSize; i++) {
+            if (basis[i]->zero) {
+                continue;
+            }
             if (min_count > basis[i]->count) {
                 min_count = basis[i]->count;
             }
         }
-#if defined(DEBUG)
-        cout << "min_count = " << min_count << endl;
-        cout << "stateBitSize = " << stateBitSize << endl;
-        cout << "bit_len = " << bit_len << endl;
-        cout << "theoretical bound " << (stateBitSize / bit_len) << endl;
-#endif
-        if (min_count > stateBitSize / bit_len) {
+        int result = min_count;
+        if (result > stateBitSize / bitSize) {
+//        if (result > stateBitSize / (bitSize / info.elementNo)) {
+            cerr << "over theoretical bound" << endl;
+            cout << "bitSize = " << dec << bitSize << endl;
+            cout << "min_count = " << dec << min_count << endl;
+            cout << "stateBitSize = " << dec << stateBitSize << endl;
+            cout << "elementNo = " << dec << info.elementNo << endl;
+            cout << "result = " << dec << result << endl;
             cerr << basis[0]->rand->getParamString() << endl;
+#if 0
             for(int i = 0; i < size; i++) {
                 basis[i]->debug_print();
             }
-            cerr << "min_count = " << min_count << endl;
-            cerr << "stateBitSize = " << stateBitSize << endl;
-            cerr << "bit_len = " << bit_len << endl;
-            cerr << "over theoretical bound " << (stateBitSize / bit_len)
-                 << endl;
+#endif
             throw new std::logic_error("over theoretical bound");
         }
-        return min_count;
+#if defined(DEBUG)
+        cout << "get_equidist_main end" << endl;
+#endif
+        return result;
     }
+
+    template<typename U, typename SIMDGenerator>
+    int calc_SIMD_equidistribution(const SIMDGenerator& rand,
+                                   int veq[],
+                                   int bit_len,
+                                   SIMDInfo& info,
+                                   int mexp)
+    {
+        int state_inc;
+        int weight_max = info.bitSize / 32;
+        int state_max = weight_max;
+        if (info.bitMode == 32) {
+            state_inc = 1;
+        } else {
+            state_inc = 2;
+        }
+        int weight_dec = state_inc;
+        for (int i = 0; i < bit_len; i++) {
+            veq[i] = INT_MAX;
+        }
+        int veq_weight[bit_len];
+        for (int sm = 0; sm < state_max; sm += state_inc) {
+            for (int i = 0; i < bit_len; i++) {
+                veq_weight[i] = -1;
+            }
+            for (int wm = weight_dec; wm <= weight_max; wm += weight_dec) {
+#if 0
+                cout << "start_mode = " << dec << sm;
+                cout << " weight_mode = " << dec << wm << endl;
+#endif
+                SIMDGenerator work = rand;
+                work.setStartMode(sm);
+                work.setWeightMode(wm);
+                work.generate();
+                for (int v = 1; v <= bit_len; v++) {
+                    AlgorithmSIMDEquidistribution<U, SIMDGenerator>
+                        ase(work, v, info, rand.bitSize());
+                    int e = ase.get_equidist(v);
+#if 0
+                    cout << "min_count = " << dec << e;
+#endif
+                    if (info.bitMode == 32) {
+                        e = e * info.elementNo - (info.elementNo - wm);
+                    } else { // 64
+                        e = e * info.elementNo - (info.elementNo - wm / 2);
+                    }
+                    if (e > mexp / v) {
+                        cerr << "over theoretical bound" << endl;
+                        cout << "start_mode = " << dec << sm;
+                        cout << " weight_mode = " << dec << wm;
+                        cout << " mexp = " << dec << mexp;
+                        cout << " e = " << dec << e;
+                        cout << " v = " << dec << v << endl;
+                        throw new std::logic_error("over theoretical bound");
+                    }
+#if 0
+                    cout << "\tk(" << dec << v << ") = " << dec
+                         << e << endl;
+#endif
+                    // max
+                    if (e > veq_weight[v - 1]) {
+                        veq_weight[v - 1] = e;
+                    }
+                }
+            }
+            for (int i = 0; i < bit_len; i++) {
+                // min
+                if (veq[i] > veq_weight[i]) {
+                    veq[i] = veq_weight[i];
+                }
+            }
+        }
+        int sum = 0;
+        for (int i = 1; i <= bit_len; i++) {
+            sum += mexp / i - veq[i - 1];
+        }
+        return sum;
+    }
+
 }
 #if defined(MTTOOLBOX_USE_TR1)
 #undef MTTOOLBOX_USE_TR1

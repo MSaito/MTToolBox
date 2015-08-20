@@ -37,7 +37,7 @@ namespace MTToolBox {
      * be unsigned integer.
      *\endenglish
      */
-    template<typename U>
+    template<typename U, typename V = U>
     class RecursionSearchable
         : virtual public AbstractGenerator<U> {
     public:
@@ -70,7 +70,7 @@ namespace MTToolBox {
          * \b generator may be Mersenne Twister or SequentialGenerator.
          *\endenglish
          */
-        virtual void setUpParam(AbstractGenerator<U>& generator) = 0;
+        virtual void setUpParam(AbstractGenerator<V>& generator) = 0;
 
         /**
          *\japanese

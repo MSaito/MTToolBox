@@ -27,6 +27,7 @@
 #include <NTL/GF2X.h>
 #include <NTL/vector.h>
 #include <MTToolBox/AbstractGenerator.hpp>
+#include <MTToolBox/util.hpp>
 
 namespace MTToolBox {
     /**
@@ -50,16 +51,23 @@ namespace MTToolBox {
      *\endenglish
      */
     template<typename U> void
-    minpoly(NTL::GF2X& poly, AbstractGenerator<U>& generator, int pos = 0)
+    minpoly(NTL::GF2X& poly, AbstractGenerator<U>& generator, int pos = 0,
+            int stateSize = 0)
     {
         using namespace std;
         using namespace NTL;
 
         Vec<GF2> v;
-        int size = generator.bitSize();
+        int size;
+        if (stateSize <= 0) {
+            size = generator.bitSize();
+        } else {
+            size = stateSize;
+        }
         v.SetLength(2 * size);
         for (int i = 0; i < 2 * size; i++) {
-            v[i] = (generator.generate() >> pos) & 1;
+//            v[i] = (generator.generate() >> pos) & 1;
+            v[i] = getBitOfPos(generator.generate(), pos);
         }
         MinPolySeq(poly, v, size);
     }

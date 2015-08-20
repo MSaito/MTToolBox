@@ -44,7 +44,7 @@ namespace MTToolBox {
      * generator. Should be unsigned number.
      *\endenglish
      */
-    template<typename U, typename G>
+    template<typename U, typename G, typename V = U>
     class AlgorithmReducibleEquidistribution {
     public:
         /**
@@ -67,13 +67,14 @@ namespace MTToolBox {
          */
         AlgorithmReducibleEquidistribution(const G& rg,
                                            const NTL::GF2X irreducibleFactor,
-                                           int bit_length) {
+                                           int bit_length,
+                                           int mexp) {
             G * rand = new G(rg);
             NTL::GF2X poly(0,1);
             calcCharacteristicPolynomial(rand, poly);
             NTL::GF2X quotient = poly / irreducibleFactor;
             annihilate<U>(rand, quotient);
-            ae = new AlgorithmEquidistribution<U>(*rand, bit_length);
+            ae = new AlgorithmEquidistribution<U, V>(*rand, bit_length, mexp);
         }
 
         /**
@@ -103,7 +104,7 @@ namespace MTToolBox {
             return ae->get_equidist(sum_equidist);
         }
     private:
-        AlgorithmEquidistribution<U> *ae;
+        AlgorithmEquidistribution<U, V> *ae;
     };
 }
 #endif // MTTOOLBOX_ALGORITHM_REDUCIBLE_EQUIDISTRIBUTION_HPP

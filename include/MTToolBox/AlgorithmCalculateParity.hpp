@@ -120,12 +120,12 @@ namespace MTToolBox {
                 bases[i].rg = new G(g);
                 bases[i].rg->setZero();
                 bases[i].zero = true;
-                bases[i].next = 0;
+                setZero(bases[i].next);
             }
             work_base.rg = new G(g);
             work_base.rg->setZero();
             work_base.zero = true;
-            work_base.next = 0;
+            setZero(work_base.next);
 #if defined(DEBUG)
             cout << "searchParity before while loop" << endl;
             cout << "word_width = " << word_width << endl;
@@ -138,7 +138,7 @@ namespace MTToolBox {
                 addBase(bases, word_width, work_base);
                 count = 0;
                 for (int i = 0; i < word_width; i++) {
-                    if (bases[i].next != 0) {
+                    if (!isZero(bases[i].next)) {
                         count++;
                     }
                 }
@@ -158,7 +158,7 @@ namespace MTToolBox {
 #if defined(DEBUG)
             cout << "----" << endl;
             for (int i = 0; i < word_width; i++) {
-                if (bases[i].next == 0) {
+                if (isZero(bases[i].next)) {
                         continue;
                 }
                 int w = word_width / 4;
@@ -248,7 +248,7 @@ namespace MTToolBox {
 #endif
             if (st.rg->isZero()) {
                 st.zero = true;
-                st.next = 0;
+                setZero(st.next);
 #if defined(DEBUG)
                 cout << "set_state end zero" << endl;
 #endif
@@ -257,7 +257,7 @@ namespace MTToolBox {
             st.zero = false;
             st.rg->generate();
             st.next = st.rg->getParityValue();
-            while (st.next == 0) {
+            while (isZero(st.next)) {
                 if (st.rg->isZero()) {
                     st.zero = true;
                     break;
@@ -335,7 +335,7 @@ namespace MTToolBox {
 #if defined(DEBUG)
                 cout << "addBase work.next = " << hex << work.next << endl;
 #endif
-                if (work.next == 0) {
+                if (isZero(work.next)) {
                     get_next_state(work);
                     if (work.zero) {
 #if defined(DEBUG)
@@ -353,7 +353,7 @@ namespace MTToolBox {
                          << " size = " << dec << size << endl;
                     throw "pivot > size error";
                 }
-                if (bases[pivot].next == 0) {
+                if (isZero(bases[pivot].next)) {
                     add_state(bases[pivot], work);
 #if defined(DEBUG)
                     cout << "addBase end next == 0" << endl;
@@ -391,16 +391,17 @@ namespace MTToolBox {
             NTL::mat_GF2 my;
 
             mx.SetDims(word_width, size);
-            U mask = 0;
+            U mask;
+            setZero(mask);
             mask = ~mask;
             mask = mask ^ (mask >> 1);
             for (int i = 0; i < word_width; i++) {
                 int cnt = 0;
                 for (int j = 0; j < word_width; j++) {
-                    if (base[j].next == 0) {
+                    if (isZero(base[j].next)) {
                         continue;
                     }
-                    if (mask & base[j].next) {
+                    if (!isZero(mask & base[j].next)) {
                         mx.put(i, cnt, 1);
                     } else {
                         mx.put(i, cnt, 0);

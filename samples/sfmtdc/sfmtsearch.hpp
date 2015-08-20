@@ -1,5 +1,5 @@
-#ifndef SFMTSEARCH_HPP
-#define SFMTSEARCH_HPP
+#ifndef SFMTSEARCH_WEIGHT_HPP
+#define SFMTSEARCH_WEIGHT_HPP
 /**
  * @file SFMTsearch.hpp
  *
@@ -10,40 +10,34 @@
  * except they are experts in random number generation.
  * This file is used for parameter searching.
  *
- * @author Mutsuo Saito (Hiroshima University)
+ * @author Mutsuo Saito (Manieth Copr.)
  * @author Makoto Matsumoto (The University of Tokyo)
  *
- * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
- * and Hiroshima University.
+ * Copyright (C) 2015 Mutsuo Saito, Makoto Matsumoto,
+ * Manieth Copr. and Hiroshima University.
  * All rights reserved.
  *
  * The 3-clause BSD License is applied to this software, see
  * LICENSE.txt
  */
 
+#include "w128.hpp"
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
-#include <cerrno>
 #include <sstream>
-#include <unistd.h>
-#include <search_temper.hpp>
-#include "mt19937ar.h"
+#include <MTToolBox/ReducibleGenerator.hpp>
+#include <MTToolBox/MersenneTwister.hpp>
+#include <MTToolBox/util.hpp>
 
 /**
  * @namespace sfmt
  * name space for sfmt
  */
-namespace sfmt {
-    using namespace MTToolBox;
+namespace MTToolBox {
+//    using namespace MTToolBox;
     using namespace NTL;
     using namespace std;
-
-    union w128_t {
-        vector unsigned int s;
-        uint32_t u[4];
-        uint64_t u64[2];
-    };
 
     /**
      * @class sfmt_param
@@ -64,20 +58,58 @@ namespace sfmt {
         uint32_t msk2;
         uint32_t msk3;
         uint32_t msk4;
+        uint32_t parity1;
+        uint32_t parity2;
+        uint32_t parity3;
+        uint32_t parity4;
 
+        sfmt_param() {
+            mexp = 0;
+            pos1 = 0;
+            sl1 = 0;
+            sl2 = 0;
+            sr1 = 0;
+            sr2 = 0;
+            msk1 = 0;
+            msk2 = 0;
+            msk3 = 0;
+            msk4 = 0;
+            parity1 = 0;
+            parity2 = 0;
+            parity3 = 0;
+            parity4 = 0;
+        }
+
+        sfmt_param(const sfmt_param& src) {
+            mexp = src.mexp;
+            pos1 = src.pos1;
+            sl1 = src.sl1;
+            sl2 = src.sl2;
+            sr1 = src.sr1;
+            sr2 = src.sr2;
+            msk1 = src.msk1;
+            msk2 = src.msk2;
+            msk3 = src.msk3;
+            msk4 = src.msk4;
+            parity1 = src.parity1;
+            parity2 = src.parity2;
+            parity3 = src.parity3;
+            parity4 = src.parity4;
+        }
         /**
          * This method is used in output.hpp.
          * @return header line of output.
          */
-        string get_header() {
-            return "mexp, pos1, sl1, sl2, sr1, sr2, msk1, msk2, msk3, msk4";
+        const string get_header() const {
+            return "mexp, pos1, sl1, sl2, sr1, sr2, msk1, msk2, msk3, msk4"
+                ", parity1, parity2, parity3, parity4";
         }
 
         /**
          * This method is used in output.hpp.
          * @return string of parameters
          */
-        string get_string() {
+        const string get_string() const {
             stringstream ss;
             ss << dec << mexp << ",";
             ss << dec << pos1 << ",";
@@ -89,6 +121,10 @@ namespace sfmt {
             ss << hex << setw(8) << setfill('0') << msk2 << ",";
             ss << hex << setw(8) << setfill('0') << msk3 << ",";
             ss << hex << setw(8) << setfill('0') << msk4 << ",";
+            ss << hex << setw(8) << setfill('0') << parity1 << ",";
+            ss << hex << setw(8) << setfill('0') << parity2 << ",";
+            ss << hex << setw(8) << setfill('0') << parity3 << ",";
+            ss << hex << setw(8) << setfill('0') << parity4 << ",";
             string s;
             ss >> s;
             return s;
@@ -98,7 +134,7 @@ namespace sfmt {
          * This method is used for DEBUG.
          * @return string of parameters.
          */
-        string get_debug_string() {
+        const string get_debug_string() const {
             stringstream ss;
             ss << "mexp:" << dec << mexp << endl;
             ss << "pos1:" << dec << pos1 << endl;
@@ -125,7 +161,7 @@ namespace sfmt {
      * but is not a subclass of some abstract class.
      * Instead, this class is passed to them as template parameters.
      */
-    class sfmt {
+    class sfmt : public ReducibleGenerator<w128_t, uint32_t> {
     public:
         /**
          * Constructor by mexp.
@@ -144,7 +180,16 @@ namespace sfmt {
             param.msk2 = 0;
             param.msk3 = 0;
             param.msk4 = 0;
+            param.parity1 = 0;
+            param.parity2 = 0;
+            param.parity3 = 0;
+            param.parity4 = 0;
+            index = 0;
             reverse_bit_flag = false;
+            start_mode = 0;
+            weight_mode = 4;
+            previous.u64[0] = 0;
+            previous.u64[1] = 0;
         }
 
         ~sfmt() {
@@ -156,9 +201,16 @@ namespace sfmt {
          * @param src The origin of copy.
          */
         sfmt(const sfmt& src) : param(src.param) {
-            size = src.param.mexp / 128 + 1;
+            size = src.size;
             state = new w128_t[size];
-            reverse_bit_flag = false;
+            for (int i = 0; i < size; i++) {
+                state[i] = src.state[i];
+            }
+            index = src.index;
+            start_mode = src.start_mode;
+            weight_mode = src.weight_mode;
+            reverse_bit_flag = src.reverse_bit_flag;
+            previous = src.previous;
         }
 
         /**
@@ -168,33 +220,21 @@ namespace sfmt {
         sfmt(const sfmt_param& src_param) : param(src_param) {
             size = src_param.mexp / 128 + 1;
             state = new w128_t[size];
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < 2; j++) {
+                    state[i].u64[j] = 0;
+                }
+            }
+            index = 0;
+            start_mode = 0;
+            weight_mode = 4;
+            previous.u64[0] = 0;
+            previous.u64[1] = 0;
             reverse_bit_flag = false;
         }
 
-        /**
-         * This method is called by the functions in simple_shortest_basis.hpp
-         */
-        void make_zero_state() {
-            for (int i = 0; i < size; i++) {
-                state[i] = 0;
-            }
-            index = 0;
-        }
-
-        /**
-         * This method returns mexp
-         * @return mexp
-         */
-        int get_mexp() const {
-            return param.mexp;
-        }
-
-        /**
-         * This method returns size of internal state
-         * @return size
-         */
-        int get_state_size() const {
-            return size;
+        EquidistributionCalculatable<w128_t, uint32_t> * clone() const {
+            return new sfmt(*this);
         }
 
         /**
@@ -202,14 +242,17 @@ namespace sfmt {
          * This initialization is simple.
          * @param seed seed for initialization
          */
-        void seeding(uint32_t seed) {
-            make_zero_state();
-            if (param.pos1 > 0 && param.pos1 < size) {
-                state[param.pos1 - 1] = seed;
-            } else {
-                state[0] = seed;
+        void seed(w128_t seed) {
+            setZero();
+            state[0] = seed;
+            uint32_t * pstate = &state[0].u[0];
+            for (int i = 1; i < size * 4; i++) {
+                pstate[i] ^= i + UINT32_C(1812433253)
+                    * (pstate[i - 1] ^ (pstate[i - 1] >> 30));
             }
             index = 0;
+            previous.u64[0] = 0;
+            previous.u64[1] = 0;
         }
 
         void rshift128(w128_t *out, w128_t const *in, int shift) {
@@ -263,40 +306,135 @@ namespace sfmt {
          * Important state transition function.
          */
         void next_state() {
+            index = (index + 1) % size;
             do_recursion(&state[index],
                          &state[index],
                          &state[(index + param.pos1) % size],
                          &state[(index + size - 2) % size],
-                         &state[(index + size -2) % size]);
-            index = (index + 1) % size;
+                         &state[(index + size - 1) % size]);
+            //index = (index + 1) % size;
         }
-
-        /**
-         * get a part of internal state without tempering
-         * @return
-         */
-        w128_t get_uint() {
-            return state[index];
-        }
-
-        /**
-         * getter of state
-         * @param index index of internal state
-         * @return element of internal state at \b index
-         */
-        w128_t get_state(int index) {
-            return state[index];
-        };
 
         /**
          * Important method, generate new random number
          * @return new pseudo random number
          */
         w128_t generate() {
+#if defined(DEBUG) && 0
+            w128_t s[size];
+            for (int i = 0; i < size; i++) {
+                s[i] = state[i];
+            }
+#endif
             next_state();
-            return state[index];
+            w128_t r;
+            index = index % size;
+            int p = (index + size - 1) % size;
+            switch (start_mode) {
+            case 0:
+                r.u[0] = state[index].u[0];
+                r.u[1] = state[index].u[1];
+                r.u[2] = state[index].u[2];
+                r.u[3] = state[index].u[3];
+                break;
+            case 1:
+                r.u[0] = state[p].u[1];
+                r.u[1] = state[p].u[2];
+                r.u[2] = state[p].u[3];
+                r.u[3] = state[index].u[0];
+                break;
+            case 2:
+                r.u[0] = state[p].u[2];
+                r.u[1] = state[p].u[3];
+                r.u[2] = state[index].u[0];
+                r.u[3] = state[index].u[1];
+                break;
+            case 3:
+            default:
+                r.u[0] = state[p].u[3];
+                r.u[1] = state[index].u[0];
+                r.u[2] = state[index].u[1];
+                r.u[3] = state[index].u[2];
+                break;
+            }
+#if defined(DEBUG) && 0
+            if (start_mode != 0) {
+                cout << "start_mode = " << dec << start_mode
+                     << " index = " << dec << index
+                     << " p = " << dec << p << endl;
+            }
+#endif
+#if defined(DEBUG) && 0
+            if ((r.u64[1] == 0 || r.u64[0] == 0) &&
+                (r.u64[1] != 0 || r.u64[0] != 0)) {
+                cout << "sfmt generate " << hex << r << endl;
+                cout << "start_mode = " << dec << start_mode << endl;
+                cout << "index = " << dec << index << endl;
+                cout << "param " << getParamString() << endl;
+                for (int i = 0; i < size; i++) {
+                    cout << "s[" << dec << i << "] = " << hex << s[i]
+                         << endl;
+                }
+                for (int i = 0; i < size; i++) {
+                    cout << "state[" << dec << i << "] = " << hex << state[i]
+                         << endl;
+                }
+            }
+#endif
+            w128_t r2;
+            switch (weight_mode) {
+            case 4:
+                r2 = r;
+                break;
+            case 3:
+                r2.u[0] = r.u[0];
+                r2.u[1] = r.u[1];
+                r2.u[2] = r.u[2];
+                r2.u[3] = previous.u[3];
+                break;
+            case 2:
+                r2.u[0] = r.u[0];
+                r2.u[1] = r.u[1];
+                r2.u[2] = previous.u[2];
+                r2.u[3] = previous.u[3];
+                break;
+            case 1:
+            default:
+                r2.u[0] = r.u[0];
+                r2.u[1] = previous.u[1];
+                r2.u[2] = previous.u[2];
+                r2.u[3] = previous.u[3];
+                break;
+            }
+#if defined(DEBUG)
+            cout << "w:" << dec << weight_mode
+                 << " s:" << dec << start_mode << endl;
+            cout << "r:" << hex << r << endl;
+            cout << "p:" << hex << previous << endl;
+            cout << "2:" << hex << r2 << endl;
+#endif
+            previous = r;
+//            next_state();
+            return r2;
         }
 
+        void setStartMode(int mode) {
+            start_mode = mode;
+        }
+
+        int getStartMode() {
+            return start_mode;
+        }
+
+        void setWeightMode(int mode) {
+            weight_mode = mode;
+            previous.u64[0] = 0;
+            previous.u64[1] = 0;
+        }
+
+        int getWeightMode() {
+            return weight_mode;
+        }
         /**
          * This method is called by the functions in simple_shortest_basis.hpp
          * This method returns \b bit_len bits of MSB of generated numbers
@@ -306,11 +444,14 @@ namespace sfmt {
          */
         w128_t generate(int bit_len) {
             w128_t w;
+#if 0
             if (reverse_bit_flag) {
                 w = reverse_bit(generate());
             } else {
                 w = generate();
             }
+#endif
+            w = generate();
             w128_t mask = make_msb_mask(bit_len);
             return and_mask(w, mask);
         }
@@ -320,94 +461,76 @@ namespace sfmt {
          * internal id
          * @param num sequential number
          */
-        void setup_param(uint32_t num) {
-            uint32_t work = num ^ (num << 15) ^ (num << 23);
-            work <<= 1;
-            param.mat1 = (work & 0xffff0000) | (param.id & 0xffff);
-            param.mat2 = (work & 0xffff) | (param.id & 0xffff0000);
-            param.mat1 ^= param.mat1 >> 19;
-            param.mat2 ^= param.mat2 << 18;
-            param.mat2 ^= 1;
-            param.tmat[0] = 0;
-        };
+        void setUpParam(AbstractGenerator<uint32_t>& mt) {
+            param.pos1 = mt.generate() % (size - 2) + 1;
+            param.sl1 = mt.generate() % (32 - 1) + 1;
+            param.sl2 = (mt.generate() % 4) * 2 + 1;
+            param.sr1 = mt.generate() % (32 - 1) + 1;
+            param.sr2 = (mt.generate() % 4) * 2 + 1;
+            param.msk1 = mt.generate() | mt.generate();
+            param.msk2 = mt.generate() | mt.generate();
+            param.msk3 = mt.generate() | mt.generate();
+            param.msk4 = mt.generate() | mt.generate();
+        }
 
-        /**
-         * getter of parameter
-         * @return parameter
-         */
-        const sfmt_param& get_param() const {
-            return param;
-        };
-
-        /**
-         * getter of recursion parameter
-         * @param mat1 parameter mat1 is set after calling this method
-         * @param mat2 parameter mat2 is set after calling this method
-         */
-        void get_mat(uint32_t *mat1, uint32_t *mat2) const {
-            *mat1 = param.mat1;
-            *mat2 = param.mat2;
-        };
-
-        /**
-         * This method gives information to the functions in the file
-         * search_temper.hpp
-         * @return always 1
-         */
-        int get_temper_param_num() const {
-            return 1;
-        };
+        void setZero() {
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < 2; j++) {
+                    state[i].u64[j] = 0;
+                }
+            }
+            index = 0;
+            previous.u64[0] = 0;
+            previous.u64[1] = 0;
+        }
 
         /**
          * This method is called by the functions in the file
          * simple_shortest_basis.hpp
          * @return true if all elements of state is zero
          */
-        bool is_zero() {
-            return (state[0] == 0) &&
-                (state[1] == 0) &&
-                (state[2] == 0) &&
-                (state[3] == 0);
-        };
-
-        /**
-         * This is important,
-         * This function tries to improve output quality of randomness.
-         * One important point of SFMT is this tempering function,
-         * which is not GF(2)-linear.
-         * But in calculating parameter phase, NON_LINEAR is never defined.
-         * @return improved random number
-         */
-        uint32_t temper() {
-#if defined(NO_TEMPER)
-            return state[0];
-#else
-            uint32_t t0, t1;
-#if defined(NON_LINEAR)
-            t0 = state[3];
-            t1 = state[0] + (state[2] >> sh8);
-#else
-            t0 = state[3];
-            t1 = state[0] ^ (state[2] >> sh8);
-#endif
-            t0 ^= t1;
-            if (t1 & 1) {
-                t0 ^= param.tmat[0];
+        bool isZero() const {
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < 2; j++) {
+                    if (state[i].u64[j] != 0) {
+                        return false;
+                    }
+                }
             }
-            return t0;
-#endif
-        };
+            switch (weight_mode) {
+            case 4:
+                return true;
+            case 3:
+                return previous.u[3] == 0;
+            case 2:
+                return (previous.u[2] == 0) && (previous.u[3] == 0);
+            case 1:
+            default:
+                return (previous.u[1] == 0)
+                    && (previous.u[2] == 0)
+                    && (previous.u[3] == 0);
+            }
+        }
 
-        /**
-         * This method is called by functions in the file search_temper.hpp
-         * @param mask available bits of pattern
-         * @param pattern bit pattern
-         * @param src_bit only 0 is allowed
-         */
-        void set_temper_pattern(uint32_t mask, uint32_t pattern, int src_bit) {
-            param.tmat[src_bit] &= ~mask;
-            param.tmat[src_bit] |= pattern & mask;
-        };
+        void setParityValue(w128_t parity) {
+            state[index] = parity;
+            param.parity1 = parity.u[0];
+            param.parity2 = parity.u[1];
+            param.parity3 = parity.u[2];
+            param.parity4 = parity.u[3];
+        }
+
+        w128_t getParityValue() const {
+            return state[index];
+        }
+
+        void setOneBit(int bitPos) {
+            setZero();
+            int idx = bitPos / 128;
+            int p = (bitPos / 64) % 2;
+            int r = bitPos % 64;
+            state[idx].u[p] = UINT64_C(1) << r;
+        }
 
         /**
          * This method is called by functions in the file
@@ -416,36 +539,36 @@ namespace sfmt {
          * output function is GF(2)-linear.
          * @param that SFMT generator added to this generator
          */
-        void add(sfmt& that) {
-            state[0] ^= that.state[0];
-            state[1] ^= that.state[1];
-            state[2] ^= that.state[2];
-            state[3] ^= that.state[3];
-        };
+        void add(EquidistributionCalculatable<w128_t, uint32_t>& other) {
+            sfmt *that = dynamic_cast<sfmt *>(&other);
+            if (that == 0) {
+                throw std::invalid_argument(
+                    "the adder should have same type as the addee.");
+            }
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < 2; j++) {
+                    state[(i + index) % size].u64[j]
+                        ^= that->state[(i + that->index) % size].u64[j];
+                }
+            }
+            previous ^= that->previous;
+        }
 
-        /**
-         * This method is called by functions in the file search_temper.hpp
-         * Do not remove this.
-         */
-        void setup_temper() {
-        };
+        int getMexp() const {
+            return param.mexp;
+        }
 
-        /**
-         * setter of parameter
-         * @param src new parameter
-         */
-        void set_param(sfmt_param src) {
-            param = src;
-        };
+        int bitSize() const {
+            return size * 128;
+        }
 
-        /**
-         * output parameters
-         * @param out output stream
-         */
-        void out_param(ostream& out) {
-            string s = param.get_debug_string();
-            out << s << endl;
-        };
+        const std::string getHeaderString() {
+            return param.get_header();
+        }
+
+        const std::string getParamString() {
+            return param.get_string();
+        }
 
         /**
          * This method is called by the functions in search_temper.hpp
@@ -453,7 +576,7 @@ namespace sfmt {
          */
         void set_reverse_bit() {
             reverse_bit_flag = true;
-        };
+        }
 
         /**
          * This method is called by the functions in search_temper.hpp
@@ -461,13 +584,16 @@ namespace sfmt {
          */
         void reset_reverse_bit() {
             reverse_bit_flag = false;
-        };
+        }
     private:
         int size;
         int index;
-        uint32_t * state;
+        int start_mode;
+        int weight_mode;
+        w128_t * state;
         sfmt_param param;
         bool reverse_bit_flag;
+        w128_t previous;
     };
 }
 

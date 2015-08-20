@@ -135,7 +135,7 @@ namespace MTToolBox {
             int veq[bit_size<U>()];
             AlgorithmReducibleRecursionSearch<U> search(rg, *baseGenerator);
             AlgorithmCalculateParity<U, G> cp;
-            int mexp = rg.getMexp();
+            int mexp = rg.bitSize();
             bool found = false;
             for (int i = 0;; i++) {
                 if (search.start(1000 * mexp)) {

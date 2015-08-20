@@ -49,9 +49,9 @@ namespace MTToolBox {
      *\endenglish
      *
      */
-    template<typename U>
+    template<typename U, typename V = U>
     class ReducibleGenerator
-        : virtual public EquidistributionCalculatable<U> {
+        : virtual public EquidistributionCalculatable<U, V> {
     public:
 
         /**
@@ -134,10 +134,10 @@ namespace MTToolBox {
      * @param[in] a value
      *\endenglish
      */
-    template<typename U>
-    void annihilate(EquidistributionCalculatable<U>* rg,
+    template<typename U, typename V = U>
+    void annihilate(EquidistributionCalculatable<U, V>* rg,
                     const NTL::GF2X& poly) {
-        EquidistributionCalculatable<U> *other = rg->clone();
+        EquidistributionCalculatable<U, V> *other = rg->clone();
         rg->setZero();
         for (int i = 0; i <= deg(poly); i++) {
             if (coeff(poly, i) != 0) {

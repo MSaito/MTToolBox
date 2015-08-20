@@ -33,6 +33,7 @@
 #include <MTToolBox/RecursionSearchable.hpp>
 #include <MTToolBox/AlgorithmPrimitivity.hpp>
 #include <MTToolBox/period.hpp>
+#include <MTToolBox/util.hpp>
 
 namespace MTToolBox {
     using namespace std;
@@ -67,7 +68,7 @@ namespace MTToolBox {
      * generator. Should be unsigned number.
      *\endenglish
      */
-    template<typename U>
+    template<typename U, typename V = U>
     class AlgorithmRecursionSearch {
     public:
         /**
@@ -96,8 +97,8 @@ namespace MTToolBox {
          * sample directory uses sequential counter.
          *\endenglish
          */
-        AlgorithmRecursionSearch(RecursionSearchable<U>& generator,
-                                 AbstractGenerator<U>& bg) {
+        AlgorithmRecursionSearch(RecursionSearchable<U, V>& generator,
+                                 AbstractGenerator<V>& bg) {
             rand = &generator;
             baseGenerator = &bg;
             count = 0;
@@ -131,8 +132,8 @@ namespace MTToolBox {
          * @param[in] primitivity A class to judge primitivity.
          *\endenglish
          */
-        AlgorithmRecursionSearch(RecursionSearchable<U>& generator,
-                                 AbstractGenerator<U>& bg,
+        AlgorithmRecursionSearch(RecursionSearchable<U, V>& generator,
+                                 AbstractGenerator<V>& bg,
                                  const AlgorithmPrimitivity& primitivity) {
             rand = &generator;
             baseGenerator = &bg;
@@ -175,7 +176,7 @@ namespace MTToolBox {
             long degree;
             for (int i = 0; i < try_count; i++) {
                 rand->setUpParam(*baseGenerator);
-                rand->seed(1);
+                rand->seed(getOne<U>());
                 minpoly(poly, *rand);
                 count++;
                 degree = deg(poly);
@@ -249,8 +250,8 @@ namespace MTToolBox {
         }
 
     private:
-        RecursionSearchable<U> *rand;
-        AbstractGenerator<U> *baseGenerator;
+        RecursionSearchable<U, V> *rand;
+        AbstractGenerator<V> *baseGenerator;
         const AlgorithmPrimitivity *isPrime;
         NTL::GF2X poly;
         long count;

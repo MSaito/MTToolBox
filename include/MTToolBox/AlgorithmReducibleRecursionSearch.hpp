@@ -35,16 +35,16 @@
 #endif
 #include <NTL/GF2X.h>
 #include <NTL/GF2XFactoring.h>
+#include <MTToolBox/util.hpp>
 #include <MTToolBox/ReducibleGenerator.hpp>
 #include <MTToolBox/AlgorithmPrimitivity.hpp>
 #include <MTToolBox/period.hpp>
-#include <MTToolBox/util.hpp>
 
 namespace MTToolBox {
     using namespace std;
 
-    template<typename U>
-    void calcCharacteristicPolynomial(RecursionSearchable<U> *rand,
+    template<typename U, typename V = U>
+    void calcCharacteristicPolynomial(RecursionSearchable<U, V> *rand,
                                       NTL::GF2X& poly);
     /**
      * @class AlgorithmReducibleRecursionSearch
@@ -108,7 +108,7 @@ namespace MTToolBox {
          * pseudo random number generator.
          *\endenglish
          */
-        AlgorithmReducibleRecursionSearch(ReducibleGenerator<U>& generator,
+        AlgorithmReducibleRecursionSearch(ReducibleGenerator<U, V>& generator,
                                  AbstractGenerator<V>& bg) {
             rand = &generator;
             baseGenerator = &bg;
@@ -123,7 +123,7 @@ namespace MTToolBox {
             long mexp = rand->getMexp();
             for (int i = 0; i < try_count; i++) {
                 rand->setUpParam(*baseGenerator);
-                rand->seed(1);
+                rand->seed(getOne<U>());
 #if defined(DEBUG)
                 cout << "rand param:";
                 cout << rand->getParamString() << endl;
@@ -219,7 +219,7 @@ namespace MTToolBox {
         }
 
     private:
-        ReducibleGenerator<U> *rand;
+        ReducibleGenerator<U, V> *rand;
         AbstractGenerator<V> *baseGenerator;
         NTL::GF2X poly;
         NTL::GF2X irreducible;
@@ -227,8 +227,8 @@ namespace MTToolBox {
 
     };
 
-    template<typename U>
-    void calcCharacteristicPolynomial(ReducibleGenerator<U> *rand,
+    template<typename U, typename V = U>
+    void calcCharacteristicPolynomial(ReducibleGenerator<U, V> *rand,
                                       NTL::GF2X& poly)
     {
 #if defined(DEBUG)

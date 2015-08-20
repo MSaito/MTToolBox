@@ -170,7 +170,7 @@ namespace MTToolBox {
     int get_range(T input, int start, int end) {
         if (end < start) {
             //printf("get_range:%d, %d\n", start, end);
-	    std::cout << "get_range:" << start << ", " << end << std::endl;
+            std::cout << "get_range:" << start << ", " << end << std::endl;
             exit(0);
         }
         return input % (end - start + 1) + start;
@@ -546,6 +546,17 @@ namespace MTToolBox {
         }
     }
 
+
+    template<typename U>
+    inline U getOne() {
+        return static_cast<U>(1);
+    }
+
+    template<typename U>
+    inline void setZero(U& x) {
+        x = 0;
+    }
+
     /**
      *\japanese
      * GF(2)ベクトルを符号なし整数に変換する。
@@ -563,8 +574,9 @@ namespace MTToolBox {
      */
     template<typename U>
     inline static U fromGF2Vec(NTL::vec_GF2& value) {
-        U result = 0;
-        U mask = 1;
+        U result;
+        setZero(result);
+        U mask = getOne<U>();
         int bitSize = bit_size<U>();
         mask = mask << (bitSize - 1);
         for (int i = 0; i < bitSize; i++) {
@@ -574,6 +586,29 @@ namespace MTToolBox {
             mask = mask >> 1;
         }
         return result;
+    }
+
+    template<typename U>
+    inline unsigned int getBitOfPos(U bits, int pos) {
+        return (bits >> pos) & 1;
+    }
+
+    template<typename U>
+    inline void setBitOfPos(U *bits, int pos, unsigned int b) {
+        b = b & 1;
+        U mask = ~(static_cast<U>(1) << pos);
+        *bits &= mask;
+        *bits |= static_cast<U>(b) << pos;
+    }
+
+    template<typename U>
+    inline bool isZero(U x) {
+        return x == 0;
+    }
+
+    template<typename U, typename V>
+    inline U convert(V x) {
+        return static_cast<U>(x);
     }
 }
 #endif //MTTOOLBOX_UTIL_HPP
