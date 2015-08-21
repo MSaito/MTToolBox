@@ -15,6 +15,7 @@ using namespace std;
 class options {
 public:
     bool verbose;
+    bool reverse;
     uint64_t seed;
     sfmt_param params;
 };
@@ -42,6 +43,14 @@ int main(int argc, char * argv[])
     int delta128 = 0;
     int delta32 = 0;
     int delta64 = 0;
+    bool lsb = false;
+    const char * lsb_str = "";
+    if (opt.reverse) {
+        sf.set_reverse_bit();
+        lsb = true;
+        cout << "Equidistribution from LSB" << endl;
+        lsb_str = " from LSB";
+    }
     AlgorithmEquidistribution<w128_t, uint32_t> re(sf, 128, opt.params.mexp);
     int veq[128];
     delta128 = re.get_all_equidist(veq);
@@ -50,33 +59,34 @@ int main(int argc, char * argv[])
     int veq32[32];
     info.bitMode = 32;
     info.elementNo = 4;
+    sf.reset_reverse_bit();
     delta32 = calc_SIMD_equidistribution<w128_t, sfmt>(sf, veq32, 32, info,
-                                                       opt.params.mexp);
+                                                       opt.params.mexp, lsb);
     int veq64[64];
     info.bitMode = 64;
     info.elementNo = 2;
     delta64 = calc_SIMD_equidistribution<w128_t, sfmt>(sf, veq64, 64, info,
-                                                       opt.params.mexp);
+                                                       opt.params.mexp, lsb);
     cout << sf.getParamString();
     cout << dec << delta32 << "," << delta64 << ","
          << delta128 << endl;
     if (opt.verbose) {
         cout << "32bit dimension of equidistribution at v-bit accuracy k(v)"
-             << endl;
+             << lsb_str << endl;
         for (int j = 0; j < 32; j++) {
             cout << "k(" << dec << (j + 1) << ") = " << dec << veq32[j];
             cout << "\td(" << dec << (j + 1) << ") = " << dec
                  << (opt.params.mexp / (j + 1) - veq32[j]) << endl;
         }
         cout << "64bit dimension of equidistribution at v-bit accuracy k(v)"
-             << endl;
+             << lsb_str << endl;
         for (int j = 0; j < 64; j++) {
             cout << "k(" << dec << (j + 1) << ") = " << dec << veq64[j];
             cout << "\td(" << dec << (j + 1) << ") = " << dec
                  << (opt.params.mexp / (j + 1) - veq64[j]) << endl;
         }
         cout << "128bit dimension of equidistribution at v-bit accuracy k(v)"
-             << endl;
+             << lsb_str << endl;
         for (int j = 0; j < 128; j++) {
             cout << "k(" << dec << (j + 1) << ") = " << dec << veq[j];
             cout << "\td(" << dec << (j + 1) << ") = " << dec
@@ -118,16 +128,18 @@ static void printBinary(FILE *fp, GF2X& poly)
 static bool parse_opt(options& opt, int argc, char **argv) {
     opt.verbose = false;
     opt.seed = (uint64_t)clock();
+    opt.reverse = false;
     int c;
     bool error = false;
     string pgm = argv[0];
     static struct option longopts[] = {
         {"verbose", no_argument, NULL, 'v'},
         {"seed", required_argument, NULL, 's'},
+        {"reverse", no_argument, NULL, 'r'},
         {NULL, 0, NULL, 0}};
     errno = 0;
     for (;;) {
-        c = getopt_long(argc, argv, "vs:", longopts, NULL);
+        c = getopt_long(argc, argv, "vrs:", longopts, NULL);
         if (error) {
             break;
         }
@@ -144,6 +156,9 @@ static bool parse_opt(options& opt, int argc, char **argv) {
             break;
         case 'v':
             opt.verbose = true;
+            break;
+        case 'r':
+            opt.reverse = true;
             break;
         case '?':
         default:
@@ -199,12 +214,13 @@ static void output_help(string& pgm)
 {
     cerr << "usage:" << endl;
     cerr << pgm
-         << " [-v]"
+         << " [-v] [-r]"
          << " mexp,pos1,sl1,sl2,sr1,sr2,msk1,msk2,msk3,msk4,"
          << "parity1,parity2,parity3,parity4"
          << endl;
     static string help_string1 = "\n"
 "--verbose, -v        Verbose mode. Output detailed information.\n"
+"--reverse, -r        Reverse mode. Calculate equidistribution from LSB.\n"
         ;
     cerr << help_string1 << endl;
 }

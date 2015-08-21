@@ -102,7 +102,8 @@ namespace MTToolBox {
          */
         simd_linear_generator_vector<U, SIMDGenerator>(
             const SIMDGenerator& generator,
-            SIMDInfo& info)
+            SIMDInfo& info,
+            bool lsb = false)
             {
 #if defined(MTTOOLBOX_USE_TR1)
             using namespace std::tr1;
@@ -115,6 +116,7 @@ namespace MTToolBox {
             zero = false;
             setZero(next);
             this->info = info;
+            this->lsb = lsb;
         }
 
         /**
@@ -141,7 +143,7 @@ namespace MTToolBox {
          */
         simd_linear_generator_vector<U, SIMDGenerator>(
             const SIMDGenerator& generator,
-            int bit_pos, SIMDInfo& info) {
+            int bit_pos, SIMDInfo& info, bool lsb = false) {
 #if defined(MTTOOLBOX_USE_TR1)
             using namespace std::tr1;
 #else
@@ -154,6 +156,7 @@ namespace MTToolBox {
             zero = false;
             next = getOne<U>() << (bit_size<U>() - bit_pos - 1);
             this->info = info;
+            this->lsb = lsb;
 #if defined(DEBUG)
             cout << "DEBUG:" << dec << bit_pos << ":"
                  << hex << next << endl;
@@ -217,6 +220,7 @@ namespace MTToolBox {
          */
         U next;
         SIMDInfo info;
+        bool lsb;
     };
 
     /**
@@ -285,7 +289,8 @@ namespace MTToolBox {
         AlgorithmSIMDEquidistribution(const SIMDGenerator& rand,
                                       int bit_length,
                                       SIMDInfo info,
-                                      int maxbitsize) {
+                                      int maxbitsize,
+                                      bool lsb = false) {
 #if defined(DEBUG)
             cout << "AlgorithmSIMDEquidistribution constructer start" << endl;
             cout << "bit_length = " << dec << bit_length << endl;
@@ -300,9 +305,9 @@ namespace MTToolBox {
             basis = new linear_vec * [size];
             stateBitSize = maxbitsize;
             for (int i = 0; i < bit_size; i++) {
-                basis[i] = new linear_vec(rand, i, info);
+                basis[i] = new linear_vec(rand, i, info, lsb);
             }
-            basis[bit_size] = new linear_vec(rand, info);
+            basis[bit_size] = new linear_vec(rand, info, lsb);
             basis[bit_size]->next_state(bit_len);
 #if defined(DEBUG)
             cout << "zero = " << dec << basis[bit_size]->zero << endl;
@@ -479,6 +484,12 @@ namespace MTToolBox {
         setZero(next);
         int k = info.bitSize - 1;
         if (info.bitMode == 32) {
+            if (lsb) {
+                w.u[0] = reverse_bit(w.u[0]);
+                w.u[1] = reverse_bit(w.u[1]);
+                w.u[2] = reverse_bit(w.u[2]);
+                w.u[3] = reverse_bit(w.u[3]);
+            }
             for (int i = 0; i < info.elementNo; i++) {
                 uint32_t mask = UINT32_C(0x80000000);
                 for (int j = 0; j < bitSize; j += info.elementNo) {
@@ -492,6 +503,10 @@ namespace MTToolBox {
                 }
             }
         } else {
+            if (lsb) {
+                w.u64[0] = reverse_bit(w.u64[0]);
+                w.u64[1] = reverse_bit(w.u64[1]);
+            }
             for (int i = 0; i < info.elementNo; i++) {
                 uint64_t mask = UINT64_C(0x8000000000000000);
                 for (int j = 0; j < bitSize; j += info.elementNo) {
@@ -720,7 +735,8 @@ namespace MTToolBox {
                                    int veq[],
                                    int bit_len,
                                    SIMDInfo& info,
-                                   int mexp)
+                                   int mexp,
+                                   bool lsb = false)
     {
         int state_inc;
         int weight_max = info.bitSize / 32;
@@ -750,7 +766,7 @@ namespace MTToolBox {
                 work.generate();
                 for (int v = 1; v <= bit_len; v++) {
                     AlgorithmSIMDEquidistribution<U, SIMDGenerator>
-                        ase(work, v, info, rand.bitSize());
+                        ase(work, v, info, rand.bitSize(), lsb);
                     int e = ase.get_equidist(v);
 #if 0
                     cout << "min_count = " << dec << e;

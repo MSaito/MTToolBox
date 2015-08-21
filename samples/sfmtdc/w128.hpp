@@ -237,5 +237,12 @@ namespace MTToolBox {
         w.u64[1] = 0;
         return w;
     }
+
+    static inline w128_t reverse_bit(w128_t x) {
+        w128_t w;
+        w.u64[0] = reverse_bit(x.u64[1]);
+        w.u64[1] = reverse_bit(x.u64[0]);
+        return w;
+    }
 }
 #endif

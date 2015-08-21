@@ -444,14 +444,11 @@ namespace MTToolBox {
          */
         w128_t generate(int bit_len) {
             w128_t w;
-#if 0
             if (reverse_bit_flag) {
                 w = reverse_bit(generate());
             } else {
                 w = generate();
             }
-#endif
-            w = generate();
             w128_t mask = make_msb_mask(bit_len);
             return and_mask(w, mask);
         }

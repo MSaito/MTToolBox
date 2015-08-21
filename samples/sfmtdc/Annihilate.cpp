@@ -47,6 +47,7 @@ static void getLCMPoly(GF2X& lcm, const sfmt& sf)
     GF2X poly;
     for (int i = 0; i < bitSize; i++) {
         gen.setOneBit(i);
+#if 0
         for (int j = 0; j < 128; j++) {
             minpoly<w128_t>(poly, gen, j);
             LCM(lcm, lcm, poly);
@@ -54,6 +55,13 @@ static void getLCMPoly(GF2X& lcm, const sfmt& sf)
                 return;
             }
         }
+#else
+        minpoly<w128_t>(poly, gen);
+        LCM(lcm, lcm, poly);
+        if (deg(lcm) == bitSize) {
+            return;
+        }
+#endif
     }
 }
 
