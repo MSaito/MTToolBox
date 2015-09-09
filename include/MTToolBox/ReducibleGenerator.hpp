@@ -145,6 +145,7 @@ namespace MTToolBox {
             }
             other->generate();
         }
+        delete other;
     }
 }
 
