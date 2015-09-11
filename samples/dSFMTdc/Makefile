@@ -32,6 +32,11 @@ calc_fixpoint: calc_fixpoint.cpp calc_fixpoint.h dSFMTsearch.hpp \
 	$(CXX) $(CXXFLAGS) -DMAIN -o $@ calc_fixpoint.cpp Annihilate.o \
 	printBinary.o
 
+calc_parity: calc_parity.cpp calc_parity.h dSFMTsearch.hpp \
+	Annihilate.o printBinary.o
+	$(CXX) $(CXXFLAGS) -DMAIN -o $@ calc_parity.cpp Annihilate.o \
+	printBinary.o
+
 make_old_format: make_old_format.cpp dSFMTsearch.hpp printBinary.o Annihilate.o
 	$(CXX) $(CXXFLAGS) -o $@ make_old_format.cpp Annihilate.o printBinary.o
 

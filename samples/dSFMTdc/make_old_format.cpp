@@ -47,6 +47,14 @@ static bool option(dSFMT_param& param, int argc, char * argv[]) {
     param.msk1 = strtoull(para, &para, 16);
     para++;
     param.msk2 = strtoull(para, &para, 16);
+    para++;
+    param.fix1 = strtoull(para, &para, 16);
+    para++;
+    param.fix2 = strtoull(para, &para, 16);
+    para++;
+    param.parity1 = strtoull(para, &para, 16);
+    para++;
+    param.parity2 = strtoull(para, &para, 16);
     return true;
 }
 

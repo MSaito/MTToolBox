@@ -590,7 +590,50 @@ namespace MTToolBox {
         void reset_reverse_bit() {
             reverse_bit_flag = false;
         }
+        int periodCertification() {
+            w128_t tmp;
+            w128_t parity;
+            parity.u[0] = param.parity1;
+            parity.u[1] = param.parity2;
+            parity.u[2] = param.parity3;
+            parity.u[3] = param.parity4;
+            tmp = state[0] & parity;
+            int c = count_bit(tmp.u[0]);
+            c += count_bit(tmp.u[1]);
+            c += count_bit(tmp.u[2]);
+            c += count_bit(tmp.u[3]);
+            if ((c & 1) == 1) {
+                return 1;
+            }
+            if ((parity.u[0] & 1) == 1) {
+                state[0].u[0] ^= 1;
+                return 0;
+            }
+            for (int i = 0; i < 4; i++) {
+                uint32_t work = 1;
+                for (int j = 0; j < 32; j++) {
+                    if ((work & parity.u[i]) != 0) {
+                        state[0].u[i] ^= work;
+                        return 0;
+                    }
+                    work = work << 1;
+                }
+            }
+            return 0;
+        }
+        void d_p() {
+            cout << "index = " << dec << index << endl;
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < 4; j++) {
+                    cout << hex << setw(8) << setfill('0') << state[i].u[j];
+                }
+                cout << endl;
+            }
+        }
     private:
+        sfmt& operator=(const sfmt&) {
+            throw std::logic_error("can't assign");
+        }
         int size;
         int index;
         int start_mode;

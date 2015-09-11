@@ -21,6 +21,10 @@ calc_equidist: calc_equidist.cpp sfmtsearch.hpp \
 	AlgorithmSIMDEquidistribution.hpp Annihilate.h Annihilate.o
 	$(CXX) $(CXXFLAGS) -o $@ calc_equidist.cpp Annihilate.o
 
+calc_parity: calc_parity.cpp calc_parity.h sfmtsearch.hpp \
+	Annihilate.h Annihilate.o
+	$(CXX) $(CXXFLAGS) -DMAIN -o $@ calc_parity.cpp Annihilate.o
+
 test_linearity: test_linearity.cpp sfmtsearch.hpp
 	$(CXX) $(CXXFLAGS) -o $@ test_linearity.cpp
 

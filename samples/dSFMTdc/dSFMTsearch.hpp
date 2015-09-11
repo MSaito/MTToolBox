@@ -555,6 +555,43 @@ namespace MTToolBox {
             }
             cout << endl;
         }
+
+        int periodCertification(bool noFix = false) {
+            w128_t tmp;
+            w128_t parity;
+            parity.u64[0] = param.parity1;
+            parity.u64[1] = param.parity2;
+            w128_t fix;
+            fix.u64[0] = param.fix1;
+            fix.u64[1] = param.fix2;
+            if (noFix) {
+                tmp = lung & parity;
+            } else {
+                tmp = lung ^ fix;
+                tmp = tmp & parity;
+            }
+            int c = count_bit(tmp.u64[0]);
+            c += count_bit(tmp.u64[1]);
+            c &= 1;
+            if (c == 1) {
+                return 1;
+            }
+            if ((parity.u64[1] & 1) == 1) {
+                lung.u64[1] ^= 1;
+                return 0;
+            }
+            for (int i = 1; i >= 0; i--) {
+                uint64_t work = 1;
+                for (int j = 0; j < 64; j++) {
+                    if ((work & parity.u64[i]) != 0) {
+                        lung.u64[i] ^= work;
+                        return 0;
+                    }
+                    work = work << 1;
+                }
+            }
+            return 0;
+        }
     private:
         dSFMT& operator=(const dSFMT&) {
             throw std::logic_error("can't assign");
