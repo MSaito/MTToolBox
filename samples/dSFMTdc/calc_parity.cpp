@@ -49,6 +49,7 @@ static void test_parity0(const dSFMT_param& param, GF2X& f, w128_t parity) {
         seed.u64[0] = i + 1;
         seed.u64[1] = 0;
         dsfmt.seed(seed);
+        //dsfmt.d_p();
         minpoly<w128_t>(mpoly, dsfmt);
         DivRem(q, rem, mpoly, f);
         if (deg(rem) != -1) {
@@ -71,10 +72,10 @@ static void test_parity0(const dSFMT_param& param, GF2X& f, w128_t parity) {
         if (r == 1) {
             if (verbose) printf("period certification OK\n");
         } else {
-            if (verbose) printf("period certification NG -> OK\n");
-            if (!dsfmt.periodCertification()) {
+            if (verbose) printf("period certification NG -> OK 1\n");
+            if (dsfmt.periodCertification(true) != 1) {
                 result = 0;
-                printf("period critification didn't change status!!\n");
+                printf("period critification didn't change status 1!!\n");
                 point = i;
                 break;
             }

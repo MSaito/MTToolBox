@@ -17,8 +17,8 @@ OBJS = cpu_feature.o aligned_alloc.o
 
 all: test
 
-calc_equidist: calc_equidist.cpp sfmtsearch.hpp \
-	AlgorithmSIMDEquidistribution.hpp Annihilate.h Annihilate.o
+calc_equidist: calc_equidist.cpp dSFMTsearch.hpp \
+	AlgorithmDSFMTEquidistribution.hpp Annihilate.h Annihilate.o
 	$(CXX) $(CXXFLAGS) -o $@ calc_equidist.cpp Annihilate.o
 
 test_linearity: test_linearity.cpp dSFMTsearch.hpp
@@ -41,13 +41,14 @@ make_old_format: make_old_format.cpp dSFMTsearch.hpp printBinary.o Annihilate.o
 	$(CXX) $(CXXFLAGS) -o $@ make_old_format.cpp Annihilate.o printBinary.o
 
 
-sfmtdc: sfmtdc.cpp sfmtsearch.hpp AlgorithmSIMDEquidistribution.hpp \
-	Annihilate.o Annihilate.h
-	$(CXX) $(CXXFLAGS) -o $@ sfmtdc.cpp Annihilate.o
+dSFMTdc: dSFMTdc.cpp dSFMTsearch.hpp AlgorithmDSFMTEquidistribution.hpp \
+	Annihilate.o Annihilate.h calc_fixpoint.o calc_fixpoint.h
+	$(CXX) $(CXXFLAGS) -o $@ dSFMTdc.cpp Annihilate.o calc_fixpoint.o
 
-sfmtdcfixed: sfmtdcfixed.cpp sfmtsearch.hpp AlgorithmSIMDEquidistribution.hpp \
-	Annihilate.o Annihilate.h
-	$(CXX) $(CXXFLAGS) -o $@ sfmtdcfixed.cpp Annihilate.o
+dSFMTdcfixed: dSFMTdcfixed.cpp sfmtsearch.hpp \
+	AlgorithmDSFMTEquidistribution.hpp \
+	Annihilate.o Annihilate.h calc_fixpoint.o calc_fixpoint.h
+	$(CXX) $(CXXFLAGS) -o $@ dSFMTdcfixed.cpp Annihilate.o calc_fixpoint.o
 
 Annihilate.o: dSFMTsearch.hpp Annihilate.cpp Annihilate.h
 	$(CXX) $(CXXFLAGS) -c Annihilate.cpp

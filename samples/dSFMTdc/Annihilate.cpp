@@ -7,6 +7,8 @@
 using namespace NTL;
 using namespace std;
 using namespace MTToolBox;
+static void minPolyLung(GF2X& poly, dSFMT& sf, int pos);
+static void lungLCM(GF2X& poly, dSFMT& sf);
 
 bool anni(dSFMT& sf)
 {
@@ -41,11 +43,12 @@ bool anni(dSFMT& sf)
 void getLCMPoly(GF2X& lcm, const dSFMT& sf)
 {
     dSFMT gen(sf);
+    lungLCM(lcm, gen);
     int bitSize = gen.bitSize();
     GF2X poly;
     for (int i = 0; i < bitSize; i++) {
         gen.setOneBit(i);
-        minpoly<w128_t>(poly, gen);
+        minPolyLung(poly, gen, 0);
         LCM(lcm, lcm, poly);
         if (deg(lcm) == bitSize) {
             return;
@@ -53,3 +56,24 @@ void getLCMPoly(GF2X& lcm, const dSFMT& sf)
     }
 }
 
+static void lungLCM(GF2X& lcm, dSFMT& sf)
+{
+    GF2X poly;
+    for (int i = 0; i < 128; i++) {
+        minPolyLung(poly, sf, i);
+        LCM(lcm, lcm, poly);
+    }
+}
+
+static void minPolyLung(GF2X& poly, dSFMT& sf, int pos)
+{
+    Vec<GF2> v;
+    int size = sf.bitSize();
+    v.SetLength(2 * size);
+    for (int i = 0; i < 2 * size; i++) {
+        sf.generate();
+        w128_t w = sf.getParityValue();
+        v[i] = getBitOfPos(w, pos);
+    }
+    MinPolySeq(poly, v, size);
+}

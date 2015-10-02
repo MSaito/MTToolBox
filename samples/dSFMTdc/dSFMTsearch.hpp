@@ -220,8 +220,11 @@ namespace MTToolBox {
          * @param seed seed for initialization
          */
         void seed(w128_t seed) {
-            setZero();
+            //setZero();
             uint64_t * pstate = new uint64_t[(size + 1) * 2];
+            for (int i = 0; i < (size + 1) * 2; i++) {
+                pstate[i] = 0;
+            }
             pstate[0] = seed.u64[0];
             pstate[1] = seed.u64[1];
             for (int i = 1; i < (size + 1) * 2; i++) {
