@@ -164,6 +164,8 @@ namespace MTToolBox {
             lung.u64[0] = 0;
             lung.u64[1] = 0;
             prefix = 0;
+            fixed = false;
+            fixedSL1 = 0;
         }
 
         ~dSFMT() {
@@ -186,6 +188,8 @@ namespace MTToolBox {
             weight_mode = src.weight_mode;
             previous = src.previous;
             prefix = src.prefix;
+            fixed = src.fixed;
+            fixedSL1 = src.fixedSL1;
         }
 
         /**
@@ -208,6 +212,8 @@ namespace MTToolBox {
             lung.u64[0] = 0;
             lung.u64[1] = 0;
             prefix = 0;
+            fixed = false;
+            fixedSL1 = 0;
         }
 
         EquidistributionCalculatable<w128_t, uint64_t> * clone() const {
@@ -370,12 +376,11 @@ namespace MTToolBox {
          */
         void setUpParam(AbstractGenerator<uint64_t>& mt) {
             param.pos1 = mt.generate() % (size - 2) + 1;
-#if defined(DSFMT_PARAM_FIXED)
-            // These parameters are not best ones.
-            param.sl1 = 19;
-#else
-            param.sl1 = mt.generate() % (52 - 1) + 1;
-#endif
+            if (fixed) {
+                param.sl1 = fixedSL1;
+            } else {
+                param.sl1 = mt.generate() % (52 - 1) + 1;
+            }
             param.msk1 = mt.generate() | mt.generate();
             param.msk2 = mt.generate() | mt.generate();
             param.msk1 &= UINT64_C(0x000fffffffffffff);
@@ -595,6 +600,12 @@ namespace MTToolBox {
             }
             return 0;
         }
+        void setFixed(bool value) {
+            fixed = value;
+        }
+        void setFixedSL1(int value) {
+            fixedSL1 = value;
+        }
     private:
         dSFMT& operator=(const dSFMT&) {
             throw std::logic_error("can't assign");
@@ -613,6 +624,8 @@ namespace MTToolBox {
             }
         }
         enum {sr1 = 12};
+        int fixedSL1;
+        bool fixed;
         int size;
         int index;
         int start_mode;

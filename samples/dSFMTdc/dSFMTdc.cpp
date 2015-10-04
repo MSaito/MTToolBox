@@ -44,6 +44,8 @@ class options {
 public:
     int mexp;
     bool verbose;
+    bool fixed;
+    int fixedSL1;
     uint64_t seed;
     std::string filename;
     long count;
@@ -83,6 +85,10 @@ int search(options& opt, int count) {
     if (opt.verbose) {
         time_t t = time(NULL);
         cout << "search start at " << ctime(&t);
+    }
+    if (opt.fixed) {
+        g.setFixed(true);
+        g.setFixedSL1(opt.fixedSL1);
     }
     AlgorithmReducibleRecursionSearch<w128_t, uint64_t> ars(g, mt);
     int i = 0;
@@ -150,6 +156,8 @@ bool parse_opt(options& opt, int argc, char **argv) {
     opt.count = 1;
     opt.seed = (uint64_t)clock();
     opt.filename = "";
+    opt.fixed = false;
+    opt.fixedSL1 = 19;
     int c;
     bool error = false;
     string pgm = argv[0];
@@ -158,10 +166,11 @@ bool parse_opt(options& opt, int argc, char **argv) {
         {"file", required_argument, NULL, 'f'},
         {"count", required_argument, NULL, 'c'},
         {"seed", required_argument, NULL, 's'},
+        {"fixed", optional_argument, NULL, 'x'},
         {NULL, 0, NULL, 0}};
     errno = 0;
     for (;;) {
-        c = getopt_long(argc, argv, "vs:f:c:", longopts, NULL);
+        c = getopt_long(argc, argv, "vs:f:c:x::", longopts, NULL);
         if (error) {
             break;
         }
@@ -174,6 +183,19 @@ bool parse_opt(options& opt, int argc, char **argv) {
             if (errno) {
                 error = true;
                 cerr << "seed must be a number" << endl;
+            }
+            break;
+        case 'x':
+            opt.fixed = true;
+            //if ((optarg != NULL) && (strlen(optarg) > 0)) {
+            if (optarg != NULL) {
+                opt.fixedSL1 = strtoull(optarg, NULL, 0);
+                if (errno) {
+                    error = true;
+                    cerr << "fixed sl1 must be a number" << endl;
+                }
+            } else {
+                opt.fixedSL1 = 19;
             }
             break;
         case 'v':
@@ -201,10 +223,10 @@ bool parse_opt(options& opt, int argc, char **argv) {
         error = true;
     } else {
         long mexp = strtol(argv[0], NULL, 10);
-        static const int allowed_mexp[] = {607, 1279,
-                                           2281, 3217, 4253, 4423,
-                                           9689, 9941, 11213, 19937,
-                                           21701, 23209, 44497, -1};
+        static const int allowed_mexp[] = {521, 1279,
+                                           2203, 4253,
+                                           11213, 19937,
+                                           44497, -1};
         if (! errno) {
             bool found = false;
             for (int i = 0; allowed_mexp[i] > 0; i++) {
@@ -260,6 +282,7 @@ static void output_help(string& pgm) {
 "                     option, parameters are outputted to standard output.\n"
 "--count, -c count    Output count. The number of parameters to be outputted.\n"
 "--seed, -s seed      seed of randomness.\n"
+"--fixed, -x fixedSL  fix the parameter sl1 to given value.\n"
 "mexp                 mersenne exponent.\n"
         ;
     cerr << help_string1 << endl;
