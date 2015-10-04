@@ -1,6 +1,6 @@
 noinst_PROGRAMS = dSFMTdc calc_parity calc_equidist calc_fixpoint test_linearity
 dSFMTdc_SOURCES = dSFMTsearch.hpp dSFMTdc.cpp Annihilate.h Annihilate.cpp \
-AlgorithmDSFMTEquidistribution.hpp w128.hpp
+AlgorithmDSFMTEquidistribution.hpp w128.hpp calc_fixpoint.cpp
 dSFMTdc_DEPENDENCIES = ../../lib/libMTToolBox.a
 dSFMTdc_LDFLAGS = -L../../lib
 dSFMTdc_LDADD = -lMTToolBox -lntl
@@ -14,12 +14,12 @@ test_linearity_DEPENDENCIES = ../../lib/libMTToolBox.a
 test_linearity_LDFLAGS = -L../../lib
 test_linearity_LDADD = -lMTToolBox -lntl
 calc_fixpoint_SOURCES = dSFMTsearch.hpp calc_fixpoint.cpp Annihilate.cpp \
-printBinary.cpp printBinary.h calc_fixpoint.h
+printBinary.cpp printBinary.h calc_fixpoint.h calc_fixpoint_main.cpp
 calc_fixpoint_DEPENDENCIES = ../../lib/libMTToolBox.a
 calc_fixpoint_LDFLAGS = -L../../lib
 calc_fixpoint_LDADD = -lMTToolBox -lntl
 calc_parity_SOURCES = dSFMTsearch.hpp calc_parity.cpp Annihilate.cpp \
-printBinary.cpp printBinary.h calc_fixpoint.h
+printBinary.cpp printBinary.h calc_fixpoint.h calc_parity.h calc_parity_main.cpp
 calc_parity_DEPENDENCIES = ../../lib/libMTToolBox.a
 calc_parity_LDFLAGS = -L../../lib
 calc_parity_LDADD = -lMTToolBox -lntl

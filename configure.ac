@@ -41,5 +41,6 @@ AC_CONFIG_FILES([Makefile include/Makefile lib/Makefile samples/Makefile \
 			  samples/MTDC/Makefile samples/MTGPDC/Makefile \
 			  samples/XORSHIFT/Makefile samples/RMT/Makefile \
 			  samples/TinyMTDC/Makefile samples/sfmtdc/Makefile \
+			  samples/dSFMTdc/Makefile \
 			  test/Makefile])
 AC_OUTPUT

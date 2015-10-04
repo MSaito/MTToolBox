@@ -4,6 +4,6 @@
 #include <NTL/GF2X.h>
 #include "dSFMTsearch.hpp"
 
-MTToolBox::w128_t calc_parity(const MTToolBox::dSFMT& dsfmt,
+MTToolBox::w128_t calc_parity(MTToolBox::dSFMT& dsfmt,
                               const NTL::GF2X& irreducible);
 #endif

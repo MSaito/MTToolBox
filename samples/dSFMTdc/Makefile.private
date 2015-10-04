@@ -27,14 +27,17 @@ test_linearity: test_linearity.cpp dSFMTsearch.hpp
 calc_period: calc_period.cpp dSFMTsearch.hpp Annihilate.o
 	$(CXX) $(CXXFLAGS) -o $@ calc_period.cpp Annihilate.o
 
-calc_fixpoint: calc_fixpoint.cpp calc_fixpoint.h dSFMTsearch.hpp \
-	Annihilate.o printBinary.o
-	$(CXX) $(CXXFLAGS) -DMAIN -o $@ calc_fixpoint.cpp Annihilate.o \
+calc_fixpoint: calc_fixpoint_main.cpp calc_fixpoint.cpp calc_fixpoint.h \
+	dSFMTsearch.hpp Annihilate.o printBinary.o
+	$(CXX) $(CXXFLAGS) -DMAIN -o $@ calc_fixpoint.cpp \
+	calc_fixpoint_main.cpp Annihilate.o \
 	printBinary.o
 
-calc_parity: calc_parity.cpp calc_parity.h dSFMTsearch.hpp \
+calc_parity: calc_parity_main.cpp calc_parity.cpp calc_parity.h \
+	dSFMTsearch.hpp \
 	Annihilate.o printBinary.o
-	$(CXX) $(CXXFLAGS) -DMAIN -o $@ calc_parity.cpp Annihilate.o \
+	$(CXX) $(CXXFLAGS) -DMAIN -o $@ calc_parity_main.cpp calc_parity.cpp \
+	Annihilate.o \
 	printBinary.o
 
 make_old_format: make_old_format.cpp dSFMTsearch.hpp printBinary.o Annihilate.o
