@@ -8,7 +8,7 @@
 using namespace MTToolBox;
 using namespace std;
 
-void min_max_poly(int &min, int& max, sfmt& sf);
+void min_max_poly(int &min, int& max, sfmt& sf, int& max_weight);
 int main(int argc, char * argv[])
 {
     if (argc <= 1) {
@@ -51,12 +51,14 @@ int main(int argc, char * argv[])
     w128_t seedw;
     int min = INT_MAX;
     int max = -10;
+    int max_weight = 0;
     seedw.u[0] = se;
     sf.seed(seedw);
-    min_max_poly(min, max, sf);
+    min_max_poly(min, max, sf, max_weight);
     cout << "berore anni ";
     cout << " min = " << dec << min;
     cout << " max = " << dec << max << endl;
+    cout << "max weight = " << dec << max_weight << endl;
     for (int i = 0; i < 4; i++) {
         for (int j = 4; j >= 1; j--) {
             GF2X poly;
@@ -67,7 +69,7 @@ int main(int argc, char * argv[])
                 cout << "annihilate fail" << endl;
                 return -1;
             }
-            min_max_poly(min, max, sf2);
+            min_max_poly(min, max, sf2, max_weight);
             cout << "start_mode = " << dec << i;
             cout << " weight_mode = " << dec << j;
             cout << " min = " << dec << min;
@@ -77,7 +79,7 @@ int main(int argc, char * argv[])
     return 0;
 }
 
-void min_max_poly(int &min, int&max, sfmt& sf)
+void min_max_poly(int &min, int&max, sfmt& sf, int& max_weight)
 {
     GF2X poly;
     min = INT_MAX;
@@ -90,6 +92,7 @@ void min_max_poly(int &min, int&max, sfmt& sf)
         }
         if (d > max) {
             max = d;
+            max_weight = weight(poly);
         }
     }
 }
