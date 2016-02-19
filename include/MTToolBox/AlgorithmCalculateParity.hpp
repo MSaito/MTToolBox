@@ -392,9 +392,11 @@ namespace MTToolBox {
 
             mx.SetDims(word_width, size);
             U mask;
+            int pos = bit_size<U>() - 1;
             setZero(mask);
-            mask = ~mask;
-            mask = mask ^ (mask >> 1);
+            setBitOfPos(&mask, pos, 1);
+//            mask = ~mask;
+//            mask = mask ^ (mask >> 1);
             for (int i = 0; i < word_width; i++) {
                 int cnt = 0;
                 for (int j = 0; j < word_width; j++) {
@@ -408,7 +410,10 @@ namespace MTToolBox {
                     }
                     cnt++;
                 }
-                mask = mask >> 1;
+                pos--;
+                setZero(mask);
+                setBitOfPos(&mask, pos, 1);
+//                mask = mask >> 1;
             }
             kernel(my, mx);
             if (my.NumRows() == 0) {

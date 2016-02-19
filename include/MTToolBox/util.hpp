@@ -557,6 +557,20 @@ namespace MTToolBox {
         x = 0;
     }
 
+
+    template<typename U>
+    inline unsigned int getBitOfPos(U bits, int pos) {
+        return (bits >> pos) & 1;
+    }
+
+    template<typename U>
+    inline void setBitOfPos(U *bits, int pos, unsigned int b) {
+        b = b & 1;
+        U mask = ~(static_cast<U>(1) << pos);
+        *bits &= mask;
+        *bits |= static_cast<U>(b) << pos;
+    }
+
     /**
      *\japanese
      * GF(2)ベクトルを符号なし整数に変換する。
@@ -576,29 +590,20 @@ namespace MTToolBox {
     inline static U fromGF2Vec(NTL::vec_GF2& value) {
         U result;
         setZero(result);
-        U mask = getOne<U>();
+        U mask;
+        setZero(mask);
         int bitSize = bit_size<U>();
-        mask = mask << (bitSize - 1);
+        int pos = bitSize - 1;
+        setBitOfPos(&mask, pos, 1);
         for (int i = 0; i < bitSize; i++) {
             if (!IsZero(value[i])) {
                 result |= mask;
             }
-            mask = mask >> 1;
+            pos--;
+            setZero(mask);
+            setBitOfPos(&mask, pos, 1);
         }
         return result;
-    }
-
-    template<typename U>
-    inline unsigned int getBitOfPos(U bits, int pos) {
-        return (bits >> pos) & 1;
-    }
-
-    template<typename U>
-    inline void setBitOfPos(U *bits, int pos, unsigned int b) {
-        b = b & 1;
-        U mask = ~(static_cast<U>(1) << pos);
-        *bits &= mask;
-        *bits |= static_cast<U>(b) << pos;
     }
 
     template<typename U>

@@ -2,7 +2,7 @@
 #ifndef MTTOOLBOX_ALGORITHM_DSFMT_EQUIDISTRIBUTION_HPP
 #define MTTOOLBOX_ALGORITHM_DSFMT_EQUIDISTRIBUTION_HPP
 /**
- * @file AlgorithmSIMDEquidistribution.hpp
+ * @file AlgorithmDSFMTEquidistribution.hpp
  *
  *\japanese
  * @brief 疑似乱数生成器の出力の均等分布次元を計算する。
