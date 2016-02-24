@@ -284,20 +284,32 @@ namespace MTToolBox {
             if (verbose) {
                 cout << "searching from MSB" << endl;
             }
-            shared_ptr<tempp> initial(new tempp(size));
+#if defined(MTTOOLBOX_USE_TR1)
+            std::tr1::shared_ptr<tempp> initial(new tempp(size));
+#else
+            std::shared_ptr<tempp> initial(new tempp(size));
+#endif
             initial->delta = 0;
             for (int i = 0; i < size; i++) {
                 initial->param[i] = 0;
             }
 
-            vector<shared_ptr<tempp> > params;
+#if defined(MTTOOLBOX_USE_TR1)
+            vector<std::tr1::shared_ptr<tempp> > params;
+#else
+            vector<std::shared_ptr<tempp> > params;
+#endif
             params.push_back(initial);
             int delta = 0;
 #if defined(DEBUG)
             cout << "DEBUG: bit_len = " << dec << bit_len << endl;
 #endif
             for (int p = 0; p < limit; p++) {
-                vector<shared_ptr<tempp> > current;
+#if defined(MTTOOLBOX_USE_TR1)
+                vector<std::tr1::shared_ptr<tempp> > current;
+#else
+                vector<std::shared_ptr<tempp> > current;
+#endif
                 current.clear();
                 for (unsigned int i = 0; i < params.size(); i++) {
                     search_best_temper(rand, p, *params[i],
@@ -372,7 +384,11 @@ namespace MTToolBox {
         void search_best_temper(TemperingCalculatable<U>& rand,
                                 int v_bit,
                                 const tempp& para,
-                                vector<shared_ptr<tempp> >& current,
+#if defined(MTTOOLBOX_USE_TR1)
+                                vector<std::tr1::shared_ptr<tempp> >& current,
+#else
+                                vector<std::shared_ptr<tempp> >& current,
+#endif
                                 bool verbose) {
             int delta = rand.bitSize() * obSize;
             U mask = 0;
@@ -383,7 +399,11 @@ namespace MTToolBox {
                 if (! inRange(i, v_bit)) {
                     continue;
                 }
-                shared_ptr<tempp> pattern(new tempp(size));
+#if defined(MTTOOLBOX_USE_TR1)
+                std::tr1::shared_ptr<tempp> pattern(new tempp(size));
+#else
+                std::shared_ptr<tempp> pattern(new tempp(size));
+#endif
                 make_pattern(*pattern, i, v_bit, para);
 #if defined(DEBUG)
                 cout << "pattern:" << pattern->toString() << endl;

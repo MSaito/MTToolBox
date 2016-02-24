@@ -108,11 +108,10 @@ namespace MTToolBox {
          */
         linear_generator_vector<U, V>(const ECGenerator& generator) {
 #if defined(MTTOOLBOX_USE_TR1)
-            using namespace std::tr1;
+            std::tr1::shared_ptr<ECGenerator> r(generator.clone());
 #else
-            using namespace std;
+            std::shared_ptr<ECGenerator> r(generator.clone());
 #endif
-            shared_ptr<ECGenerator> r(generator.clone());
             rand = r;
             //rand->seed(1);
             count = 0;
@@ -145,11 +144,10 @@ namespace MTToolBox {
         linear_generator_vector<U, V>(const ECGenerator& generator,
                                    int bit_pos) {
 #if defined(MTTOOLBOX_USE_TR1)
-            using namespace std::tr1;
+            std::tr1::shared_ptr<ECGenerator> r(generator.clone());
 #else
-            using namespace std;
+            std::shared_ptr<ECGenerator> r(generator.clone());
 #endif
-            shared_ptr<ECGenerator> r(generator.clone());
             rand = r;
             rand->setZero();
             count = 0;

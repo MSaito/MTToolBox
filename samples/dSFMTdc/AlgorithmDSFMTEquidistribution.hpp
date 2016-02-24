@@ -104,11 +104,10 @@ namespace MTToolBox {
             DSFMTInfo& info)
             {
 #if defined(MTTOOLBOX_USE_TR1)
-            using namespace std::tr1;
+            std::tr1::shared_ptr<SIMDGenerator> r(new SIMDGenerator(generator));
 #else
-            using namespace std;
+            std::shared_ptr<SIMDGenerator> r(new SIMDGenerator(generator));
 #endif
-            shared_ptr<SIMDGenerator> r(new SIMDGenerator(generator));
             rand = r;
             count = 0;
             zero = false;
@@ -142,11 +141,10 @@ namespace MTToolBox {
             const SIMDGenerator& generator,
             int bit_pos, DSFMTInfo& info) {
 #if defined(MTTOOLBOX_USE_TR1)
-            using namespace std::tr1;
+            std::tr1::shared_ptr<SIMDGenerator> r(new SIMDGenerator(generator));
 #else
-            using namespace std;
+            std::shared_ptr<SIMDGenerator> r(new SIMDGenerator(generator));
 #endif
-            shared_ptr<SIMDGenerator> r(new SIMDGenerator(generator));
             rand = r;
             rand->setZero();
             count = 0;

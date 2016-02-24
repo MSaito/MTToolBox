@@ -85,6 +85,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+build_triplet = x86_64-apple-darwin15.3.0
+host_triplet = x86_64-apple-darwin15.3.0
 check_PROGRAMS = test_mt$(EXEEXT) test_period$(EXEEXT) \
 	test_search$(EXEEXT) test_equidist$(EXEEXT) \
 	test_temper$(EXEEXT) test_search_temper$(EXEEXT) \
@@ -95,7 +97,10 @@ TESTS = test_mt$(EXEEXT) test_period$(EXEEXT) test_search$(EXEEXT) \
 	test_primefactors$(EXEEXT)
 subdir = test
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_0x.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
+	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
+	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_0x.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_11.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -108,43 +113,59 @@ CONFIG_CLEAN_VPATH_FILES =
 am_test_equidist_OBJECTS = test_equidist.$(OBJEXT) tinymt32.$(OBJEXT) \
 	tinymt64.$(OBJEXT)
 test_equidist_OBJECTS = $(am_test_equidist_OBJECTS)
-test_equidist_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
-	$(test_equidist_LDFLAGS) $(LDFLAGS) -o $@
+AM_V_lt = $(am__v_lt_$(V))
+am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
+am__v_lt_0 = --silent
+am__v_lt_1 = 
+test_equidist_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
+	$(AM_CXXFLAGS) $(CXXFLAGS) $(test_equidist_LDFLAGS) $(LDFLAGS) \
+	-o $@
 am_test_linearity_OBJECTS = test_linearity.$(OBJEXT) \
 	tinymt32.$(OBJEXT) tinymt64.$(OBJEXT)
 test_linearity_OBJECTS = $(am_test_linearity_OBJECTS)
-test_linearity_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
-	$(test_linearity_LDFLAGS) $(LDFLAGS) -o $@
+test_linearity_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
+	$(AM_CXXFLAGS) $(CXXFLAGS) $(test_linearity_LDFLAGS) \
+	$(LDFLAGS) -o $@
 am_test_mt_OBJECTS = test_mt.$(OBJEXT) tinymt32.$(OBJEXT) \
 	tinymt64.$(OBJEXT)
 test_mt_OBJECTS = $(am_test_mt_OBJECTS)
-test_mt_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(test_mt_LDFLAGS) \
-	$(LDFLAGS) -o $@
+test_mt_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
+	$(CXXFLAGS) $(test_mt_LDFLAGS) $(LDFLAGS) -o $@
 am_test_period_OBJECTS = test_period.$(OBJEXT) tinymt32.$(OBJEXT) \
 	tinymt64.$(OBJEXT)
 test_period_OBJECTS = $(am_test_period_OBJECTS)
-test_period_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
-	$(test_period_LDFLAGS) $(LDFLAGS) -o $@
+test_period_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
+	$(CXXFLAGS) $(test_period_LDFLAGS) $(LDFLAGS) -o $@
 am_test_primefactors_OBJECTS = test_primefactors.$(OBJEXT) \
 	tinymt32.$(OBJEXT) tinymt64.$(OBJEXT)
 test_primefactors_OBJECTS = $(am_test_primefactors_OBJECTS)
-test_primefactors_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
-	$(test_primefactors_LDFLAGS) $(LDFLAGS) -o $@
+test_primefactors_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
+	$(AM_CXXFLAGS) $(CXXFLAGS) $(test_primefactors_LDFLAGS) \
+	$(LDFLAGS) -o $@
 am_test_search_OBJECTS = test_search.$(OBJEXT) tinymt32.$(OBJEXT) \
 	tinymt64.$(OBJEXT)
 test_search_OBJECTS = $(am_test_search_OBJECTS)
-test_search_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
-	$(test_search_LDFLAGS) $(LDFLAGS) -o $@
+test_search_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
+	$(CXXFLAGS) $(test_search_LDFLAGS) $(LDFLAGS) -o $@
 am_test_search_temper_OBJECTS = test_search_temper.$(OBJEXT) \
 	tinymt32.$(OBJEXT) tinymt64.$(OBJEXT)
 test_search_temper_OBJECTS = $(am_test_search_temper_OBJECTS)
-test_search_temper_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
-	$(test_search_temper_LDFLAGS) $(LDFLAGS) -o $@
+test_search_temper_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
+	$(AM_CXXFLAGS) $(CXXFLAGS) $(test_search_temper_LDFLAGS) \
+	$(LDFLAGS) -o $@
 am_test_temper_OBJECTS = test_temper.$(OBJEXT) tinymt32.$(OBJEXT) \
 	tinymt64.$(OBJEXT)
 test_temper_OBJECTS = $(am_test_temper_OBJECTS)
-test_temper_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
-	$(test_temper_LDFLAGS) $(LDFLAGS) -o $@
+test_temper_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
+	$(CXXFLAGS) $(test_temper_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -163,25 +184,36 @@ am__depfiles_maybe = depfiles
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) \
+	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
+	$(AM_CFLAGS) $(CFLAGS)
 AM_V_CC = $(am__v_CC_$(V))
 am__v_CC_ = $(am__v_CC_$(AM_DEFAULT_VERBOSITY))
 am__v_CC_0 = @echo "  CC      " $@;
 am__v_CC_1 = 
 CCLD = $(CC)
-LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_CCLD = $(am__v_CCLD_$(V))
 am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+LTCXXCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) \
+	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
+	$(AM_CXXFLAGS) $(CXXFLAGS)
 AM_V_CXX = $(am__v_CXX_$(V))
 am__v_CXX_ = $(am__v_CXX_$(AM_DEFAULT_VERBOSITY))
 am__v_CXX_0 = @echo "  CXX     " $@;
 am__v_CXX_1 = 
 CXXLD = $(CXX)
-CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
-	-o $@
+CXXLINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
+	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_CXXLD = $(am__v_CXXLD_$(V))
 am__v_CXXLD_ = $(am__v_CXXLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
@@ -428,6 +460,7 @@ DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = ${SHELL} /Users/saito/git/MTToolBox/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
+AR = ar
 AUTOCONF = ${SHELL} /Users/saito/git/MTToolBox/missing autoconf
 AUTOHEADER = ${SHELL} /Users/saito/git/MTToolBox/missing autoheader
 AUTOMAKE = ${SHELL} /Users/saito/git/MTToolBox/missing automake-1.15
@@ -438,16 +471,21 @@ CFLAGS = -g -O2
 CPP = gcc -E
 CPPFLAGS = 
 CXX = g++
+CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2 -std=c++11
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
+DLLTOOL = false
+DSYMUTIL = dsymutil
+DUMPBIN = 
 ECHO_C = \c
 ECHO_N = 
 ECHO_T = 
 EGREP = /usr/bin/grep -E
 EXEEXT = 
+FGREP = /usr/bin/grep -F
 GREP = /usr/bin/grep
 HAVE_CXX11 = 1
 INSTALL = /opt/local/bin/ginstall -c
@@ -455,46 +493,68 @@ INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
+LD = /opt/local/bin/ld
 LDFLAGS = 
 LIBOBJS = 
 LIBS = -lgmp -lgf2x 
+LIBTOOL = $(SHELL) $(top_builddir)/libtool
+LIPO = lipo
+LN_S = ln -s
 LTLIBOBJS = 
+LT_SYS_LIBRARY_PATH = 
 MAKEINFO = ${SHELL} /Users/saito/git/MTToolBox/missing makeinfo
+MANIFEST_TOOL = :
 MKDIR_P = /opt/local/bin/gmkdir -p
+NM = /opt/local/bin/nm
+NMEDIT = nmedit
+OBJDUMP = false
 OBJEXT = o
+OTOOL = otool
+OTOOL64 = :
 PACKAGE = mttoolbox
 PACKAGE_BUGREPORT = saito@manieth.com
 PACKAGE_NAME = MTToolBox
-PACKAGE_STRING = MTToolBox 0.2.6
+PACKAGE_STRING = MTToolBox 0.2.7
 PACKAGE_TARNAME = mttoolbox
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.2.6
+PACKAGE_VERSION = 0.2.7
 PATH_SEPARATOR = :
 RANLIB = ranlib
+SED = /opt/local/bin/gsed
 SET_MAKE = 
 SHELL = /bin/sh
-STRIP = 
-VERSION = 0.2.6
+STRIP = strip
+VERSION = 0.2.7
 abs_builddir = /Users/saito/git/MTToolBox/test
 abs_srcdir = /Users/saito/git/MTToolBox/test
 abs_top_builddir = /Users/saito/git/MTToolBox
 abs_top_srcdir = /Users/saito/git/MTToolBox
+ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
+ac_ct_DUMPBIN = 
 am__include = include
 am__leading_dot = .
 am__quote = 
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
+build = x86_64-apple-darwin15.3.0
 build_alias = 
+build_cpu = x86_64
+build_os = darwin15.3.0
+build_vendor = apple
 builddir = .
 datadir = ${datarootdir}
 datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
+host = x86_64-apple-darwin15.3.0
 host_alias = 
+host_cpu = x86_64
+host_os = darwin15.3.0
+host_vendor = apple
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
@@ -586,7 +646,7 @@ AM_CFLAGS = -Wall -I../include -g -Wextra -Wmissing-prototypes -std=c99
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .c .cpp .log .o .obj .test .test$(EXEEXT) .trs
+.SUFFIXES: .c .cpp .lo .log .o .obj .test .test$(EXEEXT) .trs
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -618,7 +678,13 @@ $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 $(am__aclocal_m4_deps):
 
 clean-checkPROGRAMS:
-	-test -z "$(check_PROGRAMS)" || rm -f $(check_PROGRAMS)
+	@list='$(check_PROGRAMS)'; test -n "$$list" || exit 0; \
+	echo " rm -f" $$list; \
+	rm -f $$list || exit $$?; \
+	test -n "$(EXEEXT)" || exit 0; \
+	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
+	echo " rm -f" $$list; \
+	rm -f $$list
 
 test_equidist$(EXEEXT): $(test_equidist_OBJECTS) $(test_equidist_DEPENDENCIES) $(EXTRA_test_equidist_DEPENDENCIES) 
 	@rm -f test_equidist$(EXEEXT)
@@ -683,6 +749,13 @@ include ./$(DEPDIR)/tinymt64.Po
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(AM_V_CC_no)$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
+.c.lo:
+	$(AM_V_CC)$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+#	$(AM_V_CC)source='$<' object='$@' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(LTCOMPILE) -c -o $@ $<
+
 .cpp.o:
 	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
 	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
@@ -696,6 +769,19 @@ include ./$(DEPDIR)/tinymt64.Po
 #	$(AM_V_CXX)source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.cpp.lo:
+	$(AM_V_CXX)$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+#	$(AM_V_CXX)source='$<' object='$@' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(LTCXXCOMPILE) -c -o $@ $<
+
+mostlyclean-libtool:
+	-rm -f *.lo
+
+clean-libtool:
+	-rm -rf .libs _libs
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -1032,7 +1118,8 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-checkPROGRAMS clean-generic mostlyclean-am
+clean-am: clean-checkPROGRAMS clean-generic clean-libtool \
+	mostlyclean-am
 
 distclean: distclean-am
 	-rm -rf ./$(DEPDIR)
@@ -1087,7 +1174,8 @@ maintainer-clean-am: distclean-am maintainer-clean-generic
 
 mostlyclean: mostlyclean-am
 
-mostlyclean-am: mostlyclean-compile mostlyclean-generic
+mostlyclean-am: mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool
 
 pdf: pdf-am
 
@@ -1102,16 +1190,17 @@ uninstall-am:
 .MAKE: check-am install-am install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am check check-TESTS check-am clean \
-	clean-checkPROGRAMS clean-generic cscopelist-am ctags ctags-am \
-	distclean distclean-compile distclean-generic distclean-tags \
-	distdir dvi dvi-am html html-am info info-am install \
-	install-am install-data install-data-am install-dvi \
-	install-dvi-am install-exec install-exec-am install-html \
-	install-html-am install-info install-info-am install-man \
-	install-pdf install-pdf-am install-ps install-ps-am \
-	install-strip installcheck installcheck-am installdirs \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-compile mostlyclean-generic pdf pdf-am ps ps-am \
+	clean-checkPROGRAMS clean-generic clean-libtool cscopelist-am \
+	ctags ctags-am distclean distclean-compile distclean-generic \
+	distclean-libtool distclean-tags distdir dvi dvi-am html \
+	html-am info info-am install install-am install-data \
+	install-data-am install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	recheck tags tags-am uninstall uninstall-am
 
 .PRECIOUS: Makefile

@@ -106,18 +106,17 @@ namespace MTToolBox {
             bool lsb = false)
             {
 #if defined(MTTOOLBOX_USE_TR1)
-            using namespace std::tr1;
+                std::tr1::shared_ptr<SIMDGenerator> r(new SIMDGenerator(generator));
 #else
-            using namespace std;
+                std::shared_ptr<SIMDGenerator> r(new SIMDGenerator(generator));
 #endif
-            shared_ptr<SIMDGenerator> r(new SIMDGenerator(generator));
-            rand = r;
-            count = 0;
-            zero = false;
-            setZero(next);
-            this->info = info;
-            this->lsb = lsb;
-        }
+                rand = r;
+                count = 0;
+                zero = false;
+                setZero(next);
+                this->info = info;
+                this->lsb = lsb;
+            }
 
         /**
          *\japanese
@@ -145,11 +144,10 @@ namespace MTToolBox {
             const SIMDGenerator& generator,
             int bit_pos, SIMDInfo& info, bool lsb = false) {
 #if defined(MTTOOLBOX_USE_TR1)
-            using namespace std::tr1;
+            std::tr1::shared_ptr<SIMDGenerator> r(new SIMDGenerator(generator));
 #else
-            using namespace std;
+            std::shared_ptr<SIMDGenerator> r(new SIMDGenerator(generator));
 #endif
-            shared_ptr<SIMDGenerator> r(new SIMDGenerator(generator));
             rand = r;
             rand->setZero();
             count = 0;

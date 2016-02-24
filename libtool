@@ -1,5 +1,5 @@
 #! /bin/sh
-# Generated automatically by config.status (mttoolbox) 0.2.1
+# Generated automatically by config.status (mttoolbox) 0.2.7
 # Libtool was configured on host saimac.local:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 
@@ -67,16 +67,16 @@ PATH_SEPARATOR=":"
 
 # The host system.
 host_alias=
-host=x86_64-apple-darwin14.3.0
-host_os=darwin14.3.0
+host=x86_64-apple-darwin15.3.0
+host_os=darwin15.3.0
 
 # The build system.
 build_alias=
-build=x86_64-apple-darwin14.3.0
-build_os=darwin14.3.0
+build=x86_64-apple-darwin15.3.0
+build_os=darwin15.3.0
 
 # A sed program that does not truncate output.
-SED="/usr/bin/sed"
+SED="/opt/local/bin/gsed"
 
 # Sed that helps us avoid accidentally triggering echo(1) options like -n.
 Xsed="$SED -e 1s/^X//"
@@ -282,7 +282,7 @@ finish_eval=""
 hardcode_into_libs=no
 
 # Compile-time system search path for libraries.
-sys_lib_search_path_spec="/opt/local/lib /Users/saito/lib/lib /opt/local/lib/gcc49/gcc/x86_64-apple-darwin14/4.9.2 /opt/local/lib/gcc49 /usr/lib  /usr/local/lib"
+sys_lib_search_path_spec="/opt/local/lib /Users/saito/local/lib /Users/saito/lib/lib /opt/local/lib/gcc5/gcc/x86_64-apple-darwin15/5.3.0 /opt/local/lib/gcc5 /usr/lib  /usr/local/lib"
 
 # Detected run-time system search path for libraries.
 sys_lib_dlsearch_path_spec="/usr/local/lib /lib /usr/lib"
