@@ -90,11 +90,12 @@ host_triplet = @host@
 check_PROGRAMS = test_mt$(EXEEXT) test_period$(EXEEXT) \
 	test_search$(EXEEXT) test_equidist$(EXEEXT) \
 	test_temper$(EXEEXT) test_search_temper$(EXEEXT) \
-	test_linearity$(EXEEXT) test_primefactors$(EXEEXT)
+	test_linearity$(EXEEXT) test_primefactors$(EXEEXT) \
+	test_version$(EXEEXT)
 TESTS = test_mt$(EXEEXT) test_period$(EXEEXT) test_search$(EXEEXT) \
 	test_equidist$(EXEEXT) test_temper$(EXEEXT) \
 	test_search_temper$(EXEEXT) test_linearity$(EXEEXT) \
-	test_primefactors$(EXEEXT)
+	test_primefactors$(EXEEXT) test_version$(EXEEXT)
 subdir = test
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
@@ -107,65 +108,57 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
-CONFIG_HEADER = $(top_builddir)/config.h
+CONFIG_HEADER = $(top_builddir)/lib/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am_test_equidist_OBJECTS = test_equidist.$(OBJEXT) tinymt32.$(OBJEXT) \
 	tinymt64.$(OBJEXT)
 test_equidist_OBJECTS = $(am_test_equidist_OBJECTS)
+test_equidist_LDADD = $(LDADD)
+test_equidist_DEPENDENCIES =
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-test_equidist_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(test_equidist_LDFLAGS) $(LDFLAGS) \
-	-o $@
 am_test_linearity_OBJECTS = test_linearity.$(OBJEXT) \
 	tinymt32.$(OBJEXT) tinymt64.$(OBJEXT)
 test_linearity_OBJECTS = $(am_test_linearity_OBJECTS)
-test_linearity_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(test_linearity_LDFLAGS) \
-	$(LDFLAGS) -o $@
+test_linearity_LDADD = $(LDADD)
+test_linearity_DEPENDENCIES =
 am_test_mt_OBJECTS = test_mt.$(OBJEXT) tinymt32.$(OBJEXT) \
 	tinymt64.$(OBJEXT)
 test_mt_OBJECTS = $(am_test_mt_OBJECTS)
-test_mt_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(test_mt_LDFLAGS) $(LDFLAGS) -o $@
+test_mt_LDADD = $(LDADD)
+test_mt_DEPENDENCIES =
 am_test_period_OBJECTS = test_period.$(OBJEXT) tinymt32.$(OBJEXT) \
 	tinymt64.$(OBJEXT)
 test_period_OBJECTS = $(am_test_period_OBJECTS)
-test_period_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(test_period_LDFLAGS) $(LDFLAGS) -o $@
+test_period_LDADD = $(LDADD)
+test_period_DEPENDENCIES =
 am_test_primefactors_OBJECTS = test_primefactors.$(OBJEXT) \
 	tinymt32.$(OBJEXT) tinymt64.$(OBJEXT)
 test_primefactors_OBJECTS = $(am_test_primefactors_OBJECTS)
-test_primefactors_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(test_primefactors_LDFLAGS) \
-	$(LDFLAGS) -o $@
+test_primefactors_LDADD = $(LDADD)
+test_primefactors_DEPENDENCIES =
 am_test_search_OBJECTS = test_search.$(OBJEXT) tinymt32.$(OBJEXT) \
 	tinymt64.$(OBJEXT)
 test_search_OBJECTS = $(am_test_search_OBJECTS)
-test_search_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(test_search_LDFLAGS) $(LDFLAGS) -o $@
+test_search_LDADD = $(LDADD)
+test_search_DEPENDENCIES =
 am_test_search_temper_OBJECTS = test_search_temper.$(OBJEXT) \
 	tinymt32.$(OBJEXT) tinymt64.$(OBJEXT)
 test_search_temper_OBJECTS = $(am_test_search_temper_OBJECTS)
-test_search_temper_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(test_search_temper_LDFLAGS) \
-	$(LDFLAGS) -o $@
+test_search_temper_LDADD = $(LDADD)
+test_search_temper_DEPENDENCIES =
 am_test_temper_OBJECTS = test_temper.$(OBJEXT) tinymt32.$(OBJEXT) \
 	tinymt64.$(OBJEXT)
 test_temper_OBJECTS = $(am_test_temper_OBJECTS)
-test_temper_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(test_temper_LDFLAGS) $(LDFLAGS) -o $@
+test_temper_LDADD = $(LDADD)
+test_temper_DEPENDENCIES =
+am_test_version_OBJECTS = test_version.$(OBJEXT)
+test_version_OBJECTS = $(am_test_version_OBJECTS)
+test_version_LDADD = $(LDADD)
+test_version_DEPENDENCIES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -178,7 +171,7 @@ AM_V_at = $(am__v_at_@AM_V@)
 am__v_at_ = $(am__v_at_@AM_DEFAULT_V@)
 am__v_at_0 = @
 am__v_at_1 = 
-DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
+DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/lib
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
@@ -221,11 +214,13 @@ am__v_CXXLD_1 =
 SOURCES = $(test_equidist_SOURCES) $(test_linearity_SOURCES) \
 	$(test_mt_SOURCES) $(test_period_SOURCES) \
 	$(test_primefactors_SOURCES) $(test_search_SOURCES) \
-	$(test_search_temper_SOURCES) $(test_temper_SOURCES)
+	$(test_search_temper_SOURCES) $(test_temper_SOURCES) \
+	$(test_version_SOURCES)
 DIST_SOURCES = $(test_equidist_SOURCES) $(test_linearity_SOURCES) \
 	$(test_mt_SOURCES) $(test_period_SOURCES) \
 	$(test_primefactors_SOURCES) $(test_search_SOURCES) \
-	$(test_search_temper_SOURCES) $(test_temper_SOURCES)
+	$(test_search_temper_SOURCES) $(test_temper_SOURCES) \
+	$(test_version_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -600,45 +595,49 @@ test_linearity_SOURCES = test_linearity.cpp tinymt32.c tinymt32.h tinymt64.c \
 test_primefactors_SOURCES = test_primefactors.cpp tinymt32.c tinymt32.h \
 	tinymt64.c tinymt64.h
 
+test_version_SOURCES = test_version.cpp
 
 #test1_SOURCES = test_period.cpp test_search.cpp test_equidist.cpp
 #test2_SOURCES = test_temper.cpp test_search_temper.cpp \
 #	test_temper_searcher.hpp test_linearity.cpp test_mt.cpp \
 #	test_primefactors.cpp test_generator.hpp
 EXTRA_DIST = tinymt32.c tinymt32.h tinymt64.c tinymt64.h
-test_mt_DEPENDENCIES = ../lib/libMTToolBox.a
-test_period_DEPENDENCIES = ../lib/libMTToolBox.a
-test_search_DEPENDENCIES = ../lib/libMTToolBox.a
-test_equidist_DEPENDENCIES = ../lib/libMTToolBox.a
-test_temper_DEPENDENCIES = ../lib/libMTToolBox.a
-test_search_temper_DEPENDENCIES = ../lib/libMTToolBox.a
-test_linearity_DEPENDENCIES = ../lib/libMTToolBox.a
-test_primefactors_DEPENDENCIES = ../lib/libMTToolBox.a
+DEPENDENCIES = ../lib/libMTToolBox.a
+#test_mt_DEPENDENCIES = ../lib/libMTToolBox.a
+#test_period_DEPENDENCIES = ../lib/libMTToolBox.a
+#test_search_DEPENDENCIES = ../lib/libMTToolBox.a
+#test_equidist_DEPENDENCIES = ../lib/libMTToolBox.a
+#test_temper_DEPENDENCIES = ../lib/libMTToolBox.a
+#test_search_temper_DEPENDENCIES = ../lib/libMTToolBox.a
+#test_linearity_DEPENDENCIES = ../lib/libMTToolBox.a
+#test_primefactors_DEPENDENCIES = ../lib/libMTToolBox.a
+#test_version_DEPENDENCIES = ../lib/libMTToolBox.a
 
 #test1_DEPENDENCIES = ../lib/libMTToolBox.a
 #test2_DEPENDENCIES = ../lib/libMTToolBox.a
-test_mt_LDFLAGS = -L../lib
-test_period_LDFLAGS = -L../lib
-test_search_LDFLAGS = -L../lib
-test_equidist_LDFLAGS = -L../lib
-test_temper_LDFLAGS = -L../lib
-test_search_temper_LDFLAGS = -L../lib
-test_linearity_LDFLAGS = -L../lib
-test_primefactors_LDFLAGS = -L../lib
+AM_LDFLAGS = -L../lib
+#test_mt_LDFLAGS =  -L../lib
+#test_period_LDFLAGS =  -L../lib
+#test_search_LDFLAGS =  -L../lib
+#test_equidist_LDFLAGS =  -L../lib
+#test_temper_LDFLAGS =  -L../lib
+#test_search_temper_LDFLAGS =  -L../lib
+#test_linearity_LDFLAGS =  -L../lib
+#test_primefactors_LDFLAGS =  -L../lib
+#test_version_LDFLAGS =  -L../lib
 
 #test1_LDFLAGS = -L../lib
 #test2_LDFLAGS = -L../lib
-test_mt_LDADD = -lMTToolBox -lntl
-test_period_LDADD = -lMTToolBox -lntl
-test_search_LDADD = -lMTToolBox -lntl
-test_equidist_LDADD = -lMTToolBox -lntl
-test_temper_LDADD = -lMTToolBox -lntl
-test_search_temper_LDADD = -lMTToolBox -lntl
-test_linearity_LDADD = -lMTToolBox -lntl
-test_primefactors_LDADD = -lMTToolBox -lntl
-
-#test1_LDADD = -lMTToolBox -lntl -lUnitTest++
-#test2_LDADD = -lMTToolBox -lntl -lUnitTest++
+LDADD = -lMTToolBox -lntl
+#test_mt_LDADD = -lMTToolBox -lntl
+#test_period_LDADD = -lMTToolBox -lntl
+#test_search_LDADD = -lMTToolBox -lntl
+#test_equidist_LDADD = -lMTToolBox -lntl
+#test_temper_LDADD = -lMTToolBox -lntl
+#test_search_temper_LDADD = -lMTToolBox -lntl
+#test_linearity_LDADD = -lMTToolBox -lntl
+#test_primefactors_LDADD = -lMTToolBox -lntl
+#test_version_LDADD = -lMTToolBox -lntl
 AM_CXXFLAGS = -Wall -I../include -g -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS
 
@@ -688,35 +687,39 @@ clean-checkPROGRAMS:
 
 test_equidist$(EXEEXT): $(test_equidist_OBJECTS) $(test_equidist_DEPENDENCIES) $(EXTRA_test_equidist_DEPENDENCIES) 
 	@rm -f test_equidist$(EXEEXT)
-	$(AM_V_CXXLD)$(test_equidist_LINK) $(test_equidist_OBJECTS) $(test_equidist_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_equidist_OBJECTS) $(test_equidist_LDADD) $(LIBS)
 
 test_linearity$(EXEEXT): $(test_linearity_OBJECTS) $(test_linearity_DEPENDENCIES) $(EXTRA_test_linearity_DEPENDENCIES) 
 	@rm -f test_linearity$(EXEEXT)
-	$(AM_V_CXXLD)$(test_linearity_LINK) $(test_linearity_OBJECTS) $(test_linearity_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_linearity_OBJECTS) $(test_linearity_LDADD) $(LIBS)
 
 test_mt$(EXEEXT): $(test_mt_OBJECTS) $(test_mt_DEPENDENCIES) $(EXTRA_test_mt_DEPENDENCIES) 
 	@rm -f test_mt$(EXEEXT)
-	$(AM_V_CXXLD)$(test_mt_LINK) $(test_mt_OBJECTS) $(test_mt_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_mt_OBJECTS) $(test_mt_LDADD) $(LIBS)
 
 test_period$(EXEEXT): $(test_period_OBJECTS) $(test_period_DEPENDENCIES) $(EXTRA_test_period_DEPENDENCIES) 
 	@rm -f test_period$(EXEEXT)
-	$(AM_V_CXXLD)$(test_period_LINK) $(test_period_OBJECTS) $(test_period_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_period_OBJECTS) $(test_period_LDADD) $(LIBS)
 
 test_primefactors$(EXEEXT): $(test_primefactors_OBJECTS) $(test_primefactors_DEPENDENCIES) $(EXTRA_test_primefactors_DEPENDENCIES) 
 	@rm -f test_primefactors$(EXEEXT)
-	$(AM_V_CXXLD)$(test_primefactors_LINK) $(test_primefactors_OBJECTS) $(test_primefactors_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_primefactors_OBJECTS) $(test_primefactors_LDADD) $(LIBS)
 
 test_search$(EXEEXT): $(test_search_OBJECTS) $(test_search_DEPENDENCIES) $(EXTRA_test_search_DEPENDENCIES) 
 	@rm -f test_search$(EXEEXT)
-	$(AM_V_CXXLD)$(test_search_LINK) $(test_search_OBJECTS) $(test_search_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_search_OBJECTS) $(test_search_LDADD) $(LIBS)
 
 test_search_temper$(EXEEXT): $(test_search_temper_OBJECTS) $(test_search_temper_DEPENDENCIES) $(EXTRA_test_search_temper_DEPENDENCIES) 
 	@rm -f test_search_temper$(EXEEXT)
-	$(AM_V_CXXLD)$(test_search_temper_LINK) $(test_search_temper_OBJECTS) $(test_search_temper_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_search_temper_OBJECTS) $(test_search_temper_LDADD) $(LIBS)
 
 test_temper$(EXEEXT): $(test_temper_OBJECTS) $(test_temper_DEPENDENCIES) $(EXTRA_test_temper_DEPENDENCIES) 
 	@rm -f test_temper$(EXEEXT)
-	$(AM_V_CXXLD)$(test_temper_LINK) $(test_temper_OBJECTS) $(test_temper_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_temper_OBJECTS) $(test_temper_LDADD) $(LIBS)
+
+test_version$(EXEEXT): $(test_version_OBJECTS) $(test_version_DEPENDENCIES) $(EXTRA_test_version_DEPENDENCIES) 
+	@rm -f test_version$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_version_OBJECTS) $(test_version_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -732,6 +735,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_search.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_search_temper.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_temper.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_version.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tinymt32.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tinymt64.Po@am__quote@
 
@@ -1028,6 +1032,13 @@ test_linearity.log: test_linearity$(EXEEXT)
 test_primefactors.log: test_primefactors$(EXEEXT)
 	@p='test_primefactors$(EXEEXT)'; \
 	b='test_primefactors'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test_version.log: test_version$(EXEEXT)
+	@p='test_version$(EXEEXT)'; \
+	b='test_version'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

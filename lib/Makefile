@@ -86,8 +86,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_triplet = x86_64-apple-darwin15.3.0
-host_triplet = x86_64-apple-darwin15.3.0
+build_triplet = x86_64-apple-darwin15.6.0
+host_triplet = x86_64-apple-darwin15.6.0
 subdir = lib
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
@@ -100,7 +100,7 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
-CONFIG_HEADER = $(top_builddir)/config.h
+CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
@@ -140,7 +140,8 @@ am__v_AR_1 =
 libMTToolBox_a_AR = $(AR) $(ARFLAGS)
 libMTToolBox_a_LIBADD =
 am_libMTToolBox_a_OBJECTS = libMTToolBox_a-period.$(OBJEXT) \
-	libMTToolBox_a-AlgorithmPrimitivity.$(OBJEXT)
+	libMTToolBox_a-AlgorithmPrimitivity.$(OBJEXT) \
+	libMTToolBox_a-version.$(OBJEXT)
 libMTToolBox_a_OBJECTS = $(am_libMTToolBox_a_OBJECTS)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
@@ -154,7 +155,7 @@ AM_V_at = $(am__v_at_$(V))
 am__v_at_ = $(am__v_at_$(AM_DEFAULT_VERBOSITY))
 am__v_at_0 = @
 am__v_at_1 = 
-DEFAULT_INCLUDES = -I. -I$(top_builddir)
+DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
@@ -187,7 +188,8 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
+am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) \
+	$(LISP)config.h.in
 # Read a list of newline-separated strings from the standard input,
 # and print each of them once, without duplicates.  Input order is
 # *not* preserved.
@@ -206,7 +208,8 @@ am__define_uniq_tagged_files = \
   done | $(am__uniquify_input)`
 ETAGS = etags
 CTAGS = ctags
-am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp
+am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/config.h.in \
+	$(top_srcdir)/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = ${SHELL} /Users/saito/git/MTToolBox/missing aclocal-1.15
 AMTAR = $${TAR-tar}
@@ -256,7 +259,7 @@ LT_SYS_LIBRARY_PATH =
 MAKEINFO = ${SHELL} /Users/saito/git/MTToolBox/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /opt/local/bin/gmkdir -p
-NM = /opt/local/bin/nm
+NM = /usr/bin/nm -B
 NMEDIT = nmedit
 OBJDUMP = false
 OBJEXT = o
@@ -265,17 +268,17 @@ OTOOL64 = :
 PACKAGE = mttoolbox
 PACKAGE_BUGREPORT = saito@manieth.com
 PACKAGE_NAME = MTToolBox
-PACKAGE_STRING = MTToolBox 0.2.7
+PACKAGE_STRING = MTToolBox 0.2.8
 PACKAGE_TARNAME = mttoolbox
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.2.7
+PACKAGE_VERSION = 0.2.8
 PATH_SEPARATOR = :
 RANLIB = ranlib
 SED = /opt/local/bin/gsed
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = strip
-VERSION = 0.2.7
+VERSION = 0.2.8
 abs_builddir = /Users/saito/git/MTToolBox/lib
 abs_srcdir = /Users/saito/git/MTToolBox/lib
 abs_top_builddir = /Users/saito/git/MTToolBox
@@ -290,10 +293,10 @@ am__quote =
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
-build = x86_64-apple-darwin15.3.0
+build = x86_64-apple-darwin15.6.0
 build_alias = 
 build_cpu = x86_64
-build_os = darwin15.3.0
+build_os = darwin15.6.0
 build_vendor = apple
 builddir = .
 datadir = ${datarootdir}
@@ -301,10 +304,10 @@ datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = x86_64-apple-darwin15.3.0
+host = x86_64-apple-darwin15.6.0
 host_alias = 
 host_cpu = x86_64
-host_os = darwin15.3.0
+host_os = darwin15.6.0
 host_vendor = apple
 htmldir = ${docdir}
 includedir = ${prefix}/include
@@ -331,18 +334,19 @@ top_builddir = ..
 top_srcdir = ..
 
 #lib_LTLIBRARIES = libMTToolBox.la
-#libMTToolBox_la_SOURCES = period.cpp AlgorithmPrimitivity.cpp
+#libMTToolBox_la_SOURCES = period.cpp AlgorithmPrimitivity.cpp version.cpp
 #libMTToolBox_la_LDFLAGS = -no-undefined -version-info 0:2:0 -lntl
 #libMTToolBox_la_CXXFLAGS = -I../include -O3 -Wall -Wextra \
 #-D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS
 lib_LIBRARIES = libMTToolBox.a
-libMTToolBox_a_SOURCES = period.cpp AlgorithmPrimitivity.cpp
+libMTToolBox_a_SOURCES = period.cpp AlgorithmPrimitivity.cpp version.cpp
 #libMTToolBox_a_LDFLAGS = -no-undefined -version-info 0:2:0 -lntl
 libMTToolBox_a_CXXFLAGS = -I../include -O2 -Wall -Wextra \
 -Wno-unused-parameter \
 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS
 
-all: all-am
+all: config.h
+	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
 .SUFFIXES: .cpp .lo .o .obj
@@ -375,6 +379,21 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
+
+config.h: stamp-h1
+	@test -f $@ || rm -f stamp-h1
+	@test -f $@ || $(MAKE) $(AM_MAKEFLAGS) stamp-h1
+
+stamp-h1: $(srcdir)/config.h.in $(top_builddir)/config.status
+	@rm -f stamp-h1
+	cd $(top_builddir) && $(SHELL) ./config.status lib/config.h
+$(srcdir)/config.h.in:  $(am__configure_deps) 
+	($(am__cd) $(top_srcdir) && $(AUTOHEADER))
+	rm -f stamp-h1
+	touch $@
+
+distclean-hdr:
+	-rm -f config.h stamp-h1
 install-libLIBRARIES: $(lib_LIBRARIES)
 	@$(NORMAL_INSTALL)
 	@list='$(lib_LIBRARIES)'; test -n "$(libdir)" || list=; \
@@ -420,6 +439,7 @@ distclean-compile:
 
 include ./$(DEPDIR)/libMTToolBox_a-AlgorithmPrimitivity.Po
 include ./$(DEPDIR)/libMTToolBox_a-period.Po
+include ./$(DEPDIR)/libMTToolBox_a-version.Po
 
 .cpp.o:
 	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -469,6 +489,20 @@ libMTToolBox_a-AlgorithmPrimitivity.obj: AlgorithmPrimitivity.cpp
 #	$(AM_V_CXX)source='AlgorithmPrimitivity.cpp' object='libMTToolBox_a-AlgorithmPrimitivity.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libMTToolBox_a_CXXFLAGS) $(CXXFLAGS) -c -o libMTToolBox_a-AlgorithmPrimitivity.obj `if test -f 'AlgorithmPrimitivity.cpp'; then $(CYGPATH_W) 'AlgorithmPrimitivity.cpp'; else $(CYGPATH_W) '$(srcdir)/AlgorithmPrimitivity.cpp'; fi`
+
+libMTToolBox_a-version.o: version.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libMTToolBox_a_CXXFLAGS) $(CXXFLAGS) -MT libMTToolBox_a-version.o -MD -MP -MF $(DEPDIR)/libMTToolBox_a-version.Tpo -c -o libMTToolBox_a-version.o `test -f 'version.cpp' || echo '$(srcdir)/'`version.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libMTToolBox_a-version.Tpo $(DEPDIR)/libMTToolBox_a-version.Po
+#	$(AM_V_CXX)source='version.cpp' object='libMTToolBox_a-version.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libMTToolBox_a_CXXFLAGS) $(CXXFLAGS) -c -o libMTToolBox_a-version.o `test -f 'version.cpp' || echo '$(srcdir)/'`version.cpp
+
+libMTToolBox_a-version.obj: version.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libMTToolBox_a_CXXFLAGS) $(CXXFLAGS) -MT libMTToolBox_a-version.obj -MD -MP -MF $(DEPDIR)/libMTToolBox_a-version.Tpo -c -o libMTToolBox_a-version.obj `if test -f 'version.cpp'; then $(CYGPATH_W) 'version.cpp'; else $(CYGPATH_W) '$(srcdir)/version.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libMTToolBox_a-version.Tpo $(DEPDIR)/libMTToolBox_a-version.Po
+#	$(AM_V_CXX)source='version.cpp' object='libMTToolBox_a-version.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libMTToolBox_a_CXXFLAGS) $(CXXFLAGS) -c -o libMTToolBox_a-version.obj `if test -f 'version.cpp'; then $(CYGPATH_W) 'version.cpp'; else $(CYGPATH_W) '$(srcdir)/version.cpp'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -560,7 +594,7 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(LIBRARIES)
+all-am: Makefile $(LIBRARIES) config.h
 installdirs:
 	for dir in "$(DESTDIR)$(libdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
@@ -604,7 +638,7 @@ distclean: distclean-am
 	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
-	distclean-tags
+	distclean-hdr distclean-tags
 
 dvi: dvi-am
 
@@ -666,11 +700,11 @@ ps-am:
 
 uninstall-am: uninstall-libLIBRARIES
 
-.MAKE: install-am install-strip
+.MAKE: all install-am install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am check check-am clean clean-generic \
 	clean-libLIBRARIES clean-libtool cscopelist-am ctags ctags-am \
-	distclean distclean-compile distclean-generic \
+	distclean distclean-compile distclean-generic distclean-hdr \
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
 	html-am info info-am install install-am install-data \
 	install-data-am install-dvi install-dvi-am install-exec \
