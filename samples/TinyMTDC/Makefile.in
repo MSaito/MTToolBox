@@ -94,8 +94,10 @@ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
 	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_0x.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_11.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_14.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
@@ -107,13 +109,12 @@ CONFIG_CLEAN_VPATH_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
 am_tinymt32dc_OBJECTS = parse_opt.$(OBJEXT) tinymt32dc.$(OBJEXT)
 tinymt32dc_OBJECTS = $(am_tinymt32dc_OBJECTS)
+tinymt32dc_LDADD = $(LDADD)
+tinymt32dc_DEPENDENCIES =
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-tinymt32dc_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(tinymt32dc_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -225,6 +226,7 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GREP = @GREP@
 HAVE_CXX11 = @HAVE_CXX11@
+HAVE_CXX14 = @HAVE_CXX14@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -318,9 +320,9 @@ top_srcdir = @top_srcdir@
 tinymt32dc_SOURCES = parse_opt.cpp parse_opt.hpp tinymt32dc.cpp \
 	tinymt32search.hpp
 
-tinymt32dc_DEPENDENCIES = ../../lib/libMTToolBox.a
-tinymt32dc_LDFLAGS = -L../../lib
-tinymt32dc_LDADD = -lMTToolBox -lntl
+DEPENDENCIES = ../../lib/libMTToolBox.a
+AM_LDFLAGS = -L../../lib
+LDADD = -lMTToolBox -lntl
 EXTRA_DIST = README.jp.txt
 AM_CXXFLAGS = -Wall -O2 -I../../include -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS
@@ -370,7 +372,7 @@ clean-noinstPROGRAMS:
 
 tinymt32dc$(EXEEXT): $(tinymt32dc_OBJECTS) $(tinymt32dc_DEPENDENCIES) $(EXTRA_tinymt32dc_DEPENDENCIES) 
 	@rm -f tinymt32dc$(EXEEXT)
-	$(AM_V_CXXLD)$(tinymt32dc_LINK) $(tinymt32dc_OBJECTS) $(tinymt32dc_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(tinymt32dc_OBJECTS) $(tinymt32dc_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

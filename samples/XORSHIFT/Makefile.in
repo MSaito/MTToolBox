@@ -96,8 +96,10 @@ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
 	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_0x.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_11.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_14.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
@@ -109,39 +111,33 @@ CONFIG_CLEAN_VPATH_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
 am_xorshift1_OBJECTS = xorshift-1.$(OBJEXT)
 xorshift1_OBJECTS = $(am_xorshift1_OBJECTS)
+xorshift1_LDADD = $(LDADD)
+xorshift1_DEPENDENCIES =
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-xorshift1_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(xorshift1_LDFLAGS) $(LDFLAGS) -o $@
 am_xorshift128_OBJECTS = xorshift128_main.$(OBJEXT) \
 	xorshift128.$(OBJEXT)
 xorshift128_OBJECTS = $(am_xorshift128_OBJECTS)
-xorshift128_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(xorshift128_LDFLAGS) $(LDFLAGS) -o $@
+xorshift128_LDADD = $(LDADD)
+xorshift128_DEPENDENCIES =
 am_xorshift2_OBJECTS = xorshift-2.$(OBJEXT)
 xorshift2_OBJECTS = $(am_xorshift2_OBJECTS)
-xorshift2_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(xorshift2_LDFLAGS) $(LDFLAGS) -o $@
+xorshift2_LDADD = $(LDADD)
+xorshift2_DEPENDENCIES =
 am_xorshift3_OBJECTS = xorshift-3.$(OBJEXT)
 xorshift3_OBJECTS = $(am_xorshift3_OBJECTS)
-xorshift3_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(xorshift3_LDFLAGS) $(LDFLAGS) -o $@
+xorshift3_LDADD = $(LDADD)
+xorshift3_DEPENDENCIES =
 am_xorshift4_OBJECTS = xorshift-4.$(OBJEXT)
 xorshift4_OBJECTS = $(am_xorshift4_OBJECTS)
-xorshift4_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(xorshift4_LDFLAGS) $(LDFLAGS) -o $@
+xorshift4_LDADD = $(LDADD)
+xorshift4_DEPENDENCIES =
 am_xorshift5_OBJECTS = xorshift-5.$(OBJEXT)
 xorshift5_OBJECTS = $(am_xorshift5_OBJECTS)
-xorshift5_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(xorshift5_LDFLAGS) $(LDFLAGS) -o $@
+xorshift5_LDADD = $(LDADD)
+xorshift5_DEPENDENCIES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -257,6 +253,7 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GREP = @GREP@
 HAVE_CXX11 = @HAVE_CXX11@
+HAVE_CXX14 = @HAVE_CXX14@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -353,24 +350,9 @@ xorshift3_SOURCES = xorshift-3.cpp
 xorshift4_SOURCES = xorshift-4.cpp
 xorshift5_SOURCES = xorshift-5.cpp
 xorshift128_SOURCES = xorshift128_main.c xorshift128.c xorshift128.h
-xorshift1_DEPENDENCIES = ../../lib/libMTToolBox.a
-xorshift2_DEPENDENCIES = ../../lib/libMTToolBox.a
-xorshift3_DEPENDENCIES = ../../lib/libMTToolBox.a
-xorshift4_DEPENDENCIES = ../../lib/libMTToolBox.a
-xorshift5_DEPENDENCIES = ../../lib/libMTToolBox.a
-xorshift128_DEPENDENCIES = ../../lib/libMTToolBox.a
-xorshift1_LDFLAGS = -L../../lib
-xorshift2_LDFLAGS = -L../../lib
-xorshift3_LDFLAGS = -L../../lib
-xorshift4_LDFLAGS = -L../../lib
-xorshift5_LDFLAGS = -L../../lib
-xorshift128_LDFLAGS = -L../../lib
-xorshift1_LDADD = -lMTToolBox -lntl
-xorshift2_LDADD = -lMTToolBox -lntl
-xorshift3_LDADD = -lMTToolBox -lntl
-xorshift4_LDADD = -lMTToolBox -lntl
-xorshift5_LDADD = -lMTToolBox -lntl
-xorshift128_LDADD = -lMTToolBox -lntl
+DEPENDENCIES = ../../lib/libMTToolBox.a
+AM_LDFLAGS = -L../../lib
+LDADD = -lMTToolBox -lntl
 EXTRA_DIST = README README.utf8.ja.txt
 AM_CXXFLAGS = -Wall -O2 -I../../include -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS
@@ -421,27 +403,27 @@ clean-noinstPROGRAMS:
 
 xorshift1$(EXEEXT): $(xorshift1_OBJECTS) $(xorshift1_DEPENDENCIES) $(EXTRA_xorshift1_DEPENDENCIES) 
 	@rm -f xorshift1$(EXEEXT)
-	$(AM_V_CXXLD)$(xorshift1_LINK) $(xorshift1_OBJECTS) $(xorshift1_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(xorshift1_OBJECTS) $(xorshift1_LDADD) $(LIBS)
 
 xorshift128$(EXEEXT): $(xorshift128_OBJECTS) $(xorshift128_DEPENDENCIES) $(EXTRA_xorshift128_DEPENDENCIES) 
 	@rm -f xorshift128$(EXEEXT)
-	$(AM_V_CCLD)$(xorshift128_LINK) $(xorshift128_OBJECTS) $(xorshift128_LDADD) $(LIBS)
+	$(AM_V_CCLD)$(LINK) $(xorshift128_OBJECTS) $(xorshift128_LDADD) $(LIBS)
 
 xorshift2$(EXEEXT): $(xorshift2_OBJECTS) $(xorshift2_DEPENDENCIES) $(EXTRA_xorshift2_DEPENDENCIES) 
 	@rm -f xorshift2$(EXEEXT)
-	$(AM_V_CXXLD)$(xorshift2_LINK) $(xorshift2_OBJECTS) $(xorshift2_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(xorshift2_OBJECTS) $(xorshift2_LDADD) $(LIBS)
 
 xorshift3$(EXEEXT): $(xorshift3_OBJECTS) $(xorshift3_DEPENDENCIES) $(EXTRA_xorshift3_DEPENDENCIES) 
 	@rm -f xorshift3$(EXEEXT)
-	$(AM_V_CXXLD)$(xorshift3_LINK) $(xorshift3_OBJECTS) $(xorshift3_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(xorshift3_OBJECTS) $(xorshift3_LDADD) $(LIBS)
 
 xorshift4$(EXEEXT): $(xorshift4_OBJECTS) $(xorshift4_DEPENDENCIES) $(EXTRA_xorshift4_DEPENDENCIES) 
 	@rm -f xorshift4$(EXEEXT)
-	$(AM_V_CXXLD)$(xorshift4_LINK) $(xorshift4_OBJECTS) $(xorshift4_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(xorshift4_OBJECTS) $(xorshift4_LDADD) $(LIBS)
 
 xorshift5$(EXEEXT): $(xorshift5_OBJECTS) $(xorshift5_DEPENDENCIES) $(EXTRA_xorshift5_DEPENDENCIES) 
 	@rm -f xorshift5$(EXEEXT)
-	$(AM_V_CXXLD)$(xorshift5_LINK) $(xorshift5_OBJECTS) $(xorshift5_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(xorshift5_OBJECTS) $(xorshift5_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

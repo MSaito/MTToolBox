@@ -101,8 +101,10 @@ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
 	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_0x.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_11.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_14.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
@@ -111,8 +113,8 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/lib/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-am_test_equidist_OBJECTS = test_equidist.$(OBJEXT) tinymt32.$(OBJEXT) \
-	tinymt64.$(OBJEXT)
+am__objects_1 = tinymt32.$(OBJEXT) tinymt64.$(OBJEXT)
+am_test_equidist_OBJECTS = test_equidist.$(OBJEXT) $(am__objects_1)
 test_equidist_OBJECTS = $(am_test_equidist_OBJECTS)
 test_equidist_LDADD = $(LDADD)
 test_equidist_DEPENDENCIES =
@@ -120,38 +122,33 @@ AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-am_test_linearity_OBJECTS = test_linearity.$(OBJEXT) \
-	tinymt32.$(OBJEXT) tinymt64.$(OBJEXT)
+am_test_linearity_OBJECTS = test_linearity.$(OBJEXT) $(am__objects_1)
 test_linearity_OBJECTS = $(am_test_linearity_OBJECTS)
 test_linearity_LDADD = $(LDADD)
 test_linearity_DEPENDENCIES =
-am_test_mt_OBJECTS = test_mt.$(OBJEXT) tinymt32.$(OBJEXT) \
-	tinymt64.$(OBJEXT)
+am_test_mt_OBJECTS = test_mt.$(OBJEXT) $(am__objects_1)
 test_mt_OBJECTS = $(am_test_mt_OBJECTS)
 test_mt_LDADD = $(LDADD)
 test_mt_DEPENDENCIES =
-am_test_period_OBJECTS = test_period.$(OBJEXT) tinymt32.$(OBJEXT) \
-	tinymt64.$(OBJEXT)
+am_test_period_OBJECTS = test_period.$(OBJEXT) $(am__objects_1)
 test_period_OBJECTS = $(am_test_period_OBJECTS)
 test_period_LDADD = $(LDADD)
 test_period_DEPENDENCIES =
 am_test_primefactors_OBJECTS = test_primefactors.$(OBJEXT) \
-	tinymt32.$(OBJEXT) tinymt64.$(OBJEXT)
+	$(am__objects_1)
 test_primefactors_OBJECTS = $(am_test_primefactors_OBJECTS)
 test_primefactors_LDADD = $(LDADD)
 test_primefactors_DEPENDENCIES =
-am_test_search_OBJECTS = test_search.$(OBJEXT) tinymt32.$(OBJEXT) \
-	tinymt64.$(OBJEXT)
+am_test_search_OBJECTS = test_search.$(OBJEXT) $(am__objects_1)
 test_search_OBJECTS = $(am_test_search_OBJECTS)
 test_search_LDADD = $(LDADD)
 test_search_DEPENDENCIES =
 am_test_search_temper_OBJECTS = test_search_temper.$(OBJEXT) \
-	tinymt32.$(OBJEXT) tinymt64.$(OBJEXT)
+	$(am__objects_1)
 test_search_temper_OBJECTS = $(am_test_search_temper_OBJECTS)
 test_search_temper_LDADD = $(LDADD)
 test_search_temper_DEPENDENCIES =
-am_test_temper_OBJECTS = test_temper.$(OBJEXT) tinymt32.$(OBJEXT) \
-	tinymt64.$(OBJEXT)
+am_test_temper_OBJECTS = test_temper.$(OBJEXT) $(am__objects_1)
 test_temper_OBJECTS = $(am_test_temper_OBJECTS)
 test_temper_LDADD = $(LDADD)
 test_temper_DEPENDENCIES =
@@ -483,6 +480,7 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GREP = @GREP@
 HAVE_CXX11 = @HAVE_CXX11@
+HAVE_CXX14 = @HAVE_CXX14@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -573,71 +571,20 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-test_mt_SOURCES = test_mt.cpp tinymt32.c tinymt32.h tinymt64.c tinymt64.h
-test_period_SOURCES = test_period.cpp tinymt32.c tinymt32.h tinymt64.c \
-	tinymt64.h
-
-test_search_SOURCES = test_search.cpp test_generator.hpp tinymt32.c \
-	tinymt32.h tinymt64.c tinymt64.h
-
-test_equidist_SOURCES = test_equidist.cpp tinymt32.c tinymt32.h \
-	tinymt64.c tinymt64.h
-
-test_temper_SOURCES = test_temper.cpp tinymt32.c tinymt32.h tinymt64.c \
-	tinymt64.h
-
-test_search_temper_SOURCES = test_search_temper.cpp tinymt32.c tinymt32.h \
-	tinymt64.c tinymt64.h
-
-test_linearity_SOURCES = test_linearity.cpp tinymt32.c tinymt32.h tinymt64.c \
-	tinymt64.h
-
-test_primefactors_SOURCES = test_primefactors.cpp tinymt32.c tinymt32.h \
-	tinymt64.c tinymt64.h
-
+common_files = tinymt32.c tinymt32.h tinymt64.c tinymt64.h
+test_mt_SOURCES = test_mt.cpp $(common_files)
+test_period_SOURCES = test_period.cpp $(common_files)
+test_search_SOURCES = test_search.cpp test_generator.hpp $(common_files)
+test_equidist_SOURCES = test_equidist.cpp $(common_files)
+test_temper_SOURCES = test_temper.cpp $(common_files)
+test_search_temper_SOURCES = test_search_temper.cpp $(common_files)
+test_linearity_SOURCES = test_linearity.cpp $(common_files)
+test_primefactors_SOURCES = test_primefactors.cpp $(common_files)
 test_version_SOURCES = test_version.cpp
-
-#test1_SOURCES = test_period.cpp test_search.cpp test_equidist.cpp
-#test2_SOURCES = test_temper.cpp test_search_temper.cpp \
-#	test_temper_searcher.hpp test_linearity.cpp test_mt.cpp \
-#	test_primefactors.cpp test_generator.hpp
-EXTRA_DIST = tinymt32.c tinymt32.h tinymt64.c tinymt64.h
+EXTRA_DIST = $(common_files)
 DEPENDENCIES = ../lib/libMTToolBox.a
-#test_mt_DEPENDENCIES = ../lib/libMTToolBox.a
-#test_period_DEPENDENCIES = ../lib/libMTToolBox.a
-#test_search_DEPENDENCIES = ../lib/libMTToolBox.a
-#test_equidist_DEPENDENCIES = ../lib/libMTToolBox.a
-#test_temper_DEPENDENCIES = ../lib/libMTToolBox.a
-#test_search_temper_DEPENDENCIES = ../lib/libMTToolBox.a
-#test_linearity_DEPENDENCIES = ../lib/libMTToolBox.a
-#test_primefactors_DEPENDENCIES = ../lib/libMTToolBox.a
-#test_version_DEPENDENCIES = ../lib/libMTToolBox.a
-
-#test1_DEPENDENCIES = ../lib/libMTToolBox.a
-#test2_DEPENDENCIES = ../lib/libMTToolBox.a
-AM_LDFLAGS = -L../lib
-#test_mt_LDFLAGS =  -L../lib
-#test_period_LDFLAGS =  -L../lib
-#test_search_LDFLAGS =  -L../lib
-#test_equidist_LDFLAGS =  -L../lib
-#test_temper_LDFLAGS =  -L../lib
-#test_search_temper_LDFLAGS =  -L../lib
-#test_linearity_LDFLAGS =  -L../lib
-#test_primefactors_LDFLAGS =  -L../lib
-#test_version_LDFLAGS =  -L../lib
-
-#test1_LDFLAGS = -L../lib
-#test2_LDFLAGS = -L../lib
 LDADD = -lMTToolBox -lntl
-#test_mt_LDADD = -lMTToolBox -lntl
-#test_period_LDADD = -lMTToolBox -lntl
-#test_search_LDADD = -lMTToolBox -lntl
-#test_equidist_LDADD = -lMTToolBox -lntl
-#test_temper_LDADD = -lMTToolBox -lntl
-#test_search_temper_LDADD = -lMTToolBox -lntl
-#test_linearity_LDADD = -lMTToolBox -lntl
-#test_primefactors_LDADD = -lMTToolBox -lntl
-#test_version_LDADD = -lMTToolBox -lntl
+AM_LDFLAGS = -L../lib
 AM_CXXFLAGS = -Wall -I../include -g -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS
 

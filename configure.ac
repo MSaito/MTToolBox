@@ -19,6 +19,8 @@ AC_PROG_CC
 # Checks for header files.
 AC_CHECK_HEADERS([inttypes.h limits.h stdint.h stdlib.h string.h unistd.h])
 AX_CXX_COMPILE_STDCXX_0X
+
+AX_CXX_COMPILE_STDCXX_14(noext, optional) // keep this order
 AX_CXX_COMPILE_STDCXX_11(noext, optional)
 
 # Checks for typedefs, structures, and compiler characteristics.

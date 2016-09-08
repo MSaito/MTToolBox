@@ -54,7 +54,9 @@
 namespace MTToolBox {
     using namespace std;
 #if defined(MTTOOLBOX_USE_TR1)
-    using namespace std::tr1;
+    using std::tr1::shared_ptr;
+#else
+    using std::shared_ptr;
 #endif
 
     /**
@@ -284,32 +286,19 @@ namespace MTToolBox {
             if (verbose) {
                 cout << "searching from MSB" << endl;
             }
-#if defined(MTTOOLBOX_USE_TR1)
-            std::tr1::shared_ptr<tempp> initial(new tempp(size));
-#else
-            std::shared_ptr<tempp> initial(new tempp(size));
-#endif
+            shared_ptr<tempp> initial(new tempp(size));
             initial->delta = 0;
             for (int i = 0; i < size; i++) {
                 initial->param[i] = 0;
             }
-
-#if defined(MTTOOLBOX_USE_TR1)
-            vector<std::tr1::shared_ptr<tempp> > params;
-#else
-            vector<std::shared_ptr<tempp> > params;
-#endif
+            vector<shared_ptr<tempp> > params;
             params.push_back(initial);
             int delta = 0;
 #if defined(DEBUG)
             cout << "DEBUG: bit_len = " << dec << bit_len << endl;
 #endif
             for (int p = 0; p < limit; p++) {
-#if defined(MTTOOLBOX_USE_TR1)
-                vector<std::tr1::shared_ptr<tempp> > current;
-#else
-                vector<std::shared_ptr<tempp> > current;
-#endif
+                vector<shared_ptr<tempp> > current;
                 current.clear();
                 for (unsigned int i = 0; i < params.size(); i++) {
                     search_best_temper(rand, p, *params[i],
@@ -384,11 +373,7 @@ namespace MTToolBox {
         void search_best_temper(TemperingCalculatable<U>& rand,
                                 int v_bit,
                                 const tempp& para,
-#if defined(MTTOOLBOX_USE_TR1)
-                                vector<std::tr1::shared_ptr<tempp> >& current,
-#else
-                                vector<std::shared_ptr<tempp> >& current,
-#endif
+                                vector<shared_ptr<tempp> >& current,
                                 bool verbose) {
             int delta = rand.bitSize() * obSize;
             U mask = 0;
@@ -399,11 +384,7 @@ namespace MTToolBox {
                 if (! inRange(i, v_bit)) {
                     continue;
                 }
-#if defined(MTTOOLBOX_USE_TR1)
-                std::tr1::shared_ptr<tempp> pattern(new tempp(size));
-#else
-                std::shared_ptr<tempp> pattern(new tempp(size));
-#endif
+                shared_ptr<tempp> pattern(new tempp(size));
                 make_pattern(*pattern, i, v_bit, para);
 #if defined(DEBUG)
                 cout << "pattern:" << pattern->toString() << endl;

@@ -14,6 +14,12 @@
 
 
 
+#lib_LTLIBRARIES = libMTToolBox.la
+#libMTToolBox_la_SOURCES = period.cpp AlgorithmPrimitivity.cpp version.cpp
+#libMTToolBox_la_LDFLAGS = -no-undefined -version-info 0:2:0 -lntl
+#libMTToolBox_la_CXXFLAGS = -I../include -O3 -Wall -Wextra \
+#-D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS
+
 
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
@@ -93,8 +99,10 @@ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
 	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_0x.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_11.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_14.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
@@ -224,10 +232,10 @@ CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
 CPP = gcc -E
 CPPFLAGS = 
-CXX = g++
-CXXCPP = g++ -E
+CXX = g++ -std=c++14
+CXXCPP = g++ -E -std=c++14
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -O2 -std=c++11
+CXXFLAGS = -g -O2
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -242,6 +250,7 @@ EXEEXT =
 FGREP = /usr/bin/grep -F
 GREP = /usr/bin/grep
 HAVE_CXX11 = 1
+HAVE_CXX14 = 1
 INSTALL = /opt/local/bin/ginstall -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
@@ -321,7 +330,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /usr/local
+prefix = /Users/saito/local
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -332,12 +341,6 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-
-#lib_LTLIBRARIES = libMTToolBox.la
-#libMTToolBox_la_SOURCES = period.cpp AlgorithmPrimitivity.cpp version.cpp
-#libMTToolBox_la_LDFLAGS = -no-undefined -version-info 0:2:0 -lntl
-#libMTToolBox_la_CXXFLAGS = -I../include -O3 -Wall -Wextra \
-#-D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS
 lib_LIBRARIES = libMTToolBox.a
 libMTToolBox_a_SOURCES = period.cpp AlgorithmPrimitivity.cpp version.cpp
 #libMTToolBox_a_LDFLAGS = -no-undefined -version-info 0:2:0 -lntl

@@ -96,8 +96,10 @@ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
 	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_0x.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_11.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_14.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
@@ -110,36 +112,29 @@ PROGRAMS = $(noinst_PROGRAMS)
 am_calc_equidist_OBJECTS = calc_equidist.$(OBJEXT) \
 	Annihilate.$(OBJEXT)
 calc_equidist_OBJECTS = $(am_calc_equidist_OBJECTS)
+calc_equidist_LDADD = $(LDADD)
+calc_equidist_DEPENDENCIES =
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-calc_equidist_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(calc_equidist_LDFLAGS) $(LDFLAGS) \
-	-o $@
 am_sfmtdc_OBJECTS = sfmtdc.$(OBJEXT) Annihilate.$(OBJEXT)
 sfmtdc_OBJECTS = $(am_sfmtdc_OBJECTS)
-sfmtdc_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(sfmtdc_LDFLAGS) $(LDFLAGS) -o $@
+sfmtdc_LDADD = $(LDADD)
+sfmtdc_DEPENDENCIES =
 am_sfmtdcfixed_OBJECTS = sfmtdcfixed.$(OBJEXT) Annihilate.$(OBJEXT)
 sfmtdcfixed_OBJECTS = $(am_sfmtdcfixed_OBJECTS)
-sfmtdcfixed_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(sfmtdcfixed_LDFLAGS) $(LDFLAGS) -o $@
+sfmtdcfixed_LDADD = $(LDADD)
+sfmtdcfixed_DEPENDENCIES =
 am_test_linearity_OBJECTS = test_linearity.$(OBJEXT) \
 	Annihilate.$(OBJEXT)
 test_linearity_OBJECTS = $(am_test_linearity_OBJECTS)
-test_linearity_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(test_linearity_LDFLAGS) \
-	$(LDFLAGS) -o $@
+test_linearity_LDADD = $(LDADD)
+test_linearity_DEPENDENCIES =
 am_test_period_OBJECTS = test_period.$(OBJEXT) Annihilate.$(OBJEXT)
 test_period_OBJECTS = $(am_test_period_OBJECTS)
-test_period_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(test_period_LDFLAGS) $(LDFLAGS) -o $@
+test_period_LDADD = $(LDADD)
+test_period_DEPENDENCIES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -255,6 +250,7 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GREP = @GREP@
 HAVE_CXX11 = @HAVE_CXX11@
+HAVE_CXX14 = @HAVE_CXX14@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -348,29 +344,17 @@ top_srcdir = @top_srcdir@
 sfmtdc_SOURCES = sfmtsearch.hpp sfmtdc.cpp Annihilate.h Annihilate.cpp \
 AlgorithmSIMDEquidistribution.hpp w128.hpp
 
-sfmtdc_DEPENDENCIES = ../../lib/libMTToolBox.a
-sfmtdc_LDFLAGS = -L../../lib
-sfmtdc_LDADD = -lMTToolBox -lntl
 sfmtdcfixed_SOURCES = sfmtsearch.hpp sfmtdcfixed.cpp Annihilate.h \
 Annihilate.cpp AlgorithmSIMDEquidistribution.hpp w128.hpp
 
-sfmtdcfixed_DEPENDENCIES = ../../lib/libMTToolBox.a
-sfmtdcfixed_LDFLAGS = -L../../lib
-sfmtdcfixed_LDADD = -lMTToolBox -lntl
 calc_equidist_SOURCES = sfmtsearch.hpp calc_equidist.cpp Annihilate.cpp \
 AlgorithmSIMDEquidistribution.hpp
 
-calc_equidist_DEPENDENCIES = ../../lib/libMTToolBox.a
-calc_equidist_LDFLAGS = -L../../lib
-calc_equidist_LDADD = -lMTToolBox -lntl
 test_linearity_SOURCES = sfmtsearch.hpp test_linearity.cpp Annihilate.cpp
-test_linearity_DEPENDENCIES = ../../lib/libMTToolBox.a
-test_linearity_LDFLAGS = -L../../lib
-test_linearity_LDADD = -lMTToolBox -lntl
 test_period_SOURCES = sfmtsearch.hpp test_period.cpp Annihilate.cpp
-test_period_DEPENDENCIES = ../../lib/libMTToolBox.a
-test_period_LDFLAGS = -L../../lib
-test_period_LDADD = -lMTToolBox -lntl
+DEPENDENCIES = ../../lib/libMTToolBox.a
+LDADD = -lMTToolBox -lntl
+AM_LDFLAGS = -L../../lib
 AM_CXXFLAGS = -Wall -O2 -I../../include -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS
 
@@ -420,23 +404,23 @@ clean-noinstPROGRAMS:
 
 calc_equidist$(EXEEXT): $(calc_equidist_OBJECTS) $(calc_equidist_DEPENDENCIES) $(EXTRA_calc_equidist_DEPENDENCIES) 
 	@rm -f calc_equidist$(EXEEXT)
-	$(AM_V_CXXLD)$(calc_equidist_LINK) $(calc_equidist_OBJECTS) $(calc_equidist_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(calc_equidist_OBJECTS) $(calc_equidist_LDADD) $(LIBS)
 
 sfmtdc$(EXEEXT): $(sfmtdc_OBJECTS) $(sfmtdc_DEPENDENCIES) $(EXTRA_sfmtdc_DEPENDENCIES) 
 	@rm -f sfmtdc$(EXEEXT)
-	$(AM_V_CXXLD)$(sfmtdc_LINK) $(sfmtdc_OBJECTS) $(sfmtdc_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(sfmtdc_OBJECTS) $(sfmtdc_LDADD) $(LIBS)
 
 sfmtdcfixed$(EXEEXT): $(sfmtdcfixed_OBJECTS) $(sfmtdcfixed_DEPENDENCIES) $(EXTRA_sfmtdcfixed_DEPENDENCIES) 
 	@rm -f sfmtdcfixed$(EXEEXT)
-	$(AM_V_CXXLD)$(sfmtdcfixed_LINK) $(sfmtdcfixed_OBJECTS) $(sfmtdcfixed_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(sfmtdcfixed_OBJECTS) $(sfmtdcfixed_LDADD) $(LIBS)
 
 test_linearity$(EXEEXT): $(test_linearity_OBJECTS) $(test_linearity_DEPENDENCIES) $(EXTRA_test_linearity_DEPENDENCIES) 
 	@rm -f test_linearity$(EXEEXT)
-	$(AM_V_CXXLD)$(test_linearity_LINK) $(test_linearity_OBJECTS) $(test_linearity_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_linearity_OBJECTS) $(test_linearity_LDADD) $(LIBS)
 
 test_period$(EXEEXT): $(test_period_OBJECTS) $(test_period_DEPENDENCIES) $(EXTRA_test_period_DEPENDENCIES) 
 	@rm -f test_period$(EXEEXT)
-	$(AM_V_CXXLD)$(test_period_LINK) $(test_period_OBJECTS) $(test_period_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_period_OBJECTS) $(test_period_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

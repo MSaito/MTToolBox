@@ -53,6 +53,11 @@
 #include <MTToolBox/util.hpp>
 
 namespace MTToolBox {
+#if defined(MTTOOLBOX_USE_TR1)
+    using std::tr1::shared_ptr;
+#else
+    using std::shared_ptr;
+#endif
     /**
      * @class linear_generator_vector
      *\japanese
@@ -107,11 +112,7 @@ namespace MTToolBox {
          *\endenglish
          */
         linear_generator_vector<U, V>(const ECGenerator& generator) {
-#if defined(MTTOOLBOX_USE_TR1)
-            std::tr1::shared_ptr<ECGenerator> r(generator.clone());
-#else
-            std::shared_ptr<ECGenerator> r(generator.clone());
-#endif
+            shared_ptr<ECGenerator> r(generator.clone());
             rand = r;
             //rand->seed(1);
             count = 0;
@@ -143,11 +144,7 @@ namespace MTToolBox {
          */
         linear_generator_vector<U, V>(const ECGenerator& generator,
                                    int bit_pos) {
-#if defined(MTTOOLBOX_USE_TR1)
-            std::tr1::shared_ptr<ECGenerator> r(generator.clone());
-#else
-            std::shared_ptr<ECGenerator> r(generator.clone());
-#endif
+            shared_ptr<ECGenerator> r(generator.clone());
             rand = r;
             rand->setZero();
             count = 0;
@@ -172,11 +169,7 @@ namespace MTToolBox {
          * A GF(2) linear pseudo random number generator
          *\endenglish
          */
-#if defined(MTTOOLBOX_USE_TR1)
-        std::tr1::shared_ptr<ECGenerator> rand;
-#else
-        std::shared_ptr<ECGenerator> rand;
-#endif
+        shared_ptr<ECGenerator> rand;
         /**
          *\japanese
          * next_state() が呼ばれた回数

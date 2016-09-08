@@ -96,8 +96,10 @@ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
 	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_0x.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_11.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_14.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
@@ -110,41 +112,33 @@ PROGRAMS = $(noinst_PROGRAMS)
 am_calc_equidist_OBJECTS = calc_equidist.$(OBJEXT) \
 	Annihilate.$(OBJEXT)
 calc_equidist_OBJECTS = $(am_calc_equidist_OBJECTS)
+calc_equidist_LDADD = $(LDADD)
+calc_equidist_DEPENDENCIES =
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-calc_equidist_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(calc_equidist_LDFLAGS) $(LDFLAGS) \
-	-o $@
 am_calc_fixpoint_OBJECTS = calc_fixpoint.$(OBJEXT) \
 	Annihilate.$(OBJEXT) printBinary.$(OBJEXT) \
 	calc_fixpoint_main.$(OBJEXT)
 calc_fixpoint_OBJECTS = $(am_calc_fixpoint_OBJECTS)
-calc_fixpoint_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(calc_fixpoint_LDFLAGS) $(LDFLAGS) \
-	-o $@
+calc_fixpoint_LDADD = $(LDADD)
+calc_fixpoint_DEPENDENCIES =
 am_calc_parity_OBJECTS = calc_parity.$(OBJEXT) Annihilate.$(OBJEXT) \
 	printBinary.$(OBJEXT) calc_parity_main.$(OBJEXT)
 calc_parity_OBJECTS = $(am_calc_parity_OBJECTS)
-calc_parity_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(calc_parity_LDFLAGS) $(LDFLAGS) -o $@
+calc_parity_LDADD = $(LDADD)
+calc_parity_DEPENDENCIES =
 am_dSFMTdc_OBJECTS = dSFMTdc.$(OBJEXT) Annihilate.$(OBJEXT) \
 	calc_fixpoint.$(OBJEXT)
 dSFMTdc_OBJECTS = $(am_dSFMTdc_OBJECTS)
-dSFMTdc_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(dSFMTdc_LDFLAGS) $(LDFLAGS) -o $@
+dSFMTdc_LDADD = $(LDADD)
+dSFMTdc_DEPENDENCIES =
 am_test_linearity_OBJECTS = test_linearity.$(OBJEXT) \
 	Annihilate.$(OBJEXT)
 test_linearity_OBJECTS = $(am_test_linearity_OBJECTS)
-test_linearity_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(test_linearity_LDFLAGS) \
-	$(LDFLAGS) -o $@
+test_linearity_LDADD = $(LDADD)
+test_linearity_DEPENDENCIES =
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -242,10 +236,10 @@ CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
 CPP = gcc -E
 CPPFLAGS = 
-CXX = g++
-CXXCPP = g++ -E
+CXX = g++ -std=c++14
+CXXCPP = g++ -E -std=c++14
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -O2 -std=c++11
+CXXFLAGS = -g -O2
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -260,6 +254,7 @@ EXEEXT =
 FGREP = /usr/bin/grep -F
 GREP = /usr/bin/grep
 HAVE_CXX11 = 1
+HAVE_CXX14 = 1
 INSTALL = /opt/local/bin/ginstall -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
@@ -339,7 +334,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /usr/local
+prefix = /Users/saito/local
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -353,31 +348,20 @@ top_srcdir = ../..
 dSFMTdc_SOURCES = dSFMTsearch.hpp dSFMTdc.cpp Annihilate.h Annihilate.cpp \
 AlgorithmDSFMTEquidistribution.hpp w128.hpp calc_fixpoint.cpp
 
-dSFMTdc_DEPENDENCIES = ../../lib/libMTToolBox.a
-dSFMTdc_LDFLAGS = -L../../lib
-dSFMTdc_LDADD = -lMTToolBox -lntl
 calc_equidist_SOURCES = dSFMTsearch.hpp calc_equidist.cpp Annihilate.cpp \
 AlgorithmDSFMTEquidistribution.hpp
 
-calc_equidist_DEPENDENCIES = ../../lib/libMTToolBox.a
-calc_equidist_LDFLAGS = -L../../lib
-calc_equidist_LDADD = -lMTToolBox -lntl
 test_linearity_SOURCES = dSFMTsearch.hpp test_linearity.cpp Annihilate.cpp
-test_linearity_DEPENDENCIES = ../../lib/libMTToolBox.a
-test_linearity_LDFLAGS = -L../../lib
-test_linearity_LDADD = -lMTToolBox -lntl
 calc_fixpoint_SOURCES = dSFMTsearch.hpp calc_fixpoint.cpp Annihilate.cpp \
 printBinary.cpp printBinary.h calc_fixpoint.h calc_fixpoint_main.cpp
 
-calc_fixpoint_DEPENDENCIES = ../../lib/libMTToolBox.a
-calc_fixpoint_LDFLAGS = -L../../lib
-calc_fixpoint_LDADD = -lMTToolBox -lntl
 calc_parity_SOURCES = dSFMTsearch.hpp calc_parity.cpp Annihilate.cpp \
-printBinary.cpp printBinary.h calc_fixpoint.h calc_parity.h calc_parity_main.cpp
+printBinary.cpp printBinary.h calc_fixpoint.h calc_parity.h \
+calc_parity_main.cpp
 
-calc_parity_DEPENDENCIES = ../../lib/libMTToolBox.a
-calc_parity_LDFLAGS = -L../../lib
-calc_parity_LDADD = -lMTToolBox -lntl
+DEPENDENCIES = ../../lib/libMTToolBox.a
+LDADD = -lMTToolBox -lntl
+AM_LDFLAGS = -L../../lib
 AM_CXXFLAGS = -Wall -O2 -I../../include -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS
 
@@ -427,23 +411,23 @@ clean-noinstPROGRAMS:
 
 calc_equidist$(EXEEXT): $(calc_equidist_OBJECTS) $(calc_equidist_DEPENDENCIES) $(EXTRA_calc_equidist_DEPENDENCIES) 
 	@rm -f calc_equidist$(EXEEXT)
-	$(AM_V_CXXLD)$(calc_equidist_LINK) $(calc_equidist_OBJECTS) $(calc_equidist_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(calc_equidist_OBJECTS) $(calc_equidist_LDADD) $(LIBS)
 
 calc_fixpoint$(EXEEXT): $(calc_fixpoint_OBJECTS) $(calc_fixpoint_DEPENDENCIES) $(EXTRA_calc_fixpoint_DEPENDENCIES) 
 	@rm -f calc_fixpoint$(EXEEXT)
-	$(AM_V_CXXLD)$(calc_fixpoint_LINK) $(calc_fixpoint_OBJECTS) $(calc_fixpoint_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(calc_fixpoint_OBJECTS) $(calc_fixpoint_LDADD) $(LIBS)
 
 calc_parity$(EXEEXT): $(calc_parity_OBJECTS) $(calc_parity_DEPENDENCIES) $(EXTRA_calc_parity_DEPENDENCIES) 
 	@rm -f calc_parity$(EXEEXT)
-	$(AM_V_CXXLD)$(calc_parity_LINK) $(calc_parity_OBJECTS) $(calc_parity_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(calc_parity_OBJECTS) $(calc_parity_LDADD) $(LIBS)
 
 dSFMTdc$(EXEEXT): $(dSFMTdc_OBJECTS) $(dSFMTdc_DEPENDENCIES) $(EXTRA_dSFMTdc_DEPENDENCIES) 
 	@rm -f dSFMTdc$(EXEEXT)
-	$(AM_V_CXXLD)$(dSFMTdc_LINK) $(dSFMTdc_OBJECTS) $(dSFMTdc_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(dSFMTdc_OBJECTS) $(dSFMTdc_LDADD) $(LIBS)
 
 test_linearity$(EXEEXT): $(test_linearity_OBJECTS) $(test_linearity_DEPENDENCIES) $(EXTRA_test_linearity_DEPENDENCIES) 
 	@rm -f test_linearity$(EXEEXT)
-	$(AM_V_CXXLD)$(test_linearity_LINK) $(test_linearity_OBJECTS) $(test_linearity_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_linearity_OBJECTS) $(test_linearity_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

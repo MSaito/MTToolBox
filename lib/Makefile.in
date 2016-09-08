@@ -14,6 +14,12 @@
 
 @SET_MAKE@
 
+#lib_LTLIBRARIES = libMTToolBox.la
+#libMTToolBox_la_SOURCES = period.cpp AlgorithmPrimitivity.cpp version.cpp
+#libMTToolBox_la_LDFLAGS = -no-undefined -version-info 0:2:0 -lntl
+#libMTToolBox_la_CXXFLAGS = -I../include -O3 -Wall -Wextra \
+#-D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS
+
 VPATH = @srcdir@
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
@@ -93,8 +99,10 @@ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
 	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_0x.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_11.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_14.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
@@ -242,6 +250,7 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GREP = @GREP@
 HAVE_CXX11 = @HAVE_CXX11@
+HAVE_CXX14 = @HAVE_CXX14@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -332,12 +341,6 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-
-#lib_LTLIBRARIES = libMTToolBox.la
-#libMTToolBox_la_SOURCES = period.cpp AlgorithmPrimitivity.cpp version.cpp
-#libMTToolBox_la_LDFLAGS = -no-undefined -version-info 0:2:0 -lntl
-#libMTToolBox_la_CXXFLAGS = -I../include -O3 -Wall -Wextra \
-#-D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS
 lib_LIBRARIES = libMTToolBox.a
 libMTToolBox_a_SOURCES = period.cpp AlgorithmPrimitivity.cpp version.cpp
 #libMTToolBox_a_LDFLAGS = -no-undefined -version-info 0:2:0 -lntl

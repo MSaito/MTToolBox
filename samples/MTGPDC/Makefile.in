@@ -95,8 +95,10 @@ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
 	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_0x.m4 \
 	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_11.m4 \
+	$(top_srcdir)/m4/m4_ax_cxx_compile_stdcxx_14.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
@@ -108,18 +110,16 @@ CONFIG_CLEAN_VPATH_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
 am_MTGP32dc_OBJECTS = MTGP32dc.$(OBJEXT) parse_opt.$(OBJEXT)
 MTGP32dc_OBJECTS = $(am_MTGP32dc_OBJECTS)
+MTGP32dc_LDADD = $(LDADD)
+MTGP32dc_DEPENDENCIES =
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-MTGP32dc_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(MTGP32dc_LDFLAGS) $(LDFLAGS) -o $@
 am_test_OBJECTS = test_linearity.$(OBJEXT)
 test_OBJECTS = $(am_test_OBJECTS)
-test_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(test_LDFLAGS) $(LDFLAGS) -o $@
+test_LDADD = $(LDADD)
+test_DEPENDENCIES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -231,6 +231,7 @@ EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GREP = @GREP@
 HAVE_CXX11 = @HAVE_CXX11@
+HAVE_CXX14 = @HAVE_CXX14@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -325,12 +326,15 @@ MTGP32dc_SOURCES = MTGP32dc.cpp MTGP32search.hpp parse_opt.cpp parse_opt.hpp \
 mtgp_param.h
 
 test_SOURCES = test_linearity.cpp
-MTGP32dc_DEPENDENCIES = ../../lib/libMTToolBox.a
-test_DEPENDENCIES = ../../lib/libMTToolBox.a
-MTGP32dc_LDFLAGS = -L../../lib
-test_LDFLAGS = -L../../lib
-MTGP32dc_LDADD = -lMTToolBox -lntl
-test_LDADD = -lMTToolBox -lntl
+DEPENDENCIES = ../../lib/libMTToolBox.a
+#MTGP32dc_DEPENDENCIES = ../../lib/libMTToolBox.a
+#test_DEPENDENCIES = ../../lib/libMTToolBox.a
+AM_LDFLAGS = -L../../lib
+#MTGP32dc_LDFLAGS = -L../../lib
+#test_LDFLAGS = -L../../lib
+LDADD = -lMTToolBox -lntl
+#MTGP32dc_LDADD = -lMTToolBox -lntl
+#test_LDADD = -lMTToolBox -lntl
 AM_CXXFLAGS = -Wall -I../../include -O2 -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS
 
@@ -388,11 +392,11 @@ clean-noinstPROGRAMS:
 
 MTGP32dc$(EXEEXT): $(MTGP32dc_OBJECTS) $(MTGP32dc_DEPENDENCIES) $(EXTRA_MTGP32dc_DEPENDENCIES) 
 	@rm -f MTGP32dc$(EXEEXT)
-	$(AM_V_CXXLD)$(MTGP32dc_LINK) $(MTGP32dc_OBJECTS) $(MTGP32dc_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(MTGP32dc_OBJECTS) $(MTGP32dc_LDADD) $(LIBS)
 
 test$(EXEEXT): $(test_OBJECTS) $(test_DEPENDENCIES) $(EXTRA_test_DEPENDENCIES) 
 	@rm -f test$(EXEEXT)
-	$(AM_V_CXXLD)$(test_LINK) $(test_OBJECTS) $(test_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_OBJECTS) $(test_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
