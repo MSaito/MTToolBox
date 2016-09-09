@@ -48,9 +48,9 @@ namespace MTToolBox {
      * @tparam U type of output of pseudo random number generator
      *\endenglish
      */
-    template<class U>
+    template<typename U, typename V = U>
     class TemperingCalculatable
-        : virtual public EquidistributionCalculatable<U> {
+        : virtual public EquidistributionCalculatable<U, V> {
     public:
 
         /**

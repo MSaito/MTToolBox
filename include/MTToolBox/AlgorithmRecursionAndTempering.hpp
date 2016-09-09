@@ -75,7 +75,7 @@ namespace MTToolBox {
      * generator. Should be unsigned number.
      * \endenglish
      */
-    template<typename U>
+    template<typename U, typename V = U>
     class AlgorithmRecursionAndTempering {
     public:
         /**
@@ -94,8 +94,10 @@ namespace MTToolBox {
          * sample directory uses sequential counter.
          *\endenglish
          */
-        AlgorithmRecursionAndTempering(AbstractGenerator<U>& bg) {
+        AlgorithmRecursionAndTempering(AbstractGenerator<U>& bg,
+            const AlgorithmPrimitivity& primitivity = MersennePrimitivity) {
             baseGenerator = &bg;
+            isPrime = &primitivity;
         }
         /**
          *\japanese
@@ -125,7 +127,7 @@ namespace MTToolBox {
          * @return false if no tempering parameters which gives proper
          * state transition function are found.
          */
-        bool search(TemperingCalculatable<U>& lg,
+        bool search(TemperingCalculatable<U, V>& lg,
                     AlgorithmTempering<U>& st1,
                     AlgorithmTempering<U>& st2,
                     bool verbose = false,
@@ -136,7 +138,7 @@ namespace MTToolBox {
 
             out = &os;
             int veq[bit_size<U>()];
-            AlgorithmRecursionSearch<U> search(lg, *baseGenerator);
+            AlgorithmRecursionSearch<U, V> search(lg, *baseGenerator, *isPrime);
             int mexp = lg.bitSize();
             bool found = false;
             for (int i = 0;; i++) {
@@ -285,7 +287,7 @@ namespace MTToolBox {
         NTL::GF2X poly;
         std::ostream * out;
         AbstractGenerator<U> * baseGenerator;
-
+        const AlgorithmPrimitivity *isPrime;
         void print_kv(int veq[], int mexp, int size) {
             using namespace std;
             for (int i = 0; i < size; i++) {
