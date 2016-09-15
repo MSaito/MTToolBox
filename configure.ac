@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([MTToolBox], [0.2.9], [saito@manieth.com])
+AC_INIT([MTToolBox], [0.2.10], [saito@manieth.com])
 AC_CONFIG_SRCDIR([lib/period.cpp])
 AC_CONFIG_HEADERS([lib/config.h])
 AC_CONFIG_MACRO_DIRS([m4])

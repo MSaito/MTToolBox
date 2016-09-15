@@ -56,7 +56,7 @@ namespace MTToolBox {
      * for example, uint32_t. Only unsigned numbers are allowed.
      *\endenglish
      */
-    template<typename U>
+    template<typename U, typename V = U>
     class AlgorithmTempering {
     public:
 
@@ -88,7 +88,7 @@ namespace MTToolBox {
          * @return always zero.
          *\endenglish
          */
-        virtual int operator()(TemperingCalculatable<U>& rand,
+        virtual int operator()(TemperingCalculatable<U, V>& rand,
                                bool verbose = false) = 0;
 
         /**

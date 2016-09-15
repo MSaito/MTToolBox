@@ -94,7 +94,7 @@ namespace MTToolBox {
          * sample directory uses sequential counter.
          *\endenglish
          */
-        AlgorithmRecursionAndTempering(AbstractGenerator<U>& bg,
+        AlgorithmRecursionAndTempering(AbstractGenerator<V>& bg,
             const AlgorithmPrimitivity& primitivity = MersennePrimitivity) {
             baseGenerator = &bg;
             isPrime = &primitivity;
@@ -164,7 +164,7 @@ namespace MTToolBox {
             poly = search.getMinPoly();
             weight = NTL::weight(poly);
             if (verbose) {
-                AlgorithmEquidistribution<U> sb(lg, bit_size<U>());
+                AlgorithmEquidistribution<U, V> sb(lg, bit_size<U>());
                 int delta = sb.get_all_equidist(veq);
                 print_kv(veq, mexp, bit_size<U>());
                 *out << "delta = " << dec << delta << endl;
@@ -175,7 +175,7 @@ namespace MTToolBox {
                     if (st2.isLSBTempering()) {
                         lg.setReverseOutput();
                     }
-                    AlgorithmEquidistribution<U> sc(lg, bit_size<U>());
+                    AlgorithmEquidistribution<U, V> sc(lg, bit_size<U>());
                     delta = sc.get_all_equidist(veq);
                     lg.resetReverseOutput();
                     time_t t = time(NULL);
@@ -186,7 +186,7 @@ namespace MTToolBox {
                 }
             }
             st1(lg, verbose);
-            AlgorithmEquidistribution<U> sc(lg, bit_size<U>());
+            AlgorithmEquidistribution<U, V> sc(lg, bit_size<U>());
             delta = sc.get_all_equidist(veq);
             if (verbose) {
                 time_t t = time(NULL);
@@ -228,7 +228,7 @@ namespace MTToolBox {
          * state transition function are found.
          *\endenglish
          */
-        bool search(TemperingCalculatable<U>& lg,
+        bool search(TemperingCalculatable<U, V>& lg,
                     AlgorithmTempering<U>& st,
                     bool verbose = false,
                     std::ostream& os = std::cout) {
@@ -286,7 +286,7 @@ namespace MTToolBox {
         int delta;
         NTL::GF2X poly;
         std::ostream * out;
-        AbstractGenerator<U> * baseGenerator;
+        AbstractGenerator<V> * baseGenerator;
         const AlgorithmPrimitivity *isPrime;
         void print_kv(int veq[], int mexp, int size) {
             using namespace std;

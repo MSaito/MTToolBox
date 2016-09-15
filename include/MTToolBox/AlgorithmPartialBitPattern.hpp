@@ -102,10 +102,10 @@ namespace MTToolBox {
      * MSB.
      *\endenglish
      */
-    template<typename U,
+    template<typename U, typename V,
              int bit_len, int param_num, int try_bit_len, int step = 5,
              bool lsb = false>
-    class AlgorithmPartialBitPattern : public AlgorithmTempering<U> {
+    class AlgorithmPartialBitPattern : public AlgorithmTempering<U, V> {
     public:
         /**
          *\japanese
@@ -126,7 +126,7 @@ namespace MTToolBox {
          * @return always zero.
          *\endenglish
          */
-        int operator()(TemperingCalculatable<U>& rand,
+        int operator()(TemperingCalculatable<U, V>& rand,
                        bool verbose = false) {
             using namespace std;
             if (verbose) {
@@ -175,7 +175,7 @@ namespace MTToolBox {
             return lsb;
         }
     private:
-        void make_temper_bit(TemperingCalculatable<U>& rand,
+        void make_temper_bit(TemperingCalculatable<U, V>& rand,
                              U mask,
                              int param_pos,
                              U pattern) {
@@ -232,7 +232,7 @@ namespace MTToolBox {
          * selected bit pattern.
          *\endenglish
          */
-        int search_best_temper(TemperingCalculatable<U>& rand, int v_bit,
+        int search_best_temper(TemperingCalculatable<U, V>& rand, int v_bit,
                                int param_pos, int max_v_bit, bool verbose) {
             using namespace std;
             int bitSize = rand.bitSize();
@@ -295,9 +295,9 @@ namespace MTToolBox {
          *
          *\endenglish
          */
-        int get_equidist(TemperingCalculatable<U>& rand,
+        int get_equidist(TemperingCalculatable<U, V>& rand,
                          int bit_length) {
-            AlgorithmEquidistribution<U> sb(rand, bit_length);
+            AlgorithmEquidistribution<U, V> sb(rand, bit_length);
             int veq[bit_length];
             int sum = sb.get_all_equidist(veq);
             return sum;

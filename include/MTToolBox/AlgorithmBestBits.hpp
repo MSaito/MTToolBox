@@ -182,8 +182,8 @@ namespace MTToolBox {
      * Should be unsigned type.
      *\endenglish
      */
-    template<typename U>
-    class AlgorithmBestBits : public AlgorithmTempering<U> {
+    template<typename U, typename V = U>
+    class AlgorithmBestBits : public AlgorithmTempering<U, V> {
     public:
         /**
          *\japanese
@@ -280,7 +280,7 @@ namespace MTToolBox {
          * @return 0 always zero
          *\endenglish
          */
-        int operator()(TemperingCalculatable<U>& rand,
+        int operator()(TemperingCalculatable<U, V>& rand,
                        bool verbose = false) {
             rand.resetReverseOutput();
             if (verbose) {
@@ -370,7 +370,7 @@ namespace MTToolBox {
          *\english
          *\endenglish
          */
-        void search_best_temper(TemperingCalculatable<U>& rand,
+        void search_best_temper(TemperingCalculatable<U, V>& rand,
                                 int v_bit,
                                 const tempp& para,
                                 vector<shared_ptr<tempp> >& current,
@@ -421,9 +421,9 @@ namespace MTToolBox {
          * between theoretical upper bound and realized value.
          *\endenglish
          */
-        int get_equidist(TemperingCalculatable<U>& rand,
+        int get_equidist(TemperingCalculatable<U, V>& rand,
                          int bit_length) {
-            AlgorithmEquidistribution<U> sb(rand, bit_length);
+            AlgorithmEquidistribution<U, V> sb(rand, bit_length);
             int veq[bit_length];
             return sb.get_all_equidist(veq);
         }

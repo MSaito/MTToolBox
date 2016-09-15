@@ -84,14 +84,14 @@ int search(rmt_options& opt, int count) {
     }
     //static const int shifts[] = {17, 37};
     //AlgorithmBestBits<uint64_t> tmp(64, shifts, 2, 15);
-    typedef AlgorithmPartialBitPattern<uint64_t, 64, 2, 63, 6> st64;
+    typedef AlgorithmPartialBitPattern<uint64_t, uint64_t, 64, 2, 63, 6> st64;
     st64 st;
     AlgorithmReducibleRecursionAndTempering<uint64_t, RMT64Search> all(mt);
     int i = 0;
     cout << "# "
-	 << g.getHeaderString()
-	 << ", delta"
-	 << endl;
+         << g.getHeaderString()
+         << ", delta"
+         << endl;
     while (i < count) {
         if (all.search(g, st, st, opt.verbose)) {
             int delta = all.getDelta();
@@ -231,7 +231,7 @@ static void output_help(string& pgm) {
     cerr << pgm
          << " [-s seed] [-v] [-c count]"
          << " [-f outputfile]"
-	 << " mexp"
+         << " mexp"
          << endl;
     static string help_string1 = "\n"
 "--verbose, -v        Verbose mode. Output parameters, calculation time, etc.\n"
@@ -240,6 +240,6 @@ static void output_help(string& pgm) {
 "--count, -c count    Output count. The number of parameters to be outputted.\n"
 "--seed, -s seed      seed of randomness.\n"
 "mexp                 mersenne exponent.\n"
-	;
+        ;
     cerr << help_string1 << endl;
 }

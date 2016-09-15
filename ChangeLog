@@ -1,3 +1,4 @@
+ver 0.2.10 fix bug in AlgorithmRecursionAndTempering
 ver 0.2.9 Modify AlgorithmRecursionAndTempering to accept AlgorithmPrimitivity
 ver 0.2.8 Add get_mttoolbox_version function, modify Makefile.am in samples.
 ver 0.2.5 Add dSFMT sample
