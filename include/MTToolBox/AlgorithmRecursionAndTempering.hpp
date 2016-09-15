@@ -128,8 +128,8 @@ namespace MTToolBox {
          * state transition function are found.
          */
         bool search(TemperingCalculatable<U, V>& lg,
-                    AlgorithmTempering<U>& st1,
-                    AlgorithmTempering<U>& st2,
+                    AlgorithmTempering<U, V>& st1,
+                    AlgorithmTempering<U, V>& st2,
                     bool verbose = false,
                     std::ostream& os = std::cout,
                     bool no_lsb = false) {
@@ -229,7 +229,7 @@ namespace MTToolBox {
          *\endenglish
          */
         bool search(TemperingCalculatable<U, V>& lg,
-                    AlgorithmTempering<U>& st,
+                    AlgorithmTempering<U, V>& st,
                     bool verbose = false,
                     std::ostream& os = std::cout) {
             return search(lg, st, st, verbose, os, true);
