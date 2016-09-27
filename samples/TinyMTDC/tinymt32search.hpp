@@ -136,6 +136,7 @@ namespace tinymt {
             param.mat2 = 0;
             param.tmat = 0;
             reverse_bit_flag = false;
+            setZero();
         }
 
         /**
@@ -145,6 +146,10 @@ namespace tinymt {
         tinymt32(const tinymt32& src) : TemperingCalculatable<uint32_t>(),
                                         param(src.param) {
             reverse_bit_flag = false;
+            status[0] = src.status[0];
+            status[1] = src.status[1];
+            status[2] = src.status[2];
+            status[3] = src.status[3];
         }
 
         /**
@@ -153,6 +158,7 @@ namespace tinymt {
          */
         tinymt32(const tinymt32_param& src_param) : param(src_param) {
             reverse_bit_flag = false;
+            setZero();
         }
 
         tinymt32 * clone() const {
