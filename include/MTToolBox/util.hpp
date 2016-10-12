@@ -14,7 +14,7 @@
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
+ * Copyright (C) 2013, 2016 Mutsuo Saito, Makoto Matsumoto
  * and Hiroshima University.
  * All rights reserved.
  *
@@ -471,7 +471,7 @@ namespace MTToolBox {
      *\endjapanese
      *
      *\english
-     * \copydoc count_bit(uint16_t)
+     * \copydoc count_bit(uint32_t)
      * @param[in] x bit pattern
      * @return reverse of \b x
      *\endenglish
@@ -519,6 +519,7 @@ namespace MTToolBox {
      *\japanese
      * 符号なし整数をGF(2)ベクトルに変換する。
      * 上位ビットがベクトルの初めの要素になる。（デバッグの時見やすいように）
+     * @tparam U 変換元の型
      * @param[out] result 結果のGF(2)ベクトル
      * @param[in] value 変換元符号なし整数
      *\endjapanese
@@ -526,6 +527,7 @@ namespace MTToolBox {
      *\english
      * convert unsigned integer to GF(2) vector
      * MSB of unsigned integer becomes first element of the vector.
+     * @tparam U type of conversion source
      * @param[out] result The result vector
      * @param[in] value source integer
      *\endenglish
@@ -547,22 +549,85 @@ namespace MTToolBox {
     }
 
 
+    /**
+     *\japanese
+     * その型の1を返す
+     * SIMD型は、そのSIMD型のファイルでこのテンプレートを特殊化する。
+     * @tparam U 1を返す型
+     * @return 指定された型の1
+     *\endjapanese
+     *
+     *\english
+     * return one of specified type
+     * @tparam U type of one
+     * @return one of specified type
+     *\endenglish
+     */
     template<typename U>
     inline U getOne() {
         return static_cast<U>(1);
     }
 
+    /**
+     *\japanese
+     * ゼロをセットする
+     * SIMD型は、そのSIMD型のファイルでこのテンプレートを特殊化する。
+     * @tparam U 0をセットする型
+     * @param[out] x ゼロをセットする変数
+     *\endjapanese
+     *
+     *\english
+     * set zero
+     * @tparam U type to set zero
+     * @param[out] x variable set to be zero
+     *\endenglish
+     */
     template<typename U>
     inline void setZero(U& x) {
         x = 0;
     }
 
-
+    /**
+     *\japanese
+     * 特定位置のビットを求める
+     * SIMD型は、そのSIMD型のファイルでこのテンプレートを特殊化する。
+     * @tparam U ビットを求める型
+     * @param[in] bits ビット列
+     * @param[in] pos ビット位置
+     * @return 指定位置のビット、ゼロまたは１
+     *\endjapanese
+     *
+     *\english
+     * set zero
+     * @tparam U type to get bit
+     * @param[in] bits variable to get bit
+     * @param[in] pos bit position
+     * @return bit of position, zero or one.
+     *\endenglish
+     */
     template<typename U>
     inline unsigned int getBitOfPos(U bits, int pos) {
         return (bits >> pos) & 1;
     }
 
+    /**
+     *\japanese
+     * 変数の指定位置のビットを1または0にセットする
+     * SIMD型は、そのSIMD型のファイルでこのテンプレートを特殊化する。
+     * @tparam U 変数の型
+     * @param[in,out] bits 指定位置のビットをセットする変数
+     * @param[in] pos 指定位置
+     * @param[in] b ビット, 0または1
+     *\endjapanese
+     *
+     *\english
+     * set zero or 1 to specified bit of specified type variable.
+     * @tparam U type of variable
+     * @param[in,out] bits variable
+     * @param[in] pos position of bit, LSB is 0
+     * @param[in] b bit to set
+     *\endenglish
+     */
     template<typename U>
     inline void setBitOfPos(U *bits, int pos, unsigned int b) {
         b = b & 1;
@@ -606,11 +671,45 @@ namespace MTToolBox {
         return result;
     }
 
+    /**
+     *\japanese
+     * ゼロかどうか、判定する。
+     * SIMD型は、そのSIMD型のファイルでこのテンプレートを特殊化する。
+     * @tparam U 変数の型
+     * @param[in] x 変数
+     * @return 変数がゼロかどうか ゼロならtrue
+     *\endjapanese
+     *
+     *\english
+     * check if varible is zero or not
+     * @tparam U type of variable
+     * @param[in] x variable to be checked
+     * @return ture if x is zero
+     *\endenglish
+     */
     template<typename U>
     inline bool isZero(U x) {
         return x == 0;
     }
 
+    /**
+     *\japanese
+     * V 型をU型に変換する
+     * SIMD型は、そのSIMD型のファイルでこのテンプレートを特殊化する。
+     * @tparam U 変換先の型
+     * @tparam V 変換元変数の型
+     * @param[in] x 変数
+     * @return U 型の値
+     *\endjapanese
+     *
+     *\english
+     * convert to type U from type V
+     * @tparam U type convert to
+     * @tparam V type convert from
+     * @param[in] x variable
+     * @return value of type U
+     *\endenglish
+     */
     template<typename U, typename V>
     inline U convert(V x) {
         return static_cast<U>(x);

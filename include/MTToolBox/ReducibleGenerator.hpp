@@ -42,10 +42,14 @@ namespace MTToolBox {
      * 大きな既約因子を持つかどうかの判定や、大きな既約因子に基づく周期を保
      * 証するためのパリティベクターを計算するために必要となるメソッドを備え
      * る。
+     * @tparam U 疑似乱数生成器の出力の型
+     * @tparam V 疑似乱数生成器の内部パラメータを決める際に使う乱数生成器の出力の型
      *\endjapanese
      *
      *\english
      * @brief This class is an Abstract class for reducible generator.
+     * @tparam U output type of the generator.
+     * @tparam V output type of the generator used for parameter generating.
      *\endenglish
      *
      */
@@ -126,12 +130,18 @@ namespace MTToolBox {
     /**
      *\japanese
      * 可約疑似乱数生成器の状態空間を多項式で殲滅する。
-     * @param[in] セットする値
+     * @tparam U 疑似乱数生成器の出力の型
+     * @tparam V 疑似乱数生成器の内部パラメータを決める際に使う乱数生成器の出力の型
+     * @param[in,out] rg 可約疑似乱数生成器
+     * @param[in] poly 殲滅多項式
      *\endjapanese
      *
      *\english
-     * Annihilate internal state by given polynomial.
-     * @param[in] a value
+     * Annihilate internal state of generator by given polynomial.
+     * @tparam U output type of the generator.
+     * @tparam V output type of the generator used for parameter generating.
+     * @param[in,out] rg reducible generator
+     * @param[in] poly annihilator polynomial
      *\endenglish
      */
     template<typename U, typename V = U>

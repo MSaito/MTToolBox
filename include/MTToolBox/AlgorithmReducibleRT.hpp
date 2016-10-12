@@ -1,7 +1,7 @@
 #ifndef MTTOOLBOX_ALGORITHM_REDUCIBLE_RT_HPP
 #define MTTOOLBOX_ALGORITHM_REDUCIBLE_RT_HPP
 /**
- * @file AlgorithmRecursionAndTempering.hpp
+ * @file AlgorithmReducibleRT.hpp
  *
  *\japanese
  * @brief 可約ジェネレータの状態遷移パラメータとテンパリングパラメータの探索を一度に行う
@@ -20,9 +20,8 @@
  * @author Mutsuo Saito (Manieth Corp.)
  * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2015 Mutsuo Saito, Makoto Matsumoto, Manieth Corp. and
- * Hiroshima University.
- * All rights reserved.
+ * Copyright (C) 2015, 2016 Mutsuo Saito, Makoto Matsumoto, Manieth
+ * Corp.  and Hiroshima University.  All rights reserved.
  *
  * The 3-clause BSD License is applied to this software, see
  * LICENSE.txt
@@ -56,6 +55,7 @@ namespace MTToolBox {
      * <li>均等分布次元がよくなるようなテンパリングパラメータを探索する。
      *</ol>
      * @tparam U 疑似乱数生成器の出力の型, 符号なし型であること
+     * @tparam G 疑似乱数生成器
      *\endjapanese
      *
      *\english
@@ -67,7 +67,8 @@ namespace MTToolBox {
      * generator.</li>
      * </ol>
      *
-     * @tparam U Type of output of pseudo random number
+     * @tparam U Type of output of pseudo random number.
+     * @tparam G Type of pseudo random number generator.
      * generator. Should be unsigned number.
      * \endenglish
      */

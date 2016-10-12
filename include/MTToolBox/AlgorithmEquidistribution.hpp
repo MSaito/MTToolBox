@@ -17,10 +17,10 @@
  * of pseudo random number generators using PIS method[1](S. Harase).
  *\endenglish
  *
- * @author Mutsuo Saito (Hiroshima University)
+ * @author Mutsuo Saito (Manieth Corp.)
  * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
+ * Copyright (C) 2013, 2016 Mutsuo Saito, Makoto Matsumoto
  * and Hiroshima University.
  * All rights reserved.
  *
@@ -69,6 +69,7 @@ namespace MTToolBox {
      * next_state()メソッドによって行われる。
      *
      * @tparam U 疑似乱数生成器の出力の型, 符号なし型でなければならない
+     * @tparam V パラメータ生成器の出力の型
      *\endjapanese
      *
      *\english
@@ -80,6 +81,7 @@ namespace MTToolBox {
      *
      * @tparam U type of output of pseudo random number
      * generator. Should be unsigned type.
+     * @tparam V type of output of parameter generator.
      *\endenglish
      */
     template<typename U, typename V = U>
@@ -218,6 +220,7 @@ namespace MTToolBox {
      * アルゴリズム
      *
      * @tparam U 疑似乱数生成器の出力の型
+     * @tparam V パラメータ生成器の出力の型
      *\endjapanese
      *
      *\english
@@ -228,6 +231,7 @@ namespace MTToolBox {
      * output of pseudo random number generators using PIS
      * method[1](S. Harase).
      * @tparam type of output of pseudo random number generator.
+     * @tparam type of output of parameter generator.
      *\endenglish
      */
     template<typename U, typename V = U>
@@ -269,6 +273,8 @@ namespace MTToolBox {
          * @param rand 均等分布次元計算可能な疑似乱数生成器
          * @param bit_length 均等分布次元を計算するMSBからのビット長, k(v)のv
          * の最初の値
+         * @param mexp メルセンヌ指数、指定しなければ状態空間サイズ。
+         * 可約生成器の場合は指定する必要がある。
          *\endjapanese
          *
          *\english
@@ -282,6 +288,9 @@ namespace MTToolBox {
          * @param rand pseudo random number generator
          * @param bit_length bit length from MSB to calculate dimension
          * of equi-distribution. This is first v of k(v).
+         * @param mexp Mersenne Exponent. If not specified, internal state
+         * size is used. If generator is reducible, this parameter should
+         * be specified.
          *\endenglish
          */
         AlgorithmEquidistribution(const ECGenerator& rand, int bit_length,

@@ -24,13 +24,15 @@
  * - MT のパラメータを検索するMTDCのサンプル
  * - MTGP のパラメータを検索するMTGPDCのサンプル
  * - RMT のサンプル
+ * - SMFT のサンプル
+ * - dSFMT のサンプル
  *
  * @author Mutsuo Saito, (saito@manieth.com) Manieth corp.
  * @author Makoto Matsumoto, Hiroshima University
  *
- * @date 2013-9-25
+ * @date 2016-10-07
  *
- * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
+ * Copyright (C) 2013, 2016 Mutsuo Saito, Makoto Matsumoto
  * and Hiroshima University.
  * All rights reserved.
  *

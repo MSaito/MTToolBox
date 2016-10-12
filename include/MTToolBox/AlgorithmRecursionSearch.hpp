@@ -17,7 +17,7 @@
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto,
+ * Copyright (C) 2013, 2016 Mutsuo Saito, Makoto Matsumoto,
  * and Hiroshima University.
  * All rights reserved.
  *
@@ -57,6 +57,7 @@ namespace MTToolBox {
      * </li></ol>
      *
      * @tparam U 疑似乱数生成器の出力する値の型、符号なし型であること。
+     * @tparam V パラメータ生成器の出力する値の型
      *\endjapanese
      *
      *\english
@@ -66,6 +67,7 @@ namespace MTToolBox {
      * primitive.
      * @tparam U Type of output of pseudo random number
      * generator. Should be unsigned number.
+     * @tparam V type of output of paramenter generator.
      *\endenglish
      */
     template<typename U, typename V = U>

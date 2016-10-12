@@ -186,14 +186,14 @@ namespace MTToolBox {
          *\japanese
          * T 型配列による初期化
          * @tparam T 配列の要素の型
-         * @param[in] value 初期化の種
+         * @param[in] init_key 初期化の種
          * @param[in] key_length 文字列の長さ
          *\endjapanese
          *
          *\english
          * Initialization by an array of T type
          * @tparam T type of element of \b value
-         * @param[in] value Seed of initialization
+         * @param[in] init_key Seed of initialization
          * @param key_length Length of \b value
          *\endenglish
          */

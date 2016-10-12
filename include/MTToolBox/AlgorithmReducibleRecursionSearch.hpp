@@ -22,7 +22,7 @@
  * @author Mutsuo Saito (Manieth Corp.)
  * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2014 Mutsuo Saito, Makoto Matsumoto, Manieth Corp.
+ * Copyright (C) 2014, 2016 Mutsuo Saito, Makoto Matsumoto, Manieth Corp.
  * and Hiroshima University.
  * All rights reserved.
  *
@@ -67,6 +67,7 @@ namespace MTToolBox {
      * </li></ol>
      *
      * @tparam U 疑似乱数生成器の出力する値の型、符号なし型であること。
+     * @tparam V パラメータ生成用疑似乱数生成器の出力する値の型
      *\endjapanese
      *
      *\english
@@ -170,7 +171,7 @@ namespace MTToolBox {
         }
 
         /**
-         * @copydoc AlgorithmRecursionSearch::getCharacteristicPolynomial
+         * @copydoc AlgorithmRecursionSearch::getMinPoly
          *\japanese
          * このメソッドが返すのは特性多項式ではない可能性がある。
          *\endjapanese
@@ -227,6 +228,26 @@ namespace MTToolBox {
 
     };
 
+    /**
+     *\japanese
+     * Reducible Generator の特性多項式の計算
+     * 実のところ、特性多項式ではなく最小多項式のLCMを計算しているに過ぎない。
+     * 次数が一致すれば特性多項式。特性多項式でなくても、MTToolBoxで使用する
+     * 範囲内では特に問題はない。
+     * @tparam U 疑似乱数生成器の返す値の型
+     * @tparam V パラメータ生成器の返す値の型
+     * @param[in,out] rand 疑似乱数生成器
+     * @param[in,out] poly 特性多項式
+     *\endjapanese
+     *
+     *\english
+     * Calculate the characteristic polynomial of reducible generator.
+     * @tparam U type of return value of random number generator.
+     * @tparam V type of return value of parameter generator.
+     * @param[in,out] rand pseudo random number generator.
+     * @param[in,out] poly calculated characteristic polynomial.
+     *\endenglish
+     */
     template<typename U, typename V = U>
     void calcCharacteristicPolynomial(ReducibleGenerator<U, V> *rand,
                                       NTL::GF2X& poly)

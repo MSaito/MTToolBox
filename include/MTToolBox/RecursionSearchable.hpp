@@ -28,6 +28,7 @@ namespace MTToolBox {
      * 数生成器のクラスである。
      *
      * @tparam U 疑似乱数生成器の出力のタイプ、符号なし型であること
+     * @tparam V パラメータ生成器の出力のタイプ
      *\endjapanese
      *
      *\english
@@ -35,6 +36,7 @@ namespace MTToolBox {
      * function of pseudo random number generator.
      * @tparam U type of output of pseudo random number generator, should
      * be unsigned integer.
+     * @tparam V type of output of parameter generator
      *\endenglish
      */
     template<typename U, typename V = U>

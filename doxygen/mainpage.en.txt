@@ -29,13 +29,15 @@
  * - sample of MTGP Dynamic Creator
  * - sample of Mersenne Twister Dynamic Creator
  * - sample of RMT
+ * - sample of SFMT
+ * - sample of dSFMT
  *
  * @author Mutsuo Saito, (saito@math.sci.hiroshima-u.ac.jp) Hiroshima University
  * @author Makoto Matsumoto, Hiroshima University
  *
- * @date 2013-10-07
+ * @date 2016-10-07
  *
- * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
+ * Copyright (C) 2013, 2016 Mutsuo Saito, Makoto Matsumoto
  * and Hiroshima University.
  * All rights reserved.
  *

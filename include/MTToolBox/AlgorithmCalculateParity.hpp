@@ -6,7 +6,7 @@
  *\japanese
  * @brief 可約ジェネレータのパリティチェックベクトルを求める。
  *
- * 状態遷移関数の特性多項式hを f * q という多項式の積で表すことができて、
+ * 状態遷移関数の特性多項式 h を f * q という多項式の積で表すことができて、
  * かつ f の次数が状態空間が許す限り大きなメルセンヌ指数である場合、状
  * 態遷移の周期が2^(deg(f))-1のゼロでない倍数となるように保証するような
  * ベクトルを求めることができる。ケーリー・ハミルトンの式によって、hは
@@ -48,7 +48,7 @@
  * @author Mutsuo Saito (Manieth Corp.)
  * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2015 Mutsuo Saito, Makoto Matsumoto, Manieth Corp.
+ * Copyright (C) 2015, 2016 Mutsuo Saito, Makoto Matsumoto, Manieth Corp.
  * and Hiroshima University.
  * All rights reserved.
  *
@@ -76,10 +76,15 @@ namespace MTToolBox {
      *\japanese
      * @brief 可約ジェネレータのパリティチェックベクトルを求める。
      *
+     * @tparam U 疑似乱数生成器の出力の型
+     * @tparam G 疑似乱数生成器
      *\endjapanese
      *
      *\english
      * @brief Calculate the parity check vector of reducible generator.
+     *
+     * @tparam U type of output of generator
+     * @tparam G generator
      *\endenglish
      */
     template<typename U, typename G>
@@ -395,8 +400,6 @@ namespace MTToolBox {
             int pos = bit_size<U>() - 1;
             setZero(mask);
             setBitOfPos(&mask, pos, 1);
-//            mask = ~mask;
-//            mask = mask ^ (mask >> 1);
             for (int i = 0; i < word_width; i++) {
                 int cnt = 0;
                 for (int j = 0; j < word_width; j++) {
@@ -413,7 +416,6 @@ namespace MTToolBox {
                 pos--;
                 setZero(mask);
                 setBitOfPos(&mask, pos, 1);
-//                mask = mask >> 1;
             }
             kernel(my, mx);
             if (my.NumRows() == 0) {

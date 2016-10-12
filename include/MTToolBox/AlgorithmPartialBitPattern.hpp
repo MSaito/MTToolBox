@@ -17,7 +17,7 @@
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto
+ * Copyright (C) 2013, 2016 Mutsuo Saito, Makoto Matsumoto
  * and Hiroshima University.
  * All rights reserved.
  *
@@ -49,6 +49,8 @@ namespace MTToolBox {
      * グで均等分布次元を最大化することはできないだろう。
      *
      * @tparam U 疑似乱数生成器の出力の型, 例えば uint32_t など。
+     *
+     * @tparam V パラメータ生成器の出力の型
      *
      * @tparam bit_len テンパリングパラメータのビット長, 通常は出力のビッ
      * ト長と等しいと思われる。
@@ -85,6 +87,8 @@ namespace MTToolBox {
      *
      * @tparam U type of output of pseudo random number generator,
      * for example, uint32_t. Only unsigned numbers are allowed.
+     *
+     * @tparam V type of output of parameter generator.
      *
      * @tparam bit_len bit length of variable for tempering parameter
      *

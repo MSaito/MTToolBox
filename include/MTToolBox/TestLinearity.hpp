@@ -58,6 +58,7 @@ namespace MTToolBox {
      * い。
      *
      * @tparam U 疑似乱数生成器の出力の型、符号なし型であること
+     * @tparam V 疑似乱数生成器のパラメータ生成に使う疑似乱数の型
      *\endjapanese
      *
      *\english
@@ -73,6 +74,7 @@ namespace MTToolBox {
      * the generator fails this test, there may be a problem in
      * user's implementation of Equidistribution#add in user's generator.
      * @tparam U type of output of the generator, should be unsigned number.
+     * @tparam V type of output of parameter generator
      *\endenglish
      */
     template<typename U, typename V = U>

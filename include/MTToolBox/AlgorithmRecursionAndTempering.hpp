@@ -22,7 +22,7 @@
  * @author Mutsuo Saito (Hiroshima University)
  * @author Makoto Matsumoto (Hiroshima University)
  *
- * Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto and
+ * Copyright (C) 2013, 2016 Mutsuo Saito, Makoto Matsumoto and
  * Hiroshima University.
  * All rights reserved.
  *
@@ -56,6 +56,7 @@ namespace MTToolBox {
      * <li>均等分布次元がよくなるようなテンパリングパラメータを探索する。
      *</ol>
      * @tparam U 疑似乱数生成器の出力の型, 符号なし型であること
+     * @tparam V パラメータ生成器の出力の型
      *\endjapanese
      *
      *\english
@@ -73,6 +74,7 @@ namespace MTToolBox {
      *
      * @tparam U Type of output of pseudo random number
      * generator. Should be unsigned number.
+     * @tparam V Type of output of parameter generator.
      * \endenglish
      */
     template<typename U, typename V = U>
@@ -84,6 +86,8 @@ namespace MTToolBox {
          * @param bg パラメータをランダムサーチするための疑似乱数生成器を指定する。
          * この疑似乱数生成器に限り、GF(2)線形である必要はない。疑似乱数生成器である
          * 必要すらない。
+         * @param primitivity 原始性判定アルゴリズム。 デフォルトはメルセンヌ
+         * 素数周期用のもの。
          *\endjapanese
          *
          *\english
@@ -92,6 +96,8 @@ namespace MTToolBox {
          * parameters. This generator is not need to be GF(2)-linear
          * pseudo random number generator, for example, TinyMTDC in
          * sample directory uses sequential counter.
+         * @param primitivity An algorithm to check primitivity.
+         * As a default, MersennePrimitivity is selected.
          *\endenglish
          */
         AlgorithmRecursionAndTempering(AbstractGenerator<V>& bg,

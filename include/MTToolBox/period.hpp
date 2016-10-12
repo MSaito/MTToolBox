@@ -38,6 +38,7 @@ namespace MTToolBox {
      * @param[out] poly 最小多項式
      * @param[in] generator GF(2)疑似乱数生成器
      * @param[in] pos 出力の下位から何ビット目を見るかを指定する
+     * @param[in] stateSize 状態空間のビットサイズ
      *\endjapanese
      *
      *\english
@@ -48,6 +49,7 @@ namespace MTToolBox {
      * @param[in] generator GF(2)-linear pseudo random number generator
      * @param[in] pos specifies how manieth bit from LSB is checked,
      * zero means LSB.
+     * @param[in] stateSize bit size of internal state.
      *\endenglish
      */
     template<typename U> void

@@ -34,6 +34,7 @@ namespace MTToolBox {
      * が理論的上限に近いかどうかよりも重要である。
      *
      * @tparam U 疑似乱数生成器の出力のタイプ、符号なし型でなければならない。
+     * @tparam V パラメータ生成器の出力のタイプ
      *\endjapanese
      *
      *\english
@@ -42,6 +43,7 @@ namespace MTToolBox {
      *
      * @tparam U type of output of pseudo random number generator, should
      * be unsinged number.
+     * @tparam V type of oiutput of parameter generator.
      *\endenglish
      */
     template<typename U, typename V = U>
