@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.5"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
 <title>MTToolBox: AlgorithmEquidistribution.hpp ソースファイル</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -16,9 +16,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">MTToolBox
-   &#160;<span id="projectnumber">0.2</span>
+   &#160;<span id="projectnumber">0.2.10</span>
    </div>
   </td>
  </tr>
@@ -26,11 +26,11 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 作成： Doxygen 1.8.5 -->
+<!-- 構築: Doxygen 1.8.10 -->
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li><a href="index.html"><span>メインページ</span></a></li>
-      <li><a href="namespaces.html"><span>ネームスペース</span></a></li>
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="namespaces.html"><span>名前空間</span></a></li>
       <li><a href="annotated.html"><span>データ構造</span></a></li>
       <li class="current"><a href="files.html"><span>ファイル</span></a></li>
     </ul>
@@ -38,6 +38,7 @@
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>大域各種</span></a></li>
     </ul>
   </div>
 <div id="nav-path" class="navpath">
@@ -50,299 +51,391 @@
 <div class="title">AlgorithmEquidistribution.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_algorithm_equidistribution_8hpp.html">説明を見る。</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MTTOOLBOX_ALGORITHM_EQUIDISTRIBUTION_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MTTOOLBOX_ALGORITHM_EQUIDISTRIBUTION_HPP</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;tr1/memory&gt;</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_equidistribution_calculatable_8hpp.html">MTToolBox/EquidistributionCalculatable.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="util_8hpp.html">MTToolBox/util.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">namespace </span>MTToolBox {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html">   66</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_generator_vector</a> {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#adbd0018c997d77cb2c909a8f6243d079">   79</a></span>&#160;        <span class="keyword">typedef</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">EquidistributionCalculatable&lt;U&gt;</a> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#adbd0018c997d77cb2c909a8f6243d079">ECGenerator</a>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#a64094794461b6dc171de38fc2fb9d8b6">   94</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_generator_vector&lt;U&gt;</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">ECGenerator</a>&amp; generator) {</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keyword">using namespace </span>std::tr1;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            shared_ptr&lt;ECGenerator&gt;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                r(reinterpret_cast&lt;ECGenerator *&gt;(generator.clone()));</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a71e7f24509e182fd8564705484639cfa">rand</a> = r;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a71e7f24509e182fd8564705484639cfa">rand</a>-&gt;seed(1);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a4be2093552d8bb008c841eccccf79543">count</a> = 0;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ad4ac1c94cc73169de15876f5349716ae">zero</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a> = 0;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        }</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
-<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#a5f8b8b4cbc382d628e7a0a777cb41780">  127</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_generator_vector&lt;U&gt;</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">ECGenerator</a>&amp; generator,</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                                   <span class="keywordtype">int</span> bit_pos) {</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            <span class="keyword">using namespace </span>std::tr1;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            shared_ptr&lt;ECGenerator&gt;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                r(reinterpret_cast&lt;ECGenerator *&gt;(generator.clone()));</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a71e7f24509e182fd8564705484639cfa">rand</a> = r;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a71e7f24509e182fd8564705484639cfa">rand</a>-&gt;setZero();</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a4be2093552d8bb008c841eccccf79543">count</a> = 0;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ad4ac1c94cc73169de15876f5349716ae">zero</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a> = <span class="keyword">static_cast&lt;</span>U<span class="keyword">&gt;</span>(1) &lt;&lt; (bit_size&lt;U&gt;() * 8 - bit_pos - 1);</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a6a0e3780835aea6dceb6095e887c9d9e">add</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_generator_vector&lt;U&gt;</a>&amp; src);</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae9d6ffc06109b9d61d1daa624b51db3b">next_state</a>(<span class="keywordtype">int</span> bit_len);</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a3d8cee9dfe91f363f35def32249847c6">debug_print</a>();</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;</div>
-<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#a71e7f24509e182fd8564705484639cfa">  152</a></span>&#160;        std::tr1::shared_ptr&lt;ECGenerator&gt; <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a71e7f24509e182fd8564705484639cfa">rand</a>;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
-<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#a4be2093552d8bb008c841eccccf79543">  165</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a4be2093552d8bb008c841eccccf79543">count</a>;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
-<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#ad4ac1c94cc73169de15876f5349716ae">  176</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ad4ac1c94cc73169de15876f5349716ae">zero</a>;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;</div>
-<div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">  190</a></span>&#160;        U <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a>;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    };</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;</div>
-<div class="line"><a name="l00214"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">  214</a></span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt; <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">AlgorithmEquidistribution</a> {</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        <span class="keyword">typedef</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_generator_vector&lt;U&gt;</a> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_vec</a>;</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">         *\japanese</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">         * 均等分布次元計算可能な疑似乱数生成器</span></div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">         *\endjapanese</span></div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">         *\english</span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">         * Pseudo random number generator which can calculate dimension</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">         * of equi-distribution.</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">         *\endenglish</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">         */</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="keyword">typedef</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">EquidistributionCalculatable&lt;U&gt;</a> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#adbd0018c997d77cb2c909a8f6243d079">ECGenerator</a>;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keyword">public</span>:</div>
+<a href="_algorithm_equidistribution_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MTTOOLBOX_ALGORITHM_EQUIDISTRIBUTION_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define MTTOOLBOX_ALGORITHM_EQUIDISTRIBUTION_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#if __cplusplus &gt;= 201103L</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#if defined(__clang__)</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#if __has_include(&lt;tr1/memory&gt;)</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#define MTTOOLBOX_USE_TR1</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &lt;tr1/memory&gt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif // __has_indlude</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#else  // not clang</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="_algorithm_equidistribution_8hpp.html#aec3af6c87bfe4bf36a0eee1eeaf235a3">   46</a></span>&#160;<span class="preprocessor">#define MTTOOLBOX_USE_TR1</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &lt;tr1/memory&gt;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif // clang</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif // cplusplus version</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_equidistribution_calculatable_8hpp.html">MTToolBox/EquidistributionCalculatable.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="period_8hpp.html">MTToolBox/period.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="util_8hpp.html">MTToolBox/util.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_m_t_tool_box.html">MTToolBox</a> {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#if defined(MTTOOLBOX_USE_TR1)</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">using</span> std::tr1::shared_ptr;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">using</span> std::shared_ptr;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> V = U&gt;</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html">   88</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_generator_vector</a> {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#aa684be740e0ee5cd5f1174f769a39ea2">  101</a></span>&#160;        <span class="keyword">typedef</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">EquidistributionCalculatable&lt;U, V&gt;</a> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#aa684be740e0ee5cd5f1174f769a39ea2">ECGenerator</a>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae7eb3542041ff0fa509da63ccb80ed4d">  116</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_generator_vector&lt;U, V&gt;</a>(<span class="keyword">const</span> ECGenerator&amp; generator) {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            shared_ptr&lt;ECGenerator&gt; r(generator.clone());</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a5ca95e40c3ac29673a1d8eb9f99f2dda">rand</a> = r;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            <span class="comment">//rand-&gt;seed(1);</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#afda7123bac494316d07d63219bf72b03">count</a> = 0;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a47339b2d889eb298576af66c9aa904ce">zero</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <a class="code" href="namespace_m_t_tool_box.html#a0a9e90a7e18e5cea7faf5e88b33a0e9e">setZero</a>(<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#af9b78700de25d46994a2aa0a20e33fe7">next</a>);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#a19fe1f350202523350b04ad92a655a8a">  147</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_generator_vector&lt;U, V&gt;</a>(<span class="keyword">const</span> ECGenerator&amp; generator,</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                                   <span class="keywordtype">int</span> bit_pos) {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            shared_ptr&lt;ECGenerator&gt; r(generator.clone());</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a5ca95e40c3ac29673a1d8eb9f99f2dda">rand</a> = r;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            rand-&gt;setZero();</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#afda7123bac494316d07d63219bf72b03">count</a> = 0;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a47339b2d889eb298576af66c9aa904ce">zero</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#af9b78700de25d46994a2aa0a20e33fe7">next</a> = getOne&lt;U&gt;() &lt;&lt; (bit_size&lt;U&gt;() - bit_pos - 1);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">#if defined(DEBUG)</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;DEBUG:&quot;</span> &lt;&lt; dec &lt;&lt; bit_pos &lt;&lt; <span class="stringliteral">&quot;:&quot;</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                 &lt;&lt; hex &lt;&lt; <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#af9b78700de25d46994a2aa0a20e33fe7">next</a> &lt;&lt; endl;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a390eda95423e1834c118b9369fdcd133">add</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_generator_vector&lt;U, V&gt;</a>&amp; src);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a1c63197cd22f90a8dfc48b31af214328">next_state</a>(<span class="keywordtype">int</span> bit_len);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#aec6fce31d8f7338255ac7d993871a357">debug_print</a>();</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
+<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#a5ca95e40c3ac29673a1d8eb9f99f2dda">  174</a></span>&#160;        shared_ptr&lt;ECGenerator&gt; <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a5ca95e40c3ac29673a1d8eb9f99f2dda">rand</a>;</div>
+<div class="line"><a name="l00186"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#afda7123bac494316d07d63219bf72b03">  186</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#afda7123bac494316d07d63219bf72b03">count</a>;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;</div>
+<div class="line"><a name="l00197"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#a47339b2d889eb298576af66c9aa904ce">  197</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a47339b2d889eb298576af66c9aa904ce">zero</a>;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;</div>
+<div class="line"><a name="l00211"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#af9b78700de25d46994a2aa0a20e33fe7">  211</a></span>&#160;        U <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#af9b78700de25d46994a2aa0a20e33fe7">next</a>;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    };</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> V = U&gt;</div>
+<div class="line"><a name="l00238"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">  238</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">AlgorithmEquidistribution</a> {</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;</div>
-<div class="line"><a name="l00267"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#a77415bdcee26484cc929213c60a3d1f9">  267</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#a77415bdcee26484cc929213c60a3d1f9">AlgorithmEquidistribution</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">ECGenerator</a>&amp; <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a71e7f24509e182fd8564705484639cfa">rand</a>, <span class="keywordtype">int</span> bit_length) {</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            bit_len = bit_length;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            size = bit_len + 1;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            basis = <span class="keyword">new</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_vec</a> * [size];</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            stateBitSize = rand.<a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html#accdd6df63c2639e56b31e5dd205d67d7">bitSize</a>();</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bit_len; i++) {</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                basis[i] = <span class="keyword">new</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_vec</a>(rand, i);</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            }</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            basis[bit_len] = <span class="keyword">new</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_vec</a>(rand);</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            basis[bit_len]-&gt;next_state(bit_len);</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        }</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div>
-<div class="line"><a name="l00287"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#abac47a8211d7b55b3bca71749c6a703c">  287</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#abac47a8211d7b55b3bca71749c6a703c">~AlgorithmEquidistribution</a>() {</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                <span class="keyword">delete</span> basis[i];</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;            }</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            <span class="keyword">delete</span>[] basis;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        }</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="keywordtype">int</span> get_all_equidist(<span class="keywordtype">int</span> veq[]);</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        <span class="keywordtype">int</span> get_equidist(<span class="keywordtype">int</span> *sum_equidist);</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        <span class="keywordtype">int</span> get_equidist_main(<span class="keywordtype">int</span> bit_len);</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <span class="keywordtype">void</span> adjust(<span class="keywordtype">int</span> new_len);</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        linear_vec **basis;</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        <span class="keywordtype">int</span> bit_len;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <span class="keyword">typedef</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_generator_vector&lt;U, V&gt;</a> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_vec</a>;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        <span class="comment">/*</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">         *\japanese</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">         * 均等分布次元計算可能な疑似乱数生成器</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">         *\endjapanese</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">         *\english</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">         * Pseudo random number generator which can calculate dimension</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">         * of equi-distribution.</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">         *\endenglish</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">         */</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="keyword">typedef</span> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">EquidistributionCalculatable&lt;U, V&gt;</a> <a class="code" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">ECGenerator</a>;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
+<div class="line"><a name="l00296"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#add24616aab3d5d172906863d073003e6">  296</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#add24616aab3d5d172906863d073003e6">AlgorithmEquidistribution</a>(<span class="keyword">const</span> ECGenerator&amp; rand, <span class="keywordtype">int</span> bit_length,</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                                  <span class="keywordtype">int</span> mexp = 0) {</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            bit_len = bit_length;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            size = bit_len + 1;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            basis = <span class="keyword">new</span> linear_vec * [size];</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            <span class="keywordflow">if</span> (mexp == 0) {</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                stateBitSize = rand.<a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html#a9d1d8f6dc01860875cd0849325158b5a">bitSize</a>();</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                stateBitSize = mexp;</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            }</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bit_len; i++) {</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                basis[i] = <span class="keyword">new</span> linear_vec(rand, i);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;            }</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            basis[bit_len] = <span class="keyword">new</span> linear_vec(rand);</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;            basis[bit_len]-&gt;<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a1c63197cd22f90a8dfc48b31af214328">next_state</a>(bit_len);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        }</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;</div>
+<div class="line"><a name="l00321"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#af09f04b31231e90a73b4bf4dd5a03c70">  321</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#af09f04b31231e90a73b4bf4dd5a03c70">~AlgorithmEquidistribution</a>() {</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;                <span class="keyword">delete</span> basis[i];</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            }</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;            <span class="keyword">delete</span>[] basis;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        }</div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        <span class="keywordtype">int</span> stateBitSize;</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        <span class="keywordtype">int</span> size;</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    };</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordtype">void</span> AlgorithmEquidistribution&lt;U&gt;::adjust(<span class="keywordtype">int</span> new_len) {</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        <span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        U mask = (~static_cast&lt;U&gt;(0)) &lt;&lt; (bit_size&lt;U&gt;() - new_len);</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;            basis[i]-&gt;next = basis[i]-&gt;next &amp; mask;</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;            <span class="keywordflow">if</span> (basis[i]-&gt;<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a> == 0) {</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;                basis[i]-&gt;next_state(new_len);</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            }</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        }</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    }</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="preprocessor">#if defined(DEBUG)</span></div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a3d8cee9dfe91f363f35def32249847c6">linear_generator_vector&lt;U&gt;::debug_print</a>() {</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        <span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;debug ====&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;count = &quot;</span> &lt;&lt; dec &lt;&lt; <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a4be2093552d8bb008c841eccccf79543">count</a> &lt;&lt; endl;</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;zero = &quot;</span> &lt;&lt; <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ad4ac1c94cc73169de15876f5349716ae">zero</a> &lt;&lt; endl;</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;next = &quot;</span> &lt;&lt; hex &lt;&lt; <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a> &lt;&lt; endl;</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;debug ====&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    }</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="preprocessor"></span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a name="l00398"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#a3d8cee9dfe91f363f35def32249847c6">  398</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a3d8cee9dfe91f363f35def32249847c6">linear_generator_vector&lt;U&gt;::debug_print</a>() {</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    }</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a name="l00435"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#ac4dc41633a5a978bde318b9216b3d338">  435</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#ac4dc41633a5a978bde318b9216b3d338">AlgorithmEquidistribution&lt;U&gt;::get_all_equidist</a>(<span class="keywordtype">int</span> veq[]) {</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;        <span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;        <span class="keywordtype">int</span> sum = 0;</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        veq[bit_len - 1] = get_equidist_main(bit_len);</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="preprocessor">#if defined(DEBUG)</span></div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="preprocessor"></span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;            basis[i]-&gt;debug_print();</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        }</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="preprocessor"></span>        sum += stateBitSize / bit_len - veq[bit_len - 1];</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;        bit_len--;</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;        <span class="keywordflow">for</span> (; bit_len &gt;= 1; bit_len--) {</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;            adjust(bit_len);</div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;            veq[bit_len - 1] = get_equidist_main(bit_len);</div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;            sum += stateBitSize / bit_len - veq[bit_len - 1];</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;        }</div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;        <span class="keywordflow">return</span> sum;</div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;    }</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;</div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a name="l00489"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#abe1b0dbadc803e07fef5faf6144b40e2">  489</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#abe1b0dbadc803e07fef5faf6144b40e2">AlgorithmEquidistribution&lt;U&gt;::get_equidist</a>(<span class="keywordtype">int</span> *sum_equidist) {</div>
-<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;        <span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;</div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;        <span class="keywordtype">int</span> veq = get_equidist_main(bit_len);</div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;        <span class="keywordtype">int</span> sum = 0;</div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;        bit_len--;</div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;        <span class="keywordflow">for</span> (; bit_len &gt;= 1; bit_len--) {</div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;            adjust(bit_len);</div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;            sum += stateBitSize / bit_len - get_equidist_main(bit_len);</div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;        }</div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;        *sum_equidist = sum;</div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;        <span class="keywordflow">return</span> veq;</div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;    }</div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;</div>
-<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a name="l00515"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#a6a0e3780835aea6dceb6095e887c9d9e">  515</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a6a0e3780835aea6dceb6095e887c9d9e">linear_generator_vector&lt;U&gt;::add</a>(</div>
-<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;        <span class="keyword">const</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_generator_vector&lt;U&gt;</a>&amp; src) {</div>
-<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;        <span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;</div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;        <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a71e7f24509e182fd8564705484639cfa">rand</a>-&gt;add(*src.<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a71e7f24509e182fd8564705484639cfa">rand</a>);</div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;        <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a> ^= src.<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a>;</div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;    }</div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;</div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a name="l00541"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae9d6ffc06109b9d61d1daa624b51db3b">  541</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae9d6ffc06109b9d61d1daa624b51db3b">linear_generator_vector&lt;U&gt;::next_state</a>(<span class="keywordtype">int</span> bit_len) {</div>
-<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;        <span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;</div>
-<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ad4ac1c94cc73169de15876f5349716ae">zero</a>) {</div>
-<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;        }</div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;        <span class="keywordtype">int</span> zero_count = 0;</div>
-<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;        <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a> = <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a71e7f24509e182fd8564705484639cfa">rand</a>-&gt;generate(bit_len);</div>
-<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;        <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a4be2093552d8bb008c841eccccf79543">count</a>++;</div>
-<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;        <span class="keywordflow">while</span> (<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a> == 0) {</div>
-<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;            zero_count++;</div>
-<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;            <span class="keywordflow">if</span> (zero_count &gt; <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a71e7f24509e182fd8564705484639cfa">rand</a>-&gt;bitSize() * 2) {</div>
-<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;                <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ad4ac1c94cc73169de15876f5349716ae">zero</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a71e7f24509e182fd8564705484639cfa">rand</a>-&gt;isZero()) {</div>
-<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;                    <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ad4ac1c94cc73169de15876f5349716ae">zero</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;                }</div>
-<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;            }</div>
-<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a> = <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a71e7f24509e182fd8564705484639cfa">rand</a>-&gt;generate(bit_len);</div>
-<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;            <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a4be2093552d8bb008c841eccccf79543">count</a>++;</div>
-<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;        }</div>
-<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;    }</div>
-<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;</div>
-<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">AlgorithmEquidistribution&lt;U&gt;::get_equidist_main</a>(<span class="keywordtype">int</span> v) {</div>
-<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;        <span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;        <span class="keyword">using namespace </span>NTL;</div>
-<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;        <span class="keywordtype">int</span> bit_len = v;</div>
-<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;        <span class="keywordtype">int</span> pivot_index;</div>
-<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;        <span class="keywordtype">int</span> old_pivot = 0;</div>
-<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;</div>
-<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;        pivot_index = <a class="code" href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">calc_1pos</a>(basis[bit_len]-&gt;<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a>);</div>
-<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;        <span class="keywordflow">while</span> (!basis[bit_len]-&gt;<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ad4ac1c94cc73169de15876f5349716ae">zero</a>) {</div>
-<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;<span class="preprocessor">#if defined(DEBUG)</span></div>
-<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;<span class="preprocessor"></span>            <span class="keywordflow">if</span> (pivot_index != <a class="code" href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">calc_1pos</a>(basis[pivot_index]-&gt;<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a>)) {</div>
-<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;                cerr &lt;&lt; <span class="stringliteral">&quot;pivot error 1&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;                cerr &lt;&lt; <span class="stringliteral">&quot;pivot_index:&quot;</span> &lt;&lt; dec &lt;&lt; pivot_index &lt;&lt; endl;</div>
-<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;                cerr &lt;&lt; <span class="stringliteral">&quot;calc_1pos:&quot;</span> &lt;&lt; dec</div>
-<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;                     &lt;&lt; <a class="code" href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">calc_1pos</a>(basis[pivot_index]-&gt;<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a>) &lt;&lt; endl;</div>
-<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;                cerr &lt;&lt; <span class="stringliteral">&quot;next:&quot;</span> &lt;&lt; hex &lt;&lt; basis[pivot_index]-&gt;next &lt;&lt; endl;</div>
-<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;                <span class="keywordflow">throw</span> <span class="keyword">new</span> std::logic_error(<span class="stringliteral">&quot;pivot error 1&quot;</span>);</div>
-<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;            }</div>
-<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;<span class="preprocessor"></span>            <span class="comment">// アルゴリズムとして、全部のcount を平均的に大きくしたい。</span></div>
-<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;            <span class="comment">// 従って count の小さい方を変化させたい</span></div>
-<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;            <span class="keywordflow">if</span> (basis[bit_len]-&gt;<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a4be2093552d8bb008c841eccccf79543">count</a> &gt; basis[pivot_index]-&gt;<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a4be2093552d8bb008c841eccccf79543">count</a>) {</div>
-<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;                swap(basis[bit_len], basis[pivot_index]);</div>
-<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;            }</div>
-<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;            basis[bit_len]-&gt;add(*basis[pivot_index]);</div>
-<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;            <span class="comment">// add の結果 next の最後の1 は必ず 0 になる。</span></div>
-<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;            <span class="comment">// 全部0なら次の状態に進める。（内部でcount が大きくなる）</span></div>
-<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;            <span class="keywordflow">if</span> (basis[bit_len]-&gt;<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a> == 0) {</div>
-<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;                basis[bit_len]-&gt;next_state(bit_len);</div>
-<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;                pivot_index = <a class="code" href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">calc_1pos</a>(basis[bit_len]-&gt;<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a>);</div>
-<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;</div>
-<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;            <span class="comment">// 全部0でなければ、pivot_index は小さくなる。</span></div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;            <span class="comment">// pivot_index が 0 になれば最上位bit のみ1なので</span></div>
-<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;            <span class="comment">// 次の add で全部0になる。</span></div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;                old_pivot = pivot_index;</div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;                pivot_index = <a class="code" href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">calc_1pos</a>(basis[bit_len]-&gt;<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">next</a>);</div>
-<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;                <span class="keywordflow">if</span> (old_pivot &lt;= pivot_index) {</div>
-<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;                    cerr &lt;&lt; <span class="stringliteral">&quot;pivot error 2&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;                    <span class="keywordflow">throw</span> <span class="keyword">new</span> std::logic_error(<span class="stringliteral">&quot;pivot error 2&quot;</span>);</div>
-<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;                }</div>
-<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;            }</div>
-<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;        }</div>
-<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;</div>
-<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;        <span class="comment">// 計算終了したので最長のベクトルを求める。（長いとはcountが少ないこと）</span></div>
-<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;        <span class="keywordtype">int</span> min_count = basis[0]-&gt;count;</div>
-<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; bit_len; i++) {</div>
-<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;            <span class="keywordflow">if</span> (min_count &gt; basis[i]-&gt;<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a4be2093552d8bb008c841eccccf79543">count</a>) {</div>
-<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;                min_count = basis[i]-&gt;count;</div>
-<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;            }</div>
-<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;        }</div>
-<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;        <span class="keywordflow">if</span> (min_count &gt; stateBitSize / bit_len) {</div>
-<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;            cerr &lt;&lt; <span class="stringliteral">&quot;over theoretical bound &quot;</span> &lt;&lt; bit_len &lt;&lt; endl;</div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;            cerr &lt;&lt; basis[0]-&gt;rand-&gt;getParamString() &lt;&lt; endl;</div>
-<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
-<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;                basis[i]-&gt;debug_print();</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#ac164c212056d4ef1a36d74f250e3ea3b">get_all_equidist</a>(<span class="keywordtype">int</span> veq[]);</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#a298d557d6dc23d65543fcbca9d2d8f74">get_equidist</a>(<span class="keywordtype">int</span> *sum_equidist);</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <span class="keywordtype">int</span> get_equidist_main(<span class="keywordtype">int</span> bit_len);</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <span class="keywordtype">void</span> adjust(<span class="keywordtype">int</span> new_len);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        linear_vec **basis;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        <span class="keywordtype">int</span> bit_len;</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        <span class="keywordtype">int</span> stateBitSize;</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;        <span class="keywordtype">int</span> size;</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    };</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <span class="keywordtype">void</span> AlgorithmEquidistribution&lt;U, V&gt;::adjust(<span class="keywordtype">int</span> new_len) {</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        <span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        U tmp;</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        <a class="code" href="namespace_m_t_tool_box.html#a0a9e90a7e18e5cea7faf5e88b33a0e9e">setZero</a>(tmp);</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        U mask = ~tmp &lt;&lt; (bit_size&lt;U&gt;() - new_len);</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;            basis[i]-&gt;next = basis[i]-&gt;next &amp; mask;</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="namespace_m_t_tool_box.html#a9a3ac1c9e4450b22633fce7c5925f9e0">isZero</a>(basis[i]-&gt;next)) {</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;                basis[i]-&gt;next_state(new_len);</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;            }</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        }</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    }</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="preprocessor">#if defined(DEBUG)</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#aec6fce31d8f7338255ac7d993871a357">linear_generator_vector&lt;U, V&gt;::debug_print</a>() {</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;        <span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;debug ====&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;count = &quot;</span> &lt;&lt; dec &lt;&lt; count &lt;&lt; endl;</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;zero = &quot;</span> &lt;&lt; zero &lt;&lt; endl;</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;next = &quot;</span> &lt;&lt; hex &lt;&lt; next &lt;&lt; endl;</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;debug ====&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    }</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l00433"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#aec6fce31d8f7338255ac7d993871a357">  433</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#aec6fce31d8f7338255ac7d993871a357">linear_generator_vector&lt;U, V&gt;::debug_print</a>() {</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    }</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l00470"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#ac164c212056d4ef1a36d74f250e3ea3b">  470</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#ac164c212056d4ef1a36d74f250e3ea3b">AlgorithmEquidistribution&lt;U, V&gt;::get_all_equidist</a>(<span class="keywordtype">int</span> veq[]) {</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;        <span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;        <span class="keywordtype">int</span> sum = 0;</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;        veq[bit_len - 1] = get_equidist_main(bit_len);</div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="preprocessor">#if defined(DEBUG)</span></div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;            basis[i]-&gt;debug_print();</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;        }</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;        sum += stateBitSize / bit_len - veq[bit_len - 1];</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;        bit_len--;</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;        <span class="keywordflow">for</span> (; bit_len &gt;= 1; bit_len--) {</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;            adjust(bit_len);</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;            veq[bit_len - 1] = get_equidist_main(bit_len);</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;            sum += stateBitSize / bit_len - veq[bit_len - 1];</div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;        }</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;        <span class="keywordflow">return</span> sum;</div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;    }</div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l00524"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#a298d557d6dc23d65543fcbca9d2d8f74">  524</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#a298d557d6dc23d65543fcbca9d2d8f74">AlgorithmEquidistribution&lt;U, V&gt;::get_equidist</a>(<span class="keywordtype">int</span> *sum_equidist) {</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;        <span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;</div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;        <span class="keywordtype">int</span> veq = get_equidist_main(bit_len);</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;        <span class="keywordtype">int</span> sum = 0;</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;        bit_len--;</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;        <span class="keywordflow">for</span> (; bit_len &gt;= 1; bit_len--) {</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;            adjust(bit_len);</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;            sum += stateBitSize / bit_len - get_equidist_main(bit_len);</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;        }</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;        *sum_equidist = sum;</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;        <span class="keywordflow">return</span> veq;</div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;    }</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;</div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l00550"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#a390eda95423e1834c118b9369fdcd133">  550</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a390eda95423e1834c118b9369fdcd133">linear_generator_vector&lt;U, V&gt;::add</a>(</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;        <span class="keyword">const</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html">linear_generator_vector&lt;U, V&gt;</a>&amp; src) {</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;        <span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;</div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;        rand-&gt;add(*src.<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a5ca95e40c3ac29673a1d8eb9f99f2dda">rand</a>);</div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;        next ^= src.<a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#af9b78700de25d46994a2aa0a20e33fe7">next</a>;</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;    }</div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;</div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l00576"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1linear__generator__vector.html#a1c63197cd22f90a8dfc48b31af214328">  576</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_m_t_tool_box_1_1linear__generator__vector.html#a1c63197cd22f90a8dfc48b31af214328">linear_generator_vector&lt;U, V&gt;::next_state</a>(<span class="keywordtype">int</span> bit_len) {</div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;        <span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;</div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;        <span class="keywordflow">if</span> (zero) {</div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;        }</div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;        <span class="keywordtype">int</span> zero_count = 0;</div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;        next = rand-&gt;generate(bit_len);</div>
+<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;        count++;</div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;        <span class="keywordflow">while</span> (<a class="code" href="namespace_m_t_tool_box.html#a9a3ac1c9e4450b22633fce7c5925f9e0">isZero</a>(next)) {</div>
+<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;            zero_count++;</div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;            <span class="keywordflow">if</span> (zero_count &gt; rand-&gt;bitSize() * 2) {</div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;                zero = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;                <span class="keywordflow">if</span> (rand-&gt;isZero()) {</div>
+<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;                    zero = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;                }</div>
+<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;            }</div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;            next = rand-&gt;generate(bit_len);</div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;            count++;</div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;        }</div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;    }</div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;</div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">AlgorithmEquidistribution&lt;U, V&gt;::get_equidist_main</a>(<span class="keywordtype">int</span> v) {</div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;        <span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;        <span class="keyword">using namespace </span>NTL;</div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;        <span class="keywordtype">int</span> bit_len = v;</div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;        <span class="keywordtype">int</span> pivot_index;</div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;        <span class="keywordtype">int</span> old_pivot = 0;</div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;</div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;        pivot_index = <a class="code" href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">calc_1pos</a>(basis[bit_len]-&gt;next);</div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;        <span class="keywordflow">while</span> (!basis[bit_len]-&gt;zero) {</div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;<span class="preprocessor">#if defined(DEBUG)</span></div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;            <span class="keywordflow">if</span> (pivot_index == -1) {</div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;                cout &lt;&lt; <span class="stringliteral">&quot;pivot_index = &quot;</span> &lt;&lt; dec &lt;&lt; pivot_index &lt;&lt; endl;</div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;                cout &lt;&lt; <span class="stringliteral">&quot;zero = &quot;</span> &lt;&lt; basis[bit_len]-&gt;zero &lt;&lt; endl;</div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;                cout &lt;&lt; <span class="stringliteral">&quot;next = &quot;</span> &lt;&lt; hex &lt;&lt; basis[bit_len]-&gt;next &lt;&lt; endl;</div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;                <span class="keywordflow">throw</span> <span class="keyword">new</span> std::logic_error(<span class="stringliteral">&quot;pivot error 0&quot;</span>);</div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;            }</div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;            <span class="keywordflow">if</span> (pivot_index &gt;= bit_len) {</div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;                cout &lt;&lt; <span class="stringliteral">&quot;pivot_index = &quot;</span> &lt;&lt; dec &lt;&lt; pivot_index &lt;&lt; endl;</div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;                cout &lt;&lt; <span class="stringliteral">&quot;bit_len = &quot;</span> &lt;&lt; bit_len &lt;&lt; endl;</div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;                cout &lt;&lt; <span class="stringliteral">&quot;next = &quot;</span> &lt;&lt; hex &lt;&lt; basis[bit_len]-&gt;next &lt;&lt; endl;</div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;                <span class="keywordflow">throw</span> <span class="keyword">new</span> std::logic_error(<span class="stringliteral">&quot;pivot error 0.1&quot;</span>);</div>
 <div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;            }</div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;            <span class="keywordflow">throw</span> <span class="keyword">new</span> std::logic_error(<span class="stringliteral">&quot;over theoretical bound&quot;</span>);</div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;        }</div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;        <span class="keywordflow">return</span> min_count;</div>
-<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;    }</div>
-<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;}</div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_ALGORITHM_EQUIDISTRIBUTION_HPP</span></div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;<span class="preprocessor"></span></div>
-<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html">MTToolBox::linear_generator_vector</a></div><div class="ttdoc">GF(2)ベクトルとしてのGF(2)疑似乱数生成器 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:66</div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_a71e7f24509e182fd8564705484639cfa"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#a71e7f24509e182fd8564705484639cfa">MTToolBox::linear_generator_vector::rand</a></div><div class="ttdeci">std::tr1::shared_ptr&lt; ECGenerator &gt; rand</div><div class="ttdoc">GF(2)線形疑似乱数生成器 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:152</div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_equidistribution_html_abe1b0dbadc803e07fef5faf6144b40e2"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#abe1b0dbadc803e07fef5faf6144b40e2">MTToolBox::AlgorithmEquidistribution::get_equidist</a></div><div class="ttdeci">int get_equidist(int *sum_equidist)</div><div class="ttdoc">vビット精度の均等分布次元を計算する。 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:489</div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_a4be2093552d8bb008c841eccccf79543"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#a4be2093552d8bb008c841eccccf79543">MTToolBox::linear_generator_vector::count</a></div><div class="ttdeci">int count</div><div class="ttdoc">next_state() が呼ばれた回数 これは多項式としてみた場合の次数に関係がある。 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:165</div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1_equidistribution_calculatable_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">MTToolBox::EquidistributionCalculatable</a></div><div class="ttdoc">このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。 </div><div class="ttdef"><b>Definition:</b> EquidistributionCalculatable.hpp:48</div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_equidistribution_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">MTToolBox::AlgorithmEquidistribution</a></div><div class="ttdoc">疑似乱数生成器の均等分布次元を計算する </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:214</div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_equidistribution_html_abac47a8211d7b55b3bca71749c6a703c"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#abac47a8211d7b55b3bca71749c6a703c">MTToolBox::AlgorithmEquidistribution::~AlgorithmEquidistribution</a></div><div class="ttdeci">~AlgorithmEquidistribution()</div><div class="ttdoc">デストラクタ </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:287</div></div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;            <span class="keywordflow">if</span> (pivot_index != <a class="code" href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">calc_1pos</a>(basis[pivot_index]-&gt;next)) {</div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;                cerr &lt;&lt; <span class="stringliteral">&quot;pivot error 1&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;                cerr &lt;&lt; <span class="stringliteral">&quot;pivot_index:&quot;</span> &lt;&lt; dec &lt;&lt; pivot_index &lt;&lt; endl;</div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;                cerr &lt;&lt; <span class="stringliteral">&quot;calc_1pos:&quot;</span> &lt;&lt; dec</div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;                     &lt;&lt; <a class="code" href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">calc_1pos</a>(basis[pivot_index]-&gt;next) &lt;&lt; endl;</div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;                cerr &lt;&lt; <span class="stringliteral">&quot;next:&quot;</span> &lt;&lt; hex &lt;&lt; basis[pivot_index]-&gt;next &lt;&lt; endl;</div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;                <span class="keywordflow">throw</span> <span class="keyword">new</span> std::logic_error(<span class="stringliteral">&quot;pivot error 1&quot;</span>);</div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;            }</div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;            <span class="comment">// アルゴリズムとして、全部のcount を平均的に大きくしたい。</span></div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;            <span class="comment">// 従って count の小さい方を変化させたい</span></div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;            <span class="keywordflow">if</span> (basis[bit_len]-&gt;count &gt; basis[pivot_index]-&gt;count) {</div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;                swap(basis[bit_len], basis[pivot_index]);</div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;            }</div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;<span class="preprocessor">#if defined(DEBUG)</span></div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;before add bit_len next = &quot;</span> &lt;&lt; hex</div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;                 &lt;&lt; basis[bit_len]-&gt;next &lt;&lt; <span class="stringliteral">&quot;  count = &quot;</span> &lt;&lt; dec</div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;                 &lt;&lt; basis[bit_len]-&gt;count &lt;&lt; endl;</div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;before add pivot   next = &quot;</span> &lt;&lt; hex</div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;                 &lt;&lt; basis[pivot_index]-&gt;next &lt;&lt; <span class="stringliteral">&quot;  count = &quot;</span> &lt;&lt; dec</div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;                 &lt;&lt; basis[pivot_index]-&gt;count &lt;&lt; endl;</div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;            basis[bit_len]-&gt;add(*basis[pivot_index]);</div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="preprocessor">#if defined(DEBUG)</span></div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;after  add bit_len next = &quot;</span> &lt;&lt; hex</div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;                 &lt;&lt; basis[bit_len]-&gt;next &lt;&lt; <span class="stringliteral">&quot;  count = &quot;</span> &lt;&lt; dec</div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;                 &lt;&lt; basis[bit_len]-&gt;count &lt;&lt; endl;</div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;            <span class="comment">// add の結果 next の最後の1 は必ず 0 になる。</span></div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;            <span class="comment">// 全部0なら次の状態に進める。（内部でcount が大きくなる）</span></div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="namespace_m_t_tool_box.html#a9a3ac1c9e4450b22633fce7c5925f9e0">isZero</a>(basis[bit_len]-&gt;next)) {</div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;                basis[bit_len]-&gt;next_state(bit_len);</div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;                pivot_index = <a class="code" href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">calc_1pos</a>(basis[bit_len]-&gt;next);</div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;<span class="preprocessor">#if defined(DEBUG)</span></div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;                cout &lt;&lt; <span class="stringliteral">&quot;zero&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;                cout &lt;&lt; <span class="stringliteral">&quot;pivot_index = &quot;</span> &lt;&lt; dec &lt;&lt; pivot_index &lt;&lt; endl;</div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;                <span class="keywordflow">if</span> (pivot_index &gt;= bit_len) {</div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;                    cout &lt;&lt; <span class="stringliteral">&quot;pivot_index = &quot;</span> &lt;&lt; dec &lt;&lt; pivot_index &lt;&lt; endl;</div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;                    cout &lt;&lt; <span class="stringliteral">&quot;bit_len = &quot;</span> &lt;&lt; bit_len &lt;&lt; endl;</div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;                    cout &lt;&lt; <span class="stringliteral">&quot;next = &quot;</span> &lt;&lt; hex &lt;&lt; basis[bit_len]-&gt;next &lt;&lt; endl;</div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;                    <span class="keywordflow">throw</span> <span class="keyword">new</span> std::logic_error(<span class="stringliteral">&quot;pivot error 1.1&quot;</span>);</div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;                }</div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;                <span class="keywordflow">if</span> (basis[bit_len]-&gt;zero) {</div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;                    cout &lt;&lt; <span class="stringliteral">&quot;loop exit condition&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pivot_index == -1) {</div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;                    cerr &lt;&lt; <span class="stringliteral">&quot;pivot error 1.1&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;                    <span class="keywordflow">throw</span> <span class="keyword">new</span> std::logic_error(<span class="stringliteral">&quot;pivot error 1.2&quot;</span>);</div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;                }</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;            <span class="comment">// 全部0でなければ、pivot_index は小さくなる。</span></div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;            <span class="comment">// pivot_index が 0 になれば最上位bit のみ1なので</span></div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;            <span class="comment">// 次の add で全部0になる。</span></div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;                old_pivot = pivot_index;</div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;                pivot_index = <a class="code" href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">calc_1pos</a>(basis[bit_len]-&gt;next);</div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;                <span class="keywordflow">if</span> (pivot_index &gt;= bit_len) {</div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;                    cout &lt;&lt; <span class="stringliteral">&quot;pivot_index = &quot;</span> &lt;&lt; dec &lt;&lt; pivot_index &lt;&lt; endl;</div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;                    cout &lt;&lt; <span class="stringliteral">&quot;bit_len = &quot;</span> &lt;&lt; bit_len &lt;&lt; endl;</div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;                    cout &lt;&lt; <span class="stringliteral">&quot;next = &quot;</span> &lt;&lt; hex &lt;&lt; basis[bit_len]-&gt;next &lt;&lt; endl;</div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;                    <span class="keywordflow">throw</span> <span class="keyword">new</span> std::logic_error(<span class="stringliteral">&quot;pivot error 2&quot;</span>);</div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;                }</div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;                <span class="keywordflow">if</span> (old_pivot &lt;= pivot_index) {</div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;                    cerr &lt;&lt; <span class="stringliteral">&quot;pivot error 2&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;                    cerr &lt;&lt; <span class="stringliteral">&quot;old_pivot = &quot;</span> &lt;&lt; dec &lt;&lt; old_pivot &lt;&lt; endl;</div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;                    cerr &lt;&lt; <span class="stringliteral">&quot;pivot_index = &quot;</span> &lt;&lt; dec &lt;&lt; pivot_index &lt;&lt; endl;</div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;                    <span class="keywordflow">throw</span> <span class="keyword">new</span> std::logic_error(<span class="stringliteral">&quot;pivot error 2.1&quot;</span>);</div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;                }</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;            }</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;        }</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;</div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;        <span class="comment">// 計算終了したので最長のベクトルを求める。（長いとはcountが少ないこと）</span></div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;        <span class="keywordtype">int</span> min_count = basis[0]-&gt;count;</div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; bit_len; i++) {</div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;            <span class="keywordflow">if</span> (min_count &gt; basis[i]-&gt;count) {</div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;                min_count = basis[i]-&gt;count;</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;            }</div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;        }</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;<span class="preprocessor">#if defined(DEBUG)</span></div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;min_count = &quot;</span> &lt;&lt; min_count &lt;&lt; endl;</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;stateBitSize = &quot;</span> &lt;&lt; stateBitSize &lt;&lt; endl;</div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;bit_len = &quot;</span> &lt;&lt; bit_len &lt;&lt; endl;</div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;theoretical bound &quot;</span> &lt;&lt; (stateBitSize / bit_len) &lt;&lt; endl;</div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;        <span class="keywordflow">if</span> (min_count &gt; stateBitSize / bit_len) {</div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;            cerr &lt;&lt; basis[0]-&gt;rand-&gt;getParamString() &lt;&lt; endl;</div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;                basis[i]-&gt;debug_print();</div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;            }</div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;            cerr &lt;&lt; <span class="stringliteral">&quot;min_count = &quot;</span> &lt;&lt; min_count &lt;&lt; endl;</div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;            cerr &lt;&lt; <span class="stringliteral">&quot;stateBitSize = &quot;</span> &lt;&lt; stateBitSize &lt;&lt; endl;</div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;            cerr &lt;&lt; <span class="stringliteral">&quot;bit_len = &quot;</span> &lt;&lt; bit_len &lt;&lt; endl;</div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;            cerr &lt;&lt; <span class="stringliteral">&quot;over theoretical bound &quot;</span> &lt;&lt; (stateBitSize / bit_len)</div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;                 &lt;&lt; endl;</div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;            <span class="keywordflow">throw</span> <span class="keyword">new</span> std::logic_error(<span class="stringliteral">&quot;over theoretical bound&quot;</span>);</div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;        }</div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;        <span class="keywordflow">return</span> min_count;</div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;    }</div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;}</div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;<span class="preprocessor">#if defined(MTTOOLBOX_USE_TR1)</span></div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;<span class="preprocessor">#undef MTTOOLBOX_USE_TR1</span></div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_ALGORITHM_EQUIDISTRIBUTION_HPP</span></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_equidistribution_html_add24616aab3d5d172906863d073003e6"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#add24616aab3d5d172906863d073003e6">MTToolBox::AlgorithmEquidistribution::AlgorithmEquidistribution</a></div><div class="ttdeci">AlgorithmEquidistribution(const ECGenerator &amp;rand, int bit_length, int mexp=0)</div><div class="ttdoc">コンストラクタ </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:296</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html">MTToolBox::linear_generator_vector</a></div><div class="ttdoc">GF(2)ベクトルとしてのGF(2)疑似乱数生成器 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:88</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_afda7123bac494316d07d63219bf72b03"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#afda7123bac494316d07d63219bf72b03">MTToolBox::linear_generator_vector::count</a></div><div class="ttdeci">int count</div><div class="ttdoc">next_state() が呼ばれた回数 これは多項式としてみた場合の次数に関係がある。 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:186</div></div>
+<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_abstract_generator_html_a9d1d8f6dc01860875cd0849325158b5a"><div class="ttname"><a href="class_m_t_tool_box_1_1_abstract_generator.html#a9d1d8f6dc01860875cd0849325158b5a">MTToolBox::AbstractGenerator::bitSize</a></div><div class="ttdeci">virtual int bitSize() const  =0</div><div class="ttdoc">内部状態空間のビットサイズを返す。 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_aec6fce31d8f7338255ac7d993871a357"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#aec6fce31d8f7338255ac7d993871a357">MTToolBox::linear_generator_vector::debug_print</a></div><div class="ttdeci">void debug_print()</div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:433</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_equidistribution_html_af09f04b31231e90a73b4bf4dd5a03c70"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#af09f04b31231e90a73b4bf4dd5a03c70">MTToolBox::AlgorithmEquidistribution::~AlgorithmEquidistribution</a></div><div class="ttdeci">~AlgorithmEquidistribution()</div><div class="ttdoc">デストラクタ </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:321</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_a390eda95423e1834c118b9369fdcd133"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#a390eda95423e1834c118b9369fdcd133">MTToolBox::linear_generator_vector::add</a></div><div class="ttdeci">void add(const linear_generator_vector&lt; U, V &gt; &amp;src)</div><div class="ttdoc">ベクトルの加法 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:550</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_equidistribution_calculatable_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">MTToolBox::EquidistributionCalculatable</a></div><div class="ttdoc">このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。 </div><div class="ttdef"><b>Definition:</b> EquidistributionCalculatable.hpp:50</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_a1c63197cd22f90a8dfc48b31af214328"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#a1c63197cd22f90a8dfc48b31af214328">MTToolBox::linear_generator_vector::next_state</a></div><div class="ttdeci">void next_state(int bit_len)</div><div class="ttdoc">疑似乱数生成器の状態遷移 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:576</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_equidistribution_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">MTToolBox::AlgorithmEquidistribution</a></div><div class="ttdoc">疑似乱数生成器の均等分布次元を計算する </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:238</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_a47339b2d889eb298576af66c9aa904ce"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#a47339b2d889eb298576af66c9aa904ce">MTToolBox::linear_generator_vector::zero</a></div><div class="ttdeci">bool zero</div><div class="ttdoc">ゼロベクトルであるかどうかを示す。 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:197</div></div>
 <div class="ttc" id="util_8hpp_html"><div class="ttname"><a href="util_8hpp.html">util.hpp</a></div><div class="ttdoc">ユーティリティ関数群 </div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_a3d8cee9dfe91f363f35def32249847c6"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#a3d8cee9dfe91f363f35def32249847c6">MTToolBox::linear_generator_vector::debug_print</a></div><div class="ttdeci">void debug_print()</div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:398</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_a5ca95e40c3ac29673a1d8eb9f99f2dda"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#a5ca95e40c3ac29673a1d8eb9f99f2dda">MTToolBox::linear_generator_vector::rand</a></div><div class="ttdeci">shared_ptr&lt; ECGenerator &gt; rand</div><div class="ttdoc">GF(2)線形疑似乱数生成器 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:174</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_equidistribution_html_ac164c212056d4ef1a36d74f250e3ea3b"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#ac164c212056d4ef1a36d74f250e3ea3b">MTToolBox::AlgorithmEquidistribution::get_all_equidist</a></div><div class="ttdeci">int get_all_equidist(int veq[])</div><div class="ttdoc">vビット精度の均等分布次元を計算する。 v = bit_len から 1までの均等分布次元を計算して、veq[] に入れる�...</div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:470</div></div>
 <div class="ttc" id="_equidistribution_calculatable_8hpp_html"><div class="ttname"><a href="_equidistribution_calculatable_8hpp.html">EquidistributionCalculatable.hpp</a></div><div class="ttdoc">このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。 </div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_ae572308fd386eabb60ee43ff48eb6c1b"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#ae572308fd386eabb60ee43ff48eb6c1b">MTToolBox::linear_generator_vector::next</a></div><div class="ttdeci">U next</div><div class="ttdoc">疑似乱数生成器の最新の出力（の上位vビット）または 多項式の最高次の係数のなすベクトル </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:190</div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1_abstract_generator_html_accdd6df63c2639e56b31e5dd205d67d7"><div class="ttname"><a href="class_m_t_tool_box_1_1_abstract_generator.html#accdd6df63c2639e56b31e5dd205d67d7">MTToolBox::AbstractGenerator::bitSize</a></div><div class="ttdeci">virtual int bitSize() const =0</div><div class="ttdoc">内部状態空間のビットサイズを返す。 </div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_a6a0e3780835aea6dceb6095e887c9d9e"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#a6a0e3780835aea6dceb6095e887c9d9e">MTToolBox::linear_generator_vector::add</a></div><div class="ttdeci">void add(const linear_generator_vector&lt; U &gt; &amp;src)</div><div class="ttdoc">ベクトルの加法 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:515</div></div>
-<div class="ttc" id="namespace_m_t_tool_box_html_a96ac1d869b7d96c78f770cc89260aee0"><div class="ttname"><a href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">MTToolBox::calc_1pos</a></div><div class="ttdeci">static int calc_1pos(uint16_t x)</div><div class="ttdoc">入力をビット列とみなして最上位の1の位置を0とした最も右側の（下位の）1の位置を返す。 </div><div class="ttdef"><b>Definition:</b> util.hpp:279</div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_equidistribution_html_a77415bdcee26484cc929213c60a3d1f9"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#a77415bdcee26484cc929213c60a3d1f9">MTToolBox::AlgorithmEquidistribution::AlgorithmEquidistribution</a></div><div class="ttdeci">AlgorithmEquidistribution(const ECGenerator &amp;rand, int bit_length)</div><div class="ttdoc">コンストラクタ </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:267</div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_adbd0018c997d77cb2c909a8f6243d079"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#adbd0018c997d77cb2c909a8f6243d079">MTToolBox::linear_generator_vector::ECGenerator</a></div><div class="ttdeci">EquidistributionCalculatable&lt; U &gt; ECGenerator</div><div class="ttdoc">均等分布次元計算可能な疑似乱数生成器 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:79</div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_ae9d6ffc06109b9d61d1daa624b51db3b"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#ae9d6ffc06109b9d61d1daa624b51db3b">MTToolBox::linear_generator_vector::next_state</a></div><div class="ttdeci">void next_state(int bit_len)</div><div class="ttdoc">疑似乱数生成器の状態遷移 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:541</div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_equidistribution_html_ac4dc41633a5a978bde318b9216b3d338"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#ac4dc41633a5a978bde318b9216b3d338">MTToolBox::AlgorithmEquidistribution::get_all_equidist</a></div><div class="ttdeci">int get_all_equidist(int veq[])</div><div class="ttdoc">vビット精度の均等分布次元を計算する。 v = bit_len から 1までの均等分布次元を計算して、veq[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総和...</div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:435</div></div>
-<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_ad4ac1c94cc73169de15876f5349716ae"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#ad4ac1c94cc73169de15876f5349716ae">MTToolBox::linear_generator_vector::zero</a></div><div class="ttdeci">bool zero</div><div class="ttdoc">ゼロベクトルであるかどうかを示す。 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:176</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_af9b78700de25d46994a2aa0a20e33fe7"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#af9b78700de25d46994a2aa0a20e33fe7">MTToolBox::linear_generator_vector::next</a></div><div class="ttdeci">U next</div><div class="ttdoc">疑似乱数生成器の最新の出力（の上位vビット）または 多項式の最高次の係数のなすベクトル ...</div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:211</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a0a9e90a7e18e5cea7faf5e88b33a0e9e"><div class="ttname"><a href="namespace_m_t_tool_box.html#a0a9e90a7e18e5cea7faf5e88b33a0e9e">MTToolBox::setZero</a></div><div class="ttdeci">void setZero(U &amp;x)</div><div class="ttdoc">ゼロをセットする SIMD型は、そのSIMD型のファイルでこのテンプレートを特殊化する。 </div><div class="ttdef"><b>Definition:</b> util.hpp:586</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a96ac1d869b7d96c78f770cc89260aee0"><div class="ttname"><a href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">MTToolBox::calc_1pos</a></div><div class="ttdeci">static int calc_1pos(uint16_t x)</div><div class="ttdoc">入力をビット列とみなして最上位の1の位置を0とした最も右側の（下位の）1の位置を返す。 ...</div><div class="ttdef"><b>Definition:</b> util.hpp:279</div></div>
+<div class="ttc" id="period_8hpp_html"><div class="ttname"><a href="period_8hpp.html">period.hpp</a></div><div class="ttdoc">最小多項式の計算と原始性の判定 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_equidistribution_html_a298d557d6dc23d65543fcbca9d2d8f74"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#a298d557d6dc23d65543fcbca9d2d8f74">MTToolBox::AlgorithmEquidistribution::get_equidist</a></div><div class="ttdeci">int get_equidist(int *sum_equidist)</div><div class="ttdoc">vビット精度の均等分布次元を計算する。 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:524</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1linear__generator__vector_html_aa684be740e0ee5cd5f1174f769a39ea2"><div class="ttname"><a href="class_m_t_tool_box_1_1linear__generator__vector.html#aa684be740e0ee5cd5f1174f769a39ea2">MTToolBox::linear_generator_vector::ECGenerator</a></div><div class="ttdeci">EquidistributionCalculatable&lt; U, V &gt; ECGenerator</div><div class="ttdoc">均等分布次元計算可能な疑似乱数生成器 </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:101</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a9a3ac1c9e4450b22633fce7c5925f9e0"><div class="ttname"><a href="namespace_m_t_tool_box.html#a9a3ac1c9e4450b22633fce7c5925f9e0">MTToolBox::isZero</a></div><div class="ttdeci">bool isZero(U x)</div><div class="ttdoc">ゼロかどうか、判定する。 SIMD型は、そのSIMD型のファイルでこのテンプレートを特殊化する。 ...</div><div class="ttdef"><b>Definition:</b> util.hpp:691</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html"><div class="ttname"><a href="namespace_m_t_tool_box.html">MTToolBox</a></div><div class="ttdoc">MTToolBox の名前空間 </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Dec 6 2013 10:50:03に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+2016年10月12日(水) 13時45分38秒作成 - MTToolBox / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.5
+</a> 1.8.10
 </small></address>
 </body>
 </html>

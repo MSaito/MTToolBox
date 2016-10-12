@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>MTToolBox: MTToolBox::AlgorithmReducibleEquidistribution&lt; U, G, V &gt; クラステンプレート</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MTToolBox
+   &#160;<span id="projectnumber">0.2.10</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.10 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="namespaces.html"><span>名前空間</span></a></li>
+      <li class="current"><a href="annotated.html"><span>データ構造</span></a></li>
+      <li><a href="files.html"><span>ファイル</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>データ構造</span></a></li>
+      <li><a href="hierarchy.html"><span>クラス階層</span></a></li>
+      <li><a href="functions.html"><span>データフィールド</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_m_t_tool_box.html">MTToolBox</a></li><li class="navelem"><a class="el" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html">AlgorithmReducibleEquidistribution</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">公開メンバ関数</a>  </div>
+  <div class="headertitle">
+<div class="title">MTToolBox::AlgorithmReducibleEquidistribution&lt; U, G, V &gt; クラステンプレート</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>可約ジェネレータの最悪の場合の均等分布次元を計算する。  
+ <a href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="_algorithm_reducible_equidistribution_8hpp_source.html">AlgorithmReducibleEquidistribution.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a2b201dce9be4f4fcf6f36c9952d23c37"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#a2b201dce9be4f4fcf6f36c9952d23c37">AlgorithmReducibleEquidistribution</a> (const G &amp;rg, const NTL::GF2X irreducibleFactor, int bit_length, int mexp)</td></tr>
+<tr class="memdesc:a2b201dce9be4f4fcf6f36c9952d23c37"><td class="mdescLeft">&#160;</td><td class="mdescRight">コンストラクタ  <a href="#a2b201dce9be4f4fcf6f36c9952d23c37">[詳解]</a><br /></td></tr>
+<tr class="separator:a2b201dce9be4f4fcf6f36c9952d23c37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd72b3743af230b886a6c189a7b2f7e5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#acd72b3743af230b886a6c189a7b2f7e5">~AlgorithmReducibleEquidistribution</a> ()</td></tr>
+<tr class="memdesc:acd72b3743af230b886a6c189a7b2f7e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">デストラクタ  <a href="#acd72b3743af230b886a6c189a7b2f7e5">[詳解]</a><br /></td></tr>
+<tr class="separator:acd72b3743af230b886a6c189a7b2f7e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00695ac525b2a3a01816fc9941d101ed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#a00695ac525b2a3a01816fc9941d101ed">get_all_equidist</a> (int veq[])</td></tr>
+<tr class="memdesc:a00695ac525b2a3a01816fc9941d101ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">vビット精度の均等分布次元を計算する。 v = <b>bit_len</b> から 1までの均等分布次元を計算して、<b>veq</b>[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総和である。  <a href="#a00695ac525b2a3a01816fc9941d101ed">[詳解]</a><br /></td></tr>
+<tr class="separator:a00695ac525b2a3a01816fc9941d101ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a231007a4fb814d3943bbea18e21f1a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#a9a231007a4fb814d3943bbea18e21f1a">get_equidist</a> (int *sum_equidist)</td></tr>
+<tr class="memdesc:a9a231007a4fb814d3943bbea18e21f1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">vビット精度の均等分布次元を計算する。  <a href="#a9a231007a4fb814d3943bbea18e21f1a">[詳解]</a><br /></td></tr>
+<tr class="separator:a9a231007a4fb814d3943bbea18e21f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><h3>template&lt;typename U, typename G, typename V = U&gt;<br />
+class MTToolBox::AlgorithmReducibleEquidistribution&lt; U, G, V &gt;</h3>
+
+<p>可約ジェネレータの最悪の場合の均等分布次元を計算する。 </p>
+<dl class="tparams"><dt>テンプレート引数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">U</td><td>疑似乱数生成器の出力する値の型、符号なし型であること。 </td></tr>
+    <tr><td class="paramname">G</td><td>疑似乱数生成器 </td></tr>
+    <tr><td class="paramname">V</td><td>パラメータ生成器の出力値の型 </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">構築子と解体子</h2>
+<a class="anchor" id="a2b201dce9be4f4fcf6f36c9952d23c37"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename U , typename G , typename V  = U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html">MTToolBox::AlgorithmReducibleEquidistribution</a>&lt; U, G, V &gt;::<a class="el" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html">AlgorithmReducibleEquidistribution</a> </td>
+          <td>(</td>
+          <td class="paramtype">const G &amp;&#160;</td>
+          <td class="paramname"><em>rg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const NTL::GF2X&#160;</td>
+          <td class="paramname"><em>irreducibleFactor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>bit_length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mexp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>コンストラクタ </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">rg</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">irreducibleFactor</td><td>特性多項式のメルセンヌ指数次の既約成分 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bit_length</td><td>出力のビット長 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mexp</td><td>メルセンヌ指数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>参照先 <a class="el" href="namespace_m_t_tool_box.html#a402cebc7daf73e0c7662f33933e78056">MTToolBox::calcCharacteristicPolynomial()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acd72b3743af230b886a6c189a7b2f7e5"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename U , typename G , typename V  = U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html">MTToolBox::AlgorithmReducibleEquidistribution</a>&lt; U, G, V &gt;::~<a class="el" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html">AlgorithmReducibleEquidistribution</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>デストラクタ </p>
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a class="anchor" id="a00695ac525b2a3a01816fc9941d101ed"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename U , typename G , typename V  = U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html">MTToolBox::AlgorithmReducibleEquidistribution</a>&lt; U, G, V &gt;::get_all_equidist </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>veq</em>[]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>vビット精度の均等分布次元を計算する。 v = <b>bit_len</b> から 1までの均等分布次元を計算して、<b>veq</b>[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総和である。 </p>
+<dl class="section warning"><dt>警告</dt><dd><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html" title="疑似乱数生成器の均等分布次元を計算する ">AlgorithmEquidistribution</a> をコンストラクトしてから、 <a class="el" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#a00695ac525b2a3a01816fc9941d101ed" title="vビット精度の均等分布次元を計算する。 v = bit_len から 1までの均等分布次元を計算して、veq[] に入れる�...">get_all_equidist()</a> または、get_equidist() のどちらか一方を１回し か呼び出すことはできない。</dd></dl>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">veq</td><td>v ビット精度の均等分布次元の配列 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>実際のvビット精度の均等分布次元と理論的上限の差の総和 </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a9a231007a4fb814d3943bbea18e21f1a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename U , typename G , typename V  = U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html">MTToolBox::AlgorithmReducibleEquidistribution</a>&lt; U, G, V &gt;::get_equidist </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>sum_equidist</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>vビット精度の均等分布次元を計算する。 </p>
+<p>コンストラクタで指定したbit_length についてk(v)を計算して返す。 sum_equidist には、1 から bit_len -1 までの均等分布次元と理論的上限の 差の総和が返される。</p>
+<dl class="section warning"><dt>警告</dt><dd><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html" title="疑似乱数生成器の均等分布次元を計算する ">AlgorithmEquidistribution</a> をコンストラクトしてから、 <a class="el" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#a00695ac525b2a3a01816fc9941d101ed" title="vビット精度の均等分布次元を計算する。 v = bit_len から 1までの均等分布次元を計算して、veq[] に入れる�...">get_all_equidist()</a> または、get_equidist() のどちらか一方を１回し か呼び出すことはできない。</dd></dl>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sum_equidist</td><td>1からbit_len -1 までの理論的上限との差の総和 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd><b>bit_length</b> ビット精度の均等分布次元 </dd></dl>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li><a class="el" href="_algorithm_reducible_equidistribution_8hpp_source.html">AlgorithmReducibleEquidistribution.hpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2016年10月12日(水) 13時45分38秒作成 - MTToolBox / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.10
+</small></address>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.5"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
 <title>MTToolBox: MersenneTwister.hpp ソースファイル</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -16,9 +16,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">MTToolBox
-   &#160;<span id="projectnumber">0.2</span>
+   &#160;<span id="projectnumber">0.2.10</span>
    </div>
   </td>
  </tr>
@@ -26,11 +26,11 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 作成： Doxygen 1.8.5 -->
+<!-- 構築: Doxygen 1.8.10 -->
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li><a href="index.html"><span>メインページ</span></a></li>
-      <li><a href="namespaces.html"><span>ネームスペース</span></a></li>
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="namespaces.html"><span>名前空間</span></a></li>
       <li><a href="annotated.html"><span>データ構造</span></a></li>
       <li class="current"><a href="files.html"><span>ファイル</span></a></li>
     </ul>
@@ -38,6 +38,7 @@
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>大域各種</span></a></li>
     </ul>
   </div>
 <div id="nav-path" class="navpath">
@@ -50,15 +51,15 @@
 <div class="title">MersenneTwister.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_mersenne_twister_8hpp.html">説明を見る。</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MTTOOLBOX_MERSENNETWISTER_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MTTOOLBOX_MERSENNETWISTER_HPP</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
+<a href="_mersenne_twister_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MTTOOLBOX_MERSENNETWISTER_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define MTTOOLBOX_MERSENNETWISTER_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;inttypes.h&gt;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_abstract_generator_8hpp.html">MTToolBox/AbstractGenerator.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span>MTToolBox {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_m_t_tool_box.html">MTToolBox</a> {</div>
 <div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html">   48</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html">MersenneTwister</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_tool_box_1_1_abstract_generator.html">AbstractGenerator</a>&lt;uint32_t&gt; {</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html#a3bbfacc70833a1ace156f3f90347b7ec">   59</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#a3bbfacc70833a1ace156f3f90347b7ec">MersenneTwister</a>() {</div>
@@ -146,7 +147,7 @@
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        }</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
 <div class="line"><a name="l00259"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_mersenne_twister.html#ab803399c82ff1b565346a30eb48e2fa7">  259</a></span>&#160;        uint32_t <a class="code" href="class_m_t_tool_box_1_1_mersenne_twister.html#ab803399c82ff1b565346a30eb48e2fa7">next</a>() {</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            <span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            <span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            <span class="keyword">const</span> uint32_t LARGE_MASK = UINT32_C(0x3ff);</div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            <span class="keyword">const</span> uint32_t UPPER_MASK = UINT32_C(0x80000000);</div>
@@ -183,6 +184,7 @@
 <div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_a3dcc4d91a23d5e1a3f36822a0d2ceb52"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#a3dcc4d91a23d5e1a3f36822a0d2ceb52">MTToolBox::MersenneTwister::seed_array</a></div><div class="ttdeci">void seed_array(const T *value, int key_length)</div><div class="ttdoc">T 型配列による初期化 </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:194</div></div>
 <div class="ttc" id="class_m_t_tool_box_1_1_abstract_generator_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_abstract_generator.html">MTToolBox::AbstractGenerator</a></div><div class="ttdoc">疑似乱数生成器 </div><div class="ttdef"><b>Definition:</b> AbstractGenerator.hpp:48</div></div>
 <div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_a004016129870e2408ba0d0958a178ac3"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#a004016129870e2408ba0d0958a178ac3">MTToolBox::MersenneTwister::generate</a></div><div class="ttdeci">uint32_t generate()</div><div class="ttdoc">疑似乱数を生成する </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:244</div></div>
+<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
 <div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_a3bbfacc70833a1ace156f3f90347b7ec"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#a3bbfacc70833a1ace156f3f90347b7ec">MTToolBox::MersenneTwister::MersenneTwister</a></div><div class="ttdeci">MersenneTwister()</div><div class="ttdoc">コンストラクタ </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:59</div></div>
 <div class="ttc" id="_abstract_generator_8hpp_html"><div class="ttname"><a href="_abstract_generator_8hpp.html">AbstractGenerator.hpp</a></div><div class="ttdoc">GF(2)線形疑似乱数生成器の抽象クラス </div></div>
 <div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_aedde3447ffea2853af24dcda61dd9818"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818">MTToolBox::MersenneTwister::seed</a></div><div class="ttdeci">void seed(uint32_t value)</div><div class="ttdoc">32bit整数による初期化 </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:138</div></div>
@@ -195,12 +197,13 @@
 <div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_ab3af8f22217708e437d02c62bab3a73f"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#ab3af8f22217708e437d02c62bab3a73f">MTToolBox::MersenneTwister::seed</a></div><div class="ttdeci">void seed(const std::string &amp;value)</div><div class="ttdoc">string文字列による初期化 </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:158</div></div>
 <div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_ad96982f91435bc8b18a9b6e69fcc3e66"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#ad96982f91435bc8b18a9b6e69fcc3e66">MTToolBox::MersenneTwister::seed</a></div><div class="ttdeci">void seed(const uint32_t *value, int key_length)</div><div class="ttdoc">符号なし整数配列による初期化 </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:175</div></div>
 <div class="ttc" id="class_m_t_tool_box_1_1_mersenne_twister_html_a17c2448b77d444c242b05b4dc17f02d6"><div class="ttname"><a href="class_m_t_tool_box_1_1_mersenne_twister.html#a17c2448b77d444c242b05b4dc17f02d6">MTToolBox::MersenneTwister::MersenneTwister</a></div><div class="ttdeci">MersenneTwister(const std::string &amp;value)</div><div class="ttdoc">コンストラクタ </div><div class="ttdef"><b>Definition:</b> MersenneTwister.hpp:91</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html"><div class="ttname"><a href="namespace_m_t_tool_box.html">MTToolBox</a></div><div class="ttdoc">MTToolBox の名前空間 </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Dec 6 2013 10:50:04に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+2016年10月12日(水) 13時45分38秒作成 - MTToolBox / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.5
+</a> 1.8.10
 </small></address>
 </body>
 </html>

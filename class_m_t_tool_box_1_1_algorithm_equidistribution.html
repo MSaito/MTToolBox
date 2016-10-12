@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.5"/>
-<title>MTToolBox: クラス テンプレート MTToolBox::AlgorithmEquidistribution&lt; U &gt;</title>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>MTToolBox: MTToolBox::AlgorithmEquidistribution&lt; U, V &gt; クラステンプレート</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -16,9 +16,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">MTToolBox
-   &#160;<span id="projectnumber">0.2</span>
+   &#160;<span id="projectnumber">0.2.10</span>
    </div>
   </td>
  </tr>
@@ -26,11 +26,11 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 作成： Doxygen 1.8.5 -->
+<!-- 構築: Doxygen 1.8.10 -->
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li><a href="index.html"><span>メインページ</span></a></li>
-      <li><a href="namespaces.html"><span>ネームスペース</span></a></li>
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="namespaces.html"><span>名前空間</span></a></li>
       <li class="current"><a href="annotated.html"><span>データ構造</span></a></li>
       <li><a href="files.html"><span>ファイル</span></a></li>
     </ul>
@@ -49,56 +49,57 @@
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public メソッド</a>  </div>
+<a href="#pub-methods">公開メンバ関数</a>  </div>
   <div class="headertitle">
-<div class="title">クラス テンプレート MTToolBox::AlgorithmEquidistribution&lt; U &gt;</div>  </div>
+<div class="title">MTToolBox::AlgorithmEquidistribution&lt; U, V &gt; クラステンプレート</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>疑似乱数生成器の均等分布次元を計算する  
- <a href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#details">[詳細]</a></p>
+ <a href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#details">[詳解]</a></p>
 
 <p><code>#include &lt;<a class="el" href="_algorithm_equidistribution_8hpp_source.html">AlgorithmEquidistribution.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public メソッド</h2></td></tr>
-<tr class="memitem:a77415bdcee26484cc929213c60a3d1f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#a77415bdcee26484cc929213c60a3d1f9">AlgorithmEquidistribution</a> (const <a class="el" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">ECGenerator</a> &amp;rand, int bit_length)</td></tr>
-<tr class="memdesc:a77415bdcee26484cc929213c60a3d1f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">コンストラクタ  <a href="#a77415bdcee26484cc929213c60a3d1f9">[詳細]</a><br/></td></tr>
-<tr class="separator:a77415bdcee26484cc929213c60a3d1f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abac47a8211d7b55b3bca71749c6a703c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#abac47a8211d7b55b3bca71749c6a703c">~AlgorithmEquidistribution</a> ()</td></tr>
-<tr class="memdesc:abac47a8211d7b55b3bca71749c6a703c"><td class="mdescLeft">&#160;</td><td class="mdescRight">デストラクタ  <a href="#abac47a8211d7b55b3bca71749c6a703c">[詳細]</a><br/></td></tr>
-<tr class="separator:abac47a8211d7b55b3bca71749c6a703c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4dc41633a5a978bde318b9216b3d338"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#ac4dc41633a5a978bde318b9216b3d338">get_all_equidist</a> (int veq[])</td></tr>
-<tr class="memdesc:ac4dc41633a5a978bde318b9216b3d338"><td class="mdescLeft">&#160;</td><td class="mdescRight">vビット精度の均等分布次元を計算する。 v = <b>bit_len</b> から 1までの均等分布次元を計算して、<b>veq</b>[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総和である。  <a href="#ac4dc41633a5a978bde318b9216b3d338">[詳細]</a><br/></td></tr>
-<tr class="separator:ac4dc41633a5a978bde318b9216b3d338"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe1b0dbadc803e07fef5faf6144b40e2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#abe1b0dbadc803e07fef5faf6144b40e2">get_equidist</a> (int *sum_equidist)</td></tr>
-<tr class="memdesc:abe1b0dbadc803e07fef5faf6144b40e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">vビット精度の均等分布次元を計算する。  <a href="#abe1b0dbadc803e07fef5faf6144b40e2">[詳細]</a><br/></td></tr>
-<tr class="separator:abe1b0dbadc803e07fef5faf6144b40e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:add24616aab3d5d172906863d073003e6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#add24616aab3d5d172906863d073003e6">AlgorithmEquidistribution</a> (const <a class="el" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">ECGenerator</a> &amp;rand, int bit_length, int mexp=0)</td></tr>
+<tr class="memdesc:add24616aab3d5d172906863d073003e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">コンストラクタ  <a href="#add24616aab3d5d172906863d073003e6">[詳解]</a><br /></td></tr>
+<tr class="separator:add24616aab3d5d172906863d073003e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af09f04b31231e90a73b4bf4dd5a03c70"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#af09f04b31231e90a73b4bf4dd5a03c70">~AlgorithmEquidistribution</a> ()</td></tr>
+<tr class="memdesc:af09f04b31231e90a73b4bf4dd5a03c70"><td class="mdescLeft">&#160;</td><td class="mdescRight">デストラクタ  <a href="#af09f04b31231e90a73b4bf4dd5a03c70">[詳解]</a><br /></td></tr>
+<tr class="separator:af09f04b31231e90a73b4bf4dd5a03c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac164c212056d4ef1a36d74f250e3ea3b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#ac164c212056d4ef1a36d74f250e3ea3b">get_all_equidist</a> (int veq[])</td></tr>
+<tr class="memdesc:ac164c212056d4ef1a36d74f250e3ea3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">vビット精度の均等分布次元を計算する。 v = <b>bit_len</b> から 1までの均等分布次元を計算して、<b>veq</b>[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総和である。  <a href="#ac164c212056d4ef1a36d74f250e3ea3b">[詳解]</a><br /></td></tr>
+<tr class="separator:ac164c212056d4ef1a36d74f250e3ea3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a298d557d6dc23d65543fcbca9d2d8f74"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#a298d557d6dc23d65543fcbca9d2d8f74">get_equidist</a> (int *sum_equidist)</td></tr>
+<tr class="memdesc:a298d557d6dc23d65543fcbca9d2d8f74"><td class="mdescLeft">&#160;</td><td class="mdescRight">vビット精度の均等分布次元を計算する。  <a href="#a298d557d6dc23d65543fcbca9d2d8f74">[詳解]</a><br /></td></tr>
+<tr class="separator:a298d557d6dc23d65543fcbca9d2d8f74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">説明</h2>
-<div class="textblock"><h3>template&lt;typename U&gt;<br/>
-class MTToolBox::AlgorithmEquidistribution&lt; U &gt;</h3>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><h3>template&lt;typename U, typename V = U&gt;<br />
+class MTToolBox::AlgorithmEquidistribution&lt; U, V &gt;</h3>
 
 <p>疑似乱数生成器の均等分布次元を計算する </p>
 <p>PIS法(原瀬)によって疑似乱数生成器の出力の均等分布次元を計算する アルゴリズム</p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
+<dl class="tparams"><dt>テンプレート引数</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">U</td><td>疑似乱数生成器の出力の型 </td></tr>
+    <tr><td class="paramname">V</td><td>パラメータ生成器の出力の型 </td></tr>
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">コンストラクタとデストラクタ</h2>
-<a class="anchor" id="a77415bdcee26484cc929213c60a3d1f9"></a>
+</div><h2 class="groupheader">構築子と解体子</h2>
+<a class="anchor" id="add24616aab3d5d172906863d073003e6"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename U&gt; </div>
+template&lt;typename U, typename V = U&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">MTToolBox::AlgorithmEquidistribution</a>&lt; U &gt;::<a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">AlgorithmEquidistribution</a> </td>
+          <td class="memname"><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">MTToolBox::AlgorithmEquidistribution</a>&lt; U, V &gt;::<a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">AlgorithmEquidistribution</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_m_t_tool_box_1_1_equidistribution_calculatable.html">ECGenerator</a> &amp;&#160;</td>
           <td class="paramname"><em>rand</em>, </td>
@@ -107,7 +108,13 @@ template&lt;typename U&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>bit_length</em>&#160;</td>
+          <td class="paramname"><em>bit_length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mexp</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -128,25 +135,26 @@ template&lt;typename U&gt; </div>
   <table class="params">
     <tr><td class="paramname">rand</td><td>均等分布次元計算可能な疑似乱数生成器 </td></tr>
     <tr><td class="paramname">bit_length</td><td>均等分布次元を計算するMSBからのビット長, k(v)のv の最初の値 </td></tr>
+    <tr><td class="paramname">mexp</td><td>メルセンヌ指数、指定しなければ状態空間サイズ。 可約生成器の場合は指定する必要がある。 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>参照先 <a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html#accdd6df63c2639e56b31e5dd205d67d7">MTToolBox::AbstractGenerator&lt; U &gt;::bitSize()</a>.</p>
+<p>参照先 <a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html#a9d1d8f6dc01860875cd0849325158b5a">MTToolBox::AbstractGenerator&lt; U &gt;::bitSize()</a>, <a class="el" href="class_m_t_tool_box_1_1linear__generator__vector.html#a1c63197cd22f90a8dfc48b31af214328">MTToolBox::linear_generator_vector&lt; U, V &gt;::next_state()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="abac47a8211d7b55b3bca71749c6a703c"></a>
+<a class="anchor" id="af09f04b31231e90a73b4bf4dd5a03c70"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename U&gt; </div>
+template&lt;typename U, typename V = U&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">MTToolBox::AlgorithmEquidistribution</a>&lt; U &gt;::~<a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">AlgorithmEquidistribution</a> </td>
+          <td class="memname"><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">MTToolBox::AlgorithmEquidistribution</a>&lt; U, V &gt;::~<a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">AlgorithmEquidistribution</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -163,15 +171,15 @@ template&lt;typename U&gt; </div>
 
 </div>
 </div>
-<h2 class="groupheader">関数</h2>
-<a class="anchor" id="ac4dc41633a5a978bde318b9216b3d338"></a>
+<h2 class="groupheader">関数詳解</h2>
+<a class="anchor" id="ac164c212056d4ef1a36d74f250e3ea3b"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename U &gt; </div>
+template&lt;typename U , typename V &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">MTToolBox::AlgorithmEquidistribution</a>&lt; U &gt;::get_all_equidist </td>
+          <td class="memname">int <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">MTToolBox::AlgorithmEquidistribution</a>&lt; U, V &gt;::get_all_equidist </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>veq</em>[]</td><td>)</td>
@@ -181,7 +189,7 @@ template&lt;typename U &gt; </div>
 </div><div class="memdoc">
 
 <p>vビット精度の均等分布次元を計算する。 v = <b>bit_len</b> から 1までの均等分布次元を計算して、<b>veq</b>[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総和である。 </p>
-<dl class="section warning"><dt>警告</dt><dd><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html" title="疑似乱数生成器の均等分布次元を計算する ">AlgorithmEquidistribution</a> をコンストラクトしてから、 <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#ac4dc41633a5a978bde318b9216b3d338" title="vビット精度の均等分布次元を計算する。 v = bit_len から 1までの均等分布次元を計算して、veq[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総和...">get_all_equidist()</a> または、get_equidist() のどちらか一方を１回し か呼び出すことはできない。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html" title="疑似乱数生成器の均等分布次元を計算する ">AlgorithmEquidistribution</a> をコンストラクトしてから、 <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#ac164c212056d4ef1a36d74f250e3ea3b" title="vビット精度の均等分布次元を計算する。 v = bit_len から 1までの均等分布次元を計算して、veq[] に入れる�...">get_all_equidist()</a> または、get_equidist() のどちらか一方を１回し か呼び出すことはできない。</dd></dl>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">veq</td><td>v ビット精度の均等分布次元の配列 </td></tr>
@@ -190,18 +198,18 @@ template&lt;typename U &gt; </div>
 </dl>
 <dl class="section return"><dt>戻り値</dt><dd>実際のvビット精度の均等分布次元と理論的上限の差の総和 </dd></dl>
 
-<p>参照元 <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a893bd8f23f666a4b3f88c199ceea463f">MTToolBox::AlgorithmRecursionAndTempering&lt; U &gt;::search()</a>.</p>
+<p>参照元 <a class="el" href="class_m_t_tool_box_1_1_algorithm_reducible_recursion_and_tempering.html#ae0b7c1e8b838238a73c58257caa3f9c0">MTToolBox::AlgorithmReducibleRecursionAndTempering&lt; U, G &gt;::search()</a>, <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a7936299c98f98a7c601ce82de1d5f358">MTToolBox::AlgorithmRecursionAndTempering&lt; U, V &gt;::search()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="abe1b0dbadc803e07fef5faf6144b40e2"></a>
+<a class="anchor" id="a298d557d6dc23d65543fcbca9d2d8f74"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename U &gt; </div>
+template&lt;typename U , typename V &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">MTToolBox::AlgorithmEquidistribution</a>&lt; U &gt;::get_equidist </td>
+          <td class="memname">int <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">MTToolBox::AlgorithmEquidistribution</a>&lt; U, V &gt;::get_equidist </td>
           <td>(</td>
           <td class="paramtype">int *&#160;</td>
           <td class="paramname"><em>sum_equidist</em></td><td>)</td>
@@ -212,7 +220,7 @@ template&lt;typename U &gt; </div>
 
 <p>vビット精度の均等分布次元を計算する。 </p>
 <p>コンストラクタで指定したbit_length についてk(v)を計算して返す。 sum_equidist には、1 から bit_len -1 までの均等分布次元と理論的上限の 差の総和が返される。</p>
-<dl class="section warning"><dt>警告</dt><dd><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html" title="疑似乱数生成器の均等分布次元を計算する ">AlgorithmEquidistribution</a> をコンストラクトしてから、 <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#ac4dc41633a5a978bde318b9216b3d338" title="vビット精度の均等分布次元を計算する。 v = bit_len から 1までの均等分布次元を計算して、veq[] に入れる。返却値はv=1からbit_len までの均等分布次元の理論的上限との 差の総和...">get_all_equidist()</a> または、get_equidist() のどちらか一方を１回し か呼び出すことはできない。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd><a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html" title="疑似乱数生成器の均等分布次元を計算する ">AlgorithmEquidistribution</a> をコンストラクトしてから、 <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#ac164c212056d4ef1a36d74f250e3ea3b" title="vビット精度の均等分布次元を計算する。 v = bit_len から 1までの均等分布次元を計算して、veq[] に入れる�...">get_all_equidist()</a> または、get_equidist() のどちらか一方を１回し か呼び出すことはできない。</dd></dl>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
     <tr><td class="paramname">sum_equidist</td><td>1からbit_len -1 までの理論的上限との差の総和 </td></tr>
@@ -223,15 +231,15 @@ template&lt;typename U &gt; </div>
 
 </div>
 </div>
-<hr/>このクラスの説明は次のファイルから生成されました:<ul>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
 <li><a class="el" href="_algorithm_equidistribution_8hpp_source.html">AlgorithmEquidistribution.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Dec 6 2013 10:50:04に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+2016年10月12日(水) 13時45分38秒作成 - MTToolBox / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.5
+</a> 1.8.10
 </small></address>
 </body>
 </html>

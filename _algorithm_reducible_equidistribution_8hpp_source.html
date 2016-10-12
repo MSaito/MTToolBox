@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>MTToolBox: AlgorithmReducibleEquidistribution.hpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MTToolBox
+   &#160;<span id="projectnumber">0.2.10</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.10 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="namespaces.html"><span>名前空間</span></a></li>
+      <li><a href="annotated.html"><span>データ構造</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>大域各種</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_25bad69779203a1e5f1599a258f903fc.html">MTToolBox</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">AlgorithmReducibleEquidistribution.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_algorithm_reducible_equidistribution_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MTTOOLBOX_ALGORITHM_REDUCIBLE_EQUIDISTRIBUTION_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define MTTOOLBOX_ALGORITHM_REDUCIBLE_EQUIDISTRIBUTION_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_reducible_generator_8hpp.html">MTToolBox/ReducibleGenerator.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_algorithm_equidistribution_8hpp.html">MTToolBox/AlgorithmEquidistribution.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_m_t_tool_box.html">MTToolBox</a> {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> G, <span class="keyword">typename</span> V = U&gt;</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html">   51</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html">AlgorithmReducibleEquidistribution</a> {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#a2b201dce9be4f4fcf6f36c9952d23c37">   75</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#a2b201dce9be4f4fcf6f36c9952d23c37">AlgorithmReducibleEquidistribution</a>(<span class="keyword">const</span> G&amp; rg,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                                           <span class="keyword">const</span> NTL::GF2X irreducibleFactor,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                                           <span class="keywordtype">int</span> bit_length,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                                           <span class="keywordtype">int</span> mexp) {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            G * rand = <span class="keyword">new</span> G(rg);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            NTL::GF2X poly(0,1);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <a class="code" href="namespace_m_t_tool_box.html#a402cebc7daf73e0c7662f33933e78056">calcCharacteristicPolynomial</a>(rand, poly);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            NTL::GF2X quotient = poly / irreducibleFactor;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            annihilate&lt;U&gt;(rand, quotient);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            ae = <span class="keyword">new</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">AlgorithmEquidistribution&lt;U, V&gt;</a>(*rand, bit_length, mexp);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#acd72b3743af230b886a6c189a7b2f7e5">   96</a></span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#acd72b3743af230b886a6c189a7b2f7e5">~AlgorithmReducibleEquidistribution</a>() {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keyword">delete</span> ae;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#a00695ac525b2a3a01816fc9941d101ed">  103</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#a00695ac525b2a3a01816fc9941d101ed">get_all_equidist</a>(<span class="keywordtype">int</span> veq[]) {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordflow">return</span> ae-&gt;get_all_equidist(veq);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#a9a231007a4fb814d3943bbea18e21f1a">  110</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#a9a231007a4fb814d3943bbea18e21f1a">get_equidist</a>(<span class="keywordtype">int</span> * sum_equidist) {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keywordflow">return</span> ae-&gt;get_equidist(sum_equidist);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <a class="code" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">AlgorithmEquidistribution&lt;U, V&gt;</a> *ae;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    };</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#endif // MTTOOLBOX_ALGORITHM_REDUCIBLE_EQUIDISTRIBUTION_HPP</span></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution_html_a2b201dce9be4f4fcf6f36c9952d23c37"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#a2b201dce9be4f4fcf6f36c9952d23c37">MTToolBox::AlgorithmReducibleEquidistribution::AlgorithmReducibleEquidistribution</a></div><div class="ttdeci">AlgorithmReducibleEquidistribution(const G &amp;rg, const NTL::GF2X irreducibleFactor, int bit_length, int mexp)</div><div class="ttdoc">コンストラクタ </div><div class="ttdef"><b>Definition:</b> AlgorithmReducibleEquidistribution.hpp:75</div></div>
+<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a402cebc7daf73e0c7662f33933e78056"><div class="ttname"><a href="namespace_m_t_tool_box.html#a402cebc7daf73e0c7662f33933e78056">MTToolBox::calcCharacteristicPolynomial</a></div><div class="ttdeci">void calcCharacteristicPolynomial(RecursionSearchable&lt; U, V &gt; *rand, NTL::GF2X &amp;poly)</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution_html_a00695ac525b2a3a01816fc9941d101ed"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#a00695ac525b2a3a01816fc9941d101ed">MTToolBox::AlgorithmReducibleEquidistribution::get_all_equidist</a></div><div class="ttdeci">int get_all_equidist(int veq[])</div><div class="ttdoc">vビット精度の均等分布次元を計算する。 v = bit_len から 1までの均等分布次元を計算して、veq[] に入れる�...</div><div class="ttdef"><b>Definition:</b> AlgorithmReducibleEquidistribution.hpp:103</div></div>
+<div class="ttc" id="_reducible_generator_8hpp_html"><div class="ttname"><a href="_reducible_generator_8hpp.html">ReducibleGenerator.hpp</a></div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_equidistribution_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_equidistribution.html">MTToolBox::AlgorithmEquidistribution</a></div><div class="ttdoc">疑似乱数生成器の均等分布次元を計算する </div><div class="ttdef"><b>Definition:</b> AlgorithmEquidistribution.hpp:238</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution_html"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html">MTToolBox::AlgorithmReducibleEquidistribution</a></div><div class="ttdoc">可約ジェネレータの最悪の場合の均等分布次元を計算する。 </div><div class="ttdef"><b>Definition:</b> AlgorithmReducibleEquidistribution.hpp:51</div></div>
+<div class="ttc" id="_algorithm_equidistribution_8hpp_html"><div class="ttname"><a href="_algorithm_equidistribution_8hpp.html">AlgorithmEquidistribution.hpp</a></div><div class="ttdoc">疑似乱数生成器の出力の均等分布次元を計算する。 </div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution_html_a9a231007a4fb814d3943bbea18e21f1a"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#a9a231007a4fb814d3943bbea18e21f1a">MTToolBox::AlgorithmReducibleEquidistribution::get_equidist</a></div><div class="ttdeci">int get_equidist(int *sum_equidist)</div><div class="ttdoc">vビット精度の均等分布次元を計算する。 </div><div class="ttdef"><b>Definition:</b> AlgorithmReducibleEquidistribution.hpp:110</div></div>
+<div class="ttc" id="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution_html_acd72b3743af230b886a6c189a7b2f7e5"><div class="ttname"><a href="class_m_t_tool_box_1_1_algorithm_reducible_equidistribution.html#acd72b3743af230b886a6c189a7b2f7e5">MTToolBox::AlgorithmReducibleEquidistribution::~AlgorithmReducibleEquidistribution</a></div><div class="ttdeci">~AlgorithmReducibleEquidistribution()</div><div class="ttdoc">デストラクタ </div><div class="ttdef"><b>Definition:</b> AlgorithmReducibleEquidistribution.hpp:96</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html"><div class="ttname"><a href="namespace_m_t_tool_box.html">MTToolBox</a></div><div class="ttdoc">MTToolBox の名前空間 </div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2016年10月12日(水) 13時45分38秒作成 - MTToolBox / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.10
+</small></address>
+</body>
+</html>

@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.5"/>
-<title>MTToolBox: メインページ</title>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>MTToolBox: 総合概要</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -16,9 +16,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">MTToolBox
-   &#160;<span id="projectnumber">0.2</span>
+   &#160;<span id="projectnumber">0.2.10</span>
    </div>
   </td>
  </tr>
@@ -26,11 +26,11 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 作成： Doxygen 1.8.5 -->
+<!-- 構築: Doxygen 1.8.10 -->
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>メインページ</span></a></li>
-      <li><a href="namespaces.html"><span>ネームスペース</span></a></li>
+      <li class="current"><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="namespaces.html"><span>名前空間</span></a></li>
       <li><a href="annotated.html"><span>データ構造</span></a></li>
       <li><a href="files.html"><span>ファイル</span></a></li>
     </ul>
@@ -38,18 +38,16 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">MTToolBox ドキュメント</div>  </div>
+<div class="title">MTToolBox 詳解</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="el" href="namespace_m_t_tool_box.html" title="MTToolBox の名前空間 ">MTToolBox</a> はGF(2)線形疑似乱数生成器を開発するためのライブラリである。</p>
-<ul>
+<div class="textblock"><p><a class="el" href="namespace_m_t_tool_box.html" title="MTToolBox の名前空間 ">MTToolBox</a> はGF(2)線形疑似乱数生成器を開発するためのライブラリである。</p><ul>
 <li>doxygen ドキュメント <a href="http://msaito.github.io/MTToolBox/">http://msaito.github.io/MTToolBox/</a></li>
 <li>doxygen ドキュメント <a href="http://msaito.github.io/MTToolBox/en/">http://msaito.github.io/MTToolBox/en/</a> (English)</li>
 <li>github プロジェクト <a href="https://github.com/MSaito/MTToolBox">https://github.com/MSaito/MTToolBox</a></li>
 <li>スライド <a href="http://msaito.github.io/MTToolBox/mttoolbox.pdf">http://msaito.github.io/MTToolBox/mttoolbox.pdf</a></li>
 </ul>
-<p><a class="el" href="namespace_m_t_tool_box.html" title="MTToolBox の名前空間 ">MTToolBox</a> はGF(2)線形疑似乱数生成器を開発する上で以下の点をサポートする。</p>
-<ul>
+<p><a class="el" href="namespace_m_t_tool_box.html" title="MTToolBox の名前空間 ">MTToolBox</a> はGF(2)線形疑似乱数生成器を開発する上で以下の点をサポートする。</p><ul>
 <li>GF(2)線形性のチェック</li>
 <li>出力列の最小多項式の計算<ul>
 <li>出力列の最小多項式の原始性の判定</li>
@@ -58,23 +56,25 @@
 <li>均等分布次元の計算</li>
 <li>均等分布次元を向上させるテンパリングパラメータの計算</li>
 </ul>
-<p><a class="el" href="namespace_m_t_tool_box.html" title="MTToolBox の名前空間 ">MTToolBox</a> は以下のような人に役に立つ</p>
-<ul>
+<p><a class="el" href="namespace_m_t_tool_box.html" title="MTToolBox の名前空間 ">MTToolBox</a> は以下のような人に役に立つ</p><ul>
 <li>CPU アーキテクチャに詳しく、高速な疑似乱数生成器を作りたい人</li>
 <li>特殊なハードウェアに適した疑似乱数生成器を作りたい人</li>
 </ul>
-<p><a class="el" href="namespace_m_t_tool_box.html" title="MTToolBox の名前空間 ">MTToolBox</a> には実践的なサンプルがある。</p>
-<ul>
+<p><a class="el" href="namespace_m_t_tool_box.html" title="MTToolBox の名前空間 ">MTToolBox</a> には実践的なサンプルがある。</p><ul>
+<li>XORSHIFT のサンプル兼チュートリアル</li>
 <li>TinyMT のパラメータを検索するTinyMTDCのサンプル</li>
+<li>MT のパラメータを検索するMTDCのサンプル</li>
 <li>MTGP のパラメータを検索するMTGPDCのサンプル</li>
+<li>RMT のサンプル</li>
+<li>SMFT のサンプル</li>
+<li>dSFMT のサンプル</li>
 </ul>
-<dl class="section author"><dt>作者</dt><dd>Mutsuo Saito, (<a href="#" onclick="location.href='mai'+'lto:'+'sai'+'to'+'@ma'+'th'+'.sc'+'i.'+'hir'+'os'+'him'+'a-'+'u.a'+'c.'+'jp'; return false;">saito<span style="display: none;">.nosp@m.</span>@mat<span style="display: none;">.nosp@m.</span>h.sci<span style="display: none;">.nosp@m.</span>.hir<span style="display: none;">.nosp@m.</span>oshim<span style="display: none;">.nosp@m.</span>a-u.<span style="display: none;">.nosp@m.</span>ac.jp</a>) Hiroshima University </dd>
+<dl class="section author"><dt>著者</dt><dd>Mutsuo Saito, (<a href="#" onclick="location.href='mai'+'lto:'+'sai'+'to'+'@ma'+'ni'+'eth'+'.c'+'om'; return false;">saito<span style="display: none;">.nosp@m.</span>@man<span style="display: none;">.nosp@m.</span>ieth.<span style="display: none;">.nosp@m.</span>com</a>) Manieth corp. </dd>
 <dd>
 Makoto Matsumoto, Hiroshima University</dd></dl>
-<dl class="section date"><dt>日付</dt><dd>2013-9-25</dd></dl>
-<p>Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto and Hiroshima University. All rights reserved.</p>
-<p>The 3-clause BSD License is applied to this software. </p>
-<pre class="fragment">Copyright (c) 2013 Mutsuo Saito, Makoto Matsumoto
+<dl class="section date"><dt>日付</dt><dd>2016-10-07</dd></dl>
+<p>Copyright (C) 2013, 2016 Mutsuo Saito, Makoto Matsumoto and Hiroshima University. All rights reserved.</p>
+<p>The 3-clause BSD License is applied to this software. </p><pre class="fragment">Copyright (c) 2013, 2016 Mutsuo Saito, Makoto Matsumoto
 and Hiroshima University.
 All rights reserved.
 
@@ -107,9 +107,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 </pre> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Dec 6 2013 10:50:04に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+2016年10月12日(水) 13時45分38秒作成 - MTToolBox / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.5
+</a> 1.8.10
 </small></address>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.5"/>
-<title>MTToolBox: period.hpp</title>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>MTToolBox: period.hpp ファイル</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -16,9 +16,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">MTToolBox
-   &#160;<span id="projectnumber">0.2</span>
+   &#160;<span id="projectnumber">0.2.10</span>
    </div>
   </td>
  </tr>
@@ -26,11 +26,11 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 作成： Doxygen 1.8.5 -->
+<!-- 構築: Doxygen 1.8.10 -->
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li><a href="index.html"><span>メインページ</span></a></li>
-      <li><a href="namespaces.html"><span>ネームスペース</span></a></li>
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="namespaces.html"><span>名前空間</span></a></li>
       <li><a href="annotated.html"><span>データ構造</span></a></li>
       <li class="current"><a href="files.html"><span>ファイル</span></a></li>
     </ul>
@@ -38,6 +38,7 @@
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>大域各種</span></a></li>
     </ul>
   </div>
 <div id="nav-path" class="navpath">
@@ -47,56 +48,57 @@
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">ネームスペース</a> &#124;
+<a href="#namespaces">名前空間</a> &#124;
 <a href="#func-members">関数</a>  </div>
   <div class="headertitle">
-<div class="title">period.hpp</div>  </div>
+<div class="title">period.hpp ファイル</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>最小多項式の計算と原始性の判定  
-<a href="#details">[詳細]</a></p>
-<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br/>
-<code>#include &lt;NTL/GF2X.h&gt;</code><br/>
-<code>#include &lt;NTL/vector.h&gt;</code><br/>
-<code>#include &lt;<a class="el" href="_abstract_generator_8hpp_source.html">MTToolBox/AbstractGenerator.hpp</a>&gt;</code><br/>
+<a href="#details">[詳解]</a></p>
+<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;NTL/GF2X.h&gt;</code><br />
+<code>#include &lt;NTL/vector.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="_abstract_generator_8hpp_source.html">MTToolBox/AbstractGenerator.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="util_8hpp_source.html">MTToolBox/util.hpp</a>&gt;</code><br />
 </div>
-<p><a href="period_8hpp_source.html">ソースコードを見る。</a></p>
+<p><a href="period_8hpp_source.html">[ソースコード]</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-ネームスペース</h2></td></tr>
-<tr class="memitem:namespace_m_t_tool_box"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_t_tool_box.html">MTToolBox</a></td></tr>
-<tr class="memdesc:namespace_m_t_tool_box"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_m_t_tool_box.html" title="MTToolBox の名前空間 ">MTToolBox</a> の名前空間 <br/></td></tr>
+名前空間</h2></td></tr>
+<tr class="memitem:namespace_m_t_tool_box"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_t_tool_box.html">MTToolBox</a></td></tr>
+<tr class="memdesc:namespace_m_t_tool_box"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_m_t_tool_box.html" title="MTToolBox の名前空間 ">MTToolBox</a> の名前空間 <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 関数</h2></td></tr>
-<tr class="memitem:a7861dda005fe9d0c519f7e1442a1fa84"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
-<tr class="memitem:a7861dda005fe9d0c519f7e1442a1fa84"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_m_t_tool_box.html#a7861dda005fe9d0c519f7e1442a1fa84">MTToolBox::minpoly</a> (NTL::GF2X &amp;poly, AbstractGenerator&lt; U &gt; &amp;generator, int pos=0)</td></tr>
-<tr class="memdesc:a7861dda005fe9d0c519f7e1442a1fa84"><td class="mdescLeft">&#160;</td><td class="mdescRight">最小多項式を求める  <a href="#a7861dda005fe9d0c519f7e1442a1fa84">[詳細]</a><br/></td></tr>
-<tr class="separator:a7861dda005fe9d0c519f7e1442a1fa84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a163d01ea904e59bb7458e125ff8cd948"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
+<tr class="memitem:a163d01ea904e59bb7458e125ff8cd948"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_m_t_tool_box.html#a163d01ea904e59bb7458e125ff8cd948">MTToolBox::minpoly</a> (NTL::GF2X &amp;poly, AbstractGenerator&lt; U &gt; &amp;generator, int pos=0, int stateSize=0)</td></tr>
+<tr class="memdesc:a163d01ea904e59bb7458e125ff8cd948"><td class="mdescLeft">&#160;</td><td class="mdescRight">最小多項式を求める  <a href="namespace_m_t_tool_box.html#a163d01ea904e59bb7458e125ff8cd948">[詳解]</a><br /></td></tr>
+<tr class="separator:a163d01ea904e59bb7458e125ff8cd948"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a321a25e0bd1bf2447a2dfffd9f960fa5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_t_tool_box.html#a321a25e0bd1bf2447a2dfffd9f960fa5">MTToolBox::isMexp</a> (uint32_t degree)</td></tr>
-<tr class="memdesc:a321a25e0bd1bf2447a2dfffd9f960fa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">2<sup>degree</sup> -1 が素数となるかどうかを返す  <a href="#a321a25e0bd1bf2447a2dfffd9f960fa5">[詳細]</a><br/></td></tr>
+<tr class="memdesc:a321a25e0bd1bf2447a2dfffd9f960fa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">2<sup>degree</sup> -1 が素数となるかどうかを返す  <a href="namespace_m_t_tool_box.html#a321a25e0bd1bf2447a2dfffd9f960fa5">[詳解]</a><br /></td></tr>
 <tr class="separator:a321a25e0bd1bf2447a2dfffd9f960fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a910150b2b4a1db3af4e77c498c1835dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_t_tool_box.html#a910150b2b4a1db3af4e77c498c1835dc">MTToolBox::isIrreducible</a> (const NTL::GF2X &amp;poly)</td></tr>
-<tr class="memdesc:a910150b2b4a1db3af4e77c498c1835dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">既約判定  <a href="#a910150b2b4a1db3af4e77c498c1835dc">[詳細]</a><br/></td></tr>
+<tr class="memdesc:a910150b2b4a1db3af4e77c498c1835dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">既約判定  <a href="namespace_m_t_tool_box.html#a910150b2b4a1db3af4e77c498c1835dc">[詳解]</a><br /></td></tr>
 <tr class="separator:a910150b2b4a1db3af4e77c498c1835dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07f94dcf95c07af9dca861231891dbb0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_t_tool_box.html#a07f94dcf95c07af9dca861231891dbb0">MTToolBox::isPrime</a> (const NTL::GF2X &amp;poly)</td></tr>
-<tr class="memdesc:a07f94dcf95c07af9dca861231891dbb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">原始性判定  <a href="#a07f94dcf95c07af9dca861231891dbb0">[詳細]</a><br/></td></tr>
+<tr class="memdesc:a07f94dcf95c07af9dca861231891dbb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">原始性判定  <a href="namespace_m_t_tool_box.html#a07f94dcf95c07af9dca861231891dbb0">[詳解]</a><br /></td></tr>
 <tr class="separator:a07f94dcf95c07af9dca861231891dbb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77e20f43e12f69f3a5d255fbad34e809"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_t_tool_box.html#a77e20f43e12f69f3a5d255fbad34e809">MTToolBox::isPrime</a> (const NTL::GF2X &amp;poly, int degree, const NTL::Vec&lt; NTL::ZZ &gt; &amp;prime_factors)</td></tr>
-<tr class="memdesc:a77e20f43e12f69f3a5d255fbad34e809"><td class="mdescLeft">&#160;</td><td class="mdescRight">原始性判定  <a href="#a77e20f43e12f69f3a5d255fbad34e809">[詳細]</a><br/></td></tr>
+<tr class="memdesc:a77e20f43e12f69f3a5d255fbad34e809"><td class="mdescLeft">&#160;</td><td class="mdescRight">原始性判定  <a href="namespace_m_t_tool_box.html#a77e20f43e12f69f3a5d255fbad34e809">[詳解]</a><br /></td></tr>
 <tr class="separator:a77e20f43e12f69f3a5d255fbad34e809"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c2d18bc039c136eae772077692bb5a3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_t_tool_box.html#a2c2d18bc039c136eae772077692bb5a3">MTToolBox::isPrime</a> (const NTL::GF2X &amp;poly, int degree, const char *prime_factors[])</td></tr>
-<tr class="memdesc:a2c2d18bc039c136eae772077692bb5a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">原始性判定  <a href="#a2c2d18bc039c136eae772077692bb5a3">[詳細]</a><br/></td></tr>
+<tr class="memdesc:a2c2d18bc039c136eae772077692bb5a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">原始性判定  <a href="namespace_m_t_tool_box.html#a2c2d18bc039c136eae772077692bb5a3">[詳解]</a><br /></td></tr>
 <tr class="separator:a2c2d18bc039c136eae772077692bb5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14bcb3353334840e792ed780d1157e5c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_t_tool_box.html#a14bcb3353334840e792ed780d1157e5c">MTToolBox::hasFactorOfDegree</a> (NTL::GF2X &amp;poly, long degree)</td></tr>
-<tr class="memdesc:a14bcb3353334840e792ed780d1157e5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">指定された次数の原始多項式がpolyの因数分解に含まれているか判定する。  <a href="#a14bcb3353334840e792ed780d1157e5c">[詳細]</a><br/></td></tr>
+<tr class="memdesc:a14bcb3353334840e792ed780d1157e5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">指定された次数の原始多項式がpolyの因数分解に含まれているか判定する。  <a href="namespace_m_t_tool_box.html#a14bcb3353334840e792ed780d1157e5c">[詳解]</a><br /></td></tr>
 <tr class="separator:a14bcb3353334840e792ed780d1157e5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">説明</h2>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>最小多項式の計算と原始性の判定 </p>
-<dl class="section author"><dt>作者</dt><dd>Mutsuo Saito (Hiroshima University) </dd>
+<dl class="section author"><dt>著者</dt><dd>Mutsuo Saito (Hiroshima University) </dd>
 <dd>
 Makoto Matsumoto (Hiroshima University)</dd></dl>
 <p>Copyright (C) 2013 Mutsuo Saito, Makoto Matsumoto and Hiroshima University. All rights reserved.</p>
@@ -104,9 +106,9 @@ Makoto Matsumoto (Hiroshima University)</dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Dec 6 2013 10:50:04に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+2016年10月12日(水) 13時45分38秒作成 - MTToolBox / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.5
+</a> 1.8.10
 </small></address>
 </body>
 </html>

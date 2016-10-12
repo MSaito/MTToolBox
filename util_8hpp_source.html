@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.5"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
 <title>MTToolBox: util.hpp ソースファイル</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -16,9 +16,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">MTToolBox
-   &#160;<span id="projectnumber">0.2</span>
+   &#160;<span id="projectnumber">0.2.10</span>
    </div>
   </td>
  </tr>
@@ -26,11 +26,11 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 作成： Doxygen 1.8.5 -->
+<!-- 構築: Doxygen 1.8.10 -->
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li><a href="index.html"><span>メインページ</span></a></li>
-      <li><a href="namespaces.html"><span>ネームスペース</span></a></li>
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="namespaces.html"><span>名前空間</span></a></li>
       <li><a href="annotated.html"><span>データ構造</span></a></li>
       <li class="current"><a href="files.html"><span>ファイル</span></a></li>
     </ul>
@@ -38,6 +38,7 @@
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>大域各種</span></a></li>
     </ul>
   </div>
 <div id="nav-path" class="navpath">
@@ -50,73 +51,73 @@
 <div class="title">util.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="util_8hpp.html">説明を見る。</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MTTOOLBOX_UTIL_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MTTOOLBOX_UTIL_HPP</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<a href="util_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MTTOOLBOX_UTIL_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define MTTOOLBOX_UTIL_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//#include &lt;stdio.h&gt;</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;iomanip&gt;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;inttypes.h&gt;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;tr1/memory&gt;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;NTL/GF2X.h&gt;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#if defined(USE_SHA)</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;openssl/sha.h&gt;</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">namespace </span>MTToolBox {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="namespace_m_t_tool_box.html#a8d0cc4161a8a989b21de16672c7bacbb">count_bit</a>(uint16_t x);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="namespace_m_t_tool_box.html#a8d0cc4161a8a989b21de16672c7bacbb">count_bit</a>(uint32_t x);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="namespace_m_t_tool_box.html#a8d0cc4161a8a989b21de16672c7bacbb">count_bit</a>(uint64_t x);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> uint32_t <a class="code" href="namespace_m_t_tool_box.html#a1f0e1393f674c0eac3b7269f852486ac">reverse_bit</a>(uint32_t x);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> uint64_t <a class="code" href="namespace_m_t_tool_box.html#a1f0e1393f674c0eac3b7269f852486ac">reverse_bit</a>(uint64_t x);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#a7e7fe113e116d591fd4c006ae4a3ec05">   65</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="namespace_m_t_tool_box.html#a7e7fe113e116d591fd4c006ae4a3ec05">bit_size</a>() {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<span class="keyword">sizeof</span>(T) * 8);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#a8fbf5b1b0ad367bccd4c19ff281fb88f">   80</a></span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="namespace_m_t_tool_box.html#a8fbf5b1b0ad367bccd4c19ff281fb88f">UNUSED_VARIABLE</a>(<span class="keywordtype">void</span> * x) {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        (void)x;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#affe01232a623b92053b22dc08bb70a54">  100</a></span>&#160;    T <a class="code" href="namespace_m_t_tool_box.html#affe01232a623b92053b22dc08bb70a54">floor2p</a>(T n) {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordflow">if</span> (n == 1) {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordflow">return</span> 2 * floor2p&lt;T&gt;(n / 2);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        }</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#a8efab9c60840a6b341ef525a0ad04210">  128</a></span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="namespace_m_t_tool_box.html#a8efab9c60840a6b341ef525a0ad04210">print_binary</a>(std::ostream&amp; os,</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                                    NTL::GF2X&amp; poly,</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                                    <span class="keywordtype">bool</span> breakline = <span class="keyword">true</span>) {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keyword">using namespace </span>NTL;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordflow">if</span> (deg(poly) &lt; 0) {</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            os &lt;&lt; <span class="stringliteral">&quot;0deg=-1&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        }</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt;= deg(poly); i++) {</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <span class="keywordflow">if</span>(rep(coeff(poly, i)) == 1) {</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                os &lt;&lt; <span class="charliteral">&#39;1&#39;</span>;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                os &lt;&lt; <span class="charliteral">&#39;0&#39;</span>;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            }</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            <span class="keywordflow">if</span> (breakline &amp;&amp; ((i % 32) == 31)) {</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                os &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            }</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        }</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        os &lt;&lt; <span class="stringliteral">&quot;deg=&quot;</span> &lt;&lt; deg(poly) &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    }</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#a30abfd018fb12ac7ae7d18325979efee">  171</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="namespace_m_t_tool_box.html#a30abfd018fb12ac7ae7d18325979efee">get_range</a>(T input, <span class="keywordtype">int</span> start, <span class="keywordtype">int</span> end) {</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        <span class="keywordflow">if</span> (end &lt; start) {</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            printf(<span class="stringliteral">&quot;get_range:%d, %d\n&quot;</span>, start, end);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;NTL/GF2X.h&gt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#if defined(USE_SHA)</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;openssl/sha.h&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_m_t_tool_box.html">MTToolBox</a> {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="namespace_m_t_tool_box.html#a8d0cc4161a8a989b21de16672c7bacbb">count_bit</a>(uint16_t x);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="namespace_m_t_tool_box.html#a8d0cc4161a8a989b21de16672c7bacbb">count_bit</a>(uint32_t x);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="namespace_m_t_tool_box.html#a8d0cc4161a8a989b21de16672c7bacbb">count_bit</a>(uint64_t x);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> uint32_t <a class="code" href="namespace_m_t_tool_box.html#a1f0e1393f674c0eac3b7269f852486ac">reverse_bit</a>(uint32_t x);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> uint64_t <a class="code" href="namespace_m_t_tool_box.html#a1f0e1393f674c0eac3b7269f852486ac">reverse_bit</a>(uint64_t x);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#a7e7fe113e116d591fd4c006ae4a3ec05">   64</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="namespace_m_t_tool_box.html#a7e7fe113e116d591fd4c006ae4a3ec05">bit_size</a>() {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<span class="keyword">sizeof</span>(T) * 8);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#a8fbf5b1b0ad367bccd4c19ff281fb88f">   79</a></span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="namespace_m_t_tool_box.html#a8fbf5b1b0ad367bccd4c19ff281fb88f">UNUSED_VARIABLE</a>(<span class="keywordtype">void</span> * x) {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        (void)x;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#affe01232a623b92053b22dc08bb70a54">   99</a></span>&#160;    T <a class="code" href="namespace_m_t_tool_box.html#affe01232a623b92053b22dc08bb70a54">floor2p</a>(T n) {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordflow">if</span> (n == 1) {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keywordflow">return</span> 2 * floor2p&lt;T&gt;(n / 2);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#a8efab9c60840a6b341ef525a0ad04210">  127</a></span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="namespace_m_t_tool_box.html#a8efab9c60840a6b341ef525a0ad04210">print_binary</a>(std::ostream&amp; os,</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                                    NTL::GF2X&amp; poly,</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                                    <span class="keywordtype">bool</span> breakline = <span class="keyword">true</span>) {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keyword">using namespace </span>NTL;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">if</span> (deg(poly) &lt; 0) {</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            os &lt;&lt; <span class="stringliteral">&quot;0deg=-1&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt;= deg(poly); i++) {</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keywordflow">if</span>(rep(coeff(poly, i)) == 1) {</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                os &lt;&lt; <span class="charliteral">&#39;1&#39;</span>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                os &lt;&lt; <span class="charliteral">&#39;0&#39;</span>;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            }</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            <span class="keywordflow">if</span> (breakline &amp;&amp; ((i % 32) == 31)) {</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                os &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            }</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        }</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        os &lt;&lt; <span class="stringliteral">&quot;deg=&quot;</span> &lt;&lt; deg(poly) &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    }</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#a30abfd018fb12ac7ae7d18325979efee">  170</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="namespace_m_t_tool_box.html#a30abfd018fb12ac7ae7d18325979efee">get_range</a>(T input, <span class="keywordtype">int</span> start, <span class="keywordtype">int</span> end) {</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordflow">if</span> (end &lt; start) {</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <span class="comment">//printf(&quot;get_range:%d, %d\n&quot;, start, end);</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            std::cout &lt;&lt; <span class="stringliteral">&quot;get_range:&quot;</span> &lt;&lt; start &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; end &lt;&lt; std::endl;</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            exit(0);</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        }</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <span class="keywordflow">return</span> input % (end - start + 1) + start;</div>
@@ -134,10 +135,10 @@
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    }</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="preprocessor">#if defined(USE_SHA)</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> poly_sha1(std::string&amp; str, <span class="keyword">const</span> NTL::GF2X&amp; poly) {</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        <span class="keyword">using namespace </span>NTL;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        SHA_CTX ctx;</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        SHA1_Init(&amp;ctx);</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keywordflow">if</span> (deg(poly) &lt; 0) {</div>
@@ -160,7 +161,7 @@
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        ss &gt;&gt; str;</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    }</div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;</div>
 <div class="line"><a name="l00279"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">  279</a></span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">calc_1pos</a>(uint16_t x)</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    {</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <span class="keywordflow">if</span> (x == 0) {</div>
@@ -247,23 +248,112 @@
 <div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;        <span class="keywordflow">return</span>((x &gt;&gt; 32) | (x &lt;&lt; 32));</div>
 <div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;    }</div>
 <div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;</div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;}</div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;<span class="preprocessor">#endif //MTTOOLBOX_UTIL_HPP</span></div>
-<div class="ttc" id="namespace_m_t_tool_box_html_affe01232a623b92053b22dc08bb70a54"><div class="ttname"><a href="namespace_m_t_tool_box.html#affe01232a623b92053b22dc08bb70a54">MTToolBox::floor2p</a></div><div class="ttdeci">T floor2p(T n)</div><div class="ttdoc">n を越えない最大の2のべき乗を返す。 </div><div class="ttdef"><b>Definition:</b> util.hpp:100</div></div>
-<div class="ttc" id="namespace_m_t_tool_box_html_a7e7fe113e116d591fd4c006ae4a3ec05"><div class="ttname"><a href="namespace_m_t_tool_box.html#a7e7fe113e116d591fd4c006ae4a3ec05">MTToolBox::bit_size</a></div><div class="ttdeci">int bit_size()</div><div class="ttdoc">T のビットサイズを返す。 </div><div class="ttdef"><b>Definition:</b> util.hpp:65</div></div>
-<div class="ttc" id="namespace_m_t_tool_box_html_a8fbf5b1b0ad367bccd4c19ff281fb88f"><div class="ttname"><a href="namespace_m_t_tool_box.html#a8fbf5b1b0ad367bccd4c19ff281fb88f">MTToolBox::UNUSED_VARIABLE</a></div><div class="ttdeci">static void UNUSED_VARIABLE(void *x)</div><div class="ttdoc">使用しない変数のワーニングを止める </div><div class="ttdef"><b>Definition:</b> util.hpp:80</div></div>
+<div class="line"><a name="l00509"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#aaddba044611fd649ec7af6ba41737759">  509</a></span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="namespace_m_t_tool_box.html#aaddba044611fd649ec7af6ba41737759">LCM</a>(NTL::GF2X&amp; lcm, <span class="keyword">const</span> NTL::GF2X&amp; x,</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;                           <span class="keyword">const</span> NTL::GF2X&amp; y) {</div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;        <span class="keyword">using namespace </span>NTL;</div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;        GF2X gcd;</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;        GCD(gcd, x, y);</div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;        mul(lcm, x, y);</div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;        lcm /= gcd;</div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;    }</div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a name="l00536"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#aaf8f6f376710a5d09992e8332c762aa6">  536</a></span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="namespace_m_t_tool_box.html#aaf8f6f376710a5d09992e8332c762aa6">toGF2Vec</a>(NTL::vec_GF2&amp; result, U value) {</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;        U mask = 1;</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;        <span class="keywordtype">int</span> bitSize = bit_size&lt;U&gt;();</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;        result.SetLength(bitSize);</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;        mask = mask &lt;&lt; (bitSize - 1);</div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bitSize; i++) {</div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;            <span class="keywordflow">if</span> (value &amp; mask) {</div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;                result.put(i, 1);</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;                result.put(i, 0);</div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;            }</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;            mask = mask &gt;&gt; 1;</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;        }</div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;    }</div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;</div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a name="l00567"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#acc163ed96b5d844bec46b63320426aed">  567</a></span>&#160;    <span class="keyword">inline</span> U <a class="code" href="namespace_m_t_tool_box.html#acc163ed96b5d844bec46b63320426aed">getOne</a>() {</div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>U<span class="keyword">&gt;</span>(1);</div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;    }</div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;</div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a name="l00586"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#a0a9e90a7e18e5cea7faf5e88b33a0e9e">  586</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespace_m_t_tool_box.html#a0a9e90a7e18e5cea7faf5e88b33a0e9e">setZero</a>(U&amp; x) {</div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;        x = 0;</div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;    }</div>
+<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;</div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a name="l00609"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#a6012795eccfa54f44eae575d35f6d160">  609</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespace_m_t_tool_box.html#a6012795eccfa54f44eae575d35f6d160">getBitOfPos</a>(U bits, <span class="keywordtype">int</span> pos) {</div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;        <span class="keywordflow">return</span> (bits &gt;&gt; pos) &amp; 1;</div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;    }</div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;</div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a name="l00632"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#aff2fcf94fbfc715cdf8fa286ee69cb10">  632</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespace_m_t_tool_box.html#aff2fcf94fbfc715cdf8fa286ee69cb10">setBitOfPos</a>(U *bits, <span class="keywordtype">int</span> pos, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> b) {</div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;        b = b &amp; 1;</div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;        U mask = ~(<span class="keyword">static_cast&lt;</span>U<span class="keyword">&gt;</span>(1) &lt;&lt; pos);</div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;        *bits &amp;= mask;</div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;        *bits |= <span class="keyword">static_cast&lt;</span>U<span class="keyword">&gt;</span>(b) &lt;&lt; pos;</div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;    }</div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;</div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a name="l00655"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#a928f4d3aa9e5458a6f0404f22dbf343c">  655</a></span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> U <a class="code" href="namespace_m_t_tool_box.html#a928f4d3aa9e5458a6f0404f22dbf343c">fromGF2Vec</a>(NTL::vec_GF2&amp; value) {</div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;        U result;</div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;        <a class="code" href="namespace_m_t_tool_box.html#a0a9e90a7e18e5cea7faf5e88b33a0e9e">setZero</a>(result);</div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;        U mask;</div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;        <a class="code" href="namespace_m_t_tool_box.html#a0a9e90a7e18e5cea7faf5e88b33a0e9e">setZero</a>(mask);</div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;        <span class="keywordtype">int</span> bitSize = bit_size&lt;U&gt;();</div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;        <span class="keywordtype">int</span> pos = bitSize - 1;</div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;        <a class="code" href="namespace_m_t_tool_box.html#aff2fcf94fbfc715cdf8fa286ee69cb10">setBitOfPos</a>(&amp;mask, pos, 1);</div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bitSize; i++) {</div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;            <span class="keywordflow">if</span> (!IsZero(value[i])) {</div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;                result |= mask;</div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;            }</div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;            pos--;</div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;            <a class="code" href="namespace_m_t_tool_box.html#a0a9e90a7e18e5cea7faf5e88b33a0e9e">setZero</a>(mask);</div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;            <a class="code" href="namespace_m_t_tool_box.html#aff2fcf94fbfc715cdf8fa286ee69cb10">setBitOfPos</a>(&amp;mask, pos, 1);</div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;        }</div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;    }</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;</div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a name="l00691"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#a9a3ac1c9e4450b22633fce7c5925f9e0">  691</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespace_m_t_tool_box.html#a9a3ac1c9e4450b22633fce7c5925f9e0">isZero</a>(U x) {</div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;        <span class="keywordflow">return</span> x == 0;</div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;    }</div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l00714"></a><span class="lineno"><a class="line" href="namespace_m_t_tool_box.html#ad71bc993aaacdb16a3d7a562b6eb1236">  714</a></span>&#160;    <span class="keyword">inline</span> U <a class="code" href="namespace_m_t_tool_box.html#ad71bc993aaacdb16a3d7a562b6eb1236">convert</a>(V x) {</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>U<span class="keyword">&gt;</span>(x);</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;    }</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;}</div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;<span class="preprocessor">#endif //MTTOOLBOX_UTIL_HPP</span></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_affe01232a623b92053b22dc08bb70a54"><div class="ttname"><a href="namespace_m_t_tool_box.html#affe01232a623b92053b22dc08bb70a54">MTToolBox::floor2p</a></div><div class="ttdeci">T floor2p(T n)</div><div class="ttdoc">n を越えない最大の2のべき乗を返す。 </div><div class="ttdef"><b>Definition:</b> util.hpp:99</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a7e7fe113e116d591fd4c006ae4a3ec05"><div class="ttname"><a href="namespace_m_t_tool_box.html#a7e7fe113e116d591fd4c006ae4a3ec05">MTToolBox::bit_size</a></div><div class="ttdeci">int bit_size()</div><div class="ttdoc">T のビットサイズを返す。 </div><div class="ttdef"><b>Definition:</b> util.hpp:64</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a8fbf5b1b0ad367bccd4c19ff281fb88f"><div class="ttname"><a href="namespace_m_t_tool_box.html#a8fbf5b1b0ad367bccd4c19ff281fb88f">MTToolBox::UNUSED_VARIABLE</a></div><div class="ttdeci">static void UNUSED_VARIABLE(void *x)</div><div class="ttdoc">使用しない変数のワーニングを止める </div><div class="ttdef"><b>Definition:</b> util.hpp:79</div></div>
+<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
 <div class="ttc" id="namespace_m_t_tool_box_html_a8d0cc4161a8a989b21de16672c7bacbb"><div class="ttname"><a href="namespace_m_t_tool_box.html#a8d0cc4161a8a989b21de16672c7bacbb">MTToolBox::count_bit</a></div><div class="ttdeci">static int count_bit(uint16_t x)</div><div class="ttdoc">1 の個数を数える </div><div class="ttdef"><b>Definition:</b> util.hpp:377</div></div>
-<div class="ttc" id="namespace_m_t_tool_box_html_a8efab9c60840a6b341ef525a0ad04210"><div class="ttname"><a href="namespace_m_t_tool_box.html#a8efab9c60840a6b341ef525a0ad04210">MTToolBox::print_binary</a></div><div class="ttdeci">static void print_binary(std::ostream &amp;os, NTL::GF2X &amp;poly, bool breakline=true)</div><div class="ttdoc">出力ストリーム os に多項式 poly を01の文字列で出力する。 </div><div class="ttdef"><b>Definition:</b> util.hpp:128</div></div>
-<div class="ttc" id="namespace_m_t_tool_box_html_a96ac1d869b7d96c78f770cc89260aee0"><div class="ttname"><a href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">MTToolBox::calc_1pos</a></div><div class="ttdeci">static int calc_1pos(uint16_t x)</div><div class="ttdoc">入力をビット列とみなして最上位の1の位置を0とした最も右側の（下位の）1の位置を返す。 </div><div class="ttdef"><b>Definition:</b> util.hpp:279</div></div>
-<div class="ttc" id="namespace_m_t_tool_box_html_a24b91c6dd6e6479a30f9a4954ba44995"><div class="ttname"><a href="namespace_m_t_tool_box.html#a24b91c6dd6e6479a30f9a4954ba44995">MTToolBox::fill_table</a></div><div class="ttdeci">void fill_table(T dist_tbl[], T src_tbl[], int size)</div><div class="ttdoc">GF(2)ベクトルのパラメータテーブルから、より高速で冗長なルックアップテーブルを作成する。 </div><div class="ttdef"><b>Definition:</b> util.hpp:197</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_ad71bc993aaacdb16a3d7a562b6eb1236"><div class="ttname"><a href="namespace_m_t_tool_box.html#ad71bc993aaacdb16a3d7a562b6eb1236">MTToolBox::convert</a></div><div class="ttdeci">U convert(V x)</div><div class="ttdoc">V 型をU型に変換する SIMD型は、そのSIMD型のファイルでこのテンプレートを特殊化する。 ...</div><div class="ttdef"><b>Definition:</b> util.hpp:714</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a928f4d3aa9e5458a6f0404f22dbf343c"><div class="ttname"><a href="namespace_m_t_tool_box.html#a928f4d3aa9e5458a6f0404f22dbf343c">MTToolBox::fromGF2Vec</a></div><div class="ttdeci">static U fromGF2Vec(NTL::vec_GF2 &amp;value)</div><div class="ttdoc">GF(2)ベクトルを符号なし整数に変換する。 上位ビットがベクトルの初めの要素になる。（デバッグの時見やす�...</div><div class="ttdef"><b>Definition:</b> util.hpp:655</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_acc163ed96b5d844bec46b63320426aed"><div class="ttname"><a href="namespace_m_t_tool_box.html#acc163ed96b5d844bec46b63320426aed">MTToolBox::getOne</a></div><div class="ttdeci">U getOne()</div><div class="ttdoc">その型の1を返す SIMD型は、そのSIMD型のファイルでこのテンプレートを特殊化する。 </div><div class="ttdef"><b>Definition:</b> util.hpp:567</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_aff2fcf94fbfc715cdf8fa286ee69cb10"><div class="ttname"><a href="namespace_m_t_tool_box.html#aff2fcf94fbfc715cdf8fa286ee69cb10">MTToolBox::setBitOfPos</a></div><div class="ttdeci">void setBitOfPos(U *bits, int pos, unsigned int b)</div><div class="ttdoc">変数の指定位置のビットを1または0にセットする SIMD型は、そのSIMD型のファイルでこのテンプレートを特殊化...</div><div class="ttdef"><b>Definition:</b> util.hpp:632</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a8efab9c60840a6b341ef525a0ad04210"><div class="ttname"><a href="namespace_m_t_tool_box.html#a8efab9c60840a6b341ef525a0ad04210">MTToolBox::print_binary</a></div><div class="ttdeci">static void print_binary(std::ostream &amp;os, NTL::GF2X &amp;poly, bool breakline=true)</div><div class="ttdoc">出力ストリーム os に多項式 poly を01の文字列で出力する。 </div><div class="ttdef"><b>Definition:</b> util.hpp:127</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a6012795eccfa54f44eae575d35f6d160"><div class="ttname"><a href="namespace_m_t_tool_box.html#a6012795eccfa54f44eae575d35f6d160">MTToolBox::getBitOfPos</a></div><div class="ttdeci">unsigned int getBitOfPos(U bits, int pos)</div><div class="ttdoc">特定位置のビットを求める SIMD型は、そのSIMD型のファイルでこのテンプレートを特殊化する。 ...</div><div class="ttdef"><b>Definition:</b> util.hpp:609</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_aaf8f6f376710a5d09992e8332c762aa6"><div class="ttname"><a href="namespace_m_t_tool_box.html#aaf8f6f376710a5d09992e8332c762aa6">MTToolBox::toGF2Vec</a></div><div class="ttdeci">static void toGF2Vec(NTL::vec_GF2 &amp;result, U value)</div><div class="ttdoc">符号なし整数をGF(2)ベクトルに変換する。 上位ビットがベクトルの初めの要素になる。（デバッグの時見やす�...</div><div class="ttdef"><b>Definition:</b> util.hpp:536</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_aaddba044611fd649ec7af6ba41737759"><div class="ttname"><a href="namespace_m_t_tool_box.html#aaddba044611fd649ec7af6ba41737759">MTToolBox::LCM</a></div><div class="ttdeci">static void LCM(NTL::GF2X &amp;lcm, const NTL::GF2X &amp;x, const NTL::GF2X &amp;y)</div><div class="ttdoc">多項式の最小公倍数を求める。 </div><div class="ttdef"><b>Definition:</b> util.hpp:509</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a0a9e90a7e18e5cea7faf5e88b33a0e9e"><div class="ttname"><a href="namespace_m_t_tool_box.html#a0a9e90a7e18e5cea7faf5e88b33a0e9e">MTToolBox::setZero</a></div><div class="ttdeci">void setZero(U &amp;x)</div><div class="ttdoc">ゼロをセットする SIMD型は、そのSIMD型のファイルでこのテンプレートを特殊化する。 </div><div class="ttdef"><b>Definition:</b> util.hpp:586</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a96ac1d869b7d96c78f770cc89260aee0"><div class="ttname"><a href="namespace_m_t_tool_box.html#a96ac1d869b7d96c78f770cc89260aee0">MTToolBox::calc_1pos</a></div><div class="ttdeci">static int calc_1pos(uint16_t x)</div><div class="ttdoc">入力をビット列とみなして最上位の1の位置を0とした最も右側の（下位の）1の位置を返す。 ...</div><div class="ttdef"><b>Definition:</b> util.hpp:279</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a24b91c6dd6e6479a30f9a4954ba44995"><div class="ttname"><a href="namespace_m_t_tool_box.html#a24b91c6dd6e6479a30f9a4954ba44995">MTToolBox::fill_table</a></div><div class="ttdeci">void fill_table(T dist_tbl[], T src_tbl[], int size)</div><div class="ttdoc">GF(2)ベクトルのパラメータテーブルから、より高速で冗長なルックアップテーブルを作成する。 ...</div><div class="ttdef"><b>Definition:</b> util.hpp:197</div></div>
 <div class="ttc" id="namespace_m_t_tool_box_html_a1f0e1393f674c0eac3b7269f852486ac"><div class="ttname"><a href="namespace_m_t_tool_box.html#a1f0e1393f674c0eac3b7269f852486ac">MTToolBox::reverse_bit</a></div><div class="ttdeci">static uint32_t reverse_bit(uint32_t x)</div><div class="ttdoc">ビットを反転する </div><div class="ttdef"><b>Definition:</b> util.hpp:453</div></div>
-<div class="ttc" id="namespace_m_t_tool_box_html_a30abfd018fb12ac7ae7d18325979efee"><div class="ttname"><a href="namespace_m_t_tool_box.html#a30abfd018fb12ac7ae7d18325979efee">MTToolBox::get_range</a></div><div class="ttdeci">int get_range(T input, int start, int end)</div><div class="ttdoc">input を start と end の間の数に変換する。 </div><div class="ttdef"><b>Definition:</b> util.hpp:171</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a9a3ac1c9e4450b22633fce7c5925f9e0"><div class="ttname"><a href="namespace_m_t_tool_box.html#a9a3ac1c9e4450b22633fce7c5925f9e0">MTToolBox::isZero</a></div><div class="ttdeci">bool isZero(U x)</div><div class="ttdoc">ゼロかどうか、判定する。 SIMD型は、そのSIMD型のファイルでこのテンプレートを特殊化する。 ...</div><div class="ttdef"><b>Definition:</b> util.hpp:691</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html_a30abfd018fb12ac7ae7d18325979efee"><div class="ttname"><a href="namespace_m_t_tool_box.html#a30abfd018fb12ac7ae7d18325979efee">MTToolBox::get_range</a></div><div class="ttdeci">int get_range(T input, int start, int end)</div><div class="ttdoc">input を start と end の間の数に変換する。 </div><div class="ttdef"><b>Definition:</b> util.hpp:170</div></div>
+<div class="ttc" id="namespace_m_t_tool_box_html"><div class="ttname"><a href="namespace_m_t_tool_box.html">MTToolBox</a></div><div class="ttdoc">MTToolBox の名前空間 </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Dec 6 2013 10:50:04に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+2016年10月12日(水) 13時45分38秒作成 - MTToolBox / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.5
+</a> 1.8.10
 </small></address>
 </body>
 </html>

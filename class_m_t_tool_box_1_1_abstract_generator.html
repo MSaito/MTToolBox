@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.5"/>
-<title>MTToolBox: クラス テンプレート MTToolBox::AbstractGenerator&lt; U &gt;</title>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>MTToolBox: MTToolBox::AbstractGenerator&lt; U &gt; クラステンプレート</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -16,9 +16,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">MTToolBox
-   &#160;<span id="projectnumber">0.2</span>
+   &#160;<span id="projectnumber">0.2.10</span>
    </div>
   </td>
  </tr>
@@ -26,11 +26,11 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 作成： Doxygen 1.8.5 -->
+<!-- 構築: Doxygen 1.8.10 -->
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li><a href="index.html"><span>メインページ</span></a></li>
-      <li><a href="namespaces.html"><span>ネームスペース</span></a></li>
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="namespaces.html"><span>名前空間</span></a></li>
       <li class="current"><a href="annotated.html"><span>データ構造</span></a></li>
       <li><a href="files.html"><span>ファイル</span></a></li>
     </ul>
@@ -49,55 +49,62 @@
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public メソッド</a>  </div>
+<a href="#pub-methods">公開メンバ関数</a>  </div>
   <div class="headertitle">
-<div class="title">クラス テンプレート MTToolBox::AbstractGenerator&lt; U &gt;<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">MTToolBox::AbstractGenerator&lt; U &gt; クラステンプレート<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>疑似乱数生成器  
- <a href="class_m_t_tool_box_1_1_abstract_generator.html#details">[詳細]</a></p>
+ <a href="class_m_t_tool_box_1_1_abstract_generator.html#details">[詳解]</a></p>
 
 <p><code>#include &lt;<a class="el" href="_abstract_generator_8hpp_source.html">AbstractGenerator.hpp</a>&gt;</code></p>
 <div class="dynheader">
-MTToolBox::AbstractGenerator&lt; U &gt;に対する継承グラフ</div>
+MTToolBox::AbstractGenerator&lt; U &gt; の継承関係図</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_m_t_tool_box_1_1_abstract_generator.png" usemap="#MTToolBox::AbstractGenerator&lt; U &gt;_map" alt=""/>
   <map id="MTToolBox::AbstractGenerator&lt; U &gt;_map" name="MTToolBox::AbstractGenerator&lt; U &gt;_map">
-<area href="class_m_t_tool_box_1_1_recursion_searchable.html" alt="MTToolBox::RecursionSearchable&lt; U &gt;" shape="rect" coords="0,56,268,80"/>
-<area href="class_m_t_tool_box_1_1_equidistribution_calculatable.html" title="このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。 " alt="MTToolBox::EquidistributionCalculatable&lt; U &gt;" shape="rect" coords="0,112,268,136"/>
-<area href="class_m_t_tool_box_1_1_tempering_calculatable.html" title="テンパリングを行うGF(2)線形疑似乱数生成器は、このクラスを継承す ることによって、TemperingAlgorithmを使用したテンパリングパラメー タ探索が可能になる。 ..." alt="MTToolBox::TemperingCalculatable&lt; U &gt;" shape="rect" coords="0,168,268,192"/>
+<area href="class_m_t_tool_box_1_1_recursion_searchable.html" alt="MTToolBox::RecursionSearchable&lt; U, V &gt;" shape="rect" coords="154,56,452,80"/>
+<area href="class_m_t_tool_box_1_1_recursion_searchable.html" alt="MTToolBox::RecursionSearchable&lt; U, U &gt;" shape="rect" coords="770,56,1068,80"/>
+<area href="class_m_t_tool_box_1_1_equidistribution_calculatable.html" title="このクラスはGF(2)線形疑似乱数生成器の均等分布次元を計算するためのクラスである。 " alt="MTToolBox::EquidistributionCalculatable&lt; U, V &gt;" shape="rect" coords="154,112,452,136"/>
+<area href="class_m_t_tool_box_1_1_equidistribution_calculatable.html" alt="MTToolBox::EquidistributionCalculatable&lt; U, U &gt;" shape="rect" coords="770,112,1068,136"/>
+<area href="class_m_t_tool_box_1_1_reducible_generator.html" title="このクラスは特性多項式が可約なGF(2)線形疑似乱数生成器を開 発するためのクラスである。 ..." alt="MTToolBox::ReducibleGenerator&lt; U, V &gt;" shape="rect" coords="0,168,298,192"/>
+<area href="class_m_t_tool_box_1_1_tempering_calculatable.html" title="テンパリングを行う可約ジェネレータは、このクラスを継承す ることによって、TemperingAlgorithmを使用した..." alt="MTToolBox::TemperingCalculatable&lt; U, V &gt;" shape="rect" coords="308,168,606,192"/>
+<area href="class_m_t_tool_box_1_1_reducible_generator.html" alt="MTToolBox::ReducibleGenerator&lt; U &gt;" shape="rect" coords="616,168,914,192"/>
+<area href="class_m_t_tool_box_1_1_tempering_calculatable.html" alt="MTToolBox::TemperingCalculatable&lt; U &gt;" shape="rect" coords="924,168,1222,192"/>
+<area href="class_m_t_tool_box_1_1_reducible_tempering_calculatable.html" alt="MTToolBox::ReducibleTemperingCalculatable&lt; U &gt;" shape="rect" coords="616,224,914,248"/>
+<area href="class_m_t_tool_box_1_1_reducible_tempering_calculatable.html" alt="MTToolBox::ReducibleTemperingCalculatable&lt; U &gt;" shape="rect" coords="924,224,1222,248"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public メソッド</h2></td></tr>
+公開メンバ関数</h2></td></tr>
 <tr class="memitem:a38caf741e9c9979e5ff580891ba23f56"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html#a38caf741e9c9979e5ff580891ba23f56">~AbstractGenerator</a> ()</td></tr>
-<tr class="memdesc:a38caf741e9c9979e5ff580891ba23f56"><td class="mdescLeft">&#160;</td><td class="mdescRight">仮想デストラクタ（必須）  <a href="#a38caf741e9c9979e5ff580891ba23f56">[詳細]</a><br/></td></tr>
+<tr class="memdesc:a38caf741e9c9979e5ff580891ba23f56"><td class="mdescLeft">&#160;</td><td class="mdescRight">仮想デストラクタ（必須）  <a href="#a38caf741e9c9979e5ff580891ba23f56">[詳解]</a><br /></td></tr>
 <tr class="separator:a38caf741e9c9979e5ff580891ba23f56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0654743a78f7eb84630936d16fd945e"><td class="memItemLeft" align="right" valign="top">virtual U&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html#ac0654743a78f7eb84630936d16fd945e">generate</a> ()=0</td></tr>
-<tr class="memdesc:ac0654743a78f7eb84630936d16fd945e"><td class="mdescLeft">&#160;</td><td class="mdescRight">内部状態を次状態に遷移し、疑似乱数をひとつ出力する。  <a href="#ac0654743a78f7eb84630936d16fd945e">[詳細]</a><br/></td></tr>
+<tr class="memdesc:ac0654743a78f7eb84630936d16fd945e"><td class="mdescLeft">&#160;</td><td class="mdescRight">内部状態を次状態に遷移し、疑似乱数をひとつ出力する。  <a href="#ac0654743a78f7eb84630936d16fd945e">[詳解]</a><br /></td></tr>
 <tr class="separator:ac0654743a78f7eb84630936d16fd945e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2418e6884e583c7ac6f1ecff13c5596d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html#a2418e6884e583c7ac6f1ecff13c5596d">seed</a> (U value)=0</td></tr>
-<tr class="memdesc:a2418e6884e583c7ac6f1ecff13c5596d"><td class="mdescLeft">&#160;</td><td class="mdescRight">内部状態を初期化する。  <a href="#a2418e6884e583c7ac6f1ecff13c5596d">[詳細]</a><br/></td></tr>
+<tr class="memdesc:a2418e6884e583c7ac6f1ecff13c5596d"><td class="mdescLeft">&#160;</td><td class="mdescRight">内部状態を初期化する。  <a href="#a2418e6884e583c7ac6f1ecff13c5596d">[詳解]</a><br /></td></tr>
 <tr class="separator:a2418e6884e583c7ac6f1ecff13c5596d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accdd6df63c2639e56b31e5dd205d67d7"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html#accdd6df63c2639e56b31e5dd205d67d7">bitSize</a> () const =0</td></tr>
-<tr class="memdesc:accdd6df63c2639e56b31e5dd205d67d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">内部状態空間のビットサイズを返す。  <a href="#accdd6df63c2639e56b31e5dd205d67d7">[詳細]</a><br/></td></tr>
-<tr class="separator:accdd6df63c2639e56b31e5dd205d67d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d1d8f6dc01860875cd0849325158b5a"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_tool_box_1_1_abstract_generator.html#a9d1d8f6dc01860875cd0849325158b5a">bitSize</a> () const  =0</td></tr>
+<tr class="memdesc:a9d1d8f6dc01860875cd0849325158b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">内部状態空間のビットサイズを返す。  <a href="#a9d1d8f6dc01860875cd0849325158b5a">[詳解]</a><br /></td></tr>
+<tr class="separator:a9d1d8f6dc01860875cd0849325158b5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">説明</h2>
-<div class="textblock"><h3>template&lt;class U&gt;<br/>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><h3>template&lt;class U&gt;<br />
 class MTToolBox::AbstractGenerator&lt; U &gt;</h3>
 
 <p>疑似乱数生成器 </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
+<dl class="tparams"><dt>テンプレート引数</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">U</td><td>疑似乱数生成器の出力の型 </td></tr>
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">コンストラクタとデストラクタ</h2>
+</div><h2 class="groupheader">構築子と解体子</h2>
 <a class="anchor" id="a38caf741e9c9979e5ff580891ba23f56"></a>
 <div class="memitem">
 <div class="memproto">
@@ -125,8 +132,8 @@ template&lt;class U&gt; </div>
 
 </div>
 </div>
-<h2 class="groupheader">関数</h2>
-<a class="anchor" id="accdd6df63c2639e56b31e5dd205d67d7"></a>
+<h2 class="groupheader">関数詳解</h2>
+<a class="anchor" id="a9d1d8f6dc01860875cd0849325158b5a"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -150,12 +157,11 @@ template&lt;class U&gt; </div>
 </div><div class="memdoc">
 
 <p>内部状態空間のビットサイズを返す。 </p>
-<p>内部状態空間のビットサイズ、つまりGF(2)線形空間の次元を返す。 メルセンヌツイスタのように欠けた配列を使用している場合は、実 際に使用されている部分のビットサイズを返すこと。 </p>
-<dl class="section return"><dt>戻り値</dt><dd>状態空間のビットサイズ </dd></dl>
+<p>内部状態空間のビットサイズ、つまりGF(2)線形空間の次元を返す。 メルセンヌツイスタのように欠けた配列を使用している場合は、実 際に使用されている部分のビットサイズを返すこと。 </p><dl class="section return"><dt>戻り値</dt><dd>状態空間のビットサイズ </dd></dl>
 
-<p><a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#a9eb50b904a3542b0ba8342da46599f0c">MTToolBox::MersenneTwister</a>, と <a class="el" href="class_m_t_tool_box_1_1_sequential.html#aad32c0e6951175f7f05b0ff03b08de92">MTToolBox::Sequential&lt; T &gt;</a>で実装されています。</p>
+<p><a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#a9eb50b904a3542b0ba8342da46599f0c">MTToolBox::MersenneTwister</a>, <a class="el" href="class_m_t_tool_box_1_1_mersenne_twister64.html#ae5cf3c8ba5e84c64a9ddbc0b4d6ebdbb">MTToolBox::MersenneTwister64</a>, <a class="el" href="class_m_t_tool_box_1_1_sequential.html#aad32c0e6951175f7f05b0ff03b08de92">MTToolBox::Sequential&lt; T &gt;</a>で実装されています。</p>
 
-<p>参照元 <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#a77415bdcee26484cc929213c60a3d1f9">MTToolBox::AlgorithmEquidistribution&lt; U &gt;::AlgorithmEquidistribution()</a>, <a class="el" href="namespace_m_t_tool_box.html#a7861dda005fe9d0c519f7e1442a1fa84">MTToolBox::minpoly()</a>, <a class="el" href="class_m_t_tool_box_1_1_algorithm_best_bits.html#ab9c3f8c9b585c61012266f7340cbbe61">MTToolBox::AlgorithmBestBits&lt; U &gt;::operator()()</a>, と <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a893bd8f23f666a4b3f88c199ceea463f">MTToolBox::AlgorithmRecursionAndTempering&lt; U &gt;::search()</a>.</p>
+<p>参照元 <a class="el" href="class_m_t_tool_box_1_1_algorithm_equidistribution.html#add24616aab3d5d172906863d073003e6">MTToolBox::AlgorithmEquidistribution&lt; U, V &gt;::AlgorithmEquidistribution()</a>, <a class="el" href="namespace_m_t_tool_box.html#afb80c19da61ef7051b0b9f907fcb11b5">MTToolBox::calcCharacteristicPolynomial()</a>, <a class="el" href="namespace_m_t_tool_box.html#a163d01ea904e59bb7458e125ff8cd948">MTToolBox::minpoly()</a>, <a class="el" href="class_m_t_tool_box_1_1_algorithm_best_bits.html#a4a2cfaad37ea3f773c609398b009aed5">MTToolBox::AlgorithmBestBits&lt; U, V &gt;::operator()()</a>, <a class="el" href="class_m_t_tool_box_1_1_algorithm_recursion_and_tempering.html#a7936299c98f98a7c601ce82de1d5f358">MTToolBox::AlgorithmRecursionAndTempering&lt; U, V &gt;::search()</a>.</p>
 
 </div>
 </div>
@@ -185,9 +191,9 @@ template&lt;class U&gt; </div>
 <p>内部状態を次状態に遷移し、疑似乱数をひとつ出力する。 </p>
 <dl class="section return"><dt>戻り値</dt><dd>疑似乱数 </dd></dl>
 
-<p><a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#a004016129870e2408ba0d0958a178ac3">MTToolBox::MersenneTwister</a>, と <a class="el" href="class_m_t_tool_box_1_1_sequential.html#aef882621b7bf81b6b63a819e049d61cd">MTToolBox::Sequential&lt; T &gt;</a>で実装されています。</p>
+<p><a class="el" href="class_m_t_tool_box_1_1_mersenne_twister64.html#a284711074f63b6caf14dd1c3faf6813b">MTToolBox::MersenneTwister64</a>, <a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#a004016129870e2408ba0d0958a178ac3">MTToolBox::MersenneTwister</a>, <a class="el" href="class_m_t_tool_box_1_1_sequential.html#aef882621b7bf81b6b63a819e049d61cd">MTToolBox::Sequential&lt; T &gt;</a>で実装されています。</p>
 
-<p>参照元 <a class="el" href="namespace_m_t_tool_box.html#a7861dda005fe9d0c519f7e1442a1fa84">MTToolBox::minpoly()</a>.</p>
+<p>参照元 <a class="el" href="namespace_m_t_tool_box.html#a163d01ea904e59bb7458e125ff8cd948">MTToolBox::minpoly()</a>.</p>
 
 </div>
 </div>
@@ -224,21 +230,21 @@ template&lt;class U&gt; </div>
   </dd>
 </dl>
 
-<p><a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818">MTToolBox::MersenneTwister</a>, と <a class="el" href="class_m_t_tool_box_1_1_sequential.html#afd83644313d1e92198d6733e1f4846d3">MTToolBox::Sequential&lt; T &gt;</a>で実装されています。</p>
+<p><a class="el" href="class_m_t_tool_box_1_1_mersenne_twister64.html#a2ea2f2055ca83e503fb5080b15f08fa0">MTToolBox::MersenneTwister64</a>, <a class="el" href="class_m_t_tool_box_1_1_mersenne_twister.html#aedde3447ffea2853af24dcda61dd9818">MTToolBox::MersenneTwister</a>, <a class="el" href="class_m_t_tool_box_1_1_sequential.html#afd83644313d1e92198d6733e1f4846d3">MTToolBox::Sequential&lt; T &gt;</a>で実装されています。</p>
 
-<p>参照元 <a class="el" href="class_m_t_tool_box_1_1_test_linearity.html#a25fd7013237916e69b2eb22f6cf42ab3">MTToolBox::TestLinearity&lt; U &gt;::operator()()</a>.</p>
+<p>参照元 <a class="el" href="class_m_t_tool_box_1_1_test_linearity.html#a1e43f1716bef3214fad2d74b394da815">MTToolBox::TestLinearity&lt; U, V &gt;::operator()()</a>.</p>
 
 </div>
 </div>
-<hr/>このクラスの説明は次のファイルから生成されました:<ul>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
 <li><a class="el" href="_abstract_generator_8hpp_source.html">AbstractGenerator.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-MTToolBoxに対してFri Dec 6 2013 10:50:04に生成されました。 &#160;<a href="http://www.doxygen.org/index.html">
+2016年10月12日(水) 13時45分38秒作成 - MTToolBox / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.5
+</a> 1.8.10
 </small></address>
 </body>
 </html>
