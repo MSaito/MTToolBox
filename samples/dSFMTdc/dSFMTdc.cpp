@@ -90,7 +90,7 @@ int search(options& opt, int count) {
         g.setFixed(true);
         g.setFixedSL1(opt.fixedSL1);
     }
-    AlgorithmReducibleRecursionSearch<w128_t, uint64_t> ars(g, mt);
+    AlgorithmReducibleRecursionSearch<w128_t> ars(g, mt);
     int i = 0;
     AlgorithmCalculateParity<w128_t, dSFMT> cp;
     cout << "# " << g.getHeaderString() << ", delta52"

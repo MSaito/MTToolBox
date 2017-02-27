@@ -5,7 +5,7 @@ calc_period_SOURCES = calc_period.cpp rmt64.hpp
 
 DEPENDENCIES = ../../lib/libMTToolBox.a
 AM_LDFLAGS = -L../../lib
-LDADD = -lMTToolBox -lntl
+LDADD = -lMTToolBox
 
 AM_CXXFLAGS = -Wall -O2 -I../../include -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS

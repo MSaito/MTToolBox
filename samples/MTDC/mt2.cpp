@@ -146,9 +146,9 @@ public:
         return mexp;
     }
 
-    void setUpParam(AbstractGenerator<uint32_t>& generator) {
-        pos = generator.generate() % (size - 2) + 2;
-        mata = generator.generate();
+    void setUpParam(ParameterGenerator& generator) {
+        pos = generator.getUint32() % (size - 2) + 2;
+        mata = generator.getUint32();
         if (id >= 0) {
             mata = (mata & UINT32_C(0xffff0000))
                 | (id & UINT32_C(0x0000ffff));

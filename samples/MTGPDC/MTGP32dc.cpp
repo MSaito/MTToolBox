@@ -28,8 +28,8 @@ using namespace std;
 using namespace MTToolBox;
 using namespace mtgp;
 
-typedef AlgorithmPartialBitPattern<uint32_t, uint32_t, 32, 4, 23, 5> st32;
-typedef AlgorithmPartialBitPattern<uint32_t, uint32_t, 32, 4, 9, 5, true>
+typedef AlgorithmPartialBitPattern<uint32_t, 32, 4, 23, 5> st32;
+typedef AlgorithmPartialBitPattern<uint32_t, 32, 4, 9, 5, true>
 stlsb32;
 
 int indexed_search(mtgp_options& opt, bool first);

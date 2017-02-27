@@ -43,19 +43,17 @@ namespace MTToolBox {
      * 証するためのパリティベクターを計算するために必要となるメソッドを備え
      * る。
      * @tparam U 疑似乱数生成器の出力の型
-     * @tparam V 疑似乱数生成器の内部パラメータを決める際に使う乱数生成器の出力の型
      *\endjapanese
      *
      *\english
      * @brief This class is an Abstract class for reducible generator.
      * @tparam U output type of the generator.
-     * @tparam V output type of the generator used for parameter generating.
      *\endenglish
      *
      */
-    template<typename U, typename V = U>
+    template<typename U>
     class ReducibleGenerator
-        : virtual public EquidistributionCalculatable<U, V> {
+        : virtual public EquidistributionCalculatable<U> {
     public:
 
         /**
@@ -131,7 +129,6 @@ namespace MTToolBox {
      *\japanese
      * 可約疑似乱数生成器の状態空間を多項式で殲滅する。
      * @tparam U 疑似乱数生成器の出力の型
-     * @tparam V 疑似乱数生成器の内部パラメータを決める際に使う乱数生成器の出力の型
      * @param[in,out] rg 可約疑似乱数生成器
      * @param[in] poly 殲滅多項式
      *\endjapanese
@@ -139,15 +136,14 @@ namespace MTToolBox {
      *\english
      * Annihilate internal state of generator by given polynomial.
      * @tparam U output type of the generator.
-     * @tparam V output type of the generator used for parameter generating.
      * @param[in,out] rg reducible generator
      * @param[in] poly annihilator polynomial
      *\endenglish
      */
-    template<typename U, typename V = U>
-    void annihilate(EquidistributionCalculatable<U, V>* rg,
+    template<typename U>
+    void annihilate(EquidistributionCalculatable<U>* rg,
                     const NTL::GF2X& poly) {
-        EquidistributionCalculatable<U, V> *other = rg->clone();
+        EquidistributionCalculatable<U> *other = rg->clone();
         rg->setZero();
         for (int i = 0; i <= deg(poly); i++) {
             if (coeff(poly, i) != 0) {

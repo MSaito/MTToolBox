@@ -140,7 +140,7 @@ namespace MTToolBox {
      * but is not a subclass of some abstract class.
      * Instead, this class is passed to them as template parameters.
      */
-    class dSFMT : public ReducibleGenerator<w128_t, uint64_t> {
+    class dSFMT : public ReducibleGenerator<w128_t> {
     public:
         /**
          * Constructor by mexp.
@@ -216,7 +216,7 @@ namespace MTToolBox {
             fixedSL1 = 0;
         }
 
-        EquidistributionCalculatable<w128_t, uint64_t> * clone() const {
+        EquidistributionCalculatable<w128_t> * clone() const {
             return new dSFMT(*this);
         }
 
@@ -374,15 +374,15 @@ namespace MTToolBox {
          * internal id
          * @param num sequential number
          */
-        void setUpParam(AbstractGenerator<uint64_t>& mt) {
-            param.pos1 = mt.generate() % (size - 2) + 1;
+        void setUpParam(ParameterGenerator& mt) {
+            param.pos1 = mt.getUint64() % (size - 2) + 1;
             if (fixed) {
                 param.sl1 = fixedSL1;
             } else {
-                param.sl1 = mt.generate() % (52 - 1) + 1;
+                param.sl1 = mt.getUint64() % (52 - 1) + 1;
             }
-            param.msk1 = mt.generate() | mt.generate();
-            param.msk2 = mt.generate() | mt.generate();
+            param.msk1 = mt.getUint64() | mt.getUint64();
+            param.msk2 = mt.getUint64() | mt.getUint64();
             param.msk1 &= UINT64_C(0x000fffffffffffff);
             param.msk2 &= UINT64_C(0x000fffffffffffff);
         }
@@ -457,7 +457,7 @@ namespace MTToolBox {
          * output function is GF(2)-linear.
          * @param that DSFMT generator added to this generator
          */
-        void add(EquidistributionCalculatable<w128_t, uint64_t>& other) {
+        void add(EquidistributionCalculatable<w128_t>& other) {
             dSFMT *that = dynamic_cast<dSFMT *>(&other);
             if (that == 0) {
                 throw std::invalid_argument(

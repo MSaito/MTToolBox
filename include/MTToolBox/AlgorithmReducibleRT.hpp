@@ -91,7 +91,7 @@ namespace MTToolBox {
          * sample directory uses sequential counter.
          *\endenglish
          */
-        AlgorithmReducibleRecursionAndTempering(AbstractGenerator<U>& bg) {
+        AlgorithmReducibleRecursionAndTempering(ParameterGenerator& bg) {
             baseGenerator = &bg;
         }
 
@@ -292,7 +292,7 @@ namespace MTToolBox {
         NTL::GF2X poly;
         //NTL::GF2X characteristic;
         std::ostream * out;
-        AbstractGenerator<U> * baseGenerator;
+        ParameterGenerator * baseGenerator;
 
         void print_kv(int veq[], int mexp, int size) {
             using namespace std;

@@ -44,7 +44,7 @@ namespace tinymt {
      * - MSB から23ビットテンパリングする　（stlsb32 と合わせて32ビットテンパリング）
      * - Searching parameters by 6 bits at once.
      */
-    typedef AlgorithmPartialBitPattern<uint32_t, uint32_t, 32, 1, 23, 6> st32;
+    typedef AlgorithmPartialBitPattern<uint32_t, 32, 1, 23, 6> st32;
 
     /**
      * - Tempering parameter searching algorithm.
@@ -54,7 +54,7 @@ namespace tinymt {
      * - Tempering 9 bits from LSB.
      * - Searching parameters by 5 bits at once.
      */
-    typedef AlgorithmPartialBitPattern<uint32_t, uint32_t, 32, 1, 9, 5, true>
+    typedef AlgorithmPartialBitPattern<uint32_t, 32, 1, 9, 5, true>
     stlsb32;
 
     /**
@@ -264,8 +264,8 @@ namespace tinymt {
          * internal id
          * @param num sequential number
          */
-        void setUpParam(AbstractGenerator<uint32_t>& sq32) {
-            uint32_t num = sq32.generate();
+        void setUpParam(ParameterGenerator& sq32) {
+            uint32_t num = sq32.getUint32();
             uint32_t work = num ^ (num << 15) ^ (num << 23);
             work <<= 1;
             param.mat1 = (work & 0xffff0000) | (param.id & 0xffff);

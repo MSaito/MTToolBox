@@ -9,7 +9,7 @@ xorshift128_SOURCES = xorshift128_main.c xorshift128.c xorshift128.h
 
 DEPENDENCIES = ../../lib/libMTToolBox.a
 AM_LDFLAGS = -L../../lib
-LDADD = -lMTToolBox -lntl
+LDADD = -lMTToolBox
 
 EXTRA_DIST = README README.utf8.ja.txt
 

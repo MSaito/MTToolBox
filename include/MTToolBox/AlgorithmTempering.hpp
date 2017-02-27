@@ -41,7 +41,6 @@ namespace MTToolBox {
      * グで均等分布次元を最大化することはできないだろう。
      *
      * @tparam U 疑似乱数生成器の出力の型, 例えば uint32_t など。
-     * @tparam V パラメータ生成用疑似乱数の型
      *\endjapanese
      *
      *\english
@@ -55,10 +54,9 @@ namespace MTToolBox {
      *
      * @tparam U type of output of pseudo random number generator,
      * for example, uint32_t. Only unsigned numbers are allowed.
-     * @tparam V type of parameter generator
      *\endenglish
      */
-    template<typename U, typename V = U>
+    template<typename U>
     class AlgorithmTempering {
     public:
 
@@ -90,7 +88,7 @@ namespace MTToolBox {
          * @return always zero.
          *\endenglish
          */
-        virtual int operator()(TemperingCalculatable<U, V>& rand,
+        virtual int operator()(TemperingCalculatable<U>& rand,
                                bool verbose = false) = 0;
 
         /**

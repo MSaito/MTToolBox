@@ -103,9 +103,9 @@ namespace MTToolBox {
             }
         }
 
-        void setUpParam(AbstractGenerator<uint32_t>& mt) {
-            tiny.mat1 = mt.generate();
-            tiny.mat2 = mt.generate();
+        void setUpParam(ParameterGenerator& mt) {
+            tiny.mat1 = mt.getUint32();
+            tiny.mat2 = mt.getUint32();
         }
 
         const std::string getHeaderString() {

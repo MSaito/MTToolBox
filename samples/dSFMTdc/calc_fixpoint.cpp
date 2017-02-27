@@ -27,7 +27,7 @@ w128_t calc_fixpoint(const dSFMT& dsfmt, const GF2X& irreducible,
     b *= quotient;
     a *= irreducible;
     dsfmt_const.setConst();
-    annihilate<w128_t, uint64_t>(&dsfmt_const, b);
+    annihilate<w128_t>(&dsfmt_const, b);
 
     GF2X t1(1, 1);
     SetCoeff(t1, 0);
@@ -40,7 +40,6 @@ w128_t calc_fixpoint(const dSFMT& dsfmt, const GF2X& irreducible,
         cout << "deg(t1) = " << dec << deg(t1) << endl;
         throw new logic_error("failure d != 1");
     }
-    annihilate<w128_t, uint64_t>(&dsfmt_const, b);
+    annihilate<w128_t>(&dsfmt_const, b);
     return dsfmt_const.getParityValue();
 }
-

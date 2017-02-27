@@ -161,7 +161,7 @@ namespace MTToolBox {
      * but is not a subclass of some abstract class.
      * Instead, this class is passed to them as template parameters.
      */
-    class sfmt : public ReducibleGenerator<w128_t, uint32_t> {
+    class sfmt : public ReducibleGenerator<w128_t> {
     public:
         /**
          * Constructor by mexp.
@@ -233,7 +233,7 @@ namespace MTToolBox {
             reverse_bit_flag = false;
         }
 
-        EquidistributionCalculatable<w128_t, uint32_t> * clone() const {
+        EquidistributionCalculatable<w128_t> * clone() const {
             return new sfmt(*this);
         }
 
@@ -458,8 +458,8 @@ namespace MTToolBox {
          * internal id
          * @param num sequential number
          */
-        void setUpParam(AbstractGenerator<uint32_t>& mt) {
-            param.pos1 = mt.generate() % (size - 2) + 1;
+        void setUpParam(ParameterGenerator& mt) {
+            param.pos1 = mt.getUint32() % (size - 2) + 1;
 #if defined(SFMT_PARAM_FIXED)
             // These parameters are not best ones.
             param.sl1 = 19;
@@ -467,15 +467,15 @@ namespace MTToolBox {
             param.sr1 = 7;
             param.sr2 = 1;
 #else
-            param.sl1 = mt.generate() % (32 - 1) + 1;
-            param.sl2 = (mt.generate() % 4) * 2 + 1;
-            param.sr1 = mt.generate() % (32 - 1) + 1;
-            param.sr2 = (mt.generate() % 4) * 2 + 1;
+            param.sl1 = mt.getUint32() % (32 - 1) + 1;
+            param.sl2 = (mt.getUint32() % 4) * 2 + 1;
+            param.sr1 = mt.getUint32() % (32 - 1) + 1;
+            param.sr2 = (mt.getUint32() % 4) * 2 + 1;
 #endif
-            param.msk1 = mt.generate() | mt.generate();
-            param.msk2 = mt.generate() | mt.generate();
-            param.msk3 = mt.generate() | mt.generate();
-            param.msk4 = mt.generate() | mt.generate();
+            param.msk1 = mt.getUint32() | mt.getUint32();
+            param.msk2 = mt.getUint32() | mt.getUint32();
+            param.msk3 = mt.getUint32() | mt.getUint32();
+            param.msk4 = mt.getUint32() | mt.getUint32();
         }
 
         void setZero() {
@@ -544,7 +544,7 @@ namespace MTToolBox {
          * output function is GF(2)-linear.
          * @param that SFMT generator added to this generator
          */
-        void add(EquidistributionCalculatable<w128_t, uint32_t>& other) {
+        void add(EquidistributionCalculatable<w128_t>& other) {
             sfmt *that = dynamic_cast<sfmt *>(&other);
             if (that == 0) {
                 throw std::invalid_argument(

@@ -244,6 +244,7 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PRTDIAG = @PRTDIAG@
 RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -306,7 +307,7 @@ top_srcdir = @top_srcdir@
 mt1_SOURCES = mt1.cpp
 mt2_SOURCES = mt2.cpp
 DEPENDENCIES = ../../lib/libMTToolBox.a
-LDADD = -lMTToolBox -lntl
+LDADD = -lMTToolBox
 AM_LDFLAGS = -L../../lib
 AM_CXXFLAGS = -Wall -I../../include -O2 -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS

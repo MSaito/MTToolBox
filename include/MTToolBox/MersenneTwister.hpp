@@ -25,7 +25,7 @@
 #include <stdint.h>
 #include <inttypes.h>
 #include <string>
-#include <MTToolBox/AbstractGenerator.hpp>
+#include <MTToolBox/ParameterGenerator.hpp>
 
 namespace MTToolBox {
     /**
@@ -45,7 +45,7 @@ namespace MTToolBox {
      *
      *\endenglish
      */
-    class MersenneTwister : public AbstractGenerator<uint32_t> {
+    class MersenneTwister : public ParameterGenerator {
     public:
         /**
          *\japanese
@@ -135,7 +135,7 @@ namespace MTToolBox {
          * @param[in] value Seed of initialization
          *\endenglish
          */
-        void seed(uint32_t value) {
+        void seed(uint64_t value) {
             mt[0] = value;
             for (mti = 1; mti < N; mti++) {
                 mt[mti] =
@@ -241,8 +241,27 @@ namespace MTToolBox {
          * @return a 32-bit unsigned integer
          *\endenglish
          */
-        uint32_t generate() {
+        uint32_t getUint32() {
             return next();
+        }
+
+        /**
+         *\japanese
+         * 疑似乱数を生成する
+         * この実装はあまりよくない。
+         * @return １個の64bit符号なし整数
+         *\endjapanese
+         *
+         *\english
+         * Generates pseudo random number
+         * This implementation is not so good.
+         * @return a 64-bit unsigned integer
+         *\endenglish
+         */
+        uint64_t getUint64() {
+            uint64_t x = next();
+            x = (x << 32) | next();
+            return x;
         }
 
         /**
@@ -274,23 +293,6 @@ namespace MTToolBox {
             return y;
         }
 
-        /**
-         *\japanese
-         * 状態空間のビットサイズである 19937 を返す。
-         *
-         * 配列は状態空間より大きく取ってあるが、それは速度向上のために
-         * 冗長になっているだけで、状態空間の大きさはあくまでも19937である。
-         * @return 常に 19937 を返す
-         *\endjapanese
-         *
-         *\english
-         * Returns 19937, which is size of internal state.
-         * @return Always 19937
-         *\endenglish
-         */
-        int bitSize() const {
-            return 19937;
-        }
     private:
         enum {LARGE_N = 1024, N = 624, M = 397};
         uint32_t *mt;    /* the array for the state vector  */

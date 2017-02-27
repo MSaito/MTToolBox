@@ -71,8 +71,8 @@ public:
         x = y = z = v;
     }
     int bitSize() const { return 128; }
-    void setUpParam(AbstractGenerator<uint32_t>& generator) {
-        uint32_t r = generator.generate();
+    void setUpParam(ParameterGenerator& generator) {
+        uint32_t r = generator.getUint32();
         a = r & 0x1f;
         r = r >> 5;
         b = r & 0x1f;

@@ -164,7 +164,6 @@ namespace MTToolBox {
      * グで均等分布次元を最大化することはできないだろう。
      *
      * @tparam U 疑似乱数生成器の出力の型, 符号なし型であること、例えば uint32_t など。
-     * @tparam V パラメータ生成器の出力の型
      *\endjapanese
      *\english
      * @brief Algorithm which searches tempering parameters.
@@ -181,11 +180,10 @@ namespace MTToolBox {
      *
      * @tparam U type of output of pseudo random number generator.
      * Should be unsigned type.
-     * @tparam V type of output of parameter generator.
      *\endenglish
      */
-    template<typename U, typename V = U>
-    class AlgorithmBestBits : public AlgorithmTempering<U, V> {
+    template<typename U>
+    class AlgorithmBestBits : public AlgorithmTempering<U> {
     public:
         /**
          *\japanese
@@ -282,7 +280,7 @@ namespace MTToolBox {
          * @return 0 always zero
          *\endenglish
          */
-        int operator()(TemperingCalculatable<U, V>& rand,
+        int operator()(TemperingCalculatable<U>& rand,
                        bool verbose = false) {
             rand.resetReverseOutput();
             if (verbose) {
@@ -372,7 +370,7 @@ namespace MTToolBox {
          *\english
          *\endenglish
          */
-        void search_best_temper(TemperingCalculatable<U, V>& rand,
+        void search_best_temper(TemperingCalculatable<U>& rand,
                                 int v_bit,
                                 const tempp& para,
                                 vector<shared_ptr<tempp> >& current,
@@ -423,9 +421,9 @@ namespace MTToolBox {
          * between theoretical upper bound and realized value.
          *\endenglish
          */
-        int get_equidist(TemperingCalculatable<U, V>& rand,
+        int get_equidist(TemperingCalculatable<U>& rand,
                          int bit_length) {
-            AlgorithmEquidistribution<U, V> sb(rand, bit_length);
+            AlgorithmEquidistribution<U> sb(rand, bit_length);
             int veq[bit_length];
             return sb.get_all_equidist(veq);
         }

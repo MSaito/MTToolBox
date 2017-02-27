@@ -32,7 +32,7 @@
 #include <stdint.h>
 #include <inttypes.h>
 #include <string>
-#include <MTToolBox/AbstractGenerator.hpp>
+#include <MTToolBox/ParameterGenerator.hpp>
 #if defined(DEBUG)
 #include <iostream>
 #include <iomanip>
@@ -50,7 +50,7 @@ namespace MTToolBox {
      *
      *\endenglish
      */
-    class MersenneTwister64 : public AbstractGenerator<uint64_t> {
+    class MersenneTwister64 : public ParameterGenerator {
     public:
         /**
          *\japanese
@@ -237,6 +237,21 @@ namespace MTToolBox {
         /**
          *\japanese
          * 疑似乱数を生成する
+         * @return １個の32bit符号なし整数
+         *\endjapanese
+         *
+         *\english
+         * Generates pseudo random number
+         * @return a 32-bit unsigned integer
+         *\endenglish
+         */
+        uint32_t getUint32() {
+            return next() >> 32;
+        }
+
+        /**
+         *\japanese
+         * 疑似乱数を生成する
          * @return １個の64bit符号なし整数
          *\endjapanese
          *
@@ -245,7 +260,7 @@ namespace MTToolBox {
          * @return a 64-bit unsigned integer
          *\endenglish
          */
-        uint64_t generate() {
+        uint64_t getUint64() {
             return next();
         }
 

@@ -19,6 +19,7 @@
 #include <inttypes.h>
 #include <string>
 #include <MTToolBox/AbstractGenerator.hpp>
+#include <MTToolBox/ParameterGenerator.hpp>
 
 namespace MTToolBox {
     /**
@@ -28,7 +29,6 @@ namespace MTToolBox {
      * 数生成器のクラスである。
      *
      * @tparam U 疑似乱数生成器の出力のタイプ、符号なし型であること
-     * @tparam V パラメータ生成器の出力のタイプ
      *\endjapanese
      *
      *\english
@@ -36,14 +36,12 @@ namespace MTToolBox {
      * function of pseudo random number generator.
      * @tparam U type of output of pseudo random number generator, should
      * be unsigned integer.
-     * @tparam V type of output of parameter generator
      *\endenglish
      */
-    template<typename U, typename V = U>
+    template<typename U>
     class RecursionSearchable
         : virtual public AbstractGenerator<U> {
     public:
-
         /**
          *\japanese
          * 仮想デストラクタ（必須）
@@ -72,7 +70,7 @@ namespace MTToolBox {
          * \b generator may be Mersenne Twister or SequentialGenerator.
          *\endenglish
          */
-        virtual void setUpParam(AbstractGenerator<V>& generator) = 0;
+        virtual void setUpParam(ParameterGenerator& generator) = 0;
 
         /**
          *\japanese

@@ -51,7 +51,7 @@ int main(int argc, char * argv[])
         cout << "Equidistribution from LSB" << endl;
         lsb_str = " from LSB";
     }
-    AlgorithmEquidistribution<w128_t, uint32_t> re(sf, 128, opt.params.mexp);
+    AlgorithmEquidistribution<w128_t> re(sf, 128, opt.params.mexp);
     int veq[128];
     delta128 = re.get_all_equidist(veq);
     SIMDInfo info;

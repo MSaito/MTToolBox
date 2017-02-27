@@ -285,6 +285,7 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PRTDIAG = @PRTDIAG@
 RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -352,7 +353,7 @@ xorshift5_SOURCES = xorshift-5.cpp
 xorshift128_SOURCES = xorshift128_main.c xorshift128.c xorshift128.h
 DEPENDENCIES = ../../lib/libMTToolBox.a
 AM_LDFLAGS = -L../../lib
-LDADD = -lMTToolBox -lntl
+LDADD = -lMTToolBox
 EXTRA_DIST = README README.utf8.ja.txt
 AM_CXXFLAGS = -Wall -O2 -I../../include -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS

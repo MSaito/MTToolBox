@@ -76,7 +76,7 @@ static void test_parity0(const dSFMT_param& param, GF2X& f, w128_t parity) {
         seed.u64[1] = 0;
         dsfmt.seed(seed);
         //dsfmt.d_p();
-        annihilate<w128_t, uint64_t>(&dsfmt, f);
+        annihilate<w128_t>(&dsfmt, f);
         if (verbose) printf("==zero\n");
         minpoly<w128_t>(mpoly, dsfmt);
         if (verbose || deg(mpoly) >= mexp) {

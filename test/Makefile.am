@@ -19,7 +19,7 @@ test_version_SOURCES = test_version.cpp
 EXTRA_DIST = $(common_files)
 
 DEPENDENCIES = ../lib/libMTToolBox.a
-LDADD = -lMTToolBox -lntl
+LDADD = -lMTToolBox
 AM_LDFLAGS =  -L../lib
 
 AM_CXXFLAGS = -Wall -I../include -g -Wextra -D__STDC_CONSTANT_MACROS \

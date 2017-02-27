@@ -83,7 +83,7 @@ int search(options& opt, int count) {
         time_t t = time(NULL);
         cout << "search start at " << ctime(&t);
     }
-    AlgorithmReducibleRecursionSearch<w128_t, uint32_t> ars(g, mt);
+    AlgorithmReducibleRecursionSearch<w128_t> ars(g, mt);
     int i = 0;
     AlgorithmCalculateParity<w128_t, sfmt> cp;
     cout << "# " << g.getHeaderString() << ", delta32, delta64, delta128"
@@ -110,7 +110,7 @@ int search(options& opt, int count) {
             //annihilate<w128_t>(&g, quotient);
             //AlgorithmReducibleEquidistribution<w128_t, sfmt, uint32_t>
             //    re(g, irreducible, 128);
-            AlgorithmEquidistribution<w128_t, uint32_t> re(g, 128, opt.mexp);
+            AlgorithmEquidistribution<w128_t> re(g, 128, opt.mexp);
             int veq[128];
             int delta128 = 0;
             int delta32 = 0;

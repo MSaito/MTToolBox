@@ -512,6 +512,7 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PRTDIAG = @PRTDIAG@
 RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -583,7 +584,7 @@ test_primefactors_SOURCES = test_primefactors.cpp $(common_files)
 test_version_SOURCES = test_version.cpp
 EXTRA_DIST = $(common_files)
 DEPENDENCIES = ../lib/libMTToolBox.a
-LDADD = -lMTToolBox -lntl
+LDADD = -lMTToolBox
 AM_LDFLAGS = -L../lib
 AM_CXXFLAGS = -Wall -I../include -g -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS

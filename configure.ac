@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([MTToolBox], [0.2.10], [saito@manieth.com])
+AC_INIT([MTToolBox], [1.0.0], [saito@manieth.com])
 AC_CONFIG_SRCDIR([lib/period.cpp])
 AC_CONFIG_HEADERS([lib/config.h])
 AC_CONFIG_MACRO_DIRS([m4])
@@ -14,7 +14,7 @@ AC_PROG_RANLIB
 AC_PROG_CXX
 AC_PROG_CC
 
-# Checks for libraries.
+AX_GCC_ARCHFLAG
 
 # Checks for header files.
 AC_CHECK_HEADERS([inttypes.h limits.h stdint.h stdlib.h string.h unistd.h])
@@ -33,8 +33,11 @@ AX_CXX_COMPILE_STDCXX_11(noext, optional)
 #AC_TYPE_UINT32_T
 #AC_TYPE_UINT64_T
 
+# Checks for libraries.
+AC_CHECK_LIB(ntl, main,[],[ AC_MSG_ERROR(Need ntl) ])
 AC_CHECK_LIB(gf2x, gf2x_mul)
-AC_CHECK_LIB(gmp, __gmpz_init)
+#AC_CHECK_LIB(gmp, __gmpz_init)
+AC_CHECK_LIB(gmp, __gmpn_addmul_1)
 
 # Checks for library functions.
 #AC_CHECK_FUNCS([memset strtol strtoull])

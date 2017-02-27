@@ -4,7 +4,7 @@ tinymt32dc_SOURCES = parse_opt.cpp parse_opt.hpp tinymt32dc.cpp \
 
 DEPENDENCIES = ../../lib/libMTToolBox.a
 AM_LDFLAGS = -L../../lib
-LDADD = -lMTToolBox -lntl
+LDADD = -lMTToolBox
 
 EXTRA_DIST = README.jp.txt
 

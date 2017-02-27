@@ -1,5 +1,5 @@
 #! /bin/sh
-# Generated automatically by config.status (mttoolbox) 0.2.10
+# Generated automatically by config.status (mttoolbox) 1.0.0
 # Libtool was configured on host Mac-mini.local:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 
@@ -91,7 +91,7 @@ EGREP="/usr/bin/grep -E"
 FGREP="/usr/bin/grep -F"
 
 # A BSD- or MS-compatible name lister.
-NM="/usr/bin/nm -B"
+NM="/opt/local/bin/nm -B"
 
 # Whether we need soft or hard links.
 LN_S="ln -s"
@@ -165,7 +165,7 @@ lock_old_archive_extraction=yes
 LTCC="gcc"
 
 # LTCC compiler flags.
-LTCFLAGS="-g -O2"
+LTCFLAGS="-g -O2 -mtune=haswell"
 
 # Take the output of nm and produce a listing of raw symbols and C names.
 global_symbol_pipe="sed -n -e 's/^.*[	 ]\\([BCDEGRST][BCDEGRST]*\\)[	 ][	 ]*_\\([_A-Za-z][_A-Za-z0-9]*\\)\$/\\1 _\\2 \\2/p' | sed '/ __gnu_lto/d'"

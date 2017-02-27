@@ -35,7 +35,6 @@ namespace MTToolBox {
      *
      * @tparam U 疑似乱数生成器の出力する値の型、符号なし型であること。
      * @tparam G 疑似乱数生成器
-     * @tparam V パラメータ生成器の出力値の型
      *\endjapanese
      *
      *\english
@@ -44,10 +43,9 @@ namespace MTToolBox {
      * @tparam U Type of output of pseudo random number
      * generator. Should be unsigned number.
      * @tparam G random number generator
-     * @tparam V Type of output of parameter generator.
      *\endenglish
      */
-    template<typename U, typename G, typename V = U>
+    template<typename U, typename G>
     class AlgorithmReducibleEquidistribution {
     public:
         /**
@@ -81,7 +79,7 @@ namespace MTToolBox {
             calcCharacteristicPolynomial(rand, poly);
             NTL::GF2X quotient = poly / irreducibleFactor;
             annihilate<U>(rand, quotient);
-            ae = new AlgorithmEquidistribution<U, V>(*rand, bit_length, mexp);
+            ae = new AlgorithmEquidistribution<U>(*rand, bit_length, mexp);
         }
 
         /**
@@ -111,7 +109,7 @@ namespace MTToolBox {
             return ae->get_equidist(sum_equidist);
         }
     private:
-        AlgorithmEquidistribution<U, V> *ae;
+        AlgorithmEquidistribution<U> *ae;
     };
 }
 #endif // MTTOOLBOX_ALGORITHM_REDUCIBLE_EQUIDISTRIBUTION_HPP

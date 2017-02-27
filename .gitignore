@@ -3,6 +3,8 @@
 *.log
 .deps/
 .sconf_temp/
+*.dSYM/
+*.trs
 localSconsLib.pyc
 config.log
 .sconsign.dblite

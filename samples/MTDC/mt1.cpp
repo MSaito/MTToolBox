@@ -78,7 +78,7 @@ public:
         index = N - 1;
     }
     int bitSize() const { return 19937; }
-    void setUpParam(AbstractGenerator<uint32_t>& generator) {
+    void setUpParam(ParameterGenerator& generator) {
         UNUSED_VARIABLE(&generator);
     }
     const std::string getHeaderString(){return ""; }

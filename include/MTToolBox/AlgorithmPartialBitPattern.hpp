@@ -50,8 +50,6 @@ namespace MTToolBox {
      *
      * @tparam U 疑似乱数生成器の出力の型, 例えば uint32_t など。
      *
-     * @tparam V パラメータ生成器の出力の型
-     *
      * @tparam bit_len テンパリングパラメータのビット長, 通常は出力のビッ
      * ト長と等しいと思われる。
      *
@@ -88,8 +86,6 @@ namespace MTToolBox {
      * @tparam U type of output of pseudo random number generator,
      * for example, uint32_t. Only unsigned numbers are allowed.
      *
-     * @tparam V type of output of parameter generator.
-     *
      * @tparam bit_len bit length of variable for tempering parameter
      *
      * @tparam param_num number of tempering parameters, for instance,
@@ -106,10 +102,10 @@ namespace MTToolBox {
      * MSB.
      *\endenglish
      */
-    template<typename U, typename V,
+    template<typename U,
              int bit_len, int param_num, int try_bit_len, int step = 5,
              bool lsb = false>
-    class AlgorithmPartialBitPattern : public AlgorithmTempering<U, V> {
+    class AlgorithmPartialBitPattern : public AlgorithmTempering<U> {
     public:
         /**
          *\japanese
@@ -130,7 +126,7 @@ namespace MTToolBox {
          * @return always zero.
          *\endenglish
          */
-        int operator()(TemperingCalculatable<U, V>& rand,
+        int operator()(TemperingCalculatable<U>& rand,
                        bool verbose = false) {
             using namespace std;
             if (verbose) {
@@ -179,7 +175,7 @@ namespace MTToolBox {
             return lsb;
         }
     private:
-        void make_temper_bit(TemperingCalculatable<U, V>& rand,
+        void make_temper_bit(TemperingCalculatable<U>& rand,
                              U mask,
                              int param_pos,
                              U pattern) {
@@ -236,7 +232,7 @@ namespace MTToolBox {
          * selected bit pattern.
          *\endenglish
          */
-        int search_best_temper(TemperingCalculatable<U, V>& rand, int v_bit,
+        int search_best_temper(TemperingCalculatable<U>& rand, int v_bit,
                                int param_pos, int max_v_bit, bool verbose) {
             using namespace std;
             int bitSize = rand.bitSize();
@@ -299,9 +295,9 @@ namespace MTToolBox {
          *
          *\endenglish
          */
-        int get_equidist(TemperingCalculatable<U, V>& rand,
+        int get_equidist(TemperingCalculatable<U>& rand,
                          int bit_length) {
-            AlgorithmEquidistribution<U, V> sb(rand, bit_length);
+            AlgorithmEquidistribution<U> sb(rand, bit_length);
             int veq[bit_length];
             int sum = sb.get_all_equidist(veq);
             return sum;

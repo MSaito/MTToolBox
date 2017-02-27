@@ -33,7 +33,7 @@ bool array_seed(void)
                          4107218783, 4228976476};
     bool success = true;
     for (int i = 0; i < 5; i++) {
-        if (mt.generate() != result[i]) {
+        if (mt.getUint32() != result[i]) {
             success = false;
             break;
         }
@@ -55,7 +55,7 @@ bool single_seed(void)
                          3586334585, 545404204};
     bool success = true;
     for (int i = 0; i < 5; i++) {
-        if (mt.generate() != result[i]) {
+        if (mt.getUint32() != result[i]) {
             success = false;
             break;
         }
@@ -80,7 +80,7 @@ SUITE(MERSENNETWISTER) {
                               4107218783, 4228976476};
         bool success = true;
         for (int i = 0; i < 5; i++) {
-            if (mt.generate() != result[i]) {
+            if (mt.getUint32() != result[i]) {
                 success = false;
                 break;
             }
@@ -94,7 +94,7 @@ SUITE(MERSENNETWISTER) {
                               3586334585, 545404204};
         bool success = true;
         for (int i = 0; i < 5; i++) {
-            if (mt.generate() != result[i]) {
+            if (mt.getUint32() != result[i]) {
                 success = false;
                 break;
             }

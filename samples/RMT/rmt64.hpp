@@ -21,9 +21,9 @@ class RMT64Search
 public:
     RMT64Search(int mersenne_exponent, uint64_t v) {
         mexp = mersenne_exponent;
-	maskb = 0;
-	maskc = 0;
-	parity = 0;
+        maskb = 0;
+        maskc = 0;
+        parity = 0;
         size = mexp / 64 + 1;
         state = new uint64_t[size];
         reverse = false;
@@ -36,9 +36,9 @@ public:
         size = mexp / 64 + 1;
         mata = matrix_a;
         pos = position;
-	maskb = 0;
-	maskc = 0;
-	parity = 0;
+        maskb = 0;
+        maskc = 0;
+        parity = 0;
         state = new uint64_t[size];
         reverse = false;
         seed(v);
@@ -50,16 +50,16 @@ public:
         size = mexp / 64 + 1;
         mata = matrix_a;
         pos = position;
-	maskb = mb;
-	maskc = mc;
-	parity = 0;
+        maskb = mb;
+        maskc = mc;
+        parity = 0;
         state = new uint64_t[size];
         reverse = false;
         seed(v);
     }
 
     RMT64Search(const RMT64Search& src)
-	: ReducibleTemperingCalculatable<uint64_t>() {
+        : ReducibleTemperingCalculatable<uint64_t>() {
         mexp = src.mexp;
         size = src.size;
         state = new uint64_t[size];
@@ -67,9 +67,9 @@ public:
         reverse = src.reverse;
         pos = src.pos;
         mata = src.mata;
-	maskb = src.maskb;
-	maskc = src.maskc;
-	parity = src.parity;
+        maskb = src.maskb;
+        maskc = src.maskc;
+        parity = src.parity;
         for (int i = 0; i < size; i++) {
             state[i] = src.state[i];
         }
@@ -81,20 +81,20 @@ public:
 
     uint64_t generate() {
         const uint64_t matrix_a[2] = {0, mata};
-	const uint64_t maska = UINT64_C(0x5555555555555555);
-	uint64_t x;
-	uint64_t y;
+        const uint64_t maska = UINT64_C(0x5555555555555555);
+        uint64_t x;
+        uint64_t y;
         index = (index + 1) % size;
         x = state[index];
-	y = state[(index + pos) % size];
-	y = y ^ (y << 17);
-	x = y ^ (x >> 1) ^ matrix_a[(int)(x & UINT64_C(1))];
-	state[index] = x;
-	x ^= (x >> sh1) & maska;
-	x ^= (x << sh2) & maskb;
-	x ^= (x << sh3) & maskc;
-	x ^= (x >> sh4);
-	return x;
+        y = state[(index + pos) % size];
+        y = y ^ (y << 17);
+        x = y ^ (x >> 1) ^ matrix_a[(int)(x & UINT64_C(1))];
+        state[index] = x;
+        x ^= (x >> sh1) & maska;
+        x ^= (x << sh2) & maskb;
+        x ^= (x << sh3) & maskc;
+        x ^= (x >> sh4);
+        return x;
     }
 
     uint64_t generate(int outBitLen) {
@@ -110,28 +110,28 @@ public:
     }
 
     uint64_t getParityValue() const {
-	return state[index % size];
+        return state[index % size];
     }
 
     void setParityValue(uint64_t parity_value) {
-	state[index % size] = parity_value;
-	parity = parity_value;
+        state[index % size] = parity_value;
+        parity = parity_value;
     }
 
     void setOneBit(int bitPos) {
-	setZero();
-	int idx = bitPos / 64;
-	int r = bitPos % 64;
-	if (idx >= size) {
+        setZero();
+        int idx = bitPos / 64;
+        int r = bitPos % 64;
+        if (idx >= size) {
 #if defined(DEBUG)
-	    cout << "ERROR bitpos too big" << endl;
+            cout << "ERROR bitpos too big" << endl;
 #endif
-	    return;
-	}
-	state[idx] = 1 << r;
+            return;
+        }
+        state[idx] = 1 << r;
 #if defined(DEBUG) && 0
-	debug_print();
-	fflush(stdout);
+        debug_print();
+        fflush(stdout);
 #endif
     }
 
@@ -159,7 +159,7 @@ public:
         }
         for (int i = 0; i < size; i++) {
             state[(index + i) % size] ^=
-		that->state[(that->index + i) % size];
+                that->state[(that->index + i) % size];
         }
     }
 
@@ -171,8 +171,8 @@ public:
         state[0]= v;
         for (int i = 1; i < size; i++) {
             state[i] = i
-		+ UINT64_C(6364136223846793005)
-		* (state[i - 1] ^ (state[i - 1] >> 62));
+                + UINT64_C(6364136223846793005)
+                * (state[i - 1] ^ (state[i - 1] >> 62));
         }
         index = size - 1;
     }
@@ -182,12 +182,12 @@ public:
     }
 
     int getMexp() const {
-	return mexp;
+        return mexp;
     }
 
-    void setUpParam(AbstractGenerator<uint64_t>& generator) {
-        pos = generator.generate() % size;
-	mata = generator.generate();
+    void setUpParam(ParameterGenerator& generator) {
+        pos = generator.getUint64() % size;
+        mata = generator.getUint64();
     }
 
     const std::string getHeaderString() {
@@ -195,28 +195,28 @@ public:
     }
 
     const std::string getParamString() {
-	maskb = maskb >> sh2;
-	maskb = maskb << sh2;
-	maskc = maskc >> sh3;
-	maskc = maskc << sh3;
+        maskb = maskb >> sh2;
+        maskb = maskb << sh2;
+        maskc = maskc >> sh3;
+        maskc = maskc << sh3;
         stringstream ss;
         ss << dec << mexp << ",";
         ss << dec << pos << ",";
         ss << hex << setw(16) << setfill('0') << mata << ",";
-	ss << hex << setw(16) << setfill('0') << parity << ",";
-	ss << hex << setw(16) << setfill('0') << maskb << ",";
-	ss << hex << setw(16) << setfill('0') << maskc;
+        ss << hex << setw(16) << setfill('0') << parity << ",";
+        ss << hex << setw(16) << setfill('0') << maskb << ",";
+        ss << hex << setw(16) << setfill('0') << maskc;
         return ss.str();
     }
 
     void setTemperingPattern(uint64_t mask, uint64_t pattern, int src_bit) {
-	if (src_bit == 0) {
-	    maskb &= ~mask;
-	    maskb |= pattern & mask;
-	} else {
-	    maskc &= ~mask;
-	    maskc |= pattern & mask;
-	}
+        if (src_bit == 0) {
+            maskb &= ~mask;
+            maskb |= pattern & mask;
+        } else {
+            maskc &= ~mask;
+            maskc |= pattern & mask;
+        }
     }
 
     void setUpTempering() {
@@ -240,9 +240,9 @@ public:
         cout << "reverse:" << reverse << endl;
         cout << "pos:" << dec << pos << endl;
         cout << "mata:" << hex << mata << endl;
-	cout << "parity:" << hex << parity << endl;
-	cout << "maskb:" << hex << maskb << endl;
-	cout << "maskc:" << hex << maskc << endl;
+        cout << "parity:" << hex << parity << endl;
+        cout << "maskb:" << hex << maskb << endl;
+        cout << "maskc:" << hex << maskc << endl;
         for (int i = 0; i < size; i++) {
             cout << "state[" << dec << i << "]:" << hex << state[i] << endl;
         }

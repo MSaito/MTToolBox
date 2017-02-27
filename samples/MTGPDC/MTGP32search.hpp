@@ -26,6 +26,7 @@
 //#include <unistd.h>
 #include <MTToolBox/EquidistributionCalculatable.hpp>
 #include <MTToolBox/AlgorithmPartialBitPattern.hpp>
+#include <MTToolBox/ParameterGenerator.hpp>
 #include <MTToolBox/MersenneTwister.hpp>
 #include <MTToolBox/util.hpp>
 #include "mtgp_param.h"
@@ -160,20 +161,20 @@ namespace mtgp {
          * @param mt random number generator
          * @param state_size size of internal state array
          */
-        void setUpParam(AbstractGenerator<uint32_t>& mt){
+        void setUpParam(ParameterGenerator& mt){
            if (state_size > 100) {
                 param.pos
-                    = get_range(mt.generate(), 3,
+                    = get_range(mt.getUint32(), 3,
                                 state_size - floor2p<int>(state_size) - 1);
             } else {
-                param.pos = get_range(mt.generate(), 3, state_size / 2 - 1);
+                param.pos = get_range(mt.getUint32(), 3, state_size / 2 - 1);
             }
             //param.sh1 = get_range(mt.next(), 1, 31);
             //param.sh2 = get_range(mt.next(), 1, 31);
             param.sh1 = 13;
             param.sh2 = 4;
             for (int i = 0; i < 4; i++) {
-                param.tbl[i] = mt.generate();
+                param.tbl[i] = mt.getUint32();
                 if ((param.tbl[i] & 0x0f) == (UINT32_C(1) << i)) {
                     param.tbl[i] ^= (UINT32_C(1) << i);
                 }

@@ -269,6 +269,7 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PRTDIAG = @PRTDIAG@
 RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -333,7 +334,7 @@ calc_equidist_SOURCES = calc_equidist.cpp rmt64.hpp
 calc_period_SOURCES = calc_period.cpp rmt64.hpp
 DEPENDENCIES = ../../lib/libMTToolBox.a
 AM_LDFLAGS = -L../../lib
-LDADD = -lMTToolBox -lntl
+LDADD = -lMTToolBox
 AM_CXXFLAGS = -Wall -O2 -I../../include -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS
 

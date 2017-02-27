@@ -10,7 +10,7 @@ DEPENDENCIES = ../../lib/libMTToolBox.a
 AM_LDFLAGS = -L../../lib
 #MTGP32dc_LDFLAGS = -L../../lib
 #test_LDFLAGS = -L../../lib
-LDADD = -lMTToolBox -lntl
+LDADD = -lMTToolBox
 #MTGP32dc_LDADD = -lMTToolBox -lntl
 #test_LDADD = -lMTToolBox -lntl
 

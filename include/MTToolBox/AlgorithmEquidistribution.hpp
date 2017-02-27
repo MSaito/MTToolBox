@@ -69,7 +69,6 @@ namespace MTToolBox {
      * next_state()メソッドによって行われる。
      *
      * @tparam U 疑似乱数生成器の出力の型, 符号なし型でなければならない
-     * @tparam V パラメータ生成器の出力の型
      *\endjapanese
      *
      *\english
@@ -81,10 +80,9 @@ namespace MTToolBox {
      *
      * @tparam U type of output of pseudo random number
      * generator. Should be unsigned type.
-     * @tparam V type of output of parameter generator.
      *\endenglish
      */
-    template<typename U, typename V = U>
+    template<typename U>
     class linear_generator_vector {
     public:
 
@@ -98,7 +96,7 @@ namespace MTToolBox {
          * dimension of equi-distribution.
          *\endenglish
          */
-        typedef EquidistributionCalculatable<U, V> ECGenerator;
+        typedef EquidistributionCalculatable<U> ECGenerator;
 
         /**
          *\japanese
@@ -113,7 +111,7 @@ namespace MTToolBox {
          *\english
          *\endenglish
          */
-        linear_generator_vector<U, V>(const ECGenerator& generator) {
+        linear_generator_vector<U>(const ECGenerator& generator) {
             shared_ptr<ECGenerator> r(generator.clone());
             rand = r;
             //rand->seed(1);
@@ -144,7 +142,7 @@ namespace MTToolBox {
          * 1, 0, 0, 0, ... or 8, 0, 0, 0, ...
          *\endenglish
          */
-        linear_generator_vector<U, V>(const ECGenerator& generator,
+        linear_generator_vector<U>(const ECGenerator& generator,
                                    int bit_pos) {
             shared_ptr<ECGenerator> r(generator.clone());
             rand = r;
@@ -158,7 +156,7 @@ namespace MTToolBox {
 #endif
         }
 
-        void add(const linear_generator_vector<U, V>& src);
+        void add(const linear_generator_vector<U>& src);
         void next_state(int bit_len);
         void debug_print();
 
@@ -220,7 +218,6 @@ namespace MTToolBox {
      * アルゴリズム
      *
      * @tparam U 疑似乱数生成器の出力の型
-     * @tparam V パラメータ生成器の出力の型
      *\endjapanese
      *
      *\english
@@ -234,7 +231,7 @@ namespace MTToolBox {
      * @tparam type of output of parameter generator.
      *\endenglish
      */
-    template<typename U, typename V = U>
+    template<typename U>
     class AlgorithmEquidistribution {
 
         /**
@@ -246,7 +243,7 @@ namespace MTToolBox {
          * Pseudo random number generator as a vector.
          *\endenglish
          */
-        typedef linear_generator_vector<U, V> linear_vec;
+        typedef linear_generator_vector<U> linear_vec;
 
         /*
          *\japanese
@@ -257,7 +254,7 @@ namespace MTToolBox {
          * of equi-distribution.
          *\endenglish
          */
-        typedef EquidistributionCalculatable<U, V> ECGenerator;
+        typedef EquidistributionCalculatable<U> ECGenerator;
 
     public:
 
@@ -395,8 +392,8 @@ namespace MTToolBox {
      * next calculation.
      *\endenglish
      */
-    template<typename U, typename V>
-    void AlgorithmEquidistribution<U, V>::adjust(int new_len) {
+    template<typename U>
+    void AlgorithmEquidistribution<U>::adjust(int new_len) {
         using namespace std;
         U tmp;
         setZero(tmp);
@@ -418,8 +415,8 @@ namespace MTToolBox {
      * debug output
      *\endenglish
      */
-    template<typename U, typename V>
-    void linear_generator_vector<U, V>::debug_print() {
+    template<typename U>
+    void linear_generator_vector<U>::debug_print() {
         using namespace std;
 
         cout << "debug ====" << endl;
@@ -429,8 +426,8 @@ namespace MTToolBox {
         cout << "debug ====" << endl;
     }
 #else
-    template<typename U, typename V>
-    void linear_generator_vector<U, V>::debug_print() {
+    template<typename U>
+    void linear_generator_vector<U>::debug_print() {
     }
 #endif
 
@@ -466,8 +463,8 @@ namespace MTToolBox {
      *
      *\endenglish
      */
-    template<typename U, typename V>
-    int AlgorithmEquidistribution<U, V>::get_all_equidist(int veq[]) {
+    template<typename U>
+    int AlgorithmEquidistribution<U>::get_all_equidist(int veq[]) {
         using namespace std;
 
         int sum = 0;
@@ -520,8 +517,8 @@ namespace MTToolBox {
      *
      *\endenglish
      */
-    template<typename U, typename V>
-    int AlgorithmEquidistribution<U, V>::get_equidist(int *sum_equidist) {
+    template<typename U>
+    int AlgorithmEquidistribution<U>::get_equidist(int *sum_equidist) {
         using namespace std;
 
         int veq = get_equidist_main(bit_len);
@@ -546,9 +543,9 @@ namespace MTToolBox {
      * @param src source vector to be added to this vector
      *\endenglish
      */
-    template<typename U, typename V>
-    void linear_generator_vector<U, V>::add(
-        const linear_generator_vector<U, V>& src) {
+    template<typename U>
+    void linear_generator_vector<U>::add(
+        const linear_generator_vector<U>& src) {
         using namespace std;
 
         rand->add(*src.rand);
@@ -572,8 +569,8 @@ namespace MTToolBox {
      * calculating.
      *\endenglish
      */
-    template<typename U, typename V>
-    void linear_generator_vector<U, V>::next_state(int bit_len) {
+    template<typename U>
+    void linear_generator_vector<U>::next_state(int bit_len) {
         using namespace std;
 
         if (zero) {
@@ -612,8 +609,8 @@ namespace MTToolBox {
      * @return k(v)
      *\endenglish
      */
-    template<typename U, typename V>
-    int AlgorithmEquidistribution<U, V>::get_equidist_main(int v) {
+    template<typename U>
+    int AlgorithmEquidistribution<U>::get_equidist_main(int v) {
         using namespace std;
         using namespace NTL;
         int bit_len = v;

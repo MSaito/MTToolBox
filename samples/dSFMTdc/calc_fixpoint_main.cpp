@@ -56,7 +56,7 @@ static bool chk_fix1(w128_t& fix, const dSFMT& dsfmt, const GF2X& irreducible,
     cout << "dsfmt_const0" << endl;
     dsfmt_const0.d_p();
 #endif
-    annihilate<w128_t, uint64_t>(&dsfmt_const, b);
+    annihilate<w128_t>(&dsfmt_const, b);
 #if defined(DEBUG)
     cout << "dsfmt_const after annihilate" << endl;
     dsfmt_const.d_p();
@@ -66,7 +66,7 @@ static bool chk_fix1(w128_t& fix, const dSFMT& dsfmt, const GF2X& irreducible,
     dSFMT const_L_save = dsfmt_const;
     dSFMT dsfmt_const2(dsfmt);
     dsfmt_const2.setConst();
-    annihilate<w128_t, uint64_t>(&dsfmt_const2, a);
+    annihilate<w128_t>(&dsfmt_const2, a);
 #if defined(DEBUG)
     cout << "dsfmt_const2 after annihilate" << endl;
     dsfmt_const2.d_p();
@@ -102,7 +102,7 @@ static bool chk_fix1(w128_t& fix, const dSFMT& dsfmt, const GF2X& irreducible,
         cout << "deg(t1) = " << dec << deg(t1) << endl;
         throw new logic_error("failure d != 1");
     }
-    annihilate<w128_t, uint64_t>(&dsfmt_const, b);
+    annihilate<w128_t>(&dsfmt_const, b);
 
     fix = dsfmt_const.getParityValue();
     if (!chk_fix2(dsfmt_const, const_L_save, idf)) {
@@ -116,7 +116,7 @@ static bool chk_fix2(const dSFMT& fix, const dSFMT& con, const GF2X& idf)
 {
     dSFMT tmp(fix);
     tmp.generate();
-    annihilate<w128_t, uint64_t>(&tmp, idf);
+    annihilate<w128_t>(&tmp, idf);
     tmp.add(&con);
     return tmp.equals(fix);
 }
@@ -233,4 +233,3 @@ static bool get_fixpoint(dSFMT& dsfmt)
     }
     return true;
 }
-

@@ -49,7 +49,7 @@ int main(int argc, char * argv[])
         sf.seed(seedw);
         for (int i = 0; i < 4; i++) {
             for (int j = 4; j >= 1; j--) {
-                TestLinearity<w128_t, uint32_t> tl;
+                TestLinearity<w128_t> tl;
                 sfmt sf2 = sf;
                 sf2.setStartMode(i);
                 sf2.setWeightMode(j);

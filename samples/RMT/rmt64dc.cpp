@@ -84,7 +84,7 @@ int search(rmt_options& opt, int count) {
     }
     //static const int shifts[] = {17, 37};
     //AlgorithmBestBits<uint64_t> tmp(64, shifts, 2, 15);
-    typedef AlgorithmPartialBitPattern<uint64_t, uint64_t, 64, 2, 63, 6> st64;
+    typedef AlgorithmPartialBitPattern<uint64_t, 64, 2, 63, 6> st64;
     st64 st;
     AlgorithmReducibleRecursionAndTempering<uint64_t, RMT64Search> all(mt);
     int i = 0;

@@ -58,7 +58,6 @@ namespace MTToolBox {
      * い。
      *
      * @tparam U 疑似乱数生成器の出力の型、符号なし型であること
-     * @tparam V 疑似乱数生成器のパラメータ生成に使う疑似乱数の型
      *\endjapanese
      *
      *\english
@@ -74,10 +73,9 @@ namespace MTToolBox {
      * the generator fails this test, there may be a problem in
      * user's implementation of Equidistribution#add in user's generator.
      * @tparam U type of output of the generator, should be unsigned number.
-     * @tparam V type of output of parameter generator
      *\endenglish
      */
-    template<typename U, typename V = U>
+    template<typename U>
     class TestLinearity {
     public:
         /**
@@ -96,9 +94,9 @@ namespace MTToolBox {
          * @return false \b generator is not GF(2)-linear.
          *\endenglish
          */
-        bool operator()(const EquidistributionCalculatable<U, V>& generator) {
-            EquidistributionCalculatable<U, V> *g1 = generator.clone();
-            EquidistributionCalculatable<U, V> *g2 = generator.clone();
+        bool operator()(const EquidistributionCalculatable<U>& generator) {
+            EquidistributionCalculatable<U> *g1 = generator.clone();
+            EquidistributionCalculatable<U> *g2 = generator.clone();
             g1->seed(convert<U>(1234U));
             g2->seed(convert<U>(4321U));
             bool result = test1(*g1) && test2(*g1, *g2);
@@ -108,9 +106,9 @@ namespace MTToolBox {
         }
 
     private:
-        bool test1(EquidistributionCalculatable<U, V>& g1) {
+        bool test1(EquidistributionCalculatable<U>& g1) {
             using namespace std;
-            EquidistributionCalculatable<U, V> *g2 = g1.clone();
+            EquidistributionCalculatable<U> *g2 = g1.clone();
             bool result = true;
             g2->add(g1);
             for (int i = 0; i < 100; i++) {
@@ -130,10 +128,10 @@ namespace MTToolBox {
             return result;
         }
 
-        bool test2(EquidistributionCalculatable<U, V>& g1,
-                   EquidistributionCalculatable<U, V>& g2) {
+        bool test2(EquidistributionCalculatable<U>& g1,
+                   EquidistributionCalculatable<U>& g2) {
             using namespace std;
-            EquidistributionCalculatable<U, V> *g3 = g2.clone();
+            EquidistributionCalculatable<U> *g3 = g2.clone();
             g3->add(g1);
             bool result = true;
             for (int i = 0; i < 100; i++) {

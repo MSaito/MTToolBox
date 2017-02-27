@@ -57,7 +57,6 @@ namespace MTToolBox {
      * </li></ol>
      *
      * @tparam U 疑似乱数生成器の出力する値の型、符号なし型であること。
-     * @tparam V パラメータ生成器の出力する値の型
      *\endjapanese
      *
      *\english
@@ -67,10 +66,9 @@ namespace MTToolBox {
      * primitive.
      * @tparam U Type of output of pseudo random number
      * generator. Should be unsigned number.
-     * @tparam V type of output of paramenter generator.
      *\endenglish
      */
-    template<typename U, typename V = U>
+    template<typename U>
     class AlgorithmRecursionSearch {
     public:
         /**
@@ -99,8 +97,8 @@ namespace MTToolBox {
          * sample directory uses sequential counter.
          *\endenglish
          */
-        AlgorithmRecursionSearch(RecursionSearchable<U, V>& generator,
-                                 AbstractGenerator<V>& bg) {
+        AlgorithmRecursionSearch(RecursionSearchable<U>& generator,
+                                 ParameterGenerator& bg) {
             rand = &generator;
             baseGenerator = &bg;
             count = 0;
@@ -134,8 +132,8 @@ namespace MTToolBox {
          * @param[in] primitivity A class to judge primitivity.
          *\endenglish
          */
-        AlgorithmRecursionSearch(RecursionSearchable<U, V>& generator,
-                                 AbstractGenerator<V>& bg,
+        AlgorithmRecursionSearch(RecursionSearchable<U>& generator,
+                                 ParameterGenerator& bg,
                                  const AlgorithmPrimitivity& primitivity) {
             rand = &generator;
             baseGenerator = &bg;
@@ -252,8 +250,8 @@ namespace MTToolBox {
         }
 
     private:
-        RecursionSearchable<U, V> *rand;
-        AbstractGenerator<V> *baseGenerator;
+        RecursionSearchable<U> *rand;
+        ParameterGenerator *baseGenerator;
         const AlgorithmPrimitivity *isPrime;
         NTL::GF2X poly;
         long count;

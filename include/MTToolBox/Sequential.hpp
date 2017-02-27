@@ -24,7 +24,7 @@
 #include <stdexcept>
 #include <stdint.h>
 #include <inttypes.h>
-#include <MTToolBox/AbstractGenerator.hpp>
+#include <MTToolBox/ParameterGenerator.hpp>
 #include <MTToolBox/util.hpp>
 
 namespace MTToolBox {
@@ -43,7 +43,7 @@ namespace MTToolBox {
      *\endenglish
      */
     template<typename T>
-    class Sequential : public AbstractGenerator<T> {
+    class Sequential : public ParameterGenerator {
     public:
 
         /**
@@ -107,7 +107,7 @@ namespace MTToolBox {
          * @param[in] src source of copy
          *\endenglish
          */
-        Sequential(Sequential<T>& src) : AbstractGenerator<T>() {
+        Sequential(Sequential<T>& src) : ParameterGenerator() {
             status = src.status;
             mask = src.mask;
             error = src.error;
@@ -124,10 +124,24 @@ namespace MTToolBox {
          * @param[in] value Initial value of the internal counter
          *\endenglish
          */
-        void seed(T value) {
+        void seed(uint32_t value) {
             reseed(value);
         }
 
+        /*
+         *\japanese
+         * 初期化
+         * @param[in] value 内部カウンタの初期値
+         *\endjapanese
+         *
+         *\english
+         * Initialization
+         * @param[in] value Initial value of the internal counter
+         *\endenglish
+         */
+        void seed(uint64_t value) {
+            reseed(value);
+        }
         /*
          *\japanese
          * 初期化
@@ -161,10 +175,30 @@ namespace MTToolBox {
          * @return next value
          *\endenglish
          */
-        T generate() {
+        uint32_t getUint32() {
             return next();
         }
 
+        /*
+         *\japanese
+         * 次の数を返す
+         *
+         * このメソッドはnext()を呼び出している。
+         * @see next()
+         * @return next value
+         *\endjapanese
+         *
+         *\english
+         * Returns next value
+         *
+         * This method calls next()
+         * @see next()
+         * @return next value
+         *\endenglish
+         */
+        uint64_t getUint64() {
+            return next();
+        }
         /*
          *\japanese
          * 次の数を返す
@@ -226,5 +260,3 @@ namespace MTToolBox {
 }
 
 #endif //  MTTOOLBOX_SEQUENTIAL_HPP
-
-

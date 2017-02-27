@@ -10,7 +10,7 @@ test_linearity_SOURCES = sfmtsearch.hpp test_linearity.cpp Annihilate.cpp
 test_period_SOURCES = sfmtsearch.hpp test_period.cpp Annihilate.cpp
 
 DEPENDENCIES = ../../lib/libMTToolBox.a
-LDADD = -lMTToolBox -lntl
+LDADD = -lMTToolBox
 AM_LDFLAGS = -L../../lib
 AM_CXXFLAGS = -Wall -O2 -I../../include -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS

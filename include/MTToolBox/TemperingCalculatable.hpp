@@ -40,19 +40,17 @@ namespace MTToolBox {
      * ることによって、TemperingAlgorithmを使用したテンパリングパラメー
      * タ探索が可能になる。
      * @tparam U 疑似乱数生成器の出力の型、符号なし型であること
-     * @tparam V パラメータ生成用乱数の型
      *\endjapanese
      *
      *\english
      * Users can search tempering parameters by making GF(2)-linear
      * pseudo random generator class which inherits from this class.
      * @tparam U type of output of pseudo random number generator
-     * @tparam V type of output of parameter generator
      *\endenglish
      */
-    template<typename U, typename V = U>
+    template<typename U>
     class TemperingCalculatable
-        : virtual public EquidistributionCalculatable<U, V> {
+        : virtual public EquidistributionCalculatable<U> {
     public:
 
         /**

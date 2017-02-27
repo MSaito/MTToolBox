@@ -89,9 +89,9 @@ namespace MTToolBox {
             }
         }
 
-        void setUpParam(AbstractGenerator<uint32_t>& mt) {
-            tiny.mat1 = mt.generate();
-            tiny.mat2 = mt.generate();
+        void setUpParam(ParameterGenerator& mt) {
+            tiny.mat1 = mt.getUint32();
+            tiny.mat2 = mt.getUint32();
         }
 
         const std::string getHeaderString() {
@@ -172,13 +172,13 @@ namespace MTToolBox {
             delete[] state;
         }
 
-        void setUpParam(AbstractGenerator<uint32_t>& mt) {
-            mat1 = mt.generate();
-            mat2 = mt.generate();
-            sh1 = mt.generate() % 32;
-            sh2 = mt.generate() % 32;
-            sh3 = mt.generate() % 32;
-            sh4 = mt.generate() % 32;
+        void setUpParam(ParameterGenerator& mt) {
+            mat1 = mt.getUint32();
+            mat2 = mt.getUint32();
+            sh1 = mt.getUint32() % 32;
+            sh2 = mt.getUint32() % 32;
+            sh3 = mt.getUint32() % 32;
+            sh4 = mt.getUint32() % 32;
         }
 
         const std::string getParamString() {
@@ -269,13 +269,13 @@ namespace MTToolBox {
             delete[] state;
         }
 
-        void setUpParam(AbstractGenerator<uint32_t>& mt) {
-            mat1 = mt.generate();
-            pos = mt.generate() % length;
-            sh1 = mt.generate() % 32;
-            sh2 = mt.generate() % 32;
-            sh3 = mt.generate() % 32;
-            sh4 = mt.generate() % 32;
+        void setUpParam(ParameterGenerator& mt) {
+            mat1 = mt.getUint32();
+            pos = mt.getUint32() % length;
+            sh1 = mt.getUint32() % 32;
+            sh2 = mt.getUint32() % 32;
+            sh3 = mt.getUint32() % 32;
+            sh4 = mt.getUint32() % 32;
             seed(1234);
         }
 

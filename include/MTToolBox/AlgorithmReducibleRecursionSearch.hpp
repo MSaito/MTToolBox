@@ -43,8 +43,8 @@
 namespace MTToolBox {
     using namespace std;
 
-    template<typename U, typename V = U>
-    void calcCharacteristicPolynomial(RecursionSearchable<U, V> *rand,
+    template<typename U>
+    void calcCharacteristicPolynomial(RecursionSearchable<U> *rand,
                                       NTL::GF2X& poly);
     /**
      * @class AlgorithmReducibleRecursionSearch
@@ -67,7 +67,6 @@ namespace MTToolBox {
      * </li></ol>
      *
      * @tparam U 疑似乱数生成器の出力する値の型、符号なし型であること。
-     * @tparam V パラメータ生成用疑似乱数生成器の出力する値の型
      *\endjapanese
      *
      *\english
@@ -77,10 +76,9 @@ namespace MTToolBox {
      * primitive.
      * @tparam U Type of output of pseudo random number
      * generator. Should be unsigned number.
-     * @tparam V Type of output of base generator. Should be unsigned number.
      *\endenglish
      */
-    template<typename U, typename V = U>
+    template<typename U>
     class AlgorithmReducibleRecursionSearch {
     public:
         /**
@@ -109,8 +107,8 @@ namespace MTToolBox {
          * pseudo random number generator.
          *\endenglish
          */
-        AlgorithmReducibleRecursionSearch(ReducibleGenerator<U, V>& generator,
-                                 AbstractGenerator<V>& bg) {
+        AlgorithmReducibleRecursionSearch(ReducibleGenerator<U>& generator,
+                                 ParameterGenerator& bg) {
             rand = &generator;
             baseGenerator = &bg;
             count = 0;
@@ -220,8 +218,8 @@ namespace MTToolBox {
         }
 
     private:
-        ReducibleGenerator<U, V> *rand;
-        AbstractGenerator<V> *baseGenerator;
+        ReducibleGenerator<U> *rand;
+        ParameterGenerator *baseGenerator;
         NTL::GF2X poly;
         NTL::GF2X irreducible;
         long count;
@@ -235,7 +233,6 @@ namespace MTToolBox {
      * 次数が一致すれば特性多項式。特性多項式でなくても、MTToolBoxで使用する
      * 範囲内では特に問題はない。
      * @tparam U 疑似乱数生成器の返す値の型
-     * @tparam V パラメータ生成器の返す値の型
      * @param[in,out] rand 疑似乱数生成器
      * @param[in,out] poly 特性多項式
      *\endjapanese
@@ -243,13 +240,12 @@ namespace MTToolBox {
      *\english
      * Calculate the characteristic polynomial of reducible generator.
      * @tparam U type of return value of random number generator.
-     * @tparam V type of return value of parameter generator.
      * @param[in,out] rand pseudo random number generator.
      * @param[in,out] poly calculated characteristic polynomial.
      *\endenglish
      */
-    template<typename U, typename V = U>
-    void calcCharacteristicPolynomial(ReducibleGenerator<U, V> *rand,
+    template<typename U>
+    void calcCharacteristicPolynomial(ReducibleGenerator<U> *rand,
                                       NTL::GF2X& poly)
     {
 #if defined(DEBUG)

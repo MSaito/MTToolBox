@@ -42,6 +42,7 @@
 #include <MTToolBox/AlgorithmEquidistribution.hpp>
 #include <MTToolBox/AlgorithmRecursionSearch.hpp>
 #include <MTToolBox/AlgorithmTempering.hpp>
+#include <MTToolBox/ParameterGenerator.hpp>
 #include <MTToolBox/util.hpp>
 
 namespace MTToolBox {
@@ -56,7 +57,6 @@ namespace MTToolBox {
      * <li>均等分布次元がよくなるようなテンパリングパラメータを探索する。
      *</ol>
      * @tparam U 疑似乱数生成器の出力の型, 符号なし型であること
-     * @tparam V パラメータ生成器の出力の型
      *\endjapanese
      *
      *\english
@@ -74,10 +74,9 @@ namespace MTToolBox {
      *
      * @tparam U Type of output of pseudo random number
      * generator. Should be unsigned number.
-     * @tparam V Type of output of parameter generator.
      * \endenglish
      */
-    template<typename U, typename V = U>
+    template<typename U>
     class AlgorithmRecursionAndTempering {
     public:
         /**
@@ -100,7 +99,7 @@ namespace MTToolBox {
          * As a default, MersennePrimitivity is selected.
          *\endenglish
          */
-        AlgorithmRecursionAndTempering(AbstractGenerator<V>& bg,
+        AlgorithmRecursionAndTempering(ParameterGenerator& bg,
             const AlgorithmPrimitivity& primitivity = MersennePrimitivity) {
             baseGenerator = &bg;
             isPrime = &primitivity;
@@ -133,9 +132,9 @@ namespace MTToolBox {
          * @return false if no tempering parameters which gives proper
          * state transition function are found.
          */
-        bool search(TemperingCalculatable<U, V>& lg,
-                    AlgorithmTempering<U, V>& st1,
-                    AlgorithmTempering<U, V>& st2,
+        bool search(TemperingCalculatable<U>& lg,
+                    AlgorithmTempering<U>& st1,
+                    AlgorithmTempering<U>& st2,
                     bool verbose = false,
                     std::ostream& os = std::cout,
                     bool no_lsb = false) {
@@ -144,7 +143,7 @@ namespace MTToolBox {
 
             out = &os;
             int veq[bit_size<U>()];
-            AlgorithmRecursionSearch<U, V> search(lg, *baseGenerator, *isPrime);
+            AlgorithmRecursionSearch<U> search(lg, *baseGenerator, *isPrime);
             int mexp = lg.bitSize();
             bool found = false;
             for (int i = 0;; i++) {
@@ -170,7 +169,7 @@ namespace MTToolBox {
             poly = search.getMinPoly();
             weight = NTL::weight(poly);
             if (verbose) {
-                AlgorithmEquidistribution<U, V> sb(lg, bit_size<U>());
+                AlgorithmEquidistribution<U> sb(lg, bit_size<U>());
                 int delta = sb.get_all_equidist(veq);
                 print_kv(veq, mexp, bit_size<U>());
                 *out << "delta = " << dec << delta << endl;
@@ -181,7 +180,7 @@ namespace MTToolBox {
                     if (st2.isLSBTempering()) {
                         lg.setReverseOutput();
                     }
-                    AlgorithmEquidistribution<U, V> sc(lg, bit_size<U>());
+                    AlgorithmEquidistribution<U> sc(lg, bit_size<U>());
                     delta = sc.get_all_equidist(veq);
                     lg.resetReverseOutput();
                     time_t t = time(NULL);
@@ -192,7 +191,7 @@ namespace MTToolBox {
                 }
             }
             st1(lg, verbose);
-            AlgorithmEquidistribution<U, V> sc(lg, bit_size<U>());
+            AlgorithmEquidistribution<U> sc(lg, bit_size<U>());
             delta = sc.get_all_equidist(veq);
             if (verbose) {
                 time_t t = time(NULL);
@@ -234,8 +233,8 @@ namespace MTToolBox {
          * state transition function are found.
          *\endenglish
          */
-        bool search(TemperingCalculatable<U, V>& lg,
-                    AlgorithmTempering<U, V>& st,
+        bool search(TemperingCalculatable<U>& lg,
+                    AlgorithmTempering<U>& st,
                     bool verbose = false,
                     std::ostream& os = std::cout) {
             return search(lg, st, st, verbose, os, true);
@@ -292,7 +291,7 @@ namespace MTToolBox {
         int delta;
         NTL::GF2X poly;
         std::ostream * out;
-        AbstractGenerator<V> * baseGenerator;
+        ParameterGenerator * baseGenerator;
         const AlgorithmPrimitivity *isPrime;
         void print_kv(int veq[], int mexp, int size) {
             using namespace std;
