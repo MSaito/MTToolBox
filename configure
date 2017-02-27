@@ -18316,47 +18316,6 @@ $as_echo "#define HAVE_CXX11 1" >>confdefs.h
 #AC_TYPE_UINT64_T
 
 # Checks for libraries.
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for main in -lntl" >&5
-$as_echo_n "checking for main in -lntl... " >&6; }
-if ${ac_cv_lib_ntl_main+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  ac_check_lib_save_LIBS=$LIBS
-LIBS="-lntl  $LIBS"
-cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-
-
-int
-main ()
-{
-return main ();
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_c_try_link "$LINENO"; then :
-  ac_cv_lib_ntl_main=yes
-else
-  ac_cv_lib_ntl_main=no
-fi
-rm -f core conftest.err conftest.$ac_objext \
-    conftest$ac_exeext conftest.$ac_ext
-LIBS=$ac_check_lib_save_LIBS
-fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_ntl_main" >&5
-$as_echo "$ac_cv_lib_ntl_main" >&6; }
-if test "x$ac_cv_lib_ntl_main" = xyes; then :
-  cat >>confdefs.h <<_ACEOF
-#define HAVE_LIBNTL 1
-_ACEOF
-
-  LIBS="-lntl $LIBS"
-
-else
-   as_fn_error $? "Need ntl" "$LINENO" 5
-fi
-
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for gf2x_mul in -lgf2x" >&5
 $as_echo_n "checking for gf2x_mul in -lgf2x... " >&6; }
 if ${ac_cv_lib_gf2x_gf2x_mul+:} false; then :
@@ -18402,10 +18361,9 @@ _ACEOF
 
 fi
 
-#AC_CHECK_LIB(gmp, __gmpz_init)
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for __gmpn_addmul_1 in -lgmp" >&5
-$as_echo_n "checking for __gmpn_addmul_1 in -lgmp... " >&6; }
-if ${ac_cv_lib_gmp___gmpn_addmul_1+:} false; then :
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for __gmpz_init in -lgmp" >&5
+$as_echo_n "checking for __gmpz_init in -lgmp... " >&6; }
+if ${ac_cv_lib_gmp___gmpz_init+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   ac_check_lib_save_LIBS=$LIBS
@@ -18419,27 +18377,27 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 #ifdef __cplusplus
 extern "C"
 #endif
-char __gmpn_addmul_1 ();
+char __gmpz_init ();
 int
 main ()
 {
-return __gmpn_addmul_1 ();
+return __gmpz_init ();
   ;
   return 0;
 }
 _ACEOF
 if ac_fn_c_try_link "$LINENO"; then :
-  ac_cv_lib_gmp___gmpn_addmul_1=yes
+  ac_cv_lib_gmp___gmpz_init=yes
 else
-  ac_cv_lib_gmp___gmpn_addmul_1=no
+  ac_cv_lib_gmp___gmpz_init=no
 fi
 rm -f core conftest.err conftest.$ac_objext \
     conftest$ac_exeext conftest.$ac_ext
 LIBS=$ac_check_lib_save_LIBS
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_gmp___gmpn_addmul_1" >&5
-$as_echo "$ac_cv_lib_gmp___gmpn_addmul_1" >&6; }
-if test "x$ac_cv_lib_gmp___gmpn_addmul_1" = xyes; then :
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_gmp___gmpz_init" >&5
+$as_echo "$ac_cv_lib_gmp___gmpz_init" >&6; }
+if test "x$ac_cv_lib_gmp___gmpz_init" = xyes; then :
   cat >>confdefs.h <<_ACEOF
 #define HAVE_LIBGMP 1
 _ACEOF
@@ -18448,6 +18406,47 @@ _ACEOF
 
 fi
 
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for main in -lntl" >&5
+$as_echo_n "checking for main in -lntl... " >&6; }
+if ${ac_cv_lib_ntl_main+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lntl  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+
+int
+main ()
+{
+return main ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_lib_ntl_main=yes
+else
+  ac_cv_lib_ntl_main=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_ntl_main" >&5
+$as_echo "$ac_cv_lib_ntl_main" >&6; }
+if test "x$ac_cv_lib_ntl_main" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_LIBNTL 1
+_ACEOF
+
+  LIBS="-lntl $LIBS"
+
+else
+   as_fn_error $? "Need ntl" "$LINENO" 5
+fi
+ # keep this order
 
 # Checks for library functions.
 #AC_CHECK_FUNCS([memset strtol strtoull])

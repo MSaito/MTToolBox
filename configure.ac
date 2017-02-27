@@ -34,10 +34,9 @@ AX_CXX_COMPILE_STDCXX_11(noext, optional)
 #AC_TYPE_UINT64_T
 
 # Checks for libraries.
-AC_CHECK_LIB(ntl, main,[],[ AC_MSG_ERROR(Need ntl) ])
 AC_CHECK_LIB(gf2x, gf2x_mul)
-#AC_CHECK_LIB(gmp, __gmpz_init)
-AC_CHECK_LIB(gmp, __gmpn_addmul_1)
+AC_CHECK_LIB(gmp, __gmpz_init)
+AC_CHECK_LIB(ntl, main,[],[ AC_MSG_ERROR(Need ntl) ]) # keep this order
 
 # Checks for library functions.
 #AC_CHECK_FUNCS([memset strtol strtoull])
