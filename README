@@ -46,5 +46,9 @@ http://www.openssl.org/
 using in MTGP sample.
 openssl is optional.
 
-
-
+3. Interface Changed
+At Version 1.0, Interface has been changed. In almost template class,
+second template parameter is removed. This is concerned with that the
+parameter of setUpParam is changed to ParameterGenerator class. The
+class has two method getUint32() and getUint64(), use one of them
+instead of generate().

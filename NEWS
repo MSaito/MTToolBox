@@ -1,4 +1,7 @@
 Now, user can use ./configure
 
+Version 1.0
+Interface has been changed. Compatibility has been broken for previous version.
+
 Currently almost of all documents of this project are written in Japanese.
 See NEWS.jp.utf8.txt
