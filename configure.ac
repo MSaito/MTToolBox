@@ -8,7 +8,6 @@ AC_CONFIG_HEADERS([lib/config.h])
 AC_CONFIG_MACRO_DIRS([m4])
 AM_INIT_AUTOMAKE
 LT_INIT
-AC_PROG_RANLIB
 
 # Checks for programs.
 AC_PROG_CXX
