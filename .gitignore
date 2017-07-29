@@ -8,10 +8,8 @@
 localSconsLib.pyc
 config.log
 .sconsign.dblite
-config.guess
 config.h
 config.status
-config.sub
 autom4te.cache/
 include/Makefile
 lib/libMTToolBox.a
