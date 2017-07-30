@@ -1,6 +1,9 @@
 /**
  *\mainpage
  *
+ * At version 1.0, Interface has been changed, and is not compatible
+ * with previous version.
+ *
  * MTToolBox is a library for developing GF(2)-linear pseudo random
  * number generators.
  *<ul>
