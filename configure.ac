@@ -8,7 +8,6 @@ AC_CONFIG_HEADERS([lib/config.h])
 AC_CONFIG_MACRO_DIRS([m4])
 AM_INIT_AUTOMAKE
 LT_INIT
-AC_PROG_RANLIB
 
 # Checks for programs.
 AC_PROG_CXX
@@ -34,9 +33,13 @@ AX_CXX_COMPILE_STDCXX_11(noext, optional)
 #AC_TYPE_UINT64_T
 
 # Checks for libraries.
+LDFLAGS="$LDFLAGS -pthread"
 AC_CHECK_LIB(gf2x, gf2x_mul)
 AC_CHECK_LIB(gmp, __gmpz_init)
-AC_CHECK_LIB(ntl, main,[],[ AC_MSG_ERROR(Need ntl) ]) # keep this order
+AC_CHECK_LIB(ntl, main, [], [ # if link to NTL fails, try again with -pthread
+	LDFLAGS="$LDFLAGS -pthread"
+	AC_CHECK_LIB(ntl, main, [], [AC_MSG_ERROR(Need ntl)]) # keep this order
+])
 
 # Checks for library functions.
 #AC_CHECK_FUNCS([memset strtol strtoull])
