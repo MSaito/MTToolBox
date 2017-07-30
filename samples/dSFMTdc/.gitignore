@@ -1,0 +1,6 @@
+Makefile
+dSFMTdc
+calc_equidist
+calc_fixpoint
+calc_parity
+test_linearity

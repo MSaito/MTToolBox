@@ -1,0 +1,15 @@
+Makefile
+*.passed
+test_equidist
+test_linearity
+test_mt
+test_period
+test_primefactors
+test_search
+test_search_temper
+test_temper
+test_version
+test1
+test2
+test_rlittle
+test_rtiny

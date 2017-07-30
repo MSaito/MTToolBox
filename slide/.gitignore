@@ -1,0 +1,8 @@
+*.dvi
+*.aux
+*.log
+*.blg
+*.nav
+*.snm
+*.toc
+*.pdf
