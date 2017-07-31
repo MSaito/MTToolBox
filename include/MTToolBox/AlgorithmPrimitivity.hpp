@@ -292,5 +292,40 @@ namespace MTToolBox {
      */
     extern const char * prime_factors2_544_1[];
 
+    /**
+     *\japanese
+     * 2<sup>640</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>640</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_640_1[];
+
+    /**
+     *\japanese
+     * 2<sup>800</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>800</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_800_1[];
+
+    /**
+     *\japanese
+     * 2<sup>960</sup>-1 の素因数分解に現れる素数のリスト
+     *\endjapanese
+     *
+     *\english
+     * List of prime numbers appear in the factorization
+     * of 2<sup>960</sup>-1.
+     *\endenglish
+     */
+    extern const char * prime_factors2_960_1[];
 }
 #endif // MTTOOLBOX_ALGORITHM_PRIMITIVITY_HPP
