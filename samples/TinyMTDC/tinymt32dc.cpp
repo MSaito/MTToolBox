@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
     }
     try {
         return search(opt, opt.count);
-    } catch (underflow_error e) {
+    } catch (underflow_error &e) {
         return 0;
     }
 }

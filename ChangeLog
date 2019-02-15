@@ -1,3 +1,4 @@
+ver 1.0.2 catch std::underflow by reference in TinyMTDC and XORSHIFT
 ver 1.0.1 interface change, template parameter change.
 ver 0.2.10 fix bug in AlgorithmRecursionAndTempering, sample/TintMTDC
 ver 0.2.9 Modify AlgorithmRecursionAndTempering to accept AlgorithmPrimitivity

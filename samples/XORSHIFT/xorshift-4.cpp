@@ -185,7 +185,7 @@ int main() {
             search(seq, ap, first);
             first = false;
         }
-    } catch (underflow_error e) {
+    } catch (underflow_error &e) {
         return 0;
     }
     return 0;
