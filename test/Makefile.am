@@ -20,7 +20,7 @@ EXTRA_DIST = $(common_files)
 
 DEPENDENCIES = ../lib/libMTToolBox.a
 LDADD = -lMTToolBox
-AM_LDFLAGS =  -L../lib
+AM_LDFLAGS =  -L../lib -static
 
 AM_CXXFLAGS = -Wall -I../include -g -Wextra -D__STDC_CONSTANT_MACROS \
               -D__STDC_FORMAT_MACROS
