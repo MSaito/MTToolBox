@@ -1,8 +1,8 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.69])
-AC_INIT([MTToolBox], [1.0.2], [saito@manieth.com])
+AC_PREREQ([2.71])
+AC_INIT([MTToolBox],[1.0.2],[saito@manieth.com])
 AC_CONFIG_SRCDIR([lib/period.cpp])
 AC_CONFIG_HEADERS([lib/config.h])
 AC_CONFIG_MACRO_DIRS([m4])
@@ -13,14 +13,15 @@ LT_INIT
 AC_PROG_CXX
 AC_PROG_CC
 
-AX_GCC_ARCHFLAG
+#AX_GCC_ARCHFLAG
 
 # Checks for header files.
 AC_CHECK_HEADERS([inttypes.h limits.h stdint.h stdlib.h string.h unistd.h])
-AX_CXX_COMPILE_STDCXX_0X
+#AX_CXX_COMPILE_STDCXX_0X #obsolete
 
-AX_CXX_COMPILE_STDCXX_14(noext, optional) # keep this order
 AX_CXX_COMPILE_STDCXX_11(noext, optional)
+AX_CXX_COMPILE_STDCXX_14(noext, optional) # keep this order
+AX_CXX_COMPILE_STDCXX_17(noext, optional)
 
 # Checks for typedefs, structures, and compiler characteristics.
 #AC_CHECK_HEADER_STDBOOL

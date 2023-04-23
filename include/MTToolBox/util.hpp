@@ -173,7 +173,8 @@ namespace MTToolBox {
             std::cout << "get_range:" << start << ", " << end << std::endl;
             exit(0);
         }
-        return input % (end - start + 1) + start;
+        return static_cast<int>(input % static_cast<unsigned int>((end - start + 1)))
+            + start;
     }
 
     /**
@@ -282,7 +283,7 @@ namespace MTToolBox {
             return -1;
         }
         int16_t y = (int16_t)x;
-        y = count_bit((uint16_t)((y & -y) - 1));
+        y = static_cast<int16_t>(count_bit(static_cast<uint16_t>((y & -y) - 1)));
         return 15 - y;
     }
 
@@ -351,7 +352,7 @@ namespace MTToolBox {
         }
         int64_t y = (int64_t)x;
         y = count_bit((uint64_t)(y & -y) - 1);
-        return 63 - y;
+        return 63 - static_cast<int>(y);
     }
 
     /**

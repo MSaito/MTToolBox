@@ -127,6 +127,7 @@ namespace MTToolBox {
         /**
          *\japanese
          * 32bit整数による初期化
+         * ジェネリックのため uint64_t を引数としておく
          * @param[in] value 初期化の種
          *\endjapanese
          *
@@ -136,7 +137,7 @@ namespace MTToolBox {
          *\endenglish
          */
         void seed(uint64_t value) {
-            mt[0] = value;
+            mt[0] = static_cast<uint32_t>(value);
             for (mti = 1; mti < N; mti++) {
                 mt[mti] =
                     (UINT32_C(1812433253)
@@ -204,7 +205,8 @@ namespace MTToolBox {
             for (; k > 0; k--) {
                 mt[i] = (mt[i] ^ ((mt[i-1] ^ (mt[i-1] >> 30))
                                   * UINT32_C(1664525)))
-                    + static_cast<uint32_t>(value[j]) + j; /* non linear */
+                    + static_cast<uint32_t>(value[j])
+                    + static_cast<uint32_t>(j); /* non linear */
                 i++;
                 j++;
                 if (i>=N) {
@@ -218,7 +220,7 @@ namespace MTToolBox {
             for (k=N-1; k; k--) {
                 mt[i] = (mt[i] ^ ((mt[i-1] ^ (mt[i-1] >> 30))
                                   * UINT32_C(1566083941)))
-                    - i; /* non linear */
+                    - static_cast<uint32_t>(i); /* non linear */
                 i++;
                 if (i>=N) {
                     mt[0] = mt[N-1];
@@ -296,7 +298,7 @@ namespace MTToolBox {
     private:
         enum {LARGE_N = 1024, N = 624, M = 397};
         uint32_t *mt;    /* the array for the state vector  */
-        int mti;
+        unsigned int mti;
         uint32_t temper(uint32_t y) {
             y ^= (y >> 11);
             y ^= (y << 7) & UINT32_C(0x9d2c5680);

@@ -73,7 +73,7 @@ bool parse_opt(tinymt_options& opt, int argc, char **argv, uint32_t start) {
             opt.verbose = true;
             break;
         case 's':
-            opt.start = strtoull(optarg, NULL, 0);
+            opt.start = static_cast<uint32_t>(strtoull(optarg, NULL, 0));
             if (errno) {
                 error = true;
                 cerr << "start must be a number" << endl;
@@ -87,7 +87,7 @@ bool parse_opt(tinymt_options& opt, int argc, char **argv, uint32_t start) {
             opt.filename = optarg;
             break;
         case 'm':
-            opt.max_delta = strtol(optarg, NULL, 10);
+            opt.max_delta = static_cast<int>(strtol(optarg, NULL, 10));
             if (errno) {
                 error = true;
                 cerr << "max must be a number" << endl;

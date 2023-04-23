@@ -117,7 +117,7 @@ namespace MTToolBox {
         temper_params(int param_num) {
             size = param_num;
             delta = 0;
-            param = new U[param_num];
+            param = new U[static_cast<unsigned long>(param_num)];
             for (int i = 0; i < param_num; i++) {
                 param[i] = 0;
             }
@@ -234,7 +234,7 @@ namespace MTToolBox {
             obSize = bit_size<U>();
             bit_len = out_bit_length;
             size = param_num;
-            shifts = new int[size];
+            shifts = new int[static_cast<unsigned long>(size)];
             num_pat = size * (size + 1) / 2;
             for (int i = 0; i < size; i++) {
                 shifts[i] = shift_values[i];
@@ -470,10 +470,12 @@ namespace MTToolBox {
             int sum = 0;
             U one = 1;
             while (mask != 0) {
-                if ((pat & mask) && (obSize > v + sum + 1)) {
+                if ((static_cast<U>(pat) & mask) &&
+                    (obSize > v + sum + 1)) {
                     result.param[index] |= (one << (obSize - v - sum - 1))
                     & para_mask;
-                } else if (((pat & mask) == 0) && (obSize > v + sum + 1)) {
+                } else if (((static_cast<U>(pat) & mask) == 0) &&
+                           (obSize > v + sum + 1)) {
                     result.param[index] &= ~(one << (obSize - v - sum - 1));
                 }
                 mask = mask >> 1;
@@ -524,7 +526,8 @@ namespace MTToolBox {
             U mask = 1 << (num_pat - 1);
             int sum = 0;
             while (mask != 0) {
-                if ((pat & mask) && (v + shifts[index] + sum > obSize)) {
+                if ((static_cast<U>(pat) & mask) &&
+                    (v + shifts[index] + sum > obSize)) {
                     return false;
                 }
                 mask = mask >> 1;

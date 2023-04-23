@@ -15,17 +15,17 @@ int main(int argc, char * argv[])
         return 1;
     }
     char * para = argv[1];
-    int mexp = strtoull(para, &para, 10);
+    int mexp = static_cast<int>(strtoull(para, &para, 10));
     para++;
-    int pos = strtoull(para, &para, 10);
+    int pos = static_cast<int>(strtoull(para, &para, 10));
     para++;
-    uint64_t mata = strtoull(para, &para, 16);
+    uint64_t mata = static_cast<uint64_t>(strtoull(para, &para, 16));
     para++;
-    uint64_t parity = strtoull(para, &para, 16);
+    uint64_t parity = static_cast<uint64_t>(strtoull(para, &para, 16));
     para++;
-    uint64_t mskb = strtoull(para, &para, 16);
+    uint64_t mskb = static_cast<uint64_t>(strtoull(para, &para, 16));
     para++;
-    uint64_t mskc = strtoull(para, &para, 16);
+    uint64_t mskc = static_cast<uint64_t>(strtoull(para, &para, 16));
 
     RMT64Search rmt(mexp, pos, mata, mskb, mskc, 1234);
     rmt.setParityValue(parity);

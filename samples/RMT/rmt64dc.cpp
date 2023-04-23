@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
     }
     //cout << "mexp = " << dec << opt.mexp;
     //cout << " seed = " << dec << opt.seed << endl;
-    return search(opt, opt.count);
+    return search(opt, static_cast<int>(opt.count));
 }
 
 /**
@@ -204,7 +204,7 @@ bool parse_opt(rmt_options& opt, int argc, char **argv) {
             }
             cerr << endl;
         }
-        opt.mexp = mexp;
+        opt.mexp = static_cast<int>(mexp);
     }
     if (!opt.filename.empty()) {
         ofstream ofs(opt.filename.c_str());

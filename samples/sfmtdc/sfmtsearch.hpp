@@ -169,7 +169,7 @@ namespace MTToolBox {
          */
         sfmt(int mexp) {
             size = mexp / 128 + 1;
-            state = new w128_t[size];
+            state = new w128_t[static_cast<unsigned long>(size)];
             param.mexp = mexp;
             param.pos1 = 0;
             param.sl1 = 0;
@@ -202,7 +202,7 @@ namespace MTToolBox {
          */
         sfmt(const sfmt& src) : param(src.param) {
             size = src.size;
-            state = new w128_t[size];
+            state = new w128_t[static_cast<unsigned long>(size)];
             for (int i = 0; i < size; i++) {
                 state[i] = src.state[i];
             }
@@ -219,7 +219,7 @@ namespace MTToolBox {
          */
         sfmt(const sfmt_param& src_param) : param(src_param) {
             size = src_param.mexp / 128 + 1;
-            state = new w128_t[size];
+            state = new w128_t[static_cast<unsigned long>(size)];
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < 2; j++) {
                     state[i].u64[j] = 0;
@@ -247,7 +247,8 @@ namespace MTToolBox {
             state[0] = seed;
             uint32_t * pstate = &state[0].u[0];
             for (int i = 1; i < size * 4; i++) {
-                pstate[i] ^= i + UINT32_C(1812433253)
+                pstate[i] ^= static_cast<uint32_t>(i)
+                    + UINT32_C(1812433253)
                     * (pstate[i - 1] ^ (pstate[i - 1] >> 30));
             }
             index = 0;
@@ -459,7 +460,8 @@ namespace MTToolBox {
          * @param num sequential number
          */
         void setUpParam(ParameterGenerator& mt) {
-            param.pos1 = mt.getUint32() % (size - 2) + 1;
+            param.pos1 = static_cast<int>(mt.getUint32() % (static_cast<unsigned int>(size) - 2)
+                                          + 1);
 #if defined(SFMT_PARAM_FIXED)
             // These parameters are not best ones.
             param.sl1 = 19;
@@ -534,7 +536,7 @@ namespace MTToolBox {
             int idx = bitPos / 128;
             int p = (bitPos / 64) % 2;
             int r = bitPos % 64;
-            state[idx].u[p] = UINT64_C(1) << r;
+            state[idx].u64[p] = UINT64_C(1) << r;
         }
 
         /**

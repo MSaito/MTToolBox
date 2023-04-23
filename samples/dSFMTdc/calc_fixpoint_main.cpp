@@ -145,15 +145,15 @@ static bool option(dSFMT_param& param, int argc, char * argv[])
         }
     }
     char * para = argv[optind];
-    param.mexp = strtoul(para, &para, 10);
+    param.mexp = static_cast<int>(strtoul(para, &para, 10));
     para++;
-    param.pos1 = strtoul(para, &para, 10);
+    param.pos1 = static_cast<int>(strtoul(para, &para, 10));
     para++;
-    param.sl1 = strtoul(para, &para, 10);
+    param.sl1 = static_cast<int>(strtoul(para, &para, 10));
     para++;
-    param.msk1 = strtoull(para, &para, 16);
+    param.msk1 = static_cast<uint64_t>(strtoull(para, &para, 16));
     para++;
-    param.msk2 = strtoull(para, &para, 16);
+    param.msk2 = static_cast<uint64_t>(strtoull(para, &para, 16));
     return true;
 }
 

@@ -211,13 +211,13 @@ namespace MTToolBox {
             return -1;
         }
         if (x.u64[0] == 0) {
-            int64_t y = (int64_t)x.u64[1];
-            y = count_bit((uint64_t)(y & -y) - 1);
-            return 63 - y;
+            int64_t y = static_cast<int64_t>(x.u64[1]);
+            y = count_bit(static_cast<uint64_t>(y & -y) - 1);
+            return 63 - static_cast<int>(y);
         } else {
-            int64_t y = (int64_t)x.u64[0];
-            y = count_bit((uint64_t)(y & -y) - 1);
-            return 63 - y + 64;
+            int64_t y = static_cast<int64_t>(x.u64[0]);
+            y = count_bit(static_cast<uint64_t>(y & -y) - 1);
+            return 63 - static_cast<int>(y) + 64;
         }
     }
 

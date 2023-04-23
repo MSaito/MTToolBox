@@ -148,7 +148,7 @@ namespace MTToolBox {
          */
         dSFMT(int mexp) {
             size = (mexp - 128) / 104 + 1;
-            state = new w128_t[size];
+            state = new w128_t[static_cast<unsigned long>(size)];
             param.mexp = mexp;
             param.pos1 = 0;
             param.sl1 = 0;
@@ -178,7 +178,7 @@ namespace MTToolBox {
          */
         dSFMT(const dSFMT& src) : param(src.param) {
             size = src.size;
-            state = new w128_t[size];
+            state = new w128_t[static_cast<unsigned long>(size)];
             for (int i = 0; i < size; i++) {
                 state[i] = src.state[i];
             }
@@ -198,7 +198,7 @@ namespace MTToolBox {
          */
         dSFMT(const dSFMT_param& src_param) : param(src_param) {
             size = (src_param.mexp - 128) / 104 + 1;
-            state = new w128_t[size];
+            state = new w128_t[static_cast<unsigned long>(size)];
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < 2; j++) {
                     state[i].u64[j] = 0;
@@ -227,14 +227,15 @@ namespace MTToolBox {
          */
         void seed(w128_t seed) {
             //setZero();
-            uint64_t * pstate = new uint64_t[(size + 1) * 2];
+            uint64_t * pstate = new uint64_t[(static_cast<unsigned long>(size) + 1) * 2];
             for (int i = 0; i < (size + 1) * 2; i++) {
                 pstate[i] = 0;
             }
             pstate[0] = seed.u64[0];
             pstate[1] = seed.u64[1];
             for (int i = 1; i < (size + 1) * 2; i++) {
-                pstate[i] ^= i + UINT64_C(6364136223846793005)
+                pstate[i] ^= static_cast<uint64_t>(i)
+                    + UINT64_C(6364136223846793005)
                     * (pstate[i - 1] ^ (pstate[i - 1] >> 62));
             }
             for (int i = 0; i < size; i++) {
@@ -375,7 +376,9 @@ namespace MTToolBox {
          * @param num sequential number
          */
         void setUpParam(ParameterGenerator& mt) {
-            param.pos1 = mt.getUint64() % (size - 2) + 1;
+            param.pos1 = static_cast<int>(mt.getUint64()
+                                          % (static_cast<uint64_t>(size) - 2)
+                                          + 1);
             if (fixed) {
                 param.sl1 = fixedSL1;
             } else {

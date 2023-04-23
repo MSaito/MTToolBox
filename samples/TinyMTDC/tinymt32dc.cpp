@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
         return -1;
     }
     try {
-        return search(opt, opt.count);
+        return search(opt, static_cast<int>(opt.count));
     } catch (underflow_error &e) {
         return 0;
     }

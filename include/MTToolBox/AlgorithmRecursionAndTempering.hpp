@@ -167,7 +167,7 @@ namespace MTToolBox {
                 *out << lg.getParamString() << endl;
             }
             poly = search.getMinPoly();
-            weight = NTL::weight(poly);
+            weight = static_cast<int>(NTL::weight(poly));
             if (verbose) {
                 AlgorithmEquidistribution<U> sb(lg, bit_size<U>());
                 int delta = sb.get_all_equidist(veq);

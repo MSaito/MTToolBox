@@ -186,7 +186,7 @@ namespace MTToolBox {
 #endif
                     continue;
                 }
-                if ((*isPrime)(size, poly)) {
+                if ((*isPrime)(static_cast<int>(size), poly)) {
                     return true;
                 }
             }

@@ -68,7 +68,7 @@ int main(int argc, char** argv) {
     if (!parse) {
         return -1;
     }
-    return search(opt, opt.count);
+    return search(opt, static_cast<int>(opt.count));
 }
 
 /**
@@ -189,7 +189,7 @@ bool parse_opt(options& opt, int argc, char **argv) {
             opt.fixed = true;
             //if ((optarg != NULL) && (strlen(optarg) > 0)) {
             if (optarg != NULL) {
-                opt.fixedSL1 = strtoull(optarg, NULL, 0);
+                opt.fixedSL1 = static_cast<int>(strtoull(optarg, NULL, 0));
                 if (errno) {
                     error = true;
                     cerr << "fixed sl1 must be a number" << endl;
@@ -247,7 +247,7 @@ bool parse_opt(options& opt, int argc, char **argv) {
             }
             cerr << endl;
         }
-        opt.mexp = mexp;
+        opt.mexp = static_cast<int>(mexp);
     }
     if (!opt.filename.empty()) {
         ofstream ofs(opt.filename.c_str());

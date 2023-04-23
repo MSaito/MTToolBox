@@ -294,7 +294,7 @@ namespace MTToolBox {
                                   int mexp = 0) {
             bit_len = bit_length;
             size = bit_len + 1;
-            basis = new linear_vec * [size];
+            basis = new linear_vec * [static_cast<unsigned long>(size)];
             if (mexp == 0) {
                 stateBitSize = rand.bitSize();
             } else {

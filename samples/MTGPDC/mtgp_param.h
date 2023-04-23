@@ -65,6 +65,9 @@ namespace mtgp {
 #endif
         }
 
+#if __cplusplus >= 201103L
+        inline mtgp_param<T>& operator=(const mtgp_param<T>&) = default;
+#endif
         void set_sha1(std::string& src) {
 #if defined(USE_SHA)
             unsigned int sha1_length = SHA_DIGEST_LENGTH * 2 + 1;

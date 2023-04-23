@@ -73,7 +73,8 @@ public:
         state[0]= v;
         for (int i = 1; i < N; i++) {
             state[i] = UINT32_C(1812433253)
-                * (state[i - 1] ^ (state[i - 1] >> 30)) + i;
+                * (state[i - 1] ^ (state[i - 1] >> 30))
+                + static_cast<uint32_t>(i);
         }
         index = N - 1;
     }

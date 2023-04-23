@@ -140,7 +140,7 @@ namespace MTToolBox {
          *\endenglish
          */
         void seed(uint64_t value) {
-            reseed(value);
+            reseed(static_cast<T>(value));
         }
         /*
          *\japanese

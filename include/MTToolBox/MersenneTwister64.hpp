@@ -143,7 +143,7 @@ namespace MTToolBox {
         void seed(uint64_t value) {
             mt[0] = value;
             for (mti = 1; mti < N; mti++) {
-                mt[mti] = mti
+                mt[mti] = static_cast<uint64_t>(mti)
                     + UINT64_C(6364136223846793005)
                     * (mt[mti-1] ^ (mt[mti-1] >> 62));
             }
@@ -204,11 +204,13 @@ namespace MTToolBox {
             seed(UINT64_C(19650218));
             i = 1;
             j = 0;
-            k = (N > key_length ? N : key_length);
+            int tmpk = (N > key_length ? N : key_length);
+            k = static_cast<uint64_t>(tmpk);
             for (; k; k--) {
                 mt[i] = (mt[i] ^ ((mt[i-1] ^ (mt[i-1] >> 62))
                                   * UINT64_C(3935559000370003845)))
-                    + init_key[j] + (uint64_t)j; /* non linear */
+                    + static_cast<uint64_t>(init_key[j])
+                    + static_cast<uint64_t>(j); /* non linear */
                 i++;
                 j++;
                 if (i>=N) {
@@ -222,7 +224,7 @@ namespace MTToolBox {
             for (k=N-1; k; k--) {
                 mt[i] = (mt[i] ^ ((mt[i-1] ^ (mt[i-1] >> 62))
                                   * UINT64_C(2862933555777941757)))
-                    - (uint64_t)i; /* non linear */
+                    - static_cast<uint64_t>(i); /* non linear */
                 i++;
                 if (i>=N) {
                     mt[0] = mt[N-1];

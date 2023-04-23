@@ -56,11 +56,13 @@ namespace mtgp {
          */
         mtgp32(int mexp_, uint32_t id_) {
             param.mexp = mexp_;
-            state_size = mexp_ / (sizeof(uint32_t) * 8) + 1;
+            unsigned long ss = static_cast<unsigned long>(mexp_) /
+                (sizeof(uint32_t) * 8) + 1UL;
+            state_size = static_cast<int>(ss);
             param.mask = (~UINT32_C(0))
                 << (bit_size<uint32_t>() * state_size - param.mexp);
             param.id = id_;
-            state = new uint32_t[state_size];
+            state = new uint32_t[static_cast<unsigned long>(state_size)];
             idx = 0;
             reverse_bit_flag = false;
             seed(0);
@@ -73,7 +75,7 @@ namespace mtgp {
         mtgp32(const mtgp32& src) : TemperingCalculatable<uint32_t>(),
                                     param(src.param) {
             state_size = src.state_size;
-            state = new uint32_t[state_size];
+            state = new uint32_t[static_cast<unsigned long>(state_size)];
             idx = src.idx;
             reverse_bit_flag = src.reverse_bit_flag;
             for (int i = 0; i < state_size; i++) {
@@ -253,7 +255,7 @@ namespace mtgp {
             for (int i = 1; i < state_size; i++) {
                 state[i] = UINT32_C(1812433253)
                     * (state[i - 1] ^ (state[i - 1] >> 30))
-                    + i;
+                    + static_cast<uint32_t>(i);
             }
             idx = state_size - 1;
         }

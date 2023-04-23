@@ -13,39 +13,39 @@ int main(int argc, char * argv[])
     }
     sfmt_param params;
     char * para = argv[1];
-    params.mexp = strtoul(para, &para, 10);
+    params.mexp = static_cast<int>(strtoul(para, &para, 10));
     para++;
-    params.pos1 = strtoul(para, &para, 10);
+    params.pos1 = static_cast<int>(strtoul(para, &para, 10));
     para++;
-    params.sl1 = strtoul(para, &para, 10);
+    params.sl1 = static_cast<int>(strtoul(para, &para, 10));
     para++;
-    params.sl2 = strtoul(para, &para, 10);
+    params.sl2 = static_cast<int>(strtoul(para, &para, 10));
     para++;
-    params.sr1 = strtoul(para, &para, 10);
+    params.sr1 = static_cast<int>(strtoul(para, &para, 10));
     para++;
-    params.sr2 = strtoul(para, &para, 10);
+    params.sr2 = static_cast<int>(strtoul(para, &para, 10));
     para++;
-    params.msk1 = strtoul(para, &para, 16);
+    params.msk1 = static_cast<uint32_t>(strtoul(para, &para, 16));
     para++;
-    params.msk2 = strtoul(para, &para, 16);
+    params.msk2 = static_cast<uint32_t>(strtoul(para, &para, 16));
     para++;
-    params.msk3 = strtoul(para, &para, 16);
+    params.msk3 = static_cast<uint32_t>(strtoul(para, &para, 16));
     para++;
-    params.msk4 = strtoul(para, &para, 16);
+    params.msk4 = static_cast<uint32_t>(strtoul(para, &para, 16));
     para++;
-    params.parity1 = strtoul(para, &para, 16);
+    params.parity1 = static_cast<uint32_t>(strtoul(para, &para, 16));
     para++;
-    params.parity2 = strtoul(para, &para, 16);
+    params.parity2 = static_cast<uint32_t>(strtoul(para, &para, 16));
     para++;
-    params.parity3 = strtoul(para, &para, 16);
+    params.parity3 = static_cast<uint32_t>(strtoul(para, &para, 16));
     para++;
-    params.parity4 = strtoul(para, &para, 16);
+    params.parity4 = static_cast<uint32_t>(strtoul(para, &para, 16));
     sfmt sf(params);
     cout << sf.getParamString() << endl;
     bool success = true;
     for (int se = 1; se < 20; se++) {
         w128_t seedw;
-        seedw.u[0] = se;
+        seedw.u[0] = static_cast<uint32_t>(se);
         sf.seed(seedw);
         for (int i = 0; i < 4; i++) {
             for (int j = 4; j >= 1; j--) {

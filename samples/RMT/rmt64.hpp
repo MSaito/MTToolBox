@@ -25,7 +25,7 @@ public:
         maskc = 0;
         parity = 0;
         size = mexp / 64 + 1;
-        state = new uint64_t[size];
+        state = new uint64_t[static_cast<unsigned long>(size)];
         reverse = false;
         seed(v);
     }
@@ -39,13 +39,13 @@ public:
         maskb = 0;
         maskc = 0;
         parity = 0;
-        state = new uint64_t[size];
+        state = new uint64_t[static_cast<unsigned long>(size)];
         reverse = false;
         seed(v);
     }
 
     RMT64Search(int mersenne_exponent, int position,
-               uint64_t matrix_a, int mb, int mc, uint64_t v) {
+               uint64_t matrix_a, uint64_t mb, uint64_t mc, uint64_t v) {
         mexp = mersenne_exponent;
         size = mexp / 64 + 1;
         mata = matrix_a;
@@ -53,7 +53,7 @@ public:
         maskb = mb;
         maskc = mc;
         parity = 0;
-        state = new uint64_t[size];
+        state = new uint64_t[static_cast<unsigned long>(size)];
         reverse = false;
         seed(v);
     }
@@ -62,7 +62,7 @@ public:
         : ReducibleTemperingCalculatable<uint64_t>() {
         mexp = src.mexp;
         size = src.size;
-        state = new uint64_t[size];
+        state = new uint64_t[static_cast<unsigned long>(size)];
         index = src.index;
         reverse = src.reverse;
         pos = src.pos;
@@ -170,7 +170,7 @@ public:
     void seed(uint64_t v) {
         state[0]= v;
         for (int i = 1; i < size; i++) {
-            state[i] = i
+            state[i] = static_cast<uint64_t>(i)
                 + UINT64_C(6364136223846793005)
                 * (state[i - 1] ^ (state[i - 1] >> 62));
         }
@@ -186,7 +186,8 @@ public:
     }
 
     void setUpParam(ParameterGenerator& generator) {
-        pos = generator.getUint64() % size;
+        pos = static_cast<int>(generator.getUint64() %
+                               static_cast<uint64_t>(size));
         mata = generator.getUint64();
     }
 

@@ -38,7 +38,7 @@ static void test_parity0(const dSFMT_param& param, GF2X& f, w128_t parity) {
         if (verbose) printf("------\n");
         if (verbose) printf("==shoki (%d)\n", i);
         w128_t seed;
-        seed.u64[0] = i + 1;
+        seed.u64[0] = static_cast<uint64_t>(i) + 1;
         seed.u64[1] = 0;
         dsfmt.seed(seed);
         //dsfmt.d_p();
@@ -72,7 +72,7 @@ static void test_parity0(const dSFMT_param& param, GF2X& f, w128_t parity) {
                 break;
             }
         }
-        seed.u64[0] = i + 3;
+        seed.u64[0] = static_cast<uint64_t>(i) + 3;
         seed.u64[1] = 0;
         dsfmt.seed(seed);
         //dsfmt.d_p();
@@ -160,19 +160,19 @@ static bool option(dSFMT_param& param, int argc, char * argv[])
         }
     }
     char * para = argv[optind];
-    param.mexp = strtoul(para, &para, 10);
+    param.mexp = static_cast<int>(strtoul(para, &para, 10));
     para++;
-    param.pos1 = strtoul(para, &para, 10);
+    param.pos1 = static_cast<int>(strtoul(para, &para, 10));
     para++;
-    param.sl1 = strtoul(para, &para, 10);
+    param.sl1 = static_cast<int>(strtoul(para, &para, 10));
     para++;
-    param.msk1 = strtoull(para, &para, 16);
+    param.msk1 = static_cast<uint64_t>(strtoull(para, &para, 16));
     para++;
-    param.msk2 = strtoull(para, &para, 16);
+    param.msk2 = static_cast<uint64_t>(strtoull(para, &para, 16));
     para++;
-    param.fix1 = strtoull(para, &para, 16);
+    param.fix1 = static_cast<uint64_t>(strtoull(para, &para, 16));
     para++;
-    param.fix2 = strtoull(para, &para, 16);
+    param.fix2 = static_cast<uint64_t>(strtoull(para, &para, 16));
     return true;
 }
 
@@ -204,7 +204,7 @@ int main(int argc, char *argv[]) {
         cout << "error does not have factor of degree "
              << dec << dsfmt.getMexp() << endl;
         cout << "degree = " << dec << deg(irreducible) << endl;
-        return false;
+        return -1;
     }
     parity = calc_parity(dsfmt, irreducible);
     cout << dsfmt.getParamString() << endl;

@@ -172,33 +172,33 @@ static bool parse_opt(options& opt, int argc, char **argv) {
         error = true;
     } else {
         char * para = argv[0];
-        opt.params.mexp = strtoul(para, &para, 10);
+        opt.params.mexp = static_cast<int>(strtoul(para, &para, 10));
         para++;
-        opt.params.pos1 = strtoul(para, &para, 10);
+        opt.params.pos1 = static_cast<int>(strtoul(para, &para, 10));
         para++;
-        opt.params.sl1 = strtoul(para, &para, 10);
+        opt.params.sl1 = static_cast<int>(strtoul(para, &para, 10));
         para++;
-        opt.params.sl2 = strtoul(para, &para, 10);
+        opt.params.sl2 = static_cast<int>(strtoul(para, &para, 10));
         para++;
-        opt.params.sr1 = strtoul(para, &para, 10);
+        opt.params.sr1 = static_cast<int>(strtoul(para, &para, 10));
         para++;
-        opt.params.sr2 = strtoul(para, &para, 10);
+        opt.params.sr2 = static_cast<int>(strtoul(para, &para, 10));
         para++;
-        opt.params.msk1 = strtoul(para, &para, 16);
+        opt.params.msk1 = static_cast<uint32_t>(strtoul(para, &para, 16));
         para++;
-        opt.params.msk2 = strtoul(para, &para, 16);
+        opt.params.msk2 = static_cast<uint32_t>(strtoul(para, &para, 16));
         para++;
-        opt.params.msk3 = strtoul(para, &para, 16);
+        opt.params.msk3 = static_cast<uint32_t>(strtoul(para, &para, 16));
         para++;
-        opt.params.msk4 = strtoul(para, &para, 16);
+        opt.params.msk4 = static_cast<uint32_t>(strtoul(para, &para, 16));
         para++;
-        opt.params.parity1 = strtoul(para, &para, 16);
+        opt.params.parity1 = static_cast<uint32_t>(strtoul(para, &para, 16));
         para++;
-        opt.params.parity2 = strtoul(para, &para, 16);
+        opt.params.parity2 = static_cast<uint32_t>(strtoul(para, &para, 16));
         para++;
-        opt.params.parity3 = strtoul(para, &para, 16);
+        opt.params.parity3 = static_cast<uint32_t>(strtoul(para, &para, 16));
         para++;
-        opt.params.parity4 = strtoul(para, &para, 16);
+        opt.params.parity4 = static_cast<uint32_t>(strtoul(para, &para, 16));
     }
     if (error) {
         output_help(pgm);

@@ -300,7 +300,7 @@ namespace MTToolBox {
 #endif
             this->info = info;
             size = bit_size + 1;
-            basis = new linear_vec * [size];
+            basis = new linear_vec * [static_cast<unsigned int>(size)];
             stateBitSize = maxbitsize;
             for (int i = 0; i < bit_size; i++) {
                 basis[i] = new linear_vec(rand, i, info, lsb);

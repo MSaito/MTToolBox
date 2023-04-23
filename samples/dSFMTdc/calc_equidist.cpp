@@ -147,23 +147,23 @@ static bool parse_opt(options& opt, int argc, char **argv) {
         error = true;
     } else {
         char * para = argv[0];
-        opt.params.mexp = strtoul(para, &para, 10);
+        opt.params.mexp = static_cast<int>(strtoul(para, &para, 10));
         para++;
-        opt.params.pos1 = strtoul(para, &para, 10);
+        opt.params.pos1 = static_cast<int>(strtoul(para, &para, 10));
         para++;
-        opt.params.sl1 = strtoul(para, &para, 10);
+        opt.params.sl1 = static_cast<int>(strtoul(para, &para, 10));
         para++;
-        opt.params.msk1 = strtoull(para, &para, 16);
+        opt.params.msk1 = static_cast<uint64_t>(strtoull(para, &para, 16));
         para++;
-        opt.params.msk2 = strtoull(para, &para, 16);
+        opt.params.msk2 = static_cast<uint64_t>(strtoull(para, &para, 16));
         para++;
-        opt.params.fix1 = strtoull(para, &para, 16);
+        opt.params.fix1 = static_cast<uint64_t>(strtoull(para, &para, 16));
         para++;
-        opt.params.fix2 = strtoull(para, &para, 16);
+        opt.params.fix2 = static_cast<uint64_t>(strtoull(para, &para, 16));
         para++;
-        opt.params.parity1 = strtoull(para, &para, 16);
+        opt.params.parity1 = static_cast<uint64_t>(strtoull(para, &para, 16));
         para++;
-        opt.params.parity2 = strtoull(para, &para, 16);
+        opt.params.parity2 = static_cast<uint64_t>(strtoull(para, &para, 16));
     }
     if (error) {
         output_help(pgm);

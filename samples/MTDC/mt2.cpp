@@ -33,7 +33,7 @@ public:
         maskb = 0;
         maskc = 0;
         id = ident;
-        state = new uint32_t[size];
+        state = new uint32_t[static_cast<uint32_t>(size)];
         reverse = false;
         seed(v);
     }
@@ -51,14 +51,14 @@ public:
         maskb = mask_b;
         maskc = mask_c;
         id = ident;
-        state = new uint32_t[size];
+        state = new uint32_t[static_cast<uint32_t>(size)];
         reverse = false;
         seed(v);
     }
     MT32Search(const MT32Search& src) : TemperingCalculatable<uint32_t>() {
         mexp = src.mexp;
         size = src.size;
-        state = new uint32_t[size];
+        state = new uint32_t[static_cast<uint32_t>(size)];
         index = src.index;
         reverse = src.reverse;
         id = src.id;
@@ -137,7 +137,8 @@ public:
         state[0]= v;
         for (int i = 1; i < size; i++) {
             state[i] = UINT32_C(1812433253)
-                * (state[i - 1] ^ (state[i - 1] >> 30)) + i;
+                * (state[i - 1] ^ (state[i - 1] >> 30))
+                + static_cast<uint32_t>(i);
         }
         index = size - 1;
     }
@@ -147,11 +148,14 @@ public:
     }
 
     void setUpParam(ParameterGenerator& generator) {
-        pos = generator.getUint32() % (size - 2) + 2;
+        unsigned int p = generator.getUint32() %
+            (static_cast<unsigned int>(size) - 2)
+            + 2;
+        pos = static_cast<int>(p);
         mata = generator.getUint32();
         if (id >= 0) {
             mata = (mata & UINT32_C(0xffff0000))
-                | (id & UINT32_C(0x0000ffff));
+                | (static_cast<uint32_t>(id) & UINT32_C(0x0000ffff));
         }
     }
 
@@ -299,21 +303,21 @@ bool parse_opt(options& opt, int argc, char **argv) {
             opt.verbose = true;
             break;
         case 's':
-            opt.seed = strtoull(optarg, NULL, 0);
+            opt.seed = static_cast<uint32_t>(strtoull(optarg, NULL, 0));
             if (errno) {
                 error = true;
                 cerr << "seed must be a number" << endl;
             }
             break;
         case 'm':
-            opt.max_delta = strtol(optarg, NULL, 10);
+            opt.max_delta = static_cast<int>(strtol(optarg, NULL, 10));
             if (errno) {
                 error = true;
                 cerr << "max must be a number" << endl;
             }
             break;
         case 'c':
-            opt.count = strtoll(optarg, NULL, 10);
+            opt.count = static_cast<int>(strtoll(optarg, NULL, 10));
             if (errno) {
                 error = true;
                 cerr << "count must be a number" << endl;
@@ -355,14 +359,14 @@ bool parse_opt(options& opt, int argc, char **argv) {
             }
             cerr << endl;
         }
-        opt.mexp = mexp;
+        opt.mexp = static_cast<int>(mexp);
         long id = strtol(argv[1], NULL, 10);
         if (errno != 0 || (id < 0 || id > 0xffff)) {
             error = true;
             cerr << "id must be a number between 0 and " << 0xffff
                  << endl;
         }
-        opt.uid = static_cast<uint32_t>(id);
+        opt.uid = static_cast<int>(id);
     }
     if (!opt.filename.empty()) {
         ofstream ofs(opt.filename.c_str());

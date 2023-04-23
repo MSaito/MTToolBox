@@ -160,7 +160,7 @@ namespace MTToolBox {
             }
             poly = search.getIrreducibleFactor();
             parity = cp.searchParity(rg, poly);
-            weight = NTL::weight(poly);
+            weight = static_cast<int>(NTL::weight(poly));
             GF2X lcm(0, 1);
             calcCharacteristicPolynomial(&rg, lcm);
             NTL::GF2X quotient = lcm / poly;

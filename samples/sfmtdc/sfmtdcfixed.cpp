@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
     if (!parse) {
         return -1;
     }
-    return search(opt, opt.count);
+    return search(opt, static_cast<int>(opt.count));
 }
 
 /**
@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
  * @return 0 if this ends normally
  */
 int search(options& opt, int count) {
-    MersenneTwister mt(opt.seed);
+    MersenneTwister mt(static_cast<uint32_t>(opt.seed));
     sfmt g(opt.mexp);
 
     cout << "seed = " << dec << opt.seed << endl;
@@ -255,7 +255,7 @@ bool parse_opt(options& opt, int argc, char **argv) {
             }
             cerr << endl;
         }
-        opt.mexp = mexp;
+        opt.mexp = static_cast<int>(mexp);
     }
     if (!opt.filename.empty()) {
         ofstream ofs(opt.filename.c_str());

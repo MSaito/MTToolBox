@@ -72,7 +72,7 @@ bool parse_opt(mtgp_options& opt, int argc, char **argv) {
     if (argc < 2) {
         error = true;
     } else {
-        opt.mexp = strtol(argv[0], NULL, 10);
+        opt.mexp = static_cast<int>(strtol(argv[0], NULL, 10));
         if (errno != 0) {
             error = true;
             cerr << "mexp must be number" << endl;
@@ -90,7 +90,7 @@ bool parse_opt(mtgp_options& opt, int argc, char **argv) {
             }
         }
         long long id = strtoll(argv[1], NULL, 10);
-        opt.id = (unsigned long long)id;
+        opt.id = static_cast<uint32_t>(id);
         if (errno != 0) {
             error = true;
             cerr << "id must be a number between 0 and 2^32-1" << endl;
