@@ -219,7 +219,8 @@ namespace MTToolBox {
             state[2] = mat2;
             state[3] = 0;
             for (int i = 1; i < min_loop; i++) {
-                state[i & 3] ^= i + UINT32_C(1812433253)
+                state[i & 3] ^= static_cast<uint32_t>(i)
+                    + UINT32_C(1812433253)
                     * (state[(i - 1) & 3]
                        ^ (state[(i - 1) & 3] >> 30));
             }
@@ -315,7 +316,8 @@ namespace MTToolBox {
             state[0] = value;
             state[1] = mat1;
             for (int i = 1; i < length; i++) {
-                state[i] ^= i + UINT32_C(1812433253)
+                state[i] ^= static_cast<uint32_t>(i)
+                    + UINT32_C(1812433253)
                     * (state[i - 1]
                        ^ (state[i - 1] >> 30));
             }
@@ -335,7 +337,7 @@ namespace MTToolBox {
         int sh4;
         int index;
         uint32_t * state;
-        void setParam(uint32_t p_mat1, uint32_t p_pos, int p_sh1,
+        void setParam(uint32_t p_mat1, int p_pos, int p_sh1,
                       int p_sh2, int p_sh3, int p_sh4) {
             mat1 = p_mat1;
             pos = p_pos;

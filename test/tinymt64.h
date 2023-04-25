@@ -78,8 +78,10 @@ inline static void tinymt64_next_state(tinymt64_t * random) {
     x ^= x << TINYMT64_SH1;
     random->status[0] = random->status[1];
     random->status[1] = x;
-    random->status[0] ^= -((int64_t)(x & 1)) & random->mat1;
-    random->status[1] ^= -((int64_t)(x & 1)) & (((uint64_t)random->mat2) << 32);
+    if (x & 1) {
+        random->status[0] ^= random->mat1;
+        random->status[1] ^= ((uint64_t)random->mat2) << 32;
+    }
 }
 
 /**
@@ -96,7 +98,9 @@ inline static uint64_t tinymt64_temper(tinymt64_t * random) {
     x = random->status[0] + random->status[1];
 #endif
     x ^= random->status[0] >> TINYMT64_SH8;
-    x ^= -((int64_t)(x & 1)) & random->tmat;
+    if (x & 1) {
+        x ^= random->tmat;
+    }
     return x;
 }
 
@@ -118,8 +122,11 @@ inline static double tinymt64_temper_conv(tinymt64_t * random) {
     x = random->status[0] + random->status[1];
 #endif
     x ^= random->status[0] >> TINYMT64_SH8;
-    conv.u = ((x ^ (-((int64_t)(x & 1)) & random->tmat)) >> 12)
-        | UINT64_C(0x3ff0000000000000);
+    if (x & 1) {
+        conv.u = ((x ^ random->tmat) >> 12) | UINT64_C(0x3ff0000000000000);
+    } else {
+        conv.u = (x >> 12) | UINT64_C(0x3ff0000000000000);
+    }
     return conv.d;
 }
 
@@ -141,8 +148,11 @@ inline static double tinymt64_temper_conv_open(tinymt64_t * random) {
     x = random->status[0] + random->status[1];
 #endif
     x ^= random->status[0] >> TINYMT64_SH8;
-    conv.u = ((x ^ (-((int64_t)(x & 1)) & random->tmat)) >> 12)
-        | UINT64_C(0x3ff0000000000001);
+    if (x & 1) {
+        conv.u = ((x ^ random->tmat) >> 12) | UINT64_C(0x3ff0000000000001);
+    } else {
+        conv.u = (x >> 12) | UINT64_C(0x3ff0000000000001);
+    }
     return conv.d;
 }
 
