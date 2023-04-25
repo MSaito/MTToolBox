@@ -1,3 +1,4 @@
+ver 1.0.4 add std=c++20
 ver 1.0.3 add std=c++17, -Wsign-compare, -Wconversion
 ver 1.0.2 catch std::underflow by reference in TinyMTDC and XORSHIFT,
 	change version.cpp to version.c
